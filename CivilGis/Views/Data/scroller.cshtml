@@ -1,0 +1,137 @@
+﻿
+
+<!---- local DataTables JS must load after Jquery js. Otherwise error   -->
+
+<script src="~/Scripts/jquery.dataTables.js"></script>
+<link href="~/Content/jquery.dataTables.css" rel="stylesheet">
+
+<script src="~/Scripts/dataTables.scroller.min.js"></script>
+<link href="~/Content/scroller.dataTables.min.css" rel="stylesheet">
+
+
+
+<!-- our js -->
+
+<script src="~/Scripts/datatablejs_scroller.js"></script>
+
+
+<input type="hidden" id="subjectID" value=@ViewBag.Subject />
+<input type="hidden" id="areaID" value=@ViewBag.Area />
+
+
+
+
+<!-- Navigation -->
+<!-- /.navbar-top-links -->
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+
+
+            <li class="sidebar-search">
+                <div class="input-group custom-search-form">
+
+                    <!--
+                    <input type="text" id="addr_txt" class="form-control" placeholder="exp:1966 Harbor Blvd">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" id="search_addr">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                    -->
+
+                </div>
+                <!-- /input-group -->
+            </li>
+
+
+
+
+
+
+            <li>
+                <a href="/data/listscroller/newyork"><i class="fa fa-bar-chart-o fa-fw"></i> New York</a>
+            </li>
+
+            <li>
+                <a href="/data/listscroller/chicago"><i class="fa fa-table fa-fw"></i> Chicago</a>
+            </li>
+
+            <li>
+                <a href="/data/listscroller/losangeles"><i class="fa fa-car"></i> Los Angeles</a>
+            </li>
+
+
+
+        </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div>
+<!-- /.navbar-static-side -->
+</nav>
+
+
+
+
+
+
+
+
+<!-- Page Content -->
+<div id="page-wrapper">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <ol class="breadcrumb">
+                <li><a href="/map/index/">TransparentGov</a></li>
+
+                <li><a href="/data/listscroller/@ViewBag.Area">@ViewBag.Area</a></li>
+                <li><a href="/data/scroller/@ViewBag.Area/@ViewBag.Subject">@ViewBag.Subject</a></li>
+            </ol>
+
+
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+
+
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <div id="title_info"> </div>
+                  
+                </div>
+                <!-- /.panel-heading -->
+
+                <div class="panel-body">
+         
+
+                   
+
+                       
+                     
+
+
+                    <div id="tableDiv">
+                        
+
+                    </div>
+
+
+                    <div id="info-table"> </div>
+
+
+                </div>
+                    <!-- /.panel-body -->
+                    <!-- hr / -->
+
+
+
+
