@@ -35,7 +35,7 @@ namespace CivilGis
                 defaults: new { controller = "Data", action = "listPaged", area = "Chicago" }
             );
 
-          
+
 
 
 
@@ -43,24 +43,39 @@ namespace CivilGis
 
             // mapping -----------------
 
-          /*
+            /*
+              routes.MapRoute(
+                  name: "city",
+                  url: "map/city/",
+                  defaults: new { controller = "Map", action = "city", subject = "zoning" }
+              );
+
+
+
+              routes.MapRoute(
+                  name: "county",
+                  url: "map/county/",
+                  defaults: new { controller = "Map", action = "county", subject = "bounds" }
+              );
+
+           */
+
+
+
             routes.MapRoute(
-                name: "city",
-                url: "map/city/",
-                defaults: new { controller = "Map", action = "city", subject = "zoning" }
+                name: "localmap1",
+                url: "localmap/{action}/{area}/{subject}/",
+                defaults: new { controller = "LocalMap", action = "index" }
             );
 
 
 
             routes.MapRoute(
-                name: "county",
-                url: "map/county/",
-                defaults: new { controller = "Map", action = "county", subject = "bounds" }
+                name: "localmap2",
+                url: "localmap/{action}/{area}/",
+                defaults: new { controller = "LocalMap", action = "index" }
             );
 
-         */
-
-           
 
 
             routes.MapRoute(

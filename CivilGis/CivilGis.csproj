@@ -39,11 +39,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MongoDB.Bson">
@@ -135,6 +137,19 @@
     <Content Include="Content\jquery.dataTables.css" />
     <Content Include="Content\scroller.dataTables.min.css" />
     <Content Include="images\favicon.ico" />
+    <Content Include="images\logo\city-of-chicago-logo.jpg" />
+    <Content Include="images\logo\city_los_angeles.gif" />
+    <Content Include="images\logo\long-beach-logo.png" />
+    <Content Include="images\logo\longbeach_seal.png" />
+    <Content Include="images\logo\long_beach.gif" />
+    <Content Include="images\logo\MichaelWorthington-CityOfSanFranciscoLogo-2012.jpg" />
+    <Content Include="images\logo\newport_beach.png" />
+    <Content Include="images\logo\nyc.png" />
+    <Content Include="images\logo\San-Francisco-Logo.png" />
+    <Content Include="images\logo\santa_monica.jpg" />
+    <Content Include="images\logo\Santa_Monica_seal.jpg" />
+    <Content Include="images\logo\Seal_of_Chicago,_Illinois.svg.png" />
+    <Content Include="images\logo\Seal_of_San_Francisco.png" />
     <Content Include="images\sort_asc.png" />
     <Content Include="images\sort_asc_disabled.png" />
     <Content Include="images\sort_both.png" />
@@ -182,6 +197,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\localmap\localmaponly.js" />
+    <Content Include="Scripts\localmap\localmaplist_paged.js" />
+    <Content Include="Scripts\localmap\localmaplist_scroller.js" />
     <Content Include="Scripts\mapcity.js" />
     <Content Include="Scripts\maplist_scroller.js" />
     <Content Include="Scripts\maplist_paged.js" />
@@ -198,7 +216,9 @@
     <Content Include="Scripts\sb-admin-2.js" />
     <Content Include="Scripts\scrolling.js" />
     <Content Include="Scripts\smarttablejs.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
@@ -209,6 +229,7 @@
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\GeojsonController.cs" />
     <Compile Include="Controllers\JsonController.cs" />
+    <Compile Include="Controllers\LocalMapController.cs" />
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -259,7 +280,6 @@
     <Content Include="Views\Map\Index.cshtml" />
     <Content Include="Views\Map\City.cshtml" />
     <Content Include="Views\Map\County.cshtml" />
-    <Content Include="Views\Shared\_Layout - Copy.cshtml" />
     <Content Include="Views\Data\_ViewStart.cshtml" />
     <Content Include="Views\Data\paged.cshtml" />
     <Content Include="Views\Data\Index.cshtml" />
@@ -273,6 +293,16 @@
     <Content Include="Views\Map\mapsmps.cshtml" />
     <Content Include="Views\Map\mappaged.cshtml" />
     <Content Include="Views\Map\Index - Copy.cshtml" />
+    <Content Include="Views\LocalMap\localmaponly.cshtml" />
+    <Content Include="Views\LocalMap\_ViewStart.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_city_side_panel.cshtml" />
+    <Content Include="Views\Shared\_LocalMapLayout.cshtml" />
+    <Content Include="Views\Shared\_Layout - Copy.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\LocalMap\localmaplistpaged.cshtml" />
+    <Content Include="Views\LocalMap\localmaplistscroller.cshtml" />
+    <Content Include="Views\Shared\_county_side_panel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
