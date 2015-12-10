@@ -26,7 +26,7 @@ namespace CivilGis.Controllers
     {
 
 
-
+        [AcceptVerbs("GET", "POST")]
         public HttpResponseMessage listcontent(string area)
         {
 

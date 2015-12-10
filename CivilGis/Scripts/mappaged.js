@@ -509,7 +509,8 @@ function ajax_GeoJSON(gmap,_apiURI) {
                             _geojson_object = JSON.parse(data);
 
 
-                                        //------------- add each _id:{"$id": "55e8c24e382f9fe337f0d8fe"}  to properties before draw on map. -------------
+                            //-------------    php format add each _id:{"$id": "55e8c24e382f9fe337f0d8fe"}  to properties before draw on map. -------------
+                            //-------------asp.net format add each  {"_id" : "55c532cf21167708171b02a2"}  to properties before draw on map. -------------
 
                                          var _features_array = _geojson_object['features'];
 
@@ -519,13 +520,34 @@ function ajax_GeoJSON(gmap,_apiURI) {
 
                                          _features_array.forEach( function (eachFeatueItem)
                                              {
+                                                  
+                                             
+                                             /*
+                                               // --- php format ------
+                                               
                                                   _id_obj = eachFeatueItem['_id'];
                                                   _id_obj_id = _id_obj['$id'];
                                                  _propty_obj = eachFeatueItem['properties'];
                                                  var _geo_type = eachFeatueItem['geometry'];
                                                  
                                                  _propty_obj['GeoFeatureType']=_geo_type['type'];
-                                                 _propty_obj['GeoFeatureID']=_id_obj_id;
+                                                 _propty_obj['GeoFeatureID'] = _id_obj_id;
+
+
+
+                                           
+                                                 // ---end  php format ------
+                                              */
+
+
+                                             // ------ asp.net format -----------
+                                                 _id_obj_id = eachFeatueItem['_id'];
+
+
+
+                                                 _propty_obj = eachFeatueItem['properties'];
+                                                 _propty_obj['GeoFeatureID'] = _id_obj_id;
+
 
                                              });// features_array_foreach
 
@@ -664,7 +686,10 @@ function get_map_bound(){
                  NElat = northEast.lat();
                   
                   // http://localhost:10/civilgis/api/load/general_landuse/SWlong/SWlat/NElong/NElat/   This is sample URI
-                var _url=base_url+ 'api/load/'+ $("#areaID").val() + '/'+$("#subjectID").val()+'/'+SWlong+'/'+SWlat+'/'+NElong+'/'+NElat+'/';
+                  //var _url = base_url + 'api/load/' + $("#areaID").val() + '/' + $("#subjectID").val() + '/' + SWlong + '/' + SWlat + '/' + NElong + '/' + NElat + '/';
+                //var _url = "/api/geojson/feature/" + initial_location[0] + '/' + $("#subjectID").val() + "/" + SWlong + "/" + SWlat + "/" + NElong + "/" + NElat + "/";
+
+                   var _url = "/api/geojson/feature/" + $("#areaID").val() + '/' + $("#subjectID").val() + "/" + SWlong + "/" + SWlat + "/" + NElong + "/" + NElat + "/";
             
                   document.getElementById("ajaxload").style.display = "block";
                   ajax_GeoJSON(map,_url);
@@ -876,12 +901,14 @@ function datatablesX(){
       // maptabledata2 return arry of object [{name:aaa}, {age:19}...]
     // maptabledata return array [aaa, 19,....]
     // when they feed to datatables, different type of datasource. 
+
+  
       
-       var _urlx = base_url+ 'api/maptabledata/' + $("#areaID").val() + '/' + $("#subjectID").val() + '/';
-       var _url_headerx = base_url+ 'api/maptableheader/'+ $("#areaID").val() + '/' + $("#subjectID").val() + '/';
+    var _urlx = '/api/geojson/maptabledata/' + $("#areaID").val() + '/' + $("#subjectID").val() + '/';
+    var _url_headerx = '/api/geojson/maptableheader/' + $("#areaID").val() + '/' + $("#subjectID").val() + '/';
      
      
-     
+    //alert(_url_headerx);
      
      
      /* 
@@ -1304,7 +1331,7 @@ function datatablesX(){
 // datatables paged js
  $(document).ready(function () {
 
-         base_url = document.getElementById('base_url').value;
+        
 
 
        

@@ -511,7 +511,7 @@ function initialize() {
 // datatables paged js
  $(document).ready(function () {
 
-       //  Dom must be stay here, can't move to seperate javascript js file. 
+       
           google.maps.event.addDomListener(window, 'load', initialize);
 
     

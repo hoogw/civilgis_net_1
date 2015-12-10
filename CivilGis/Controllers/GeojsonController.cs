@@ -101,7 +101,72 @@ namespace CivilGis.Controllers
         }
 
 
+        // need to use 'async task<>' for await method (mongodb api require)
+       
+        [AcceptVerbs("GET", "POST")]     
+        public async Task<HttpResponseMessage> maptableheader(string area, string subject)
+        {
 
+
+            String result = "{ \"columns\":";
+
+            // set connection string in web.config 
+            _mongoClient = new MongoClient(ConfigurationManager.ConnectionStrings["MongoDBContext"].ConnectionString);
+            _mongoDatabase = _mongoClient.GetDatabase(ConfigurationManager.AppSettings["civilgisDBname"]);
+            var _max_row_count = Convert.ToInt16(ConfigurationManager.AppSettings["max_row_count"]);
+
+            var table_name = area + "_" + subject;
+
+
+
+            // var _mongoCollection = _mongoDatabase.GetCollection<FeatureDoc>(table_name);
+            var _mongoCollection = _mongoDatabase.GetCollection<BsonDocument>(table_name);
+
+
+            // get all the column name
+            // can't use array here, because array can't use add(item), however need to convert list to array, in order to sort array 
+            List<string> _columns = new List<string>();
+
+
+            // -------------  findone() ---------------  
+
+            var _first_document = await _mongoCollection.Find(new BsonDocument()).FirstOrDefaultAsync();
+
+
+             //var propertiesBsonArray = _first_document["properties"].AsBsonArray;
+            var propertiesBsonDoc = _first_document["properties"].AsBsonDocument;
+
+            foreach (var _property in propertiesBsonDoc)
+            {
+
+                // BsonElement (key-value) pair,     key -> _property.Name;  value ->_property.Value;
+                _columns.Add(_property.Name);
+
+            }
+
+            // sort columns
+            _columns.Sort();
+
+            _columns.Add("geoFID");
+            _columns.Add("geometry_type");
+            _columns.Add("coordinate");
+
+
+
+            result = result + _columns.ToJson();
+
+            result = result + "}";
+
+
+
+            //result output should be:    {"columns":["ADNUM",...,"geoFID","geometry_type","coordinate"]}
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result, "text/plain");
+
+
+
+            return response;
+
+        }
 
 
 
@@ -270,7 +335,7 @@ namespace CivilGis.Controllers
 
 
 
-        // version 1, iterate through bsondocument, foreach remove all () in objectID   
+        // not in use, version 1, iterate through bsondocument, foreach remove all () in objectID   
         [AcceptVerbs("GET", "POST")]
         public async Task<HttpResponseMessage> feature1(string area, string subj, double SWlong, double SWlat, double NElong, double NElat)
         {
@@ -408,7 +473,7 @@ namespace CivilGis.Controllers
 
 
 
-        // version 0 is origianl working copy, replace all objectID to null as 0  
+        // not in use, version 0 is origianl working copy, replace all objectID to null as 0 , 
         [AcceptVerbs("GET", "POST")]
         public async Task<HttpResponseMessage> feature0(string area, string subj, double SWlong, double SWlat, double NElong, double NElat)
         {
