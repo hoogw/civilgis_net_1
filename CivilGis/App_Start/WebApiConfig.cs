@@ -13,7 +13,7 @@ namespace CivilGis
         {
             config.MapHttpAttributeRoutes();
 
-
+            // note: ..../{area}/{subject}/   in action method, must use same name parameter as here. For example, in this case, must use action(string area, string subject),  if use 'subj' will fail.
 
             // --------------  table data  -------------------------
 
@@ -35,11 +35,13 @@ namespace CivilGis
 
 
 
-            
+
 
             //    -------------    mapping    --------------------------------
 
-           // SWlong + '/' + SWlat + '/' + NElong + '/' + NElat + '/';
+            // SWlong + '/' + SWlat + '/' + NElong + '/' + NElat + '/';
+            // Note .../{subj}/... subj must match parameter in controller action method, if you use subj, in methed parameter must use subj, if you use subject, will mismatch, will failed to map to
+
 
             config.Routes.MapHttpRoute(
                 name: "MapApi",

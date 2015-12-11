@@ -1,24 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Configuration;
+//using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Text;
-using System.Net.Http.Headers;
-
-using System.Configuration;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity;
+using System.Collections;
+using System.Web;
 
 using System.Data;
 using System.Data.SqlClient;
 
-using System.Threading.Tasks;
-using CivilGis.Models;
-using System.Web.Script.Serialization;
-using System.Collections;
-using System.Web;
+//using System.Text;
+//using System.Net.Http.Headers;
+
+
+//using System.Data.Entity.Infrastructure;
+//using System.Data.Entity;
+
+
+
+//using System.Threading.Tasks;
+//using CivilGis.Models;
+//using System.Web.Script.Serialization;
+
 
 namespace CivilGis.Controllers
 {
@@ -240,6 +245,8 @@ namespace CivilGis.Controllers
 
 
 
+
+    
 
 
          //[AcceptVerbs("GET", "POST")]

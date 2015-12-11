@@ -10,16 +10,21 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Shared;
 using System.Configuration;
-using System.Data.Entity.Infrastructure;
+//using System.Data.Entity.Infrastructure;
 using System.Data.Entity;
 
 using MongoDB.Driver.GeoJsonObjectModel;
 // builders is in mongodb legacy package, you have to install it 
-using MongoDB.Driver.Builders;
+//using MongoDB.Driver.Builders;
 
 using System.Threading.Tasks;
 using CivilGis.Models;
-using System.Text.RegularExpressions;
+//using System.Text.RegularExpressions;
+
+using System.Data;
+using System.Data.SqlClient;
+using System.Collections;
+using System.Web;
 
 namespace CivilGis.Controllers
 {
@@ -101,6 +106,7 @@ namespace CivilGis.Controllers
         }
 
 
+
         // need to use 'async task<>' for await method (mongodb api require)
        
         [AcceptVerbs("GET", "POST")]     
@@ -169,6 +175,534 @@ namespace CivilGis.Controllers
         }
 
 
+        /*  not in use
+
+        //  --------------------- this function will convert BsonBocument to Data table  --------------------
+        public DataTable GetDataTableFromMongoCursor(MongoCursor cursor)
+        {
+            if (cursor != null && cursor.Count() > 0)
+            {
+
+                DataTable dt = new DataTable(cursor.ToString());
+                foreach (BsonDocument doc in cursor)
+                {
+
+                    foreach (BsonElement elm in doc.Elements)
+                    {
+                        if (!dt.Columns.Contains(elm.Name))
+                        {
+                            dt.Columns.Add(new DataColumn(elm.Name));
+                        }
+
+                    }
+                    DataRow dr = dt.NewRow();
+                    foreach (BsonElement elm in doc.Elements)
+                    {
+                        dr[elm.Name] = elm.Value;
+
+                    }
+                    dt.Rows.Add(dr);
+                }
+                return dt;
+
+            }
+            return null;
+        } //GetDataTableFromMongoCursor
+
+        //  ---------------------  end  convert BsonBocument to Data table  --------------------
+        */
+
+
+
+        [AcceptVerbs("GET", "POST")]
+        public async Task<HttpResponseMessage> maptabledata(string area, string subject)
+        {
+
+
+
+            //=============================    processing request parameters  =================================================
+
+            /* ---------  handle request from datatables post ajax call, api reference  ----------------
+            * http://datatables.net/manual/server-side
+            * http://coderexample.com/datatable-demo-server-side-in-phpmysql-and-ajax/
+            * 
+            *  draw:2
+               columns[0][data]:0
+               columns[0][name]:
+               columns[0][searchable]:true
+               columns[0][orderable]:true
+               columns[0][search][value]:
+               columns[0][search][regex]:false
+               columns[1][data]:1
+               columns[1][name]:
+               columns[1][searchable]:true
+               columns[1][orderable]:true
+               columns[1][search][value]:
+               columns[1][search][regex]:false
+               columns[2][data]:2
+               columns[2][name]:
+               columns[2][searchable]:true
+               columns[2][orderable]:true
+               columns[2][search][value]:
+               columns[2][search][regex]:false
+               columns[3][data]:3
+               columns[3][name]:
+               columns[3][searchable]:true
+               columns[3][orderable]:true
+               columns[3][search][value]:
+               columns[3][search][regex]:false
+               columns[4][data]:4
+               columns[4][name]:
+               columns[4][searchable]:true
+               columns[4][orderable]:true
+               columns[4][search][value]:
+               columns[4][search][regex]:false
+               order[0][column]:0
+               order[0][dir]:asc
+               start:964
+               length:81
+               search[value]:
+               search[regex]:false
+            * 
+            * 
+            *      For POST request:
+
+                   string sEcho = Request.Params["draw"];
+                   int iDisplayStart = Convert.ToInt32(Request.Params["start"]);
+                   string searchValue = Request.Params["search[value]"];
+                   int orderColumn = Convert.ToInt32(Request.Params["order[0][column]"]);
+                   string orderDir = Request.Params["order[0][dir]"];
+
+            * For GET request:
+
+
+                   NameValueCollection nvc = HttpUtility.ParseQueryString(Request.Url.Query);
+                   string sEcho = nvc["draw"];
+                   int iDisplayStart = Convert.ToInt32(nvc["start"]);
+                   string searchValue = nvc["search[value]"];
+                   int orderColumn = Convert.ToInt32(nvc["order[0][column]"]);
+                   string orderDir = nvc["order[0][dir]"];
+            * 
+            * 
+            * 
+            *  Below is response  format,  data should be array of array.
+                           "data":[{"0":"ABBOTT,  BETTY L","Name":"ABBOTT,  BETTY L","1":"FOSTER GRANDPARENT","Position_Title":"FOSTER GRANDPARENT", ....},{row 1},{row 2}...]
+
+           */
+
+
+            //var parameters = HttpContext.Current.Request.Form;
+
+            var httpContext = (HttpContextWrapper)Request.Properties["MS_HttpContext"];
+
+            string sEcho = httpContext.Request.Params["draw"];
+
+
+            //int iDisplayStart = Convert.ToInt32(httpContext.Request.Params["start"]);
+            // int iDisplayLength = Convert.ToInt32(httpContext.Request.Params["length"]);   
+            int orderColumn = Convert.ToInt32(httpContext.Request.Params["order[0][column]"]);
+
+
+            string iDisplayStart = httpContext.Request.Params["start"];
+            string iDisplayLength = httpContext.Request.Params["length"];
+            // string orderColumn = httpContext.Request.Params["order[0][column]"];
+
+
+            string orderDir = httpContext.Request.Params["order[0][dir]"];
+            string searchValue = httpContext.Request.Params["search[value]"];
+
+            //================================  end processing request parameters   ==============================
+
+
+
+
+            //--------------  initialize value,  database connections ------------------------
+
+            ArrayList columns;
+            string result = "";
+            long totalData = 0;
+            long totalFiltered = 0;
+            BsonDocument propertiesBsonDoc;
+
+            // use dictionary, do not use list<keyValuePair>
+            List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+           // List<List<KeyValuePair<string, string>>> rows = new List<List<KeyValuePair<string, string>>>();
+
+            // set connection string in web.config 
+            _mongoClient = new MongoClient(ConfigurationManager.ConnectionStrings["MongoDBContext"].ConnectionString);
+            _mongoDatabase = _mongoClient.GetDatabase(ConfigurationManager.AppSettings["civilgisDBname"]);
+            var _max_row_count = Convert.ToInt16(ConfigurationManager.AppSettings["max_row_count"]);
+
+            var table_name = area + "_" + subject;
+            
+            var _mongoCollection = _mongoDatabase.GetCollection<BsonDocument>(table_name);
+
+            //--------------------------------------------------------
+
+
+
+
+
+
+
+            // --------------- get all the column name -----------------------------
+
+           
+            // can't use array here, because array can't use add(item), however need to convert list to array, in order to sort array 
+            List<string> _columns = new List<string>();
+
+
+            // findone() document
+
+            var _first_document = await _mongoCollection.Find(new BsonDocument()).FirstOrDefaultAsync();
+
+
+            //var propertiesBsonArray = _first_document["properties"].AsBsonArray;
+             propertiesBsonDoc = _first_document["properties"].AsBsonDocument;
+
+            foreach (var _property in propertiesBsonDoc)
+            {
+
+                // BsonElement (key-value) pair,     key -> _property.Name;  value ->_property.Value;
+                _columns.Add(_property.Name);
+
+            }
+
+            // sort columns
+            _columns.Sort();
+
+            _columns.Add("geoFID");
+            _columns.Add("geometry_type");
+            _columns.Add("coordinate");
+
+
+            // colums is arraylist, _columns is list, need to transfer
+             columns = new ArrayList(_columns);
+
+            //-----------------------  end get all column name ----------------------------------------
+
+
+
+
+            //  -----------------  just get total count --------------------
+
+            var _filter_all = new BsonDocument();
+
+                        // count only, does not select
+                        var temp = _mongoCollection.CountAsync(_filter_all);
+                        temp.Wait();
+            
+                        totalData = temp.Result;
+                        totalFiltered = totalData;
+            
+
+                       //----------------------end just get total count    ------------------
+
+
+
+
+
+
+
+                // +++++++++++++++   filtered result by search value  ++++++++++++++++++++++++++++++++
+                if (!(string.IsNullOrEmpty(searchValue)))
+                {
+
+
+
+
+
+                    /* if there is a search parameter
+
+                    sql = "SELECT * FROM " + tabledata_name + " WHERE ";
+
+
+                    for (int i = 0; i < columns.Count; i++)
+                    {
+
+                        if (i > 0)
+                        {
+                            sql = sql + " OR ";
+
+                        }// if
+
+                        sql = sql + columns[i] + " LIKE '%" + searchValue + "%' ";
+
+                    }// for
+
+
+
+
+
+
+                    sql = sql + " ORDER BY " + columns[orderColumn] + "   " + orderDir + "  OFFSET " + iDisplayStart + "  ROWS FETCH NEXT  " + iDisplayLength + "  ROWS ONLY  ";
+
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
+                    {
+
+                        dt_body = new DataTable();
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(dt_body);
+
+                        totalFiltered = dt_body.Rows.Count;
+
+
+                    }// sqlcommand
+                    */
+
+
+                }
+                else
+                {
+
+                        // no search value,  sort by column name dec ace start from how many rows
+                        //sql = "SELECT * FROM " + tabledata_name + "  ";
+
+                        // sql = sql + " ORDER BY " + columns[orderColumn] + "   " + orderDir + "  OFFSET " + iDisplayStart + "  ROWS FETCH NEXT  " + iDisplayLength + "  ROWS ONLY  ";
+
+
+
+                        //var _sort = Builders<BsonDocument>.Sort.Ascending("properties.NAME");
+                        var _sort_by_column = "properties." + columns[orderColumn].ToString();
+                        var _sort = Builders<BsonDocument>.Sort.Ascending(_sort_by_column);
+
+
+                       if (orderDir.Equals("asc"))
+                                                {
+                                                         _sort = Builders<BsonDocument>.Sort.Ascending(_sort_by_column);
+                                                    }
+                        else if (orderDir.Equals("desc"))
+                                                        {
+                                                            _sort = Builders<BsonDocument>.Sort.Descending(_sort_by_column);
+                                                        }
+
+
+
+
+
+
+                            rows = new List<Dictionary<string, object>>();
+                        //rows = new List<List<KeyValuePair<string, string>>>();
+
+
+
+                                  // ------------------- use Find ----------------------------------------
+                                        //var _listBsonDoc = await _mongoCollection.Find(_filter_all).ToListAsync();
+                                        var _listBsonDoc = await _mongoCollection.Find(_filter_all).Sort(_sort).ToListAsync();
+
+                                        foreach (var bsonDocument in _listBsonDoc)
+                                        {
+
+                                            // each row from each bsonDocument, batch are all rows, or all bsonDocument.
+
+                                            //var row = new List<KeyValuePair<string, string>>();
+                                            Dictionary<string, object> row = new Dictionary<string, object>();
+
+                                            propertiesBsonDoc = bsonDocument["properties"].AsBsonDocument;
+
+                                            var objectIdBsonDoc = bsonDocument["_id"].AsObjectId;
+                                            var idBsonDoc = objectIdBsonDoc.ToString();
+
+
+                                            var geometryBsonDoc = bsonDocument["geometry"].AsBsonDocument;
+
+                                            var geometryTypeBsonDoc = geometryBsonDoc["type"].AsString;
+
+                                            var coordinatesBsonArray = geometryBsonDoc["coordinates"].AsBsonArray;
+                                            var coordinatesBsonDoc = coordinatesBsonArray.ToJson();
+
+
+                                            foreach (var _property in propertiesBsonDoc)
+                                            {
+
+                                                // BsonElement (key-value) pair,     key -> _property.Name;  value ->_property.Value;
+
+                                                //row.Add(new KeyValuePair<string, string>(_property.Name, _property.Value.ToString()));
+
+                                                // for dictionary type
+                                                row.Add(_property.Name, _property.Value.ToString());
+
+                                            }// foreach each row
+
+
+                                            // current no need sort, because column_def in datatable js used. 
+                                            // why need sort because mongoDB do not like mysql sqlserver, column order on each row varied. mysql and sqlserver, column order are fixed for each row 
+                                            // fore each row, sort by columns(key) both "sort" "orderby" works
+
+                                            //_row.OrderBy(o => o.Key);
+                                            //row.Sort((x, y) => x.Key.CompareTo(y.Key));
+
+                                            // row is dictionary, can't use this way to sort. 
+                                            //row.OrderBy(key => key.Key);
+
+
+
+                                            // add last 3 columns, only geoFID column will be visible, the other two are used to fly on map and draw polygon/line/marker on location
+                                            /*
+
+                                            row.Add(new KeyValuePair<string, string>("geoFID", idBsonDoc));
+                                           row.Add(new KeyValuePair<string, string>("geometry_type", geometryTypeBsonDoc));
+                                           row.Add(new KeyValuePair<string, string>("coordinate", coordinatesBsonDoc));
+                                            */
+
+                                            // for dictionary type
+                                            row.Add("geoFID", idBsonDoc);
+                                            row.Add("geometry_type", geometryTypeBsonDoc);
+                                            row.Add("coordinate", coordinatesBsonDoc);
+
+
+                                            rows.Add(row);
+
+
+                                        }// foreach
+
+
+                                    //------------------- end use Find ------------------------
+
+
+
+/*
+
+
+                    //========================== using  FindAsync() this is old api, not in use =====================================
+                    using (var cursor = await _mongoCollection.FindAsync(_filter_all))
+                
+                {
+                    while (await cursor.MoveNextAsync())
+                    {
+                        var batch = cursor.Current;
+
+                        foreach (var bsonDocument in batch)
+                        {
+
+                            // each row from each bsonDocument, batch are all rows, or all bsonDocument.
+
+                            //var row = new List<KeyValuePair<string, string>>();
+                            Dictionary<string, object> row = new Dictionary<string, object>();
+
+                            propertiesBsonDoc = bsonDocument["properties"].AsBsonDocument;
+
+                            var objectIdBsonDoc = bsonDocument["_id"].AsObjectId;
+                            var idBsonDoc = objectIdBsonDoc.ToString();
+
+
+                            var geometryBsonDoc = bsonDocument["geometry"].AsBsonDocument;
+
+                            var geometryTypeBsonDoc = geometryBsonDoc["type"].AsString;
+
+                            var coordinatesBsonArray = geometryBsonDoc["coordinates"].AsBsonArray;
+                            var coordinatesBsonDoc = coordinatesBsonArray.ToJson();
+
+
+                            foreach (var _property in propertiesBsonDoc)
+                            {
+
+                                // BsonElement (key-value) pair,     key -> _property.Name;  value ->_property.Value;
+
+                                //row.Add(new KeyValuePair<string, string>(_property.Name, _property.Value.ToString()));
+
+                                // for dictionary type
+                                row.Add(_property.Name, _property.Value.ToString());
+
+                            }// foreach each row
+
+
+                            // current no need sort, because column_def in datatable js used. 
+                            // why need sort because mongoDB do not like mysql sqlserver, column order on each row varied. mysql and sqlserver, column order are fixed for each row 
+                            // fore each row, sort by columns(key) both "sort" "orderby" works
+
+                            //_row.OrderBy(o => o.Key);
+                            //row.Sort((x, y) => x.Key.CompareTo(y.Key));
+
+                            // row is dictionary, can't use this way to sort. 
+                            //row.OrderBy(key => key.Key);
+
+
+
+                            // add last 3 columns, only geoFID column will be visible, the other two are used to fly on map and draw polygon/line/marker on location
+                            
+                            //row.Add(new KeyValuePair<string, string>("geoFID", idBsonDoc));
+                           //row.Add(new KeyValuePair<string, string>("geometry_type", geometryTypeBsonDoc));
+                           //row.Add(new KeyValuePair<string, string>("coordinate", coordinatesBsonDoc));
+                            
+
+                            // for dictionary type
+                            row.Add("geoFID", idBsonDoc);
+                            row.Add("geometry_type", geometryTypeBsonDoc);
+                            row.Add("coordinate", coordinatesBsonDoc);
+
+
+                            rows.Add(row);
+
+
+                        }// foreach
+                    }// while await
+
+                }// using
+
+                //=================================== end use Findasync() =========================================
+
+*/
+
+
+
+
+
+
+
+
+}//else
+
+
+// +++++++++++++++ end filtered result by search value  ++++++++++++++++++++++++++++++++
+
+
+
+
+
+System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+
+// use dynamic or object both works 
+Dictionary<string, dynamic> _response = new Dictionary<string, dynamic>();
+//Dictionary<string, object> _response = new Dictionary<string, object>();
+
+
+
+_response["draw"] = Convert.ToInt16(sEcho);
+
+_response["recordsTotal"] = totalData;
+_response["recordsFiltered"] = totalFiltered;
+
+
+_response["data"] = rows;
+
+
+
+result = serializer.Serialize(_response);
+
+
+
+
+HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result, "text/plain");
+
+
+
+return response;
+
+
+
+}
+
+        private Task<IDisposable> ToListAsync(IFindFluent<BsonDocument, BsonDocument> findFluent)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+
+
+
 
 
 
@@ -176,35 +710,25 @@ namespace CivilGis.Controllers
         // need to use 'async task<>' for await method (mongodb api require)
         // this is current version in use
         [AcceptVerbs("GET", "POST")]
-        public async Task<HttpResponseMessage> feature(string area, string subj, double SWlong, double SWlat, double NElong, double NElat)
-        {
+public async Task<HttpResponseMessage> feature(string area, string subj, double SWlong, double SWlat, double NElong, double NElat)
+{
 
 
-            // embeded connection string in code
-            //_mongoClient = new MongoClient("mongodb://localhost:27017");
-           // _mongoDatabase = _mongoClient.GetDatabase("civilgis");
+// embeded connection string in code
+//_mongoClient = new MongoClient("mongodb://localhost:27017");
+// _mongoDatabase = _mongoClient.GetDatabase("civilgis");
 
 
-            // set connection string in web.config 
-             _mongoClient = new MongoClient(ConfigurationManager.ConnectionStrings["MongoDBContext"].ConnectionString);         
-             _mongoDatabase = _mongoClient.GetDatabase(ConfigurationManager.AppSettings["civilgisDBname"]);
-             var _max_row_count = Convert.ToInt16(ConfigurationManager.AppSettings["max_row_count"]);
+// set connection string in web.config 
+_mongoClient = new MongoClient(ConfigurationManager.ConnectionStrings["MongoDBContext"].ConnectionString);         
+_mongoDatabase = _mongoClient.GetDatabase(ConfigurationManager.AppSettings["civilgisDBname"]);
+var _max_row_count = Convert.ToInt16(ConfigurationManager.AppSettings["max_row_count"]);
 
-             var table_name = area + "_" + subj;
+var table_name = area + "_" + subj;
 
 
-             if (area.Equals("city"))
-             {
-                 table_name = subj;
-             }
 
-             if (area.Equals("county"))
-             {
-                 table_name = "oc_"+ subj;
-             }
-
-             
-            var _mongoCollection = _mongoDatabase.GetCollection<FeatureDoc>(table_name);
+                            var _mongoCollection = _mongoDatabase.GetCollection<FeatureDoc>(table_name);
            
 
 
