@@ -175,43 +175,6 @@ namespace CivilGis.Controllers
         }
 
 
-        /*  not in use
-
-        //  --------------------- this function will convert BsonBocument to Data table  --------------------
-        public DataTable GetDataTableFromMongoCursor(MongoCursor cursor)
-        {
-            if (cursor != null && cursor.Count() > 0)
-            {
-
-                DataTable dt = new DataTable(cursor.ToString());
-                foreach (BsonDocument doc in cursor)
-                {
-
-                    foreach (BsonElement elm in doc.Elements)
-                    {
-                        if (!dt.Columns.Contains(elm.Name))
-                        {
-                            dt.Columns.Add(new DataColumn(elm.Name));
-                        }
-
-                    }
-                    DataRow dr = dt.NewRow();
-                    foreach (BsonElement elm in doc.Elements)
-                    {
-                        dr[elm.Name] = elm.Value;
-
-                    }
-                    dt.Rows.Add(dr);
-                }
-                return dt;
-
-            }
-            return null;
-        } //GetDataTableFromMongoCursor
-
-        //  ---------------------  end  convert BsonBocument to Data table  --------------------
-        */
-
 
 
         [AcceptVerbs("GET", "POST")]
@@ -384,9 +347,9 @@ namespace CivilGis.Controllers
 
 
 
-            //  -----------------  just get total count --------------------
+                        //  -----------------  just get total count --------------------
 
-            var _filter_all = new BsonDocument();
+                        var _filter_all = new BsonDocument();
 
                         // count only, does not select
                         var temp = _mongoCollection.CountAsync(_filter_all);
@@ -482,15 +445,18 @@ namespace CivilGis.Controllers
 
 
                             rows = new List<Dictionary<string, object>>();
-                        //rows = new List<List<KeyValuePair<string, string>>>();
+                //rows = new List<List<KeyValuePair<string, string>>>();
 
 
 
-                                  // ------------------- use Find ----------------------------------------
-                                        //var _listBsonDoc = await _mongoCollection.Find(_filter_all).ToListAsync();
-                                        var _listBsonDoc = await _mongoCollection.Find(_filter_all).Sort(_sort).ToListAsync();
+                // ------------------- use Find ----------------------------------------
+                //var _listBsonDoc = await _mongoCollection.Find(_filter_all).ToListAsync();
+                //var _listBsonDoc = await _mongoCollection.Find(_filter_all).Sort(_sort).ToListAsync();
+                var _listBsonDoc = await _mongoCollection.Find(_filter_all).Sort(_sort).Limit(Convert.ToInt16(iDisplayLength)).Skip(Convert.ToInt16(iDisplayStart)).ToListAsync();
 
-                                        foreach (var bsonDocument in _listBsonDoc)
+
+
+                foreach (var bsonDocument in _listBsonDoc)
                                         {
 
                                             // each row from each bsonDocument, batch are all rows, or all bsonDocument.
@@ -710,33 +676,168 @@ return response;
         // need to use 'async task<>' for await method (mongodb api require)
         // this is current version in use
         [AcceptVerbs("GET", "POST")]
-public async Task<HttpResponseMessage> feature(string area, string subj, double SWlong, double SWlat, double NElong, double NElat)
+        public async Task<HttpResponseMessage> feature(string area, string subj, double SWlong, double SWlat, double NElong, double NElat)
 {
 
 
-// embeded connection string in code
-//_mongoClient = new MongoClient("mongodb://localhost:27017");
-// _mongoDatabase = _mongoClient.GetDatabase("civilgis");
 
+                    // set connection string in web.config 
+                    _mongoClient = new MongoClient(ConfigurationManager.ConnectionStrings["MongoDBContext"].ConnectionString);         
+                    _mongoDatabase = _mongoClient.GetDatabase(ConfigurationManager.AppSettings["civilgisDBname"]);
+                    var _max_row_count = Convert.ToInt16(ConfigurationManager.AppSettings["max_row_count"]);
 
-// set connection string in web.config 
-_mongoClient = new MongoClient(ConfigurationManager.ConnectionStrings["MongoDBContext"].ConnectionString);         
-_mongoDatabase = _mongoClient.GetDatabase(ConfigurationManager.AppSettings["civilgisDBname"]);
-var _max_row_count = Convert.ToInt16(ConfigurationManager.AppSettings["max_row_count"]);
-
-var table_name = area + "_" + subj;
+                    var table_name = area + "_" + subj;
 
 
 
                             var _mongoCollection = _mongoDatabase.GetCollection<FeatureDoc>(table_name);
-           
+                            
+
+                            if ((SWlong == 0) || (SWlat == 0) || (NElong == 0) || (NElat == 0))
+                            {
+                                SWlong = -117.963690;
+                                SWlat = 33.634180;
+                                NElong = -117.854780;
+                                NElat = 33.702970;
+                            }
 
 
-           // GeoJson2DGeographicCoordinates position = new GeoJson2DGeographicCoordinates(-117.6767, 33.456);
-          //  GeoJsonPoint<GeoJson2DGeographicCoordinates> point = new GeoJsonPoint<GeoJson2DGeographicCoordinates>(position);
+
+                            GeoJson2DGeographicCoordinates bottomleft = new GeoJson2DGeographicCoordinates(SWlong, SWlat);
+                            GeoJson2DGeographicCoordinates topleft = new GeoJson2DGeographicCoordinates(SWlong, NElat);
+                            GeoJson2DGeographicCoordinates topright = new GeoJson2DGeographicCoordinates(NElong, NElat);
+                            GeoJson2DGeographicCoordinates bottomright = new GeoJson2DGeographicCoordinates(NElong, SWlat);
+                            GeoJson2DGeographicCoordinates[] coord_array = new GeoJson2DGeographicCoordinates[] { bottomleft, topleft, topright, bottomright, bottomleft };
+                            GeoJsonLinearRingCoordinates<GeoJson2DGeographicCoordinates> ringcoord = new GeoJsonLinearRingCoordinates<GeoJson2DGeographicCoordinates>(coord_array);
+                            GeoJsonPolygonCoordinates<GeoJson2DGeographicCoordinates> boxcoord = new GeoJsonPolygonCoordinates<GeoJson2DGeographicCoordinates>(ringcoord);
+                            GeoJsonPolygon<GeoJson2DGeographicCoordinates> box = new GeoJsonPolygon<GeoJson2DGeographicCoordinates>(boxcoord);
+
+
+                            var filter = Builders<FeatureDoc>.Filter.GeoIntersects(x => x.geometry, box);
+            
+
+
+                            long count = 0;
+                            string result = "";
 
 
             
+
+                            // count only, not select
+                            var temp = _mongoCollection.CountAsync(filter);
+                            temp.Wait();
+                            count = temp.Result;
+
+
+
+            if ((count > 0) && (count < _max_row_count))
+            { 
+
+                    //var result = "{ \"type\": \"FeatureCollection\",\"features\": [";
+                    // result = @"{ ""type"": ""FeatureCollection"",""features"": [";
+                     result = @"{ ""type"": ""FeatureCollection"",""features"": ";
+                
+                
+                
+                // ------------------- use Find ----------------------------------------
+                         var _listBsonDoc = await _mongoCollection.Find(filter).ToListAsync();
+
+                
+                            //--------------------- 1 ---------------------------------------------------
+                            var batch_json = _listBsonDoc.ToJson();
+
+                        //ObjectId("55c532cf21167708171b02a2") must change to  "55c532cf21167708171b02a2"
+                        // below use 1.1    1.2 is alternative
+
+
+                        //----------------- 1.1 ok ---------------------------
+                        batch_json = batch_json.Replace("ObjectId(\"", "\"");
+                             batch_json = batch_json.Replace("\")", "\"");
+                             //----------------------------------------------------
+                           
+                            /*
+                                    //--------------------1.2 ---------------------------------
+                                     batch_json = Regex.Replace(batch_json, "ObjectId", "");
+                                     batch_json = Regex.Replace(batch_json, @"(", "");
+                                     batch_json = Regex.Replace(batch_json, @")", "");
+                                    //----------------------------------------------------------
+                             */
+                             
+                             result = result + batch_json;
+
+                            //----------------------------------- end 1 --------------------------------------
+                            
+
+                         
+                           
+                       
+
+                    
+                // batch.toString() has bug, 
+                // -------- temp fix the bug, there are one ][ occur between {1}][{2}, it should be {1},{2}, so ][ need to replace with , -------------
+                    result = result.Replace("][", ",");
+                //================================================== bug fix {}][{} ====================================================================
+
+
+                    result = result + "}";
+
+            }
+
+            else if (count == 0)
+            {
+                // no record
+                result = count.ToString();
+               
+            }
+            else
+            {
+                // more than limit
+                result = count.ToString();
+            }
+
+            
+            
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result, "text/plain");
+
+           
+
+            return response;
+
+        }
+
+
+
+        
+
+        // Not in use, FindAsync is old api, should use new api Find
+        [AcceptVerbs("GET", "POST")]
+        public async Task<HttpResponseMessage> feature2(string area, string subj, double SWlong, double SWlat, double NElong, double NElat)
+        {
+
+
+            // embeded connection string in code
+            //_mongoClient = new MongoClient("mongodb://localhost:27017");
+            // _mongoDatabase = _mongoClient.GetDatabase("civilgis");
+
+
+            // set connection string in web.config 
+            _mongoClient = new MongoClient(ConfigurationManager.ConnectionStrings["MongoDBContext"].ConnectionString);
+            _mongoDatabase = _mongoClient.GetDatabase(ConfigurationManager.AppSettings["civilgisDBname"]);
+            var _max_row_count = Convert.ToInt16(ConfigurationManager.AppSettings["max_row_count"]);
+
+            var table_name = area + "_" + subj;
+
+
+
+            var _mongoCollection = _mongoDatabase.GetCollection<FeatureDoc>(table_name);
+
+
+
+            // GeoJson2DGeographicCoordinates position = new GeoJson2DGeographicCoordinates(-117.6767, 33.456);
+            //  GeoJsonPoint<GeoJson2DGeographicCoordinates> point = new GeoJsonPoint<GeoJson2DGeographicCoordinates>(position);
+
+
+
 
             if ((SWlong == 0) || (SWlat == 0) || (NElong == 0) || (NElat == 0))
             {
@@ -776,339 +877,61 @@ var table_name = area + "_" + subj;
 
 
             if ((count > 0) && (count < _max_row_count))
-            { 
+            {
 
-                    //var result = "{ \"type\": \"FeatureCollection\",\"features\": [";
-                    // result = @"{ ""type"": ""FeatureCollection"",""features"": [";
-                     result = @"{ ""type"": ""FeatureCollection"",""features"": ";
+                //var result = "{ \"type\": \"FeatureCollection\",\"features\": [";
+                // result = @"{ ""type"": ""FeatureCollection"",""features"": [";
+                result = @"{ ""type"": ""FeatureCollection"",""features"": ";
 
-                    //here use FindAsync() with cursor to iterate through each record.
-                    using (var cursor = await _mongoCollection.FindAsync(filter))
+                //here use FindAsync() with cursor to iterate through each record.
+                using (var cursor = await _mongoCollection.FindAsync(filter))
+                {
+                    while (await cursor.MoveNextAsync())
                     {
-                        while (await cursor.MoveNextAsync())
-                        {
-                            var batch = cursor.Current;
-                            
-                            
+                        var batch = cursor.Current;
 
-                      
-                            //--------------------- 1 ---------------------------------------------------
-                            var batch_json = batch.ToJson();
-                            
-                              //ObjectId("55c532cf21167708171b02a2") must change to  "55c532cf21167708171b02a2"
-                              // below use 1.1    1.2 is alternative
-                             
 
-                             //----------------- 1.1 ok ---------------------------
-                             batch_json = batch_json.Replace("ObjectId(\"", "\"");
-                             batch_json = batch_json.Replace("\")", "\"");
-                             //----------------------------------------------------
-                           
-                            /*
-                                    //--------------------1.2 ---------------------------------
-                                     batch_json = Regex.Replace(batch_json, "ObjectId", "");
-                                     batch_json = Regex.Replace(batch_json, @"(", "");
-                                     batch_json = Regex.Replace(batch_json, @")", "");
-                                    //----------------------------------------------------------
-                             */
-                             
-                             result = result + batch_json;
 
-                            //----------------------------------- end 1 --------------------------------------
-                            
 
-                         
-                           
-                        }// while await
+                        //--------------------- 1 ---------------------------------------------------
+                        var batch_json = batch.ToJson();
 
-                    }// using
+                        //ObjectId("55c532cf21167708171b02a2") must change to  "55c532cf21167708171b02a2"
+                        // below use 1.1    1.2 is alternative
 
-                    
+
+                        //----------------- 1.1 ok ---------------------------
+                        batch_json = batch_json.Replace("ObjectId(\"", "\"");
+                        batch_json = batch_json.Replace("\")", "\"");
+                        //----------------------------------------------------
+
+                        /*
+                                //--------------------1.2 ---------------------------------
+                                 batch_json = Regex.Replace(batch_json, "ObjectId", "");
+                                 batch_json = Regex.Replace(batch_json, @"(", "");
+                                 batch_json = Regex.Replace(batch_json, @")", "");
+                                //----------------------------------------------------------
+                         */
+
+                        result = result + batch_json;
+
+                        //----------------------------------- end 1 --------------------------------------
+
+
+
+
+                    }// while await
+
+                }// using
+
+
                 // batch.toString() has bug, 
                 // -------- temp fix the bug, there are one ][ occur between {1}][{2}, it should be {1},{2}, so ][ need to replace with , -------------
-                    result = result.Replace("][", ",");
+                result = result.Replace("][", ",");
                 //================================================== bug fix {}][{} ====================================================================
 
 
-                    result = result + "}";
-
-            }
-
-            else if (count == 0)
-            {
-                // no record
-                result = count.ToString();
-               
-            }
-            else
-            {
-                // more than limit
-                result = count.ToString();
-            }
-
-            
-            
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result, "text/plain");
-
-           
-
-            return response;
-
-        }
-
-
-
-
-        // not in use, version 1, iterate through bsondocument, foreach remove all () in objectID   
-        [AcceptVerbs("GET", "POST")]
-        public async Task<HttpResponseMessage> feature1(string area, string subj, double SWlong, double SWlat, double NElong, double NElat)
-        {
-
-
-            // embeded connection string in code
-            //_mongoClient = new MongoClient("mongodb://localhost:27017");
-            // _mongoDatabase = _mongoClient.GetDatabase("civilgis");
-
-
-            // set connection string in web.config 
-            _mongoClient = new MongoClient(ConfigurationManager.ConnectionStrings["MongoDBContext"].ConnectionString);
-            _mongoDatabase = _mongoClient.GetDatabase(ConfigurationManager.AppSettings["civilgisDBname"]);
-
-
-            var table_name = area + "_" + subj;
-
-
-            if (area.Equals("city"))
-            {
-                table_name = subj;
-            }
-
-            if (area.Equals("county"))
-            {
-                table_name = "oc_" + subj;
-            }
-
-
-            var _mongoCollection = _mongoDatabase.GetCollection<FeatureDoc>(table_name);
-
-
-
-            // GeoJson2DGeographicCoordinates position = new GeoJson2DGeographicCoordinates(-117.6767, 33.456);
-            //  GeoJsonPoint<GeoJson2DGeographicCoordinates> point = new GeoJsonPoint<GeoJson2DGeographicCoordinates>(position);
-
-
-
-
-            if ((SWlong == 0) || (SWlat == 0) || (NElong == 0) || (NElat == 0))
-            {
-                SWlong = -117.963690;
-                SWlat = 33.634180;
-                NElong = -117.854780;
-                NElat = 33.702970;
-            }
-
-
-
-            GeoJson2DGeographicCoordinates bottomleft = new GeoJson2DGeographicCoordinates(SWlong, SWlat);
-            GeoJson2DGeographicCoordinates topleft = new GeoJson2DGeographicCoordinates(SWlong, NElat);
-            GeoJson2DGeographicCoordinates topright = new GeoJson2DGeographicCoordinates(NElong, NElat);
-            GeoJson2DGeographicCoordinates bottomright = new GeoJson2DGeographicCoordinates(NElong, SWlat);
-            GeoJson2DGeographicCoordinates[] coord_array = new GeoJson2DGeographicCoordinates[] { bottomleft, topleft, topright, bottomright, bottomleft };
-            GeoJsonLinearRingCoordinates<GeoJson2DGeographicCoordinates> ringcoord = new GeoJsonLinearRingCoordinates<GeoJson2DGeographicCoordinates>(coord_array);
-            GeoJsonPolygonCoordinates<GeoJson2DGeographicCoordinates> boxcoord = new GeoJsonPolygonCoordinates<GeoJson2DGeographicCoordinates>(ringcoord);
-            GeoJsonPolygon<GeoJson2DGeographicCoordinates> box = new GeoJsonPolygon<GeoJson2DGeographicCoordinates>(boxcoord);
-
-
-            var filter = Builders<FeatureDoc>.Filter.GeoIntersects(x => x.geometry, box);
-
-
-
-            long count = 0;
-            string result = "";
-
-
-
-
-            // count only, not select
-            var temp = _mongoCollection.CountAsync(filter);
-            temp.Wait();
-            count = temp.Result;
-
-
-
-            if ((count > 0) && (count < 2000))
-            {
-
-                //var result = "{ \"type\": \"FeatureCollection\",\"features\": [";
-                result = @"{ ""type"": ""FeatureCollection"",""features"": [";
-
-                //here use FindAsync() with cursor to iterate through each record.
-                using (var cursor = await _mongoCollection.FindAsync(filter))
-                {
-                    while (await cursor.MoveNextAsync())
-                    {
-                        var batch = cursor.Current;
-                        foreach (var bsonDocument in batch)
-                        {
-
-                            //bsonDocument objectID field convert to non-string style, like ObjectId("000000000000000000000000")", replace remove 'objectId(' and ')'
-
-                           
-
-                            string rd = bsonDocument.ToJson();
-                            
-                             rd = rd.Replace("ObjectId(\"", "\"");
-                             rd = rd.Replace("\")", "\"");
-
-                            result = result + rd + ",";
-                            count++;
-                        }
-                    }
-                }// using
-
-                // remove last ","
-                result = result.Remove(result.Length - 1);
-
-                result = result + "]}";
-
-            }
-
-            else if (count == 0)
-            {
-                // no record
-                result = count.ToString();
-
-            }
-            else
-            {
-                // more than limit
-                result = count.ToString();
-            }
-
-
-
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result, "text/plain");
-
-
-
-            return response;
-
-        }
-
-
-
-        // not in use, version 0 is origianl working copy, replace all objectID to null as 0 , 
-        [AcceptVerbs("GET", "POST")]
-        public async Task<HttpResponseMessage> feature0(string area, string subj, double SWlong, double SWlat, double NElong, double NElat)
-        {
-
-
-            // embeded connection string in code
-            //_mongoClient = new MongoClient("mongodb://localhost:27017");
-            // _mongoDatabase = _mongoClient.GetDatabase("civilgis");
-
-
-            // set connection string in web.config 
-            _mongoClient = new MongoClient(ConfigurationManager.ConnectionStrings["MongoDBContext"].ConnectionString);
-            _mongoDatabase = _mongoClient.GetDatabase(ConfigurationManager.AppSettings["civilgisDBname"]);
-
-
-            var table_name = area + "_" + subj;
-
-
-            if (area.Equals("city"))
-            {
-                table_name = subj;
-            }
-
-            if (area.Equals("county"))
-            {
-                table_name = "oc_" + subj;
-            }
-
-
-            var _mongoCollection = _mongoDatabase.GetCollection<FeatureDoc>(table_name);
-
-
-
-            // GeoJson2DGeographicCoordinates position = new GeoJson2DGeographicCoordinates(-117.6767, 33.456);
-            //  GeoJsonPoint<GeoJson2DGeographicCoordinates> point = new GeoJsonPoint<GeoJson2DGeographicCoordinates>(position);
-
-
-
-
-            if ((SWlong == 0) || (SWlat == 0) || (NElong == 0) || (NElat == 0))
-            {
-                SWlong = -117.963690;
-                SWlat = 33.634180;
-                NElong = -117.854780;
-                NElat = 33.702970;
-            }
-
-
-
-            GeoJson2DGeographicCoordinates bottomleft = new GeoJson2DGeographicCoordinates(SWlong, SWlat);
-            GeoJson2DGeographicCoordinates topleft = new GeoJson2DGeographicCoordinates(SWlong, NElat);
-            GeoJson2DGeographicCoordinates topright = new GeoJson2DGeographicCoordinates(NElong, NElat);
-            GeoJson2DGeographicCoordinates bottomright = new GeoJson2DGeographicCoordinates(NElong, SWlat);
-            GeoJson2DGeographicCoordinates[] coord_array = new GeoJson2DGeographicCoordinates[] { bottomleft, topleft, topright, bottomright, bottomleft };
-            GeoJsonLinearRingCoordinates<GeoJson2DGeographicCoordinates> ringcoord = new GeoJsonLinearRingCoordinates<GeoJson2DGeographicCoordinates>(coord_array);
-            GeoJsonPolygonCoordinates<GeoJson2DGeographicCoordinates> boxcoord = new GeoJsonPolygonCoordinates<GeoJson2DGeographicCoordinates>(ringcoord);
-            GeoJsonPolygon<GeoJson2DGeographicCoordinates> box = new GeoJsonPolygon<GeoJson2DGeographicCoordinates>(boxcoord);
-
-
-            var filter = Builders<FeatureDoc>.Filter.GeoIntersects(x => x.geometry, box);
-
-
-
-            long count = 0;
-            string result = "";
-
-
-
-
-            // count only, not select
-            var temp = _mongoCollection.CountAsync(filter);
-            temp.Wait();
-            count = temp.Result;
-
-
-
-            if ((count > 0) && (count < 2000))
-            {
-
-                //var result = "{ \"type\": \"FeatureCollection\",\"features\": [";
-                result = @"{ ""type"": ""FeatureCollection"",""features"": [";
-
-                //here use FindAsync() with cursor to iterate through each record.
-                using (var cursor = await _mongoCollection.FindAsync(filter))
-                {
-                    while (await cursor.MoveNextAsync())
-                    {
-                        var batch = cursor.Current;
-                        foreach (var bsonDocument in batch)
-                        {
-
-                            //bsonDocument objectID field convert to non-string style, like ObjectId(""000000000000000000000000"")", must remove it or change it to "0"
-
-                            ObjectId nullID = new ObjectId();
-                            bsonDocument.id = nullID;
-
-                            string rd = bsonDocument.ToJson();
-                            string nullstr = @"ObjectId(""000000000000000000000000"")";
-                            string rd1 = rd.Replace(nullstr, "0");
-
-
-                            result = result + rd1 + ",";
-                            count++;
-                        }
-                    }
-                }// using
-
-                // remove last ","
-                result = result.Remove(result.Length - 1);
-
-                result = result + "]}";
+                result = result + "}";
 
             }
 
