@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+//using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Text;
-using System.Net.Http.Headers;
+using System.Text.RegularExpressions;
+//using System.Net.Http.Headers;
 using MongoDB.Driver;
 using MongoDB.Bson;
-using MongoDB.Shared;
+//using MongoDB.Shared;
 using System.Configuration;
 //using System.Data.Entity.Infrastructure;
 using System.Data.Entity;
@@ -21,8 +21,8 @@ using System.Threading.Tasks;
 using CivilGis.Models;
 //using System.Text.RegularExpressions;
 
-using System.Data;
-using System.Data.SqlClient;
+//using System.Data;
+//using System.Data.SqlClient;
 using System.Collections;
 using System.Web;
 
@@ -313,7 +313,7 @@ namespace CivilGis.Controllers
            
             // can't use array here, because array can't use add(item), however need to convert list to array, in order to sort array 
             List<string> _columns = new List<string>();
-
+            
 
             // findone() document
 
@@ -330,6 +330,8 @@ namespace CivilGis.Controllers
                 _columns.Add(_property.Name);
 
             }
+
+            List<string> _columns_original = _columns;
 
             // sort columns
             _columns.Sort();
@@ -373,48 +375,120 @@ namespace CivilGis.Controllers
 
 
 
+                                            var _sort_by_column = "properties." + columns[orderColumn].ToString();
+                                            var _sort = Builders<BsonDocument>.Sort.Ascending(_sort_by_column);
 
 
-                    /* if there is a search parameter
-
-                    sql = "SELECT * FROM " + tabledata_name + " WHERE ";
-
-
-                    for (int i = 0; i < columns.Count; i++)
-                    {
-
-                        if (i > 0)
-                        {
-                            sql = sql + " OR ";
-
-                        }// if
-
-                        sql = sql + columns[i] + " LIKE '%" + searchValue + "%' ";
-
-                    }// for
+                                            if (orderDir.Equals("asc"))
+                                            {
+                                                _sort = Builders<BsonDocument>.Sort.Ascending(_sort_by_column);
+                                            }
+                                            else if (orderDir.Equals("desc"))
+                                            {
+                                                _sort = Builders<BsonDocument>.Sort.Descending(_sort_by_column);
+                                            }
 
 
 
 
 
 
-                    sql = sql + " ORDER BY " + columns[orderColumn] + "   " + orderDir + "  OFFSET " + iDisplayStart + "  ROWS FETCH NEXT  " + iDisplayLength + "  ROWS ONLY  ";
-
-                    using (SqlCommand cmd = new SqlCommand(sql, con))
-                    {
-
-                        dt_body = new DataTable();
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        da.Fill(dt_body);
-
-                        totalFiltered = dt_body.Rows.Count;
+                                            rows = new List<Dictionary<string, object>>();
 
 
-                    }// sqlcommand
-                    */
 
+
+                // ------------------- search value filter ----------------------------------------
+
+                
+
+
+                string _properties_search = "";
+                foreach (string _field in _columns_original) // Loop through List with foreach.
+                {
+
+
+                    _properties_search = _properties_search + "{ 'properties." + _field + "':{'$regex': '" + searchValue + "', '$options': 'i' }},";
 
                 }
+
+                // remove last ','
+                _properties_search = _properties_search.TrimEnd(',');
+
+
+                //--- working sample -----------
+                //string _searchValue_filter = @"{ 'properties.STNAME_ALF':'GISLER'}";
+                //  string _searchValue_filter = @"{ 'properties.STNAME_ALF':{ $regex: 'GISLER' }}";
+                //string _searchValue_filter = @"{ 'properties.STNAME_ALF':{ '$regex': 'GISLER' }}";
+                //string _searchValue_filter = @"{ 'properties.STNAME_ALF':{ '$regex': 'isl', '$options': 'i' }}";
+                //string _searchValue_filter = @"{ 'properties.STNAME_ALF':{ '$regex': '" + searchValue + "', '$options': 'i' }}";
+
+                string _searchValue_filter = @"{ $or: [" + _properties_search + "] }";
+
+                //-------------------- end search value filer ---------------------------------------------
+
+
+                //var _listBsonDoc = await _mongoCollection.Find(_searchValue_filter).ToListAsync();
+                //var _listBsonDoc = await _mongoCollection.Find(_searchValue_filter).Sort(_sort).ToListAsync();
+                var _listBsonDoc = await _mongoCollection.Find(_searchValue_filter).Sort(_sort).Limit(Convert.ToInt16(iDisplayLength)).Skip(Convert.ToInt16(iDisplayStart)).ToListAsync();
+
+
+
+                                                            foreach (var bsonDocument in _listBsonDoc)
+                                                            {
+
+                                                                // each row from each bsonDocument, batch are all rows, or all bsonDocument.
+
+                                                                //var row = new List<KeyValuePair<string, string>>();
+                                                                Dictionary<string, object> row = new Dictionary<string, object>();
+
+                                                                propertiesBsonDoc = bsonDocument["properties"].AsBsonDocument;
+
+                                                                var objectIdBsonDoc = bsonDocument["_id"].AsObjectId;
+                                                                var idBsonDoc = objectIdBsonDoc.ToString();
+
+
+                                                                var geometryBsonDoc = bsonDocument["geometry"].AsBsonDocument;
+
+                                                                var geometryTypeBsonDoc = geometryBsonDoc["type"].AsString;
+
+                                                                var coordinatesBsonArray = geometryBsonDoc["coordinates"].AsBsonArray;
+                                                                var coordinatesBsonDoc = coordinatesBsonArray.ToJson();
+
+
+                                                                foreach (var _property in propertiesBsonDoc)
+                                                            {
+
+                                                                // BsonElement (key-value) pair,     key -> _property.Name;  value ->_property.Value;
+
+                                                                //row.Add(new KeyValuePair<string, string>(_property.Name, _property.Value.ToString()));
+
+                                                                // for dictionary type
+                                                                row.Add(_property.Name, _property.Value.ToString());
+
+                                                            }// foreach each row
+
+
+
+                                                            // for dictionary type
+                                                            row.Add("geoFID", idBsonDoc);
+                                                            row.Add("geometry_type", geometryTypeBsonDoc);
+                                                            row.Add("coordinate", coordinatesBsonDoc);
+
+
+                                                            rows.Add(row);
+
+
+                                                        }// foreach
+
+
+
+
+
+               
+
+
+            }
                 else
                 {
 
@@ -444,8 +518,8 @@ namespace CivilGis.Controllers
 
 
 
-                            rows = new List<Dictionary<string, object>>();
-                //rows = new List<List<KeyValuePair<string, string>>>();
+                // rows = new List<Dictionary<string, object>>();
+                rows = new List<Dictionary<string, dynamic>>();
 
 
 
@@ -462,7 +536,8 @@ namespace CivilGis.Controllers
                                             // each row from each bsonDocument, batch are all rows, or all bsonDocument.
 
                                             //var row = new List<KeyValuePair<string, string>>();
-                                            Dictionary<string, object> row = new Dictionary<string, object>();
+                                            //Dictionary<string, object> row = new Dictionary<string, object>();
+                                            Dictionary<string, dynamic> row = new Dictionary<string, dynamic>();
 
                                             propertiesBsonDoc = bsonDocument["properties"].AsBsonDocument;
 
@@ -474,8 +549,14 @@ namespace CivilGis.Controllers
 
                                             var geometryTypeBsonDoc = geometryBsonDoc["type"].AsString;
 
+
+                                           
                                             var coordinatesBsonArray = geometryBsonDoc["coordinates"].AsBsonArray;
                                             var coordinatesBsonDoc = coordinatesBsonArray.ToJson();
+
+                                            //var coordinatesBsonDoc = geometryBsonDoc["coordinates"].AsBsonArray;
+
+                                            
 
 
                                             foreach (var _property in propertiesBsonDoc)
@@ -527,137 +608,51 @@ namespace CivilGis.Controllers
 
 
 
-/*
+                                }//else
 
 
-                    //========================== using  FindAsync() this is old api, not in use =====================================
-                    using (var cursor = await _mongoCollection.FindAsync(_filter_all))
-                
-                {
-                    while (await cursor.MoveNextAsync())
-                    {
-                        var batch = cursor.Current;
+                                // +++++++++++++++ end filtered result by search value  ++++++++++++++++++++++++++++++++
 
-                        foreach (var bsonDocument in batch)
-                        {
 
-                            // each row from each bsonDocument, batch are all rows, or all bsonDocument.
 
-                            //var row = new List<KeyValuePair<string, string>>();
-                            Dictionary<string, object> row = new Dictionary<string, object>();
 
-                            propertiesBsonDoc = bsonDocument["properties"].AsBsonDocument;
 
-                            var objectIdBsonDoc = bsonDocument["_id"].AsObjectId;
-                            var idBsonDoc = objectIdBsonDoc.ToString();
+                                System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
 
+                                // use dynamic or object both works 
+                                Dictionary<string, dynamic> _response = new Dictionary<string, dynamic>();
+                                //Dictionary<string, object> _response = new Dictionary<string, object>();
 
-                            var geometryBsonDoc = bsonDocument["geometry"].AsBsonDocument;
 
-                            var geometryTypeBsonDoc = geometryBsonDoc["type"].AsString;
 
-                            var coordinatesBsonArray = geometryBsonDoc["coordinates"].AsBsonArray;
-                            var coordinatesBsonDoc = coordinatesBsonArray.ToJson();
+                                _response["draw"] = Convert.ToInt16(sEcho);
 
+                                _response["recordsTotal"] = totalData;
+                                _response["recordsFiltered"] = totalFiltered;
 
-                            foreach (var _property in propertiesBsonDoc)
-                            {
 
-                                // BsonElement (key-value) pair,     key -> _property.Name;  value ->_property.Value;
+                                _response["data"] = rows;
 
-                                //row.Add(new KeyValuePair<string, string>(_property.Name, _property.Value.ToString()));
 
-                                // for dictionary type
-                                row.Add(_property.Name, _property.Value.ToString());
 
-                            }// foreach each row
+                                result = serializer.Serialize(_response);
 
 
-                            // current no need sort, because column_def in datatable js used. 
-                            // why need sort because mongoDB do not like mysql sqlserver, column order on each row varied. mysql and sqlserver, column order are fixed for each row 
-                            // fore each row, sort by columns(key) both "sort" "orderby" works
 
-                            //_row.OrderBy(o => o.Key);
-                            //row.Sort((x, y) => x.Key.CompareTo(y.Key));
 
-                            // row is dictionary, can't use this way to sort. 
-                            //row.OrderBy(key => key.Key);
+                                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result, "text/plain");
 
 
 
-                            // add last 3 columns, only geoFID column will be visible, the other two are used to fly on map and draw polygon/line/marker on location
-                            
-                            //row.Add(new KeyValuePair<string, string>("geoFID", idBsonDoc));
-                           //row.Add(new KeyValuePair<string, string>("geometry_type", geometryTypeBsonDoc));
-                           //row.Add(new KeyValuePair<string, string>("coordinate", coordinatesBsonDoc));
-                            
+                                return response;
 
-                            // for dictionary type
-                            row.Add("geoFID", idBsonDoc);
-                            row.Add("geometry_type", geometryTypeBsonDoc);
-                            row.Add("coordinate", coordinatesBsonDoc);
 
 
-                            rows.Add(row);
+}// 
 
 
-                        }// foreach
-                    }// while await
 
-                }// using
 
-                //=================================== end use Findasync() =========================================
-
-*/
-
-
-
-
-
-
-
-
-}//else
-
-
-// +++++++++++++++ end filtered result by search value  ++++++++++++++++++++++++++++++++
-
-
-
-
-
-System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-
-// use dynamic or object both works 
-Dictionary<string, dynamic> _response = new Dictionary<string, dynamic>();
-//Dictionary<string, object> _response = new Dictionary<string, object>();
-
-
-
-_response["draw"] = Convert.ToInt16(sEcho);
-
-_response["recordsTotal"] = totalData;
-_response["recordsFiltered"] = totalFiltered;
-
-
-_response["data"] = rows;
-
-
-
-result = serializer.Serialize(_response);
-
-
-
-
-HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result, "text/plain");
-
-
-
-return response;
-
-
-
-}
 
         private Task<IDisposable> ToListAsync(IFindFluent<BsonDocument, BsonDocument> findFluent)
         {

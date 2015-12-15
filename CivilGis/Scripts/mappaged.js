@@ -1022,8 +1022,8 @@ function datatablesX(){
                             var table = $('#tabledataX').DataTable();
                             
                             // last 2 columns are "geometry_type" and "coordinate" need to hide, set visible to false. but need to use them later.
-                            table.columns( _column_count-1 ).visible( false );
-                            table.columns( _column_count-2 ).visible( false );
+                            //table.columns( _column_count-1 ).visible( false );
+                            //table.columns( _column_count-2 ).visible( false );
                            
            
                              // ajax click row event fly to on map 
@@ -1059,8 +1059,27 @@ function datatablesX(){
                                                         }//  
                                                       
                                                        if (_column_nm === 'coordinate')
-                                                        {
-                                                          _geometry_coord = table.cell(_rowIdx, cllmnIndex ).data();
+                                                       {
+                                                           // --------- this is PHP version ------------------------
+                                                           //_geometry_coord = table.cell(_rowIdx, cllmnIndex).data();
+
+
+                                                           /* 
+                                                           
+                                                            ---------------------- this bug fix is only for ASP.net version ---------
+
+                                                                    php version, you get no quote for the value, regard as Array
+                                                                           "coordinate": [[[-117.91489338267, 33.630434601366],....]]]
+                                                                    asp.net when you serialize response you get quote for the value, regard as string, you must convert string to array, by JSON parse it.  
+                                                                   "coordinate": "[[[-117.94588209420586, 33.666439395057623],....]]]"
+                                                              --------------------------------------------------------------------------
+                                                            */
+
+                                                           var _geometry_coord_string = table.cell(_rowIdx, cllmnIndex).data();
+                                                           _geometry_coord = JSON.parse(_geometry_coord_string);
+
+                                                           // ----------------- end bug fix -------------------------------
+
                                                         } 
                                                       
                                                         if (_column_nm === 'geoFID')
@@ -1093,28 +1112,40 @@ function datatablesX(){
                                   
                                   // --------------- draw polygon line marker on map (red) -------------------
                                   
-                                  
+                                           
                                   
                                   if (_geometry_type === 'Polygon'){
                                       
+
+                                     
+
+
+
                                       _click_coord = [];
                                      // assume each coordinate has only 1 polygon,
-                                      for (i = 0, len = _geometry_coord[0].length; i < len; ++i) {
-                                           /*
-                                                   var triangleCoords = [
-                                                {lat: 25.774, lng: -80.190},
-                                                {lat: 18.466, lng: -66.118},
-                                                {lat: 32.321, lng: -64.757},
-                                                {lat: 25.774, lng: -80.190}
-                                              ];
-                                           */
+                                      for (i = 0, len = _geometry_coord[0].length; i < len; ++i)
+                                      {
+                                                   /*
+                                                           var triangleCoords = [
+                                                        {lat: 25.774, lng: -80.190},
+                                                        {lat: 18.466, lng: -66.118},
+                                                        {lat: 32.321, lng: -64.757},
+                                                        {lat: 25.774, lng: -80.190}
+                                                      ];
+                                                   */
                                           
-                                         var  _new_lat = _geometry_coord[0][i][1];
-                                         var  _new_long = _geometry_coord[0][i][0];
-                                          var _latlng = {};
-                                                _latlng["lat"]=_new_lat; 
-                                                _latlng["lng"]=_new_long; 
-                                           _click_coord.push(_latlng);   
+                                          
+
+                                                 var  _new_lat = _geometry_coord[0][i][1];
+                                                 var  _new_long = _geometry_coord[0][i][0];
+                                                  var _latlng = {};
+                                                        _latlng["lat"]=_new_lat; 
+                                                        _latlng["lng"]=_new_long; 
+                                                        _click_coord.push(_latlng);
+
+                   
+
+
                                         }// for
                                       
                                       // Construct the polygon.
@@ -1123,7 +1154,11 @@ function datatablesX(){
                                             {
                                                 _click_polygon.setMap(null);
 
-                                             }
+                                      }
+
+                                      
+
+
                                         _click_polygon = new google.maps.Polygon({
                                           paths: _click_coord,
                                           strokeColor: '#FF0000',
@@ -1132,6 +1167,9 @@ function datatablesX(){
                                           fillColor: '#FF0000',
                                           fillOpacity: 0.01
                                         });
+
+                                       
+
                                         _click_polygon.setMap(map);
                                       
                                       // zoom to bound
