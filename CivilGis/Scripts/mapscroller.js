@@ -85,21 +85,19 @@ function feed_datatables(_geojson_obj){
                                    columns: _column_def,
                                     
                                     
-                                  //  "pagingType": "full_numbers",    
+                                    "pagingType": "full_numbers",    
                                     
                                     // resize the datatables height here scrollY:150
                                     scrollY: 200,
                                     scrollX: true,
                                     
-                                    
-                                    // ------------ scroller section --------     
+                                          // ------------ scroller section --------     
                                                               
-                                                                deferRender: true,
-                                                                scrollCollapse: true,
-                                                                scroller: true
+                                          deferRender: true,
+                                      scrollCollapse: true,
+                                      scroller: true
                                                                 
-                                   // ------------ scroller section end--------  
-                                    
+                                // ------------ scroller section end--------  
                                                     
                             }); // datatable
                             
@@ -477,10 +475,11 @@ function ajax_GeoJSON(gmap,_apiURI) {
     // Load a GeoJSON from the server 
    
             
+            
             //------tile[3] ---------
                             add_tiles();
-            
-            
+                            
+                            
             // before load new geoJSON feature, need to remove all current geoJSON feature.
             
                     var callback=function(feature) {
@@ -516,7 +515,8 @@ function ajax_GeoJSON(gmap,_apiURI) {
                             _geojson_object = JSON.parse(data);
 
 
-                                        //------------- add each _id:{"$id": "55e8c24e382f9fe337f0d8fe"}  to properties before draw on map. -------------
+                            //-------------    php format add each _id:{"$id": "55e8c24e382f9fe337f0d8fe"}  to properties before draw on map. -------------
+                            //-------------asp.net format add each  {"_id" : "55c532cf21167708171b02a2"}  to properties before draw on map. -------------
 
                                          var _features_array = _geojson_object['features'];
 
@@ -526,13 +526,34 @@ function ajax_GeoJSON(gmap,_apiURI) {
 
                                          _features_array.forEach( function (eachFeatueItem)
                                              {
+                                                  
+                                             
+                                             /*
+                                               // --- php format ------
+                                               
                                                   _id_obj = eachFeatueItem['_id'];
                                                   _id_obj_id = _id_obj['$id'];
                                                  _propty_obj = eachFeatueItem['properties'];
                                                  var _geo_type = eachFeatueItem['geometry'];
                                                  
                                                  _propty_obj['GeoFeatureType']=_geo_type['type'];
-                                                 _propty_obj['GeoFeatureID']=_id_obj_id;
+                                                 _propty_obj['GeoFeatureID'] = _id_obj_id;
+
+
+
+                                           
+                                                 // ---end  php format ------
+                                              */
+
+
+                                             // ------ asp.net format -----------
+                                                 _id_obj_id = eachFeatueItem['_id'];
+
+
+
+                                                 _propty_obj = eachFeatueItem['properties'];
+                                                 _propty_obj['GeoFeatureID'] = _id_obj_id;
+
 
                                              });// features_array_foreach
 
@@ -579,7 +600,7 @@ function ajax_GeoJSON(gmap,_apiURI) {
                              // returning number of count, no geojson, clean the datatables
                         else{ 
                             
-                            
+                           
                             
                             
                             document.getElementById("ajaxload").style.display = "none";
@@ -671,7 +692,10 @@ function get_map_bound(){
                  NElat = northEast.lat();
                   
                   // http://localhost:10/civilgis/api/load/general_landuse/SWlong/SWlat/NElong/NElat/   This is sample URI
-                var _url=base_url+ 'api/load/'+ $("#areaID").val() + '/'+$("#subjectID").val()+'/'+SWlong+'/'+SWlat+'/'+NElong+'/'+NElat+'/';
+                  //var _url = base_url + 'api/load/' + $("#areaID").val() + '/' + $("#subjectID").val() + '/' + SWlong + '/' + SWlat + '/' + NElong + '/' + NElat + '/';
+                //var _url = "/api/geojson/feature/" + initial_location[0] + '/' + $("#subjectID").val() + "/" + SWlong + "/" + SWlat + "/" + NElong + "/" + NElat + "/";
+
+                   var _url = "/api/geojson/feature/" + $("#areaID").val() + '/' + $("#subjectID").val() + "/" + SWlong + "/" + SWlat + "/" + NElong + "/" + NElat + "/";
             
                   document.getElementById("ajaxload").style.display = "block";
                   ajax_GeoJSON(map,_url);
@@ -883,12 +907,14 @@ function datatablesX(){
       // maptabledata2 return arry of object [{name:aaa}, {age:19}...]
     // maptabledata return array [aaa, 19,....]
     // when they feed to datatables, different type of datasource. 
+
+  
       
-       var _urlx = base_url+ 'api/maptabledata/' + $("#areaID").val() + '/' + $("#subjectID").val() + '/';
-       var _url_headerx = base_url+ 'api/maptableheader/'+ $("#areaID").val() + '/' + $("#subjectID").val() + '/';
+    var _urlx = '/api/geojson/maptabledata/' + $("#areaID").val() + '/' + $("#subjectID").val() + '/';
+    var _url_headerx = '/api/geojson/maptableheader/' + $("#areaID").val() + '/' + $("#subjectID").val() + '/';
      
      
-     
+    //alert(_url_headerx);
      
      
      /* 
@@ -958,6 +984,8 @@ function datatablesX(){
                             //  datatable
                             $('#tabledataX').DataTable({
                                             
+                                "lengthMenu": [ 50, 100 ],
+
                                            //"pagingType": "full_numbers",
                                            
                                            //for input page number plugin
@@ -989,13 +1017,13 @@ function datatablesX(){
                                                                 scrollY: 200,
                                                                 scrollX: true,
                                                                 
-                                                                // ------------ scroller section --------     
+                                                                    // ------------ scroller section --------     
                                                               
-                                                                deferRender: true,
-                                                                scrollCollapse: true,
-                                                                scroller: true
+                                                                                        deferRender: true,
+                                                                                           scrollCollapse: true,
+                                                                                           scroller: true
                                                                 
-                                   // ------------ scroller section end--------  
+                                                                   // ------------ scroller section end--------  
                                                                 
                                                                 
                                                                 
@@ -1045,8 +1073,27 @@ function datatablesX(){
                                                         }//  
                                                       
                                                        if (_column_nm === 'coordinate')
-                                                        {
-                                                          _geometry_coord = table.cell(_rowIdx, cllmnIndex ).data();
+                                                       {
+                                                           // --------- this is PHP version ------------------------
+                                                           //_geometry_coord = table.cell(_rowIdx, cllmnIndex).data();
+
+
+                                                           /* 
+                                                           
+                                                            ---------------------- this bug fix is only for ASP.net version ---------
+
+                                                                    php version, you get no quote for the value, regard as Array
+                                                                           "coordinate": [[[-117.91489338267, 33.630434601366],....]]]
+                                                                    asp.net when you serialize response you get quote for the value, regard as string, you must convert string to array, by JSON parse it.  
+                                                                   "coordinate": "[[[-117.94588209420586, 33.666439395057623],....]]]"
+                                                              --------------------------------------------------------------------------
+                                                            */
+
+                                                           var _geometry_coord_string = table.cell(_rowIdx, cllmnIndex).data();
+                                                           _geometry_coord = JSON.parse(_geometry_coord_string);
+
+                                                           // ----------------- end bug fix -------------------------------
+
                                                         } 
                                                       
                                                         if (_column_nm === 'geoFID')
@@ -1079,28 +1126,40 @@ function datatablesX(){
                                   
                                   // --------------- draw polygon line marker on map (red) -------------------
                                   
-                                  
+                                           
                                   
                                   if (_geometry_type === 'Polygon'){
                                       
+
+                                     
+
+
+
                                       _click_coord = [];
                                      // assume each coordinate has only 1 polygon,
-                                      for (i = 0, len = _geometry_coord[0].length; i < len; ++i) {
-                                           /*
-                                                   var triangleCoords = [
-                                                {lat: 25.774, lng: -80.190},
-                                                {lat: 18.466, lng: -66.118},
-                                                {lat: 32.321, lng: -64.757},
-                                                {lat: 25.774, lng: -80.190}
-                                              ];
-                                           */
+                                      for (i = 0, len = _geometry_coord[0].length; i < len; ++i)
+                                      {
+                                                   /*
+                                                           var triangleCoords = [
+                                                        {lat: 25.774, lng: -80.190},
+                                                        {lat: 18.466, lng: -66.118},
+                                                        {lat: 32.321, lng: -64.757},
+                                                        {lat: 25.774, lng: -80.190}
+                                                      ];
+                                                   */
                                           
-                                         var  _new_lat = _geometry_coord[0][i][1];
-                                         var  _new_long = _geometry_coord[0][i][0];
-                                          var _latlng = {};
-                                                _latlng["lat"]=_new_lat; 
-                                                _latlng["lng"]=_new_long; 
-                                           _click_coord.push(_latlng);   
+                                          
+
+                                                 var  _new_lat = _geometry_coord[0][i][1];
+                                                 var  _new_long = _geometry_coord[0][i][0];
+                                                  var _latlng = {};
+                                                        _latlng["lat"]=_new_lat; 
+                                                        _latlng["lng"]=_new_long; 
+                                                        _click_coord.push(_latlng);
+
+                   
+
+
                                         }// for
                                       
                                       // Construct the polygon.
@@ -1109,7 +1168,11 @@ function datatablesX(){
                                             {
                                                 _click_polygon.setMap(null);
 
-                                             }
+                                      }
+
+                                      
+
+
                                         _click_polygon = new google.maps.Polygon({
                                           paths: _click_coord,
                                           strokeColor: '#FF0000',
@@ -1118,6 +1181,9 @@ function datatablesX(){
                                           fillColor: '#FF0000',
                                           fillOpacity: 0.01
                                         });
+
+                                       
+
                                         _click_polygon.setMap(map);
                                       
                                       // zoom to bound
@@ -1317,7 +1383,7 @@ function datatablesX(){
 // datatables paged js
  $(document).ready(function () {
 
-         base_url = document.getElementById('base_url').value;
+        
 
 
        

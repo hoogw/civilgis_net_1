@@ -100,7 +100,7 @@ function init_tiling(){
 
                                                       
 
-                                                        return _tile_baseURL + 'cityadr' + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
+                                                        return _tile_baseURL + 'city_address' + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
                                                        
 
                                                     },
@@ -117,7 +117,7 @@ function init_tiling(){
                                                                            
 
                                                                            
-                                                                            return _tile_baseURL +'cityparcels' + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
+                                                                            return _tile_baseURL +'city_parcels' + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
                                                                            
 
                                                                         },
@@ -131,7 +131,7 @@ function init_tiling(){
                                                                         getTileUrl: function(coord, zoom) {
 
                                                                            
-                                                                            return _tile_baseURL +'citystr' + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
+                                                                            return _tile_baseURL +'city_streets' + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
 
                                                                         },
                                                                         tileSize: new google.maps.Size(256, 256),

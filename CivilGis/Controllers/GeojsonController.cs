@@ -428,6 +428,10 @@ namespace CivilGis.Controllers
                 //-------------------- end search value filer ---------------------------------------------
 
 
+                totalFiltered = await _mongoCollection.CountAsync(_searchValue_filter);
+
+
+
                 //var _listBsonDoc = await _mongoCollection.Find(_searchValue_filter).ToListAsync();
                 //var _listBsonDoc = await _mongoCollection.Find(_searchValue_filter).Sort(_sort).ToListAsync();
                 var _listBsonDoc = await _mongoCollection.Find(_searchValue_filter).Sort(_sort).Limit(Convert.ToInt16(iDisplayLength)).Skip(Convert.ToInt16(iDisplayStart)).ToListAsync();

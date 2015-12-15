@@ -1022,8 +1022,8 @@ function datatablesX(){
                             var table = $('#tabledataX').DataTable();
                             
                             // last 2 columns are "geometry_type" and "coordinate" need to hide, set visible to false. but need to use them later.
-                            //table.columns( _column_count-1 ).visible( false );
-                            //table.columns( _column_count-2 ).visible( false );
+                            table.columns( _column_count-1 ).visible( false );
+                            table.columns( _column_count-2 ).visible( false );
                            
            
                              // ajax click row event fly to on map 

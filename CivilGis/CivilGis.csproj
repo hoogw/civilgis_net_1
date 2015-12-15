@@ -205,8 +205,8 @@
     <Content Include="Scripts\maplist_paged.js" />
     <Content Include="Scripts\list_paged.js" />
     <Content Include="Scripts\list_scroller.js" />
-    <Content Include="Scripts\mappaged.js" />
     <Content Include="Scripts\mapscroller.js" />
+    <Content Include="Scripts\mappaged.js" />
     <Content Include="Scripts\mapsmpp.js" />
     <Content Include="Scripts\mapsmps.js" />
     <Content Include="Scripts\map_init.js" />
@@ -303,6 +303,7 @@
     <Content Include="Views\LocalMap\localmaplistpaged.cshtml" />
     <Content Include="Views\LocalMap\localmaplistscroller.cshtml" />
     <Content Include="Views\Shared\_county_side_panel.cshtml" />
+    <Content Include="Views\Map\mapscroller.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

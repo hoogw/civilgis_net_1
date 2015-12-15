@@ -1,0 +1,335 @@
+﻿<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+
+<script src="~/Scripts/jquery.dataTables.js"></script>
+<link href="~/Content/jquery.dataTables.css" rel="stylesheet">
+
+
+<script src="~/Scripts/dataTables.scroller.min.js"></script>
+<link href="~/Content/scroller.dataTables.min.css" rel="stylesheet">
+
+<script src="~/Scripts/area_boundary.js"></script>
+<script src="~/Scripts/map_init.js"></script>
+<script src="~/Scripts/mapscroller.js"></script>
+
+
+
+
+
+
+
+
+
+  <!-- this hidden value carry the map subject from controller use it in javascript api call-->
+
+<input type="hidden" id="areaID" value=@ViewBag.Area />
+<input type="hidden" id="subjectID" value=@ViewBag.Subject />
+
+
+
+
+
+
+
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/map/index">Transparent Gov </a>
+    </div>
+
+
+    <!-- Navigation -->
+    <!-- /.navbar-top-links -->
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="sidebar-search">
+                    <div class="input-group custom-search-form">
+                        <input type="text" id="addr_txt" class="form-control" placeholder="exp:1966 Harbor Blvd">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" id="search_addr">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <!-- /input-group -->
+                </li>
+
+
+
+
+
+
+
+
+
+
+                <li>
+                    <a href="#"><i class="fa fa-sitemap fa-fw"></i> Zoning General Land Use<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/map/mapsmpp/city/general_landuse">General land use</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/zoning">Zoning</a>
+                        </li>
+
+                        <li>
+                            <a href="/map/mapsmpp/city/r1">Single family residential (R1)</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/r2_md">Multiple family residential medium density (R2-MD)</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/r2_hd">Multiple family residential high density (R2-HD)</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/r3">Multiple family residential (R3)</a>
+                        </li>
+
+
+                        <li>
+                            <a href="/map/mapsmpp/city/c1">Local business (C1)</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/c1s">Shopping center (C1S)</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/c2">General business (C2)</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/cl">Commercial limited (CL)</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/tc">Town center (TC)</a>
+                        </li>
+
+
+                        <li>
+                            <a href="/map/mapsmpp/city/mg">General industrial (MG)</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/mp">Industrial park (MP)</a>
+                        </li>
+
+                        <li>
+                            <a href="/map/mapsmpp/city/ir">Industrial and recreational and school (IRS)</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/pdc">Planned development commercial (PDC)</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/pdi">Planned development industrial (PDI)</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/pdr_ld">Planned development residential low density (PDR-LD)</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/pdr_md">Planned development residential medium density (PDR-MD)</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/pdr_hd">Planned development residential high density (PDR-HD)</a>
+                        </li>
+
+
+
+                        <li>
+                            <a href="/map/mapsmpp/city/ap">Administrative and professional</a>
+                        </li>
+
+
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+
+
+
+
+                <li>
+                    <a href="/map/mapsmpp/city/parcels"><i class="fa fa-bar-chart-o fa-fw"></i> Parcels</a>
+                </li>
+
+                <li>
+                    <a href="/map/mapsmpp/city/address"><i class="fa fa-table fa-fw"></i> Address</a>
+                </li>
+
+                <li>
+                    <a href="/map/mapsmpp/city/streets"><i class="fa fa-car"></i> Streets</a>
+                </li>
+
+
+                <li>
+                    <a href="/map/mapsmpp/city/parks"><i class="fa fa-wrench fa-fw"></i> Parks</a>
+                </li>
+
+                <li>
+                    <a href="/map/mapsmpp/city/schools"><i class="fa fa-dashboard fa-fw"></i> Schools</a>
+                </li>
+
+                <li>
+                    <a href="/map/mapsmpp/city/neighbor"><i class="fa fa-files-o fa-fw"></i> Neighbor</a>
+                </li>
+
+                <li>
+                    <a href="/map/mapsmpp/city/city_limit"><i class="fa fa-dashboard fa-fw"></i> City Limit</a>
+                </li>
+
+
+
+
+
+
+                <li>
+                    <a href="#"><i class="fa fa-files-o fa-fw"></i> Police Fire <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/map/mapsmpp/city/law_agency">Law agency</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/law_reportarea">Law report area</a>
+                        </li>
+
+
+
+
+                        <li>
+                            <a href="/map/mapsmpp/city/law_geoproximity">Law geoproximity</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/law_district">Law district</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/law_beat">Law beat</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/fire_station_boundary">Fire station boundary</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/fire_geoproximity">Fire geoproximity</a>
+                        </li>
+
+
+                        <li>
+                            <a href="/map/mapsmpp/city/fire_district">Fire district</a>
+                        </li>
+                        <li>
+                            <a href="/map/mapsmpp/city/fire_agency">Fire agency</a>
+                        </li>
+                    </ul>
+
+                </li>
+
+
+
+
+
+            </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+    <!-- /.navbar-static-side -->
+</nav>
+
+
+
+
+
+
+
+
+<!-- Page Content -->
+<div id="page-wrapper">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <ol class="breadcrumb">
+                <li><a href="/map/">TransparentGov</a></li>
+
+                <li><a href="/map/mapsmpp/city/zoning">City</a></li>
+                <li><a href="@ViewBag.Subject">@ViewBag.Subject</a></li>
+            </ol>
+
+
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <div id="title_info"> click any row FLY on map </div>
+                    <img id="ajaxload" src="~/Content/img/devoops_getdata.GIF" alt="Loading ... " style="top: 25px;left: 15px;color:#ebebeb;" />
+
+                </div>
+                <!-- /.panel-heading -->
+
+                <div class="panel-body">
+
+                    <div id="tableDivX">
+
+                    </div>
+
+
+                    <div id="map-canvas" style="position: relative;-webkit-border-radius: 0 0 3px 3px;-moz-border-radius: 0 0 3px 3px;border-radius: 0 0 3px 3px;padding: 15px;background: #FCFCFC;height: 600px;"></div>
+
+                    <div id="legend" class="alert alert-warning"></div>
+
+
+
+                    <div id="tableDiv"></div>
+
+                       
+                    <div id="info-table"></div>
+
+                    
+
+
+
+                </div>
+                <!-- /.panel-body -->
+                <!-- hr / -->
+
+
+
+                <div class="panel-footer">
+
+
+                    <p>
+
+
+
+                    </p>
+
+
+
+
+
+
+                </div>
+
+
+
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.row -->
+    </div>
+
+
+
+
+    <!-- /#page-wrapper -->
+</div>
+
