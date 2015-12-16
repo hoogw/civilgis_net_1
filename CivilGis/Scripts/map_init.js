@@ -66,6 +66,135 @@ var parcelsMapType;
 var streetMapType;
 //---------- end tile ----------
 
+var _multi_polyline;
+
+function add_area_boundary(_area) {
+
+
+    _multi_polyline = 'No';
+    var _js_url = "/Scripts/area_boundary/" + _area + ".js";
+
+
+
+
+
+    // NOTE:  Polyline use path: no S, while  polygon, use paths:   have S,   if you missing S will fail drawing
+
+
+    $.when(
+             $.getScript(_js_url)
+     /*
+    $.getScript( "/mypath/myscript1.js" ),
+    $.getScript( "/mypath/myscript2.js" ),
+    $.getScript( "/mypath/myscript3.js" ),
+    */
+
+    ).done(function () {
+
+        //place your code here, when above all scripts are all loaded completely.
+
+
+
+        //if(_area_polygon_coord[_area][0] instanceof Array)
+        if (_multi_polyline == 'Yes') {
+            // for multi line
+
+
+
+            var parentArray = _area_polygon_coord[_area];
+
+
+            for (var i = 0; i < parentArray.length; i++) {
+
+
+
+
+                var _area_polyline_multi = new google.maps.Polyline({
+
+                    path: parentArray[i],
+                    geodesic: true,
+                    strokeColor: '#0000FF',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2
+
+                });
+
+                _area_polyline_multi.setMap(map);
+
+
+
+
+            }// outer for
+
+
+
+        }
+        else {
+
+
+            // for only one line
+            _area_polyline = new google.maps.Polyline({
+
+                path: _area_polygon_coord[_area],
+                geodesic: true,
+                strokeColor: '#0000FF',
+                strokeOpacity: 0.8,
+                strokeWeight: 2
+
+            });
+            _area_polyline.setMap(map);
+        }//else
+
+
+    }); // when done
+
+
+
+
+
+
+    /*
+    
+                                    For 2 dimenional Arrays:
+    
+                                    for(var i = 0; i < parentArray.length; i++){
+                                        for(var j = 0; j < parentArray[i].length; j++){
+    
+                                            console.log(parentArray[i][j]);
+                                        }
+                                    }
+                                    For arrays with an unknown number of dimensions you have to use recursion:
+    
+                                    function printArray(arr){
+                                        for(var i = 0; i < arr.length; i++){
+                                            if(arr[i] instanceof Array){
+                                                printArray(arr[i]);
+                                            }else{
+                                                console.log(arr[i]);
+                                            }
+                                        }
+                                    }
+    
+                                    or
+    
+                                    var printArray = function(arr) {
+                                        if ( typeof(arr) == "object") {
+                                            for (var i = 0; i < arr.length; i++) {
+                                                printArray(arr[i]);
+                                            }
+                                        }
+                                        else document.write(arr);
+                                    }
+    
+                                    printArray(parentArray);
+    
+    
+    
+    */
+
+
+
+}// function add_area_boundary
 
 
 function set_initial_location(_area) {
@@ -192,7 +321,7 @@ function add_tiles(){
 
 
 
- // color zoning
+ /* color zoning
     function styleFeature(feature) {
 
 
@@ -309,7 +438,7 @@ function add_tiles(){
 
     }// style Feature
 
-
+    */
 
 
 function geocodeAddress(geocoder, resultsMap) {

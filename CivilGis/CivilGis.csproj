@@ -155,7 +155,13 @@
     <Content Include="images\sort_both.png" />
     <Content Include="images\sort_desc.png" />
     <Content Include="images\sort_desc_disabled.png" />
-    <Content Include="Scripts\area_boundary.js" />
+    <Content Include="Scripts\area_boundary\Chicago.js" />
+    <Content Include="Scripts\area_boundary\city.js" />
+    <Content Include="Scripts\area_boundary\county.js" />
+    <Content Include="Scripts\area_boundary\Los_Angeles.js" />
+    <Content Include="Scripts\area_boundary\Newport_Beach.js" />
+    <Content Include="Scripts\area_boundary\New_York.js" />
+    <Content Include="Scripts\area_boundary\San_Francisco.js" />
     <Content Include="Scripts\datatablejs_paged.js" />
     <Content Include="Scripts\datatablejs_scroller.js" />
     <Content Include="Scripts\dataTables.bootstrap.js" />
@@ -197,7 +203,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\localmap\localmaponly.js" />
+    <Content Include="Scripts\localmap\localcolormap.js" />
+    <Content Include="Scripts\localmap\localsimplemap.js" />
     <Content Include="Scripts\localmap\localmaplist_paged.js" />
     <Content Include="Scripts\localmap\localmaplist_scroller.js" />
     <Content Include="Scripts\mapcity.js" />
@@ -293,7 +300,7 @@
     <Content Include="Views\Map\mapsmps.cshtml" />
     <Content Include="Views\Map\mappaged.cshtml" />
     <Content Include="Views\Map\Index - Copy.cshtml" />
-    <Content Include="Views\LocalMap\localmaponly.cshtml" />
+    <Content Include="Views\LocalMap\localsimplemap.cshtml" />
     <Content Include="Views\LocalMap\_ViewStart.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_city_side_panel.cshtml" />
@@ -304,6 +311,7 @@
     <Content Include="Views\LocalMap\localmaplistscroller.cshtml" />
     <Content Include="Views\Shared\_county_side_panel.cshtml" />
     <Content Include="Views\Map\mapscroller.cshtml" />
+    <Content Include="Views\LocalMap\localcolormap.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

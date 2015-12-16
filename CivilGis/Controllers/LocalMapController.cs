@@ -57,7 +57,7 @@ namespace CivilGis.Controllers
         }
 
 
-        public ActionResult localmaponly(string area, string subject)
+        public ActionResult localsimplemap(string area, string subject)
         {
 
             ViewBag.Subject = subject; // for api call 
@@ -71,7 +71,17 @@ namespace CivilGis.Controllers
 
 
 
+        public ActionResult localcolormap(string area, string subject)
+        {
 
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Subject_uppercase = subject.ToUpper(); // for display title in view
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
 
 
     }
