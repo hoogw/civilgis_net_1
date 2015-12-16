@@ -60,13 +60,22 @@ var boxText;
 var _cluster_in_use = false;
 //------------end cluster [3] ------------
 
+/*
 //------- tile[0-3] ------------
 var addressMapType;
 var parcelsMapType;
 var streetMapType;
 //---------- end tile ----------
 
+*/
+
+
 var _multi_polyline;
+var _tile_baseURL;
+var _areaID;
+var _subjectID;
+var tile_MapType;
+
 
 function add_area_boundary(_area) {
 
@@ -199,6 +208,10 @@ function add_area_boundary(_area) {
 
 function set_initial_location(_area) {
 
+
+         _areaID = $("#areaID").val();
+         _subjectID = $("#subjectID").val();
+
           _flyto_zoomlevel = 18; // default for parcels, point, street, small feature.
 
          //if (($("#areaID").val() === "county") && ($("#subjectID").val() === "cities")){  _flyto_zoomlevel = 11 }
@@ -221,74 +234,26 @@ function set_initial_location(_area) {
 function init_tiling(){
     
     //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
-    var _tile_baseURL = 'http://tile.transparentgov.net/v2/';
-    //var _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
+     _tile_baseURL = 'http://tile.transparentgov.net/v2/';
+    // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
 
-    city_address_MapType = new google.maps.ImageMapType({
-                                                    getTileUrl: function(coord, zoom) {
 
-                                                      
 
-                                                        return _tile_baseURL + 'city_address' + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
-                                                       
+     tile_MapType = new google.maps.ImageMapType({
+         getTileUrl: function (coord, zoom) {
 
-                                                    },
-                                                    tileSize: new google.maps.Size(256, 256),
-                                                    maxZoom: 17,
-                                                    minZoom: 0
 
-                                                  });
-        
-        
-          city_parcels_MapType = new google.maps.ImageMapType({
-                                                                        getTileUrl: function(coord, zoom) {
 
-                                                                           
+             return _tile_baseURL + _areaID + '_' + _subjectID + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
 
-                                                                           
-                                                                            return _tile_baseURL +'city_parcels' + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
-                                                                           
 
-                                                                        },
-                                                                        tileSize: new google.maps.Size(256, 256),
-                                                                        maxZoom: 17,
-                                                                        minZoom: 0
+         },
+         tileSize: new google.maps.Size(256, 256),
+         maxZoom: 19,
+         minZoom: 0
 
-                                                                      });
+     });
 
-                    city_streets_MapType = new google.maps.ImageMapType({
-                                                                        getTileUrl: function(coord, zoom) {
-
-                                                                           
-                                                                            return _tile_baseURL +'city_streets' + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
-
-                                                                        },
-                                                                        tileSize: new google.maps.Size(256, 256),
-                                                                        maxZoom: 17,
-                                                                        minZoom: 0
-
-                                                                      });
-                                                                      
-                                                                      
-                                                                      
-                                                                      
-      county_address_MapType = new google.maps.ImageMapType({
-                                                    getTileUrl: function(coord, zoom) {
-
-                                                      
-
-                                                        return _tile_baseURL + 'county_address' + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
-                                                        
-
-                                                    },
-                                                    tileSize: new google.maps.Size(256, 256),
-                                                    maxZoom: 17,
-                                                    minZoom: 0
-
-                                                  });                                                                
-    
-    
-    
 }// init tile
 
 
@@ -297,23 +262,10 @@ function add_tiles(){
     
      // ---- if returning total number, not geoJOSN feature, then add tiling layer on top ---------------------------
                             
-                            if (($("#areaID").val() ==='city') && ($("#subjectID").val() ==='address')) {
-                                                                                                            map.overlayMapTypes.insertAt(0, city_address_MapType);
-                                                                                                        }
-                            if (($("#areaID").val() ==='city') && ($("#subjectID").val() ==='parcels')) {
-                                                                                                            map.overlayMapTypes.insertAt(0, city_parcels_MapType);
-                                                                                                        }
-                                                                                                        
-                             if (($("#areaID").val() ==='city') && ($("#subjectID").val() ==='streets')) {
-                                                                                                            map.overlayMapTypes.insertAt(0, city_streets_MapType);
-                                                                                                        }         
-                                                                                                        
-                             if (($("#areaID").val() ==='county') && ($("#subjectID").val() ==='address')) {
-                                                                                                            map.overlayMapTypes.insertAt(0, county_address_MapType);
-                                                                                                        }                                                                                   
-                                                                                                        
-                             //-------------------------------------- end  tile ----------------------------------------------------------------          
-    
+
+    map.overlayMapTypes.insertAt(0, tile_MapType);
+
+   
     
     
 }
