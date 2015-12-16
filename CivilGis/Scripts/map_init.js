@@ -60,14 +60,7 @@ var boxText;
 var _cluster_in_use = false;
 //------------end cluster [3] ------------
 
-/*
-//------- tile[0-3] ------------
-var addressMapType;
-var parcelsMapType;
-var streetMapType;
-//---------- end tile ----------
 
-*/
 
 
 var _multi_polyline;

@@ -138,13 +138,17 @@
     <Content Include="Content\scroller.dataTables.min.css" />
     <Content Include="images\favicon.ico" />
     <Content Include="images\logo\city-of-chicago-logo.jpg" />
+    <Content Include="images\logo\city-of-chicago-logo.png" />
     <Content Include="images\logo\city_los_angeles.gif" />
+    <Content Include="images\logo\city_of_los_angeles.png" />
+    <Content Include="images\logo\la_county.png" />
     <Content Include="images\logo\long-beach-logo.png" />
     <Content Include="images\logo\longbeach_seal.png" />
     <Content Include="images\logo\long_beach.gif" />
     <Content Include="images\logo\MichaelWorthington-CityOfSanFranciscoLogo-2012.jpg" />
     <Content Include="images\logo\newport_beach.png" />
     <Content Include="images\logo\nyc.png" />
+    <Content Include="images\logo\orange_county.png" />
     <Content Include="images\logo\San-Francisco-Logo.png" />
     <Content Include="images\logo\santa_monica.jpg" />
     <Content Include="images\logo\Santa_Monica_seal.jpg" />
