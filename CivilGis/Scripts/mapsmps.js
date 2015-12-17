@@ -133,10 +133,9 @@ function feed_datatables(_geojson_obj){
                                                     
                                                      map.data.revertStyle();
                                                      map.data.overrideStyle(_feature, {
-                                                                            //strokeWeight: 8,
-                                                                            strokeColor: '#FFFF00',
-                                                                            fillOpacity: 0.3,
-                                                                            fillColor:'#FFFF00'
+                                                                                         strokeWeight: 5,
+                                                                                         strokeColor: 'blue',
+                                                                                         fillOpacity: 0
                                                                         });// overrideStyle
                                                     
                                                 }//
@@ -177,7 +176,7 @@ function feed_datatables(_geojson_obj){
                                        
                                         // remove all high light yellow the feature polygon on google map
                                        // Remove custom styles.
-                                       // map.data.setStyle({});
+                                        map.data.revertStyle();
                                         
                                         
                                         // empty bottom <div>
@@ -266,6 +265,13 @@ function ajax_GeoJSON(gmap,_apiURI) {
 
 
                             //----------------  add new geojson, then remove last geojson --------------------
+
+                                         map.data.setStyle({
+                                             fillOpacity: 0,
+                                             strokeColor: 'yellow',
+                                             strokeWeight: 1
+
+                                         });
                                          _last_geojson_layer = _current_geojson_layer;
 
                                          _current_geojson_layer = map.data.addGeoJson(_geojson_object);
@@ -323,6 +329,21 @@ function ajax_GeoJSON(gmap,_apiURI) {
                              // returning number of count, no geojson, clean the datatables
                         else{ 
                             
+
+
+                            // ---------- if return number, should remove last time geojson -----------
+                            _last_geojson_layer = _current_geojson_layer;
+                            if (_last_geojson_layer) {
+
+                                for (var l = 0, len = _last_geojson_layer.length; l < len; l++) {
+
+                                    gmap.data.remove(_last_geojson_layer[l]);
+
+                                }// for
+                            }// if
+                            //-------------------- end remove last geojson ------------------------------
+
+
                            
                             
                             $('#tabledata').dataTable().fnClearTable();

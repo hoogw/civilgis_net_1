@@ -57,6 +57,14 @@ function ajax_GeoJSON(gmap,_apiURI) {
 
 
                             //----------------  add new geojson, then remove last geojson --------------------
+
+                              map.data.setStyle({
+                                  fillOpacity: 0,
+                                  strokeColor: 'yellow',
+                                  strokeWeight: 1
+
+                              });
+
                               _last_geojson_layer = _current_geojson_layer;
 
                               _current_geojson_layer = map.data.addGeoJson(_geojson_object);
@@ -118,6 +126,17 @@ function ajax_GeoJSON(gmap,_apiURI) {
                         else{ 
                             
                             
+                            // ---------- if return number, should remove last time geojson -----------
+                            _last_geojson_layer = _current_geojson_layer;
+                            if (_last_geojson_layer) {
+
+                                for (var l = 0, len = _last_geojson_layer.length; l < len; l++) {
+
+                                    gmap.data.remove(_last_geojson_layer[l]);
+
+                                }// for
+                            }// if
+                            //-------------------- end remove last geojson ------------------------------
                             
                                                                                             
                                                                                                         
