@@ -69,7 +69,17 @@ namespace CivilGis.Controllers
             return View();
         }
 
+        public ActionResult localsimpleclustermap(string area, string subject)
+        {
 
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Subject_uppercase = subject.ToUpper(); // for display title in view
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
 
         public ActionResult localcolormap(string area, string subject)
         {

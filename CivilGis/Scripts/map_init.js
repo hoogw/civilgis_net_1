@@ -68,6 +68,9 @@ var _tile_baseURL;
 var _areaID;
 var _subjectID;
 var tile_MapType;
+var _current_geojson_layer = null;
+var _last_geojson_layer = null;
+
 
 
 function add_area_boundary(_area) {

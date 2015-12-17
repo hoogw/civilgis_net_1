@@ -207,16 +207,7 @@ function ajax_GeoJSON(gmap,_apiURI) {
              //------tile[3] ---------
                             add_tiles();
             
-            // before load new geoJSON feature, need to remove all current geoJSON feature.
-            
-                    var callback=function(feature) {
-                                        //If you want, check here for some constraints.
-                                            gmap.data.remove(feature);
-                                            };
-                            gmap.data.forEach(callback);
-            
-            
-          // alert(_apiURI);
+           
             
             
             // test url if return a number means too many polygon to show.otherwise add polygon to map.
@@ -225,10 +216,6 @@ function ajax_GeoJSON(gmap,_apiURI) {
             // var promise    =  $.get(_apiURI);
             //    promise.then(function(data){
                         if(isNaN(data)){
-                            //------tile[2] ---------- returning geoJSON, need to remove previously tiling layers.  
-                            
-                           // map.overlayMapTypes.removeAt(0); // if no tile layer before, this will error, use clear() instead. solve the error
-                            map.overlayMapTypes.clear();
                             
                             
                           
@@ -276,9 +263,31 @@ function ajax_GeoJSON(gmap,_apiURI) {
                                         //---------------------------------------------------------------
 
 
-                           _array_feature = map.data.addGeoJson(_geojson_object);
-                           
-                           //alert(_array_feature[0]);
+
+
+                            //----------------  add new geojson, then remove last geojson --------------------
+                                         _last_geojson_layer = _current_geojson_layer;
+
+                                         _current_geojson_layer = map.data.addGeoJson(_geojson_object);
+
+                            // ---- after add new geojson, now remove last time old geojson -------------
+                            // don't use Array.ForEach is about 95% slower than for() in JavaScript.
+
+                                         if (_last_geojson_layer) {
+
+                                             for (var l = 0, len = _last_geojson_layer.length; l < len; l++) {
+
+                                                 gmap.data.remove(_last_geojson_layer[l]);
+
+                                             }// for
+                                         }// if
+
+
+                            //------------------------end add new geojson, then remove last geojson------------------------- ---------------
+
+
+
+
                            
                            feed_datatables(_geojson_object);
                            

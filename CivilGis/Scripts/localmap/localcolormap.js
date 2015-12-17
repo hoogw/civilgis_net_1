@@ -18,26 +18,13 @@ function ajax_GeoJSON(gmap,_apiURI) {
     //------tile[3] ---------
     add_tiles();
             
-            // before load new geoJSON feature, need to remove all current geoJSON feature.
             
-                    var callback=function(feature) {
-                                        //If you want, check here for some constraints.
-                                            gmap.data.remove(feature);
-                                            };
-                            gmap.data.forEach(callback);
-            
-            
-          // alert(_apiURI);
             
             
             // test url if return a number means too many polygon to show.otherwise add polygon to map.
             $.get(_apiURI, function(data){
            
                         if(isNaN(data)){
-                            //------tile[2] ---------- returning geoJSON, need to remove previously tiling layers.  
-                            
-                           // map.overlayMapTypes.removeAt(0); // if no tile layer before, this will error, use clear() instead. solve the error
-                            map.overlayMapTypes.clear();
                             
                             
                           
@@ -56,18 +43,44 @@ function ajax_GeoJSON(gmap,_apiURI) {
 
 
 
+
                             var _geojson_object = JSON.parse(data);
 
-                           //----- marker cluster  [2] ------each time before you add new point geojson, need to clear old last time marker clusters.
-                              markerClusterer.clearMarkers();
-                              
-                 map.data.addGeoJson(_geojson_object);
-                            
-                            if(_cluster_in_use) {
-                                  map.data.setMap(null);
-                                  _cluster_in_use = false;
+                            //----- marker cluster  [2.1] ------each time before you add new point geojson, need to clear old last time marker clusters.
+                            markerClusterer.clearMarkers();
+                            //--------------------------------------------   
+
+
+
+
+                            //----------------  add new geojson, then remove last geojson --------------------
+                            _last_geojson_layer = _current_geojson_layer;
+
+                            _current_geojson_layer = map.data.addGeoJson(_geojson_object);
+
+                            // ---- after add new geojson, now remove last time old geojson -------------
+                            // don't use Array.ForEach is about 95% slower than for() in JavaScript.
+
+                            if (_last_geojson_layer) {
+
+                                for (var l = 0, len = _last_geojson_layer.length; l < len; l++) {
+
+                                    gmap.data.remove(_last_geojson_layer[l]);
+
+                                }// for
+                            }// if
+
+
+                            //------------------------end add new geojson, then remove last geojson------------------------- ---------------
+
+
+
+                            //---------------marker cluster  [2.2]-------------------
+                            if (_cluster_in_use) {
+                                map.data.setMap(null);
+                                _cluster_in_use = false;
                             }
-                            //---------------marker cluster  [2]-------------------
+                            //-------------------------------------------------------
                            
                            
                            // hidden the title_info

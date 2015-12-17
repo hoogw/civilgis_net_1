@@ -208,6 +208,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\localmap\localcolormap.js" />
+    <Content Include="Scripts\localmap\localsimpleclustermap.js" />
     <Content Include="Scripts\localmap\localsimplemap.js" />
     <Content Include="Scripts\localmap\localmaplist_paged.js" />
     <Content Include="Scripts\localmap\localmaplist_scroller.js" />
@@ -316,6 +317,7 @@
     <Content Include="Views\Shared\_county_side_panel.cshtml" />
     <Content Include="Views\Map\mapscroller.cshtml" />
     <Content Include="Views\LocalMap\localcolormap.cshtml" />
+    <Content Include="Views\LocalMap\localsimpleclustermap.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
