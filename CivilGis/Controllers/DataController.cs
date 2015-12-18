@@ -1,17 +1,6 @@
-﻿using CivilGis.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿
 using System.Web.Mvc;
-using System.Web.Security;
-using System.Web;
 
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Text;
-using System.Net.Http.Headers;
 
 
 //using System.Web.HttpContext.Current;
@@ -33,7 +22,7 @@ namespace CivilGis.Controllers
 
 
 
-        public ActionResult listpaged(string area)
+        public ActionResult tablelistpaged(string area)
         {
 
 
@@ -54,7 +43,7 @@ namespace CivilGis.Controllers
 
 
 
-        public ActionResult listscroller(string area)
+        public ActionResult tablelistscroller(string area)
         {
 
 
@@ -80,7 +69,7 @@ namespace CivilGis.Controllers
 
 
 
-        public ActionResult paged(string area, string subject)
+        public ActionResult tablepaged(string area, string subject)
         {
             
             
@@ -103,7 +92,7 @@ namespace CivilGis.Controllers
 
 
 
-        public ActionResult scroller(string area, string subject)
+        public ActionResult tablescroller(string area, string subject)
         {
 
             

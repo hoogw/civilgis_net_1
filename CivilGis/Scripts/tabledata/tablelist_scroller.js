@@ -2,12 +2,8 @@
 
  $(document).ready(function () {
 
-      
-       var _area = document.getElementById('areaID').value;
-       var _url = '/api/json/listcontent/' + $("#areaID").val() + '/';
-    
-     
-       
+     var _area = document.getElementById('areaID').value;
+     var _url = '/api/json/listcontent/' + $("#areaID").val() + '/';
        
        
     
@@ -28,10 +24,29 @@
                                                                     }// error
                                                                 },  // ajax
                                                                 
-                                                                scrollY: 300,
-                                                                scrollX: true,
                                                                 
-                                                                "pagingType": "full_numbers",
+                                                                 // if you want page style, just remove below scroller section and the comma above
+                                                           // ------------ scroller section --------     
+                                                               // dom: "frtiS",
+                                                                scrollY: 300,
+                                                                //scrollX: true,
+                                                                deferRender: true,
+                                                                scrollCollapse: true,
+                                                                scroller: true,
+                                                                //stateSave: true,
+                                                                //fixedColumns: true,
+                                                                /*
+                                                                initComplete: function () {
+                                                                                                var api = this.api();
+                                                                                                api.scroller().scrollToRow( 1000 );
+                                                                                            },
+                                                                 */
+                                                                /*
+                                                                scroller: {
+                                                                    loadingIndicator: true
+                                                                }
+                                                                */
+                                                          // ------------ scroller section end--------   
                                                                 
                                                                 /*
                                                                 "columns": [
@@ -43,7 +58,8 @@
                                                                                                         full_table_name = full_table_name.toLowerCase();
                                                                                                     var _remove_area = _area+"_";
                                                                                                     var trunk_table_name =   full_table_name.replace(_remove_area,"");
-                                                                                    $(nTd).html("<a href='/data/paged/"+ _area + "/" + trunk_table_name+"'>"+oData.table_name+"</a>");
+                                                                                                   
+                                                                                                    $(nTd).html("<a href='/data/tablescroller/" + _area + "/" + trunk_table_name + "'>" + oData.table_name + "</a>");
                                                                                 }
                                                                             }]
                                                                 */
@@ -57,7 +73,7 @@
                                                                         var _remove_area = _area + "_";
                                                                         var trunk_name = full_name.replace(_remove_area, "");
 
-                                                                        return '<a href="/data/paged/' + _area + '/' + trunk_name + '">' + data + '</a>';
+                                                                        return '<a href="/data/tablescroller/' + _area + '/' + trunk_name + '">' + data + '</a>';
                                                                     }
                                                                 }]
                                                                 
@@ -67,7 +83,7 @@
                                                         
                             }); // datatable
                    
-                 
+                   
                    
                 // ajax click row event   
                var table = $('#tabledata').DataTable();
@@ -79,13 +95,14 @@
                                                                          var _remove = _area+"_";
                                                                          var trunk_name =   full_name.replace(_remove,"");
                    
-                                                                        var _url_new_tab = "/data/paged/"+ _area + "/"+ trunk_name + "/";
+                                                                         
+                                                                         var _url_new_tab = "/data/tablescroller/" + _area + "/" + trunk_name + "/";
                                                                          var win = window.open(_url_new_tab, '_self');
                                                                         win.focus();
                                                                          
                                                                      } );    
                    
-                 
+               
                 
                    
              

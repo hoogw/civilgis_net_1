@@ -5,7 +5,6 @@
 <script src="~/Scripts/jquery.dataTables.js"></script>
 <link href="~/Content/jquery.dataTables.css" rel="stylesheet">
 
-
 <script src="~/Scripts/dataTables.scroller.min.js"></script>
 <link href="~/Content/scroller.dataTables.min.css" rel="stylesheet">
 
@@ -13,10 +12,10 @@
 
 <!-- our js -->
 
-<script src="~/Scripts/list_scroller.js"></script>
 
+<script src="~/Scripts/tabledata/tabledata_scroller.js"></script>
 
-
+<input type="hidden" id="subjectID" value=@ViewBag.Subject />
 <input type="hidden" id="areaID" value=@ViewBag.Area />
 
 
@@ -51,15 +50,15 @@
 
 
             <li>
-                <a href="/data/listscroller/newyork"><i class="fa fa-bar-chart-o fa-fw"></i> New York</a>
+                <a href="/data/tablelistscroller/newyork"><i class="fa fa-bar-chart-o fa-fw"></i> New York</a>
             </li>
 
             <li>
-                <a href="/data/listscroller/chicago"><i class="fa fa-table fa-fw"></i> Chicago</a>
+                <a href="/data/tablelistscroller/chicago"><i class="fa fa-table fa-fw"></i> Chicago</a>
             </li>
 
             <li>
-                <a href="/data/listscroller/losangeles"><i class="fa fa-car"></i> Los Angeles</a>
+                <a href="/data/tablelistscroller/losangeles"><i class="fa fa-car"></i> Los Angeles</a>
             </li>
 
 
@@ -88,8 +87,8 @@
             <ol class="breadcrumb">
                 <li><a href="/map/index/">TransparentGov</a></li>
 
-                <li><a href="/data/listscroller/@ViewBag.Area">@ViewBag.Area</a></li>
-                
+                <li><a href="/data/tablelistscroller/@ViewBag.Area">@ViewBag.Area</a></li>
+                <li><a href="/data/tablescroller/@ViewBag.Area/@ViewBag.Subject">@ViewBag.Subject</a></li>
             </ol>
 
 
@@ -114,25 +113,19 @@
                 <div class="panel-body">
          
 
+                   
+
+                       
+                     
 
 
-                            <table id="tabledata" class="display" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
+                    <div id="tableDiv">
+                        
+
+                    </div>
 
 
-                                        <th> Table of Content</th>
-                                    </tr>
-                                </thead>
-
-                                <tfoot>
-                                    <tr>
-
-
-                                        <th>Table of Content</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                    <div id="info-table"> </div>
 
 
                 </div>

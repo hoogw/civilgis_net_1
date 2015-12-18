@@ -10,17 +10,16 @@ using System.Web;
 
 using System.Data;
 using System.Data.SqlClient;
-using MySql.Data.MySqlClient;
 
 
 
-// Json controller connect to mysql ( Current In USE )
+// Json2 controller connect to sqlserver ( Not in use )
 
 namespace CivilGis.Controllers
 {
 
-    
-    public class JsonController : ApiController
+
+    public class Json2Controller : ApiController
     {
 
 
@@ -30,21 +29,12 @@ namespace CivilGis.Controllers
 
 
             /*
-              *  Sql server: 
              * select TABLE_NAME
                 from INFORMATION_SCHEMA.COLUMNS
                 where TABLE_CATALOG = 'civilgis'
                 and TABLE_NAME like '%chicago%'
                 group by TABLE_NAME;
-
-
-             Mysql:
-
-
-
-
              */
-
 
 
 
@@ -58,7 +48,7 @@ namespace CivilGis.Controllers
 
             string iDisplayStart = httpContext.Request.Params["start"];
             string iDisplayLength = httpContext.Request.Params["length"];
-           
+
             string orderDir = httpContext.Request.Params["order[0][dir]"];
             string searchValue = httpContext.Request.Params["search[value]"];
 
@@ -66,17 +56,17 @@ namespace CivilGis.Controllers
 
 
 
-           
+
             string result = "";
             int totalData = 0;
             int totalFiltered = 0;
             string sql = "";
             DataTable dt_tablename;
 
-            
-            string connectionString = ConfigurationManager.ConnectionStrings["MySQLContext"].ConnectionString;
 
-            
+            string connectionString = ConfigurationManager.ConnectionStrings["SqlserverContext"].ConnectionString;
+
+
 
 
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -84,8 +74,8 @@ namespace CivilGis.Controllers
 
                 con.Open();
 
-                
-                
+
+
                 //  -----------------  just get total count --------------------
 
                 //sql = "select table_name from INFORMATION_SCHEMA.COLUMNS where TABLE_CATALOG = 'civilgis' and table_name like '%" + area + "%'  group by table_name;";
@@ -93,10 +83,10 @@ namespace CivilGis.Controllers
                 sql = "select count(table_name) from INFORMATION_SCHEMA.COLUMNS where TABLE_CATALOG = 'civilgis' and table_name like '%" + area + "%'  group by table_name;";
 
                 using (SqlCommand commandRowCount = new SqlCommand(sql, con))
-                        
+
                 {
                     commandRowCount.CommandType = CommandType.Text;
-                    
+
                     object countStart = commandRowCount.ExecuteScalar();
                     int? _count = (int?)(!Convert.IsDBNull(countStart) ? countStart : null);
                     //int _count = int.Parse(commandRowCount.ExecuteScalar().ToString());
@@ -136,10 +126,10 @@ namespace CivilGis.Controllers
                               FETCH NEXT 10 ROWS ONLY  
                         group by TABLE_NAME;
                      */
-                    
 
 
-                    
+
+
 
                     using (SqlCommand cmd = new SqlCommand(sql, con))
                     {
@@ -150,7 +140,7 @@ namespace CivilGis.Controllers
 
                         totalFiltered = dt_tablename.Rows.Count;
 
-                       
+
 
 
                     }// sqlcommand
@@ -165,20 +155,20 @@ namespace CivilGis.Controllers
 
                     sql = sql + " group by TABLE_NAME ";
                     sql = sql + " ORDER BY TABLE_NAME " + "   " + orderDir + "  OFFSET " + iDisplayStart + "  ROWS FETCH NEXT  " + iDisplayLength + "  ROWS ONLY  ";
-                    
-                           using (SqlCommand cmd = new SqlCommand(sql, con))
-                           {
-                               dt_tablename = new DataTable();
-                               SqlDataAdapter da = new SqlDataAdapter(cmd);
-                               da.Fill(dt_tablename);
 
-                               totalFiltered = dt_tablename.Rows.Count;
-                              
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
+                    {
+                        dt_tablename = new DataTable();
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(dt_tablename);
 
-                    
+                        totalFiltered = dt_tablename.Rows.Count;
 
-                           }// sqlcommand
-                
+
+
+
+                    }// sqlcommand
+
 
 
 
@@ -248,11 +238,12 @@ namespace CivilGis.Controllers
 
 
 
-    
 
 
-         //[AcceptVerbs("GET", "POST")]
-        public HttpResponseMessage tabledata(string area, string subject) {
+
+        //[AcceptVerbs("GET", "POST")]
+        public HttpResponseMessage tabledata(string area, string subject)
+        {
 
             /* ---------  handle request from datatables post ajax call, api reference  ----------------
              * http://datatables.net/manual/server-side
@@ -324,18 +315,18 @@ namespace CivilGis.Controllers
             //var parameters = HttpContext.Current.Request.Form;
 
             var httpContext = (HttpContextWrapper)Request.Properties["MS_HttpContext"];
-           
+
             string sEcho = httpContext.Request.Params["draw"];
 
-            
+
             //int iDisplayStart = Convert.ToInt32(httpContext.Request.Params["start"]);
-           // int iDisplayLength = Convert.ToInt32(httpContext.Request.Params["length"]);   
+            // int iDisplayLength = Convert.ToInt32(httpContext.Request.Params["length"]);   
             int orderColumn = Convert.ToInt32(httpContext.Request.Params["order[0][column]"]);
-            
+
 
             string iDisplayStart = httpContext.Request.Params["start"];
             string iDisplayLength = httpContext.Request.Params["length"];
-           // string orderColumn = httpContext.Request.Params["order[0][column]"];
+            // string orderColumn = httpContext.Request.Params["order[0][column]"];
 
 
             string orderDir = httpContext.Request.Params["order[0][dir]"];
@@ -351,190 +342,191 @@ namespace CivilGis.Controllers
             int totalFiltered = 0;
 
             // get all the column name
-            
+
             string tabledata_name = area + "_" + subject;
-            string connectionString = ConfigurationManager.ConnectionStrings["MySQLContext"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["SqlserverContext"].ConnectionString;
 
             DataTable dt_body;
-            
-            
+
+
             using (SqlConnection con = new SqlConnection(connectionString))
             {
 
                 con.Open();
 
-                        
-                        string sql = "select * from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='" + tabledata_name + "'";
-                        using (SqlCommand cmd = new SqlCommand(sql, con))
+
+                string sql = "select * from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='" + tabledata_name + "'";
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    DataTable dt_header = new DataTable();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt_header);
+
+
+                    columns = new ArrayList();
+
+                    //create arraylsit from DataTable
+                    foreach (DataRow dr in dt_header.Rows)
+                    {
+                        columns.Add(dr["COLUMN_NAME"]);
+                    }
+
+                }// sqlcommand
+
+
+
+
+
+                //  -----------------  just get total count --------------------
+
+                sql = "SELECT count(*) FROM " + tabledata_name;
+                using (SqlCommand commandRowCount = new SqlCommand(sql, con))
+                {
+                    commandRowCount.CommandType = CommandType.Text;
+
+                    object countStart = commandRowCount.ExecuteScalar();
+                    int? _count = (int?)(!Convert.IsDBNull(countStart) ? countStart : null);
+                    //int _count = int.Parse(commandRowCount.ExecuteScalar().ToString());
+
+                    totalData = Convert.ToInt32(_count);
+                    totalFiltered = totalData;
+
+                }  // sqlcommand
+
+                //----------------------end just get total count    ------------------
+
+
+
+
+
+
+
+                // filtered result by search value
+                if (!(string.IsNullOrEmpty(searchValue)))
+                {
+
+                    // if there is a search parameter
+
+                    sql = "SELECT * FROM " + tabledata_name + " WHERE ";
+
+
+                    for (int i = 0; i < columns.Count; i++)
+                    {
+
+                        if (i > 0)
                         {
-                            DataTable dt_header = new DataTable();
-                            SqlDataAdapter da = new SqlDataAdapter(cmd);
-                            da.Fill(dt_header);
+                            sql = sql + " OR ";
 
-                            
-                            columns = new ArrayList();
+                        }// if
 
-                            //create arraylsit from DataTable
-                            foreach (DataRow dr in dt_header.Rows)
-                            {
-                                columns.Add(dr["COLUMN_NAME"]);
-                            }
+                        sql = sql + columns[i] + " LIKE '%" + searchValue + "%' ";
 
-                        }// sqlcommand
+                    }// for
 
 
 
 
-
-                        //  -----------------  just get total count --------------------
-
-                        sql = "SELECT count(*) FROM " + tabledata_name;
-                        using (SqlCommand commandRowCount = new SqlCommand(sql, con))
-                        {
-                            commandRowCount.CommandType = CommandType.Text;
-
-                            object countStart = commandRowCount.ExecuteScalar();
-                            int? _count = (int?)(!Convert.IsDBNull(countStart) ? countStart : null);
-                            //int _count = int.Parse(commandRowCount.ExecuteScalar().ToString());
-
-                            totalData = Convert.ToInt32(_count);
-                            totalFiltered = totalData;
-
-                        }  // sqlcommand
-
-                        //----------------------end just get total count    ------------------
+                    /*
+                             select * from Chicago_Current_Employee_Salaries
+                              where name like '%terry%'
+                              order by Name OFFSET  5 ROWS 
+                              FETCH NEXT 5 ROWS ONLY  
+                     */
 
 
+                    sql = sql + " ORDER BY " + columns[orderColumn] + "   " + orderDir + "  OFFSET " + iDisplayStart + "  ROWS FETCH NEXT  " + iDisplayLength + "  ROWS ONLY  ";
+
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
+                    {
+
+                        dt_body = new DataTable();
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(dt_body);
+
+                        totalFiltered = dt_body.Rows.Count;
+
+
+                    }// sqlcommand
 
 
 
+                }
+                else
+                {
+
+                    sql = "SELECT * FROM " + tabledata_name + "  ";
 
 
-                      // filtered result by search value
-                      if (!(string.IsNullOrEmpty(searchValue))) 
-                        {
+                    sql = sql + " ORDER BY " + columns[orderColumn] + "   " + orderDir + "  OFFSET " + iDisplayStart + "  ROWS FETCH NEXT  " + iDisplayLength + "  ROWS ONLY  ";
 
-                                     // if there is a search parameter
-                                   
-                                                   sql = "SELECT * FROM " + tabledata_name +" WHERE ";
-                                                  
-                                                   
-                                                   for (int i = 0; i < columns.Count; i++) 
-                                                   {
-                                        
-                                                        if (i > 0) 
-                                                               { 
-                                                                  sql= sql + " OR "; 
-                                                  
-                                                               }// if
 
-                                                           sql= sql +  columns[i]+ " LIKE '%"+ searchValue +"%' ";
-                                            
-                                                       }// for
+
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
+                    {
+
+                        dt_body = new DataTable();
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(dt_body);
 
 
 
 
-                                                                       /*
-                                                                                select * from Chicago_Current_Employee_Salaries
-                                                                                 where name like '%terry%'
-                                                                                 order by Name OFFSET  5 ROWS 
-                                                                                 FETCH NEXT 5 ROWS ONLY  
-                                                                        */
+                    }// sqlcommand
 
 
-                                          sql = sql + " ORDER BY " + columns[orderColumn] + "   " + orderDir  + "  OFFSET " + iDisplayStart + "  ROWS FETCH NEXT  " +iDisplayLength + "  ROWS ONLY  "; 
-                                          
-                                        using (SqlCommand cmd = new SqlCommand(sql, con))
-                                        {
-
-                                            dt_body = new DataTable();
-                                            SqlDataAdapter da = new SqlDataAdapter(cmd);
-                                            da.Fill(dt_body);
-
-                                            totalFiltered = dt_body.Rows.Count;
-                                            
-
-                                        }// sqlcommand
-
-                                                  
-                                    
-                            } else 
-                                 {	
-
-                                            sql = "SELECT * FROM " + tabledata_name +"  ";
-
-
-                                            sql = sql + " ORDER BY " + columns[orderColumn] + "   " + orderDir + "  OFFSET " + iDisplayStart + "  ROWS FETCH NEXT  " + iDisplayLength + "  ROWS ONLY  "; 
+                }//else
 
 
 
-                                            using (SqlCommand cmd = new SqlCommand(sql, con))
-                                            {
-
-                                                dt_body = new DataTable();
-                                                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                                                da.Fill(dt_body);
-
-                                              
 
 
-                                            }// sqlcommand
-                                            
-
-                                   }//else
+            }//sqlconnection using 
 
 
-                              
+            System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
 
-
-                      }//sqlconnection using 
-
-
-                      System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-                     
-                     // use dynamic or object both works 
-                      Dictionary<string, dynamic> _response = new Dictionary<string, dynamic>();
-                      //Dictionary<string, object> _response = new Dictionary<string, object>();
-                      
-              
-
-                      _response["draw"] = Convert.ToInt16(sEcho);
-                     
-                      _response["recordsTotal"] = totalData;
-                      _response["recordsFiltered"] = totalFiltered;
-
-
-                     
-
-
-                      // datatable to list <dictionary> to Json 
-                      // datatables use columns[0], columns[1] instead of columns[name].... must add index start from 0
-                     
-
-                      List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
-                      Dictionary<string, object> row;
-                      foreach (DataRow dr in dt_body.Rows)
-                      {
-                          int k = 0;
-                          row = new Dictionary<string, object>();
-                          foreach (DataColumn col in dt_body.Columns)
-                          {
-                              
-                              row.Add(Convert.ToString(k), dr[col]);
-                              row.Add(col.ColumnName, dr[col]);
-                              k = k + 1;
-                          }
-                          rows.Add(row);
-                      }
+            // use dynamic or object both works 
+            Dictionary<string, dynamic> _response = new Dictionary<string, dynamic>();
+            //Dictionary<string, object> _response = new Dictionary<string, object>();
 
 
 
-                      _response["data"] = rows;
+            _response["draw"] = Convert.ToInt16(sEcho);
+
+            _response["recordsTotal"] = totalData;
+            _response["recordsFiltered"] = totalFiltered;
 
 
 
-                      result = serializer.Serialize(_response);
+
+
+            // datatable to list <dictionary> to Json 
+            // datatables use columns[0], columns[1] instead of columns[name].... must add index start from 0
+
+
+            List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+            Dictionary<string, object> row;
+            foreach (DataRow dr in dt_body.Rows)
+            {
+                int k = 0;
+                row = new Dictionary<string, object>();
+                foreach (DataColumn col in dt_body.Columns)
+                {
+
+                    row.Add(Convert.ToString(k), dr[col]);
+                    row.Add(col.ColumnName, dr[col]);
+                    k = k + 1;
+                }
+                rows.Add(row);
+            }
+
+
+
+            _response["data"] = rows;
+
+
+
+            result = serializer.Serialize(_response);
 
 
 
@@ -544,7 +536,7 @@ namespace CivilGis.Controllers
 
 
             return response;
-        
+
         }
 
 
@@ -563,58 +555,62 @@ namespace CivilGis.Controllers
             string result = "";
 
 
-            
-            string  tabledata_name = area+"_"+ subject;
-            string connectionString = ConfigurationManager.ConnectionStrings["MySQLContext"].ConnectionString;
-          
-            string sql = "SHOW COLUMNS FROM " + tabledata_name;
 
+            string tabledata_name = area + "_" + subject;
+            string connectionString = ConfigurationManager.ConnectionStrings["SqlserverContext"].ConnectionString;
+
+            string sql = "select * from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='" + tabledata_name + "'";
 
             DataTable dt = new DataTable();
-            
-
-            //==========================================================+++++++++++++++++++++++++++++++++++++++++=============
-            using (MySqlConnection con = new MySqlConnection(connectionString))
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
-                using (MySqlCommand cmd = new MySqlCommand(sql, con))
+                using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
+                    con.Open();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
 
-                    using (MySqlDataAdapter sda = new MySqlDataAdapter())
+                    System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+
+                    ArrayList arrayList = new ArrayList();
+                    //create arraylsit from DataTable
+                    foreach (DataRow dr in dt.Rows)
                     {
+                        arrayList.Add(dr["COLUMN_NAME"]);
+                    }
 
-                        cmd.Connection = con;
-                        sda.SelectCommand = cmd;
-                       
-                        sda.Fill(dt);
-                            
-                        
 
-                       
+                    Dictionary<string, ArrayList> dict = new Dictionary<string, ArrayList>();
+                    dict["columns"] = arrayList;
 
-                        System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+                    result = serializer.Serialize(dict);
 
-                        ArrayList arrayList = new ArrayList();
-                        //create arraylsit from DataTable
-                        foreach (DataRow dr in dt.Rows)
+
+                    /*  loop through all rows all cells
+                     
+                    List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+                    Dictionary<string, object> row;
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        row = new Dictionary<string, object>();
+                        foreach (DataColumn col in dt.Columns)
                         {
-                            arrayList.Add(dr["Field"]);
+                            row.Add(col.ColumnName, dr[col]);
                         }
+                        rows.Add(row);
+                    }// for
+                     
+                    result = serializer.Serialize(rows);
+                     */
 
 
-                        Dictionary<string, ArrayList> dict = new Dictionary<string, ArrayList>();
-                        dict["columns"] = arrayList;
-
-                        result = serializer.Serialize(dict);
-
-                        
 
 
-                    }// mysqldata adaper
 
-                }// mysqlcommand
-            }// mysqlconnection
+                }// sqlcommand
+            }//sqlconnection
 
-            
+
 
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result, "text/plain");
 
@@ -624,7 +620,7 @@ namespace CivilGis.Controllers
 
         }
 
-       
+
 
 
 

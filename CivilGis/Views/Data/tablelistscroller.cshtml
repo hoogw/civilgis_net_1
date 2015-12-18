@@ -5,10 +5,16 @@
 <script src="~/Scripts/jquery.dataTables.js"></script>
 <link href="~/Content/jquery.dataTables.css" rel="stylesheet">
 
+
+<script src="~/Scripts/dataTables.scroller.min.js"></script>
+<link href="~/Content/scroller.dataTables.min.css" rel="stylesheet">
+
+
+
 <!-- our js -->
 
-<script src="~/Scripts/list_paged.js"></script>
 
+<script src="~/Scripts/tabledata/tablelist_scroller.js"></script>
 
 
 <input type="hidden" id="areaID" value=@ViewBag.Area />
@@ -45,15 +51,15 @@
 
 
             <li>
-                <a href="/data/listpaged/newyork"><i class="fa fa-bar-chart-o fa-fw"></i> New York</a>
+                <a href="/data/tablelistscroller/newyork"><i class="fa fa-bar-chart-o fa-fw"></i> New York</a>
             </li>
 
             <li>
-                <a href="/data/listpaged/chicago"><i class="fa fa-table fa-fw"></i> Chicago</a>
+                <a href="/data/tablelistscroller/chicago"><i class="fa fa-table fa-fw"></i> Chicago</a>
             </li>
 
             <li>
-                <a href="/data/listpaged/losangeles"><i class="fa fa-car"></i> Los Angeles</a>
+                <a href="/data/tablelistscroller/losangeles"><i class="fa fa-car"></i> Los Angeles</a>
             </li>
 
 
@@ -82,7 +88,7 @@
             <ol class="breadcrumb">
                 <li><a href="/map/index/">TransparentGov</a></li>
 
-                <li><a href="/data/listpaged/@ViewBag.Area">@ViewBag.Area</a></li>
+                <li><a href="/data/tablelistscroller/@ViewBag.Area">@ViewBag.Area</a></li>
                 
             </ol>
 
