@@ -28,28 +28,8 @@ namespace CivilGis.Controllers
         public HttpResponseMessage listcontent(string area)
         {
 
-
-            /*
-              *  Sql server: 
-             * select TABLE_NAME
-                from INFORMATION_SCHEMA.COLUMNS
-                where TABLE_CATALOG = 'civilgis'
-                and TABLE_NAME like '%chicago%'
-                group by TABLE_NAME;
-
-
-             Mysql:
-
-
-
-
-             */
-
-
-
-
-
-
+            // -------------------- request parameter -------------------------------
+            
             var httpContext = (HttpContextWrapper)Request.Properties["MS_HttpContext"];
 
             string sEcho = httpContext.Request.Params["draw"];
@@ -62,7 +42,7 @@ namespace CivilGis.Controllers
             string orderDir = httpContext.Request.Params["order[0][dir]"];
             string searchValue = httpContext.Request.Params["search[value]"];
 
-            //-------------------------------------------
+            //---------------------------------------------------------------------------------
 
 
 
@@ -75,40 +55,31 @@ namespace CivilGis.Controllers
 
             
             string connectionString = ConfigurationManager.ConnectionStrings["MySQLContext"].ConnectionString;
-
             
 
-
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-
-                con.Open();
-
+                    using (MySqlConnection con = new MySqlConnection(connectionString))
+                    {
                 
-                
-                //  -----------------  just get total count --------------------
+                                //  ----------------- get total count --------------------
 
-                //sql = "select table_name from INFORMATION_SCHEMA.COLUMNS where TABLE_CATALOG = 'civilgis' and table_name like '%" + area + "%'  group by table_name;";
+                      
+                                    sql = "SELECT count(table_name) FROM information_schema.COLUMNS ";
+                                    sql = sql + " where table_schema = 'civilgis' "; 
+                                    sql = sql + "  and table_name like '"+ area + "_%' ";
+                                    sql = sql + "  group by table_name";
 
-                sql = "select count(table_name) from INFORMATION_SCHEMA.COLUMNS where TABLE_CATALOG = 'civilgis' and table_name like '%" + area + "%'  group by table_name;";
-
-                using (SqlCommand commandRowCount = new SqlCommand(sql, con))
-                        
-                {
-                    commandRowCount.CommandType = CommandType.Text;
+                                 
+                                        using (MySqlCommand cmd = new MySqlCommand(sql, con))
+                                        {
+                                            con.Open();
                     
-                    object countStart = commandRowCount.ExecuteScalar();
-                    int? _count = (int?)(!Convert.IsDBNull(countStart) ? countStart : null);
-                    //int _count = int.Parse(commandRowCount.ExecuteScalar().ToString());
+                                            totalData = Convert.ToInt32(cmd.ExecuteScalar());
+                                            totalFiltered = totalData;
+                    
 
-                    totalData = Convert.ToInt32(_count);
-                    totalFiltered = totalData;
-
-                }  // sqlcommand
-
-
-
-                //----------------------just get total count    ------------------
+                                    }  // sqlcommand
+                                        
+                                  //---------------------- end of get total count    ------------------
 
 
 
@@ -118,42 +89,35 @@ namespace CivilGis.Controllers
 
                     // if there is a search parameter
 
-                    sql = "select table_name from INFORMATION_SCHEMA.COLUMNS where TABLE_CATALOG = 'civilgis' and table_name like '%" + area + "%' ";
-
+                    sql = "SELECT table_name FROM information_schema.COLUMNS ";
+                    sql = sql + " where table_schema = 'civilgis' ";
+                    sql = sql + "  and table_name like '" + area + "_%' ";
+                  
+                    
                     sql = sql + " and TABLE_NAME like '%" + searchValue + "%' ";
                     sql = sql + " group by TABLE_NAME ";
-                    sql = sql + " ORDER BY TABLE_NAME " + "   " + orderDir + "  OFFSET " + iDisplayStart + "  ROWS FETCH NEXT  " + iDisplayLength + "  ROWS ONLY  ";
-
-
-
-                    /*
-                     * select TABLE_NAME
-                        from INFORMATION_SCHEMA.COLUMNS
-                        where TABLE_CATALOG = 'civilgis'
-                        and TABLE_NAME like '%area%'
-                     *  and TABLE_NAME like '%searchValue%'
-                     *  order by TABLE_NAME OFFSET  1 ROWS 
-                              FETCH NEXT 10 ROWS ONLY  
-                        group by TABLE_NAME;
-                     */
+                    sql = sql + " ORDER BY TABLE_NAME " + "   " + orderDir + "  LIMIT " + iDisplayStart + "  , " + iDisplayLength;
                     
-
-
-                    
-
-                    using (SqlCommand cmd = new SqlCommand(sql, con))
+                    using (MySqlCommand cmd = new MySqlCommand(sql, con))
                     {
 
                         dt_tablename = new DataTable();
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        da.Fill(dt_tablename);
 
-                        totalFiltered = dt_tablename.Rows.Count;
+                        using (MySqlDataAdapter sda = new MySqlDataAdapter())
+                        {
 
+                            cmd.Connection = con;
+                            sda.SelectCommand = cmd;
+
+                            sda.Fill(dt_tablename);
+
+
+                            totalFiltered = dt_tablename.Rows.Count;
+                        }// mysql adapter
                        
 
 
-                    }// sqlcommand
+                    }// mysqlcommand
 
 
 
@@ -161,28 +125,34 @@ namespace CivilGis.Controllers
                 else
                 {
 
-                    sql = "select table_name from INFORMATION_SCHEMA.COLUMNS where TABLE_CATALOG = 'civilgis' and table_name like '%" + area + "%' ";
-
+                    sql = "SELECT table_name FROM information_schema.COLUMNS ";
+                    sql = sql + " where table_schema = 'civilgis' ";
+                    sql = sql + "  and table_name like '" + area + "_%' ";
+                    
                     sql = sql + " group by TABLE_NAME ";
-                    sql = sql + " ORDER BY TABLE_NAME " + "   " + orderDir + "  OFFSET " + iDisplayStart + "  ROWS FETCH NEXT  " + iDisplayLength + "  ROWS ONLY  ";
-                    
-                           using (SqlCommand cmd = new SqlCommand(sql, con))
-                           {
-                               dt_tablename = new DataTable();
-                               SqlDataAdapter da = new SqlDataAdapter(cmd);
-                               da.Fill(dt_tablename);
-
-                               totalFiltered = dt_tablename.Rows.Count;
-                              
-
+                    sql = sql + " ORDER BY TABLE_NAME " + "   " + orderDir + "  LIMIT " + iDisplayStart + "  , " + iDisplayLength;
                     
 
-                           }// sqlcommand
+                           using (MySqlCommand cmd = new MySqlCommand(sql, con))
+                            {
+
+                                    dt_tablename = new DataTable();
+
+                                    using (MySqlDataAdapter sda = new MySqlDataAdapter())
+                                    {
+
+                                        cmd.Connection = con;
+                                        sda.SelectCommand = cmd;
+
+                                        sda.Fill(dt_tablename);
+                            
+                                        totalFiltered = dt_tablename.Rows.Count;
+                            
+                                    }// mysql adapter
+
+                                }// mysqlcommand
                 
-
-
-
-                }
+                }//else
 
 
 
@@ -203,10 +173,7 @@ namespace CivilGis.Controllers
 
             _response["recordsTotal"] = totalData;
             _response["recordsFiltered"] = totalFiltered;
-
-
-
-
+            
 
             // datatable to list <dictionary> to Json 
             // datatables use columns[0], columns[1] instead of columns[name].... must add index start from 0
@@ -355,33 +322,44 @@ namespace CivilGis.Controllers
             string tabledata_name = area + "_" + subject;
             string connectionString = ConfigurationManager.ConnectionStrings["MySQLContext"].ConnectionString;
 
-            DataTable dt_body;
-            
-            
-            using (SqlConnection con = new SqlConnection(connectionString))
+
+
+
+
+            //+++++++++++++++++++++++++++++++++= mysqlconnection ==++++++++++++++++++++++++++
+            DataTable dt_header = new DataTable();
+            DataTable dt_body = new DataTable();
+
+            string sql = "SHOW COLUMNS FROM " + tabledata_name;
+
+            using (MySqlConnection con = new MySqlConnection(connectionString))
             {
 
-                con.Open();
-
-                        
-                        string sql = "select * from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='" + tabledata_name + "'";
-                        using (SqlCommand cmd = new SqlCommand(sql, con))
+                   
+                        // --------------   get all column name    ---------------------  
+                        using (MySqlCommand cmd = new MySqlCommand(sql, con))
                         {
-                            DataTable dt_header = new DataTable();
-                            SqlDataAdapter da = new SqlDataAdapter(cmd);
-                            da.Fill(dt_header);
 
-                            
-                            columns = new ArrayList();
-
-                            //create arraylsit from DataTable
-                            foreach (DataRow dr in dt_header.Rows)
+                            using (MySqlDataAdapter sda = new MySqlDataAdapter())
                             {
-                                columns.Add(dr["COLUMN_NAME"]);
-                            }
 
-                        }// sqlcommand
+                                cmd.Connection = con;
+                                sda.SelectCommand = cmd;
 
+                                sda.Fill(dt_header);
+
+
+
+                                columns = new ArrayList();
+
+                                //create arraylsit from DataTable
+                                foreach (DataRow dr in dt_header.Rows)
+                                {
+                                    columns.Add(dr["Field"]);
+                                }
+                            }// adapter
+                         }// sqlcommand
+                        //------------------------------ end all column name ----------------------
 
 
 
@@ -389,15 +367,13 @@ namespace CivilGis.Controllers
                         //  -----------------  just get total count --------------------
 
                         sql = "SELECT count(*) FROM " + tabledata_name;
-                        using (SqlCommand commandRowCount = new SqlCommand(sql, con))
+                        using (MySqlCommand cmd = new MySqlCommand(sql, con))
                         {
-                            commandRowCount.CommandType = CommandType.Text;
+                            con.Open();
 
-                            object countStart = commandRowCount.ExecuteScalar();
-                            int? _count = (int?)(!Convert.IsDBNull(countStart) ? countStart : null);
-                            //int _count = int.Parse(commandRowCount.ExecuteScalar().ToString());
+                    
 
-                            totalData = Convert.ToInt32(_count);
+                            totalData = Convert.ToInt32(cmd.ExecuteScalar());
                             totalFiltered = totalData;
 
                         }  // sqlcommand
@@ -435,54 +411,67 @@ namespace CivilGis.Controllers
 
 
 
-                                                                       /*
-                                                                                select * from Chicago_Current_Employee_Salaries
-                                                                                 where name like '%terry%'
-                                                                                 order by Name OFFSET  5 ROWS 
-                                                                                 FETCH NEXT 5 ROWS ONLY  
-                                                                        */
+                    /*
+                             select * from Chicago_Current_Employee_Salaries
+                              where name like '%terry%'
+                              order by Name OFFSET  5 ROWS 
+                              FETCH NEXT 5 ROWS ONLY  
+                     */
 
 
-                                          sql = sql + " ORDER BY " + columns[orderColumn] + "   " + orderDir  + "  OFFSET " + iDisplayStart + "  ROWS FETCH NEXT  " +iDisplayLength + "  ROWS ONLY  "; 
-                                          
-                                        using (SqlCommand cmd = new SqlCommand(sql, con))
-                                        {
+                    // sql = sql + " ORDER BY " + columns[orderColumn] + "   " + orderDir  + "  OFFSET " + iDisplayStart + "  ROWS FETCH NEXT  " +iDisplayLength + "  ROWS ONLY  "; 
+                       sql = sql + " ORDER BY " + columns[orderColumn] + "   " + orderDir + "  LIMIT " + iDisplayStart + " ," + iDisplayLength + "   ";
 
-                                            dt_body = new DataTable();
-                                            SqlDataAdapter da = new SqlDataAdapter(cmd);
-                                            da.Fill(dt_body);
+                                                        using (MySqlCommand cmd = new MySqlCommand(sql, con))
+                                                        {
 
-                                            totalFiltered = dt_body.Rows.Count;
-                                            
+                                                            using (MySqlDataAdapter sda = new MySqlDataAdapter())
+                                                            {
 
-                                        }// sqlcommand
+                                                                cmd.Connection = con;
+                                                                sda.SelectCommand = cmd;
 
-                                                  
+                                                                sda.Fill(dt_body);
+                                                                
+                                                                totalFiltered = dt_body.Rows.Count;
+
+
+                                                            }// mysqlcommand
+
+                                                        }// mysql adapter                   
                                     
                             } else 
                                  {	
+                                        // No search value
 
                                             sql = "SELECT * FROM " + tabledata_name +"  ";
 
 
-                                            sql = sql + " ORDER BY " + columns[orderColumn] + "   " + orderDir + "  OFFSET " + iDisplayStart + "  ROWS FETCH NEXT  " + iDisplayLength + "  ROWS ONLY  "; 
+                    //sql = sql + " ORDER BY " + columns[orderColumn] + "   " + orderDir + "  OFFSET " + iDisplayStart + "  ROWS FETCH NEXT  " + iDisplayLength + "  ROWS ONLY  "; 
+                      sql = sql + " ORDER BY " + columns[orderColumn] + "   " + orderDir + "  LIMIT " + iDisplayStart + " ," + iDisplayLength + "   ";
+
+
+                                                using (MySqlCommand cmd = new MySqlCommand(sql, con))
+                                                {
+
+                                                    using (MySqlDataAdapter sda = new MySqlDataAdapter())
+                                                    {
+
+                                                            cmd.Connection = con;
+                                                            sda.SelectCommand = cmd;
+
+                                                            sda.Fill(dt_body);
+                           
 
 
 
-                                            using (SqlCommand cmd = new SqlCommand(sql, con))
-                                            {
 
-                                                dt_body = new DataTable();
-                                                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                                                da.Fill(dt_body);
+                                                    }// mysqlcommand
 
-                                              
+                                                }// mysql adapter  
 
 
-                                            }// sqlcommand
-                                            
-
-                                   }//else
+                }//else
 
 
                               
@@ -571,9 +560,9 @@ namespace CivilGis.Controllers
 
 
             DataTable dt = new DataTable();
-            
 
-            //==========================================================+++++++++++++++++++++++++++++++++++++++++=============
+
+            //=======================================mysqlconnection===========+++++++++++++++++++++++++++++++++++++++++=============
             using (MySqlConnection con = new MySqlConnection(connectionString))
             {
                 using (MySqlCommand cmd = new MySqlCommand(sql, con))
@@ -612,7 +601,7 @@ namespace CivilGis.Controllers
                     }// mysqldata adaper
 
                 }// mysqlcommand
-            }// mysqlconnection
+            }// ============================================ mysqlconnection ========================================
 
             
 
