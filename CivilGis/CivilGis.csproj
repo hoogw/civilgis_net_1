@@ -323,6 +323,7 @@
     <Content Include="Views\Map\mapscroller.cshtml" />
     <Content Include="Views\LocalMap\localcolormap.cshtml" />
     <Content Include="Views\LocalMap\localsimpleclustermap.cshtml" />
+    <Content Include="Views\Shared\_MapLayout - Copy.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
