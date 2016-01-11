@@ -127,6 +127,82 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\blue\css\bootstrap.min.css" />
+    <Content Include="Content\blue\css\font-awesome.min.css" />
+    <Content Include="Content\blue\css\main.css" />
+    <Content Include="Content\blue\css\prettyPhoto.css" />
+    <Content Include="Content\blue\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\blue\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\blue\images\ico\apple-touch-icon-114-precomposed.png" />
+    <Content Include="Content\blue\images\ico\apple-touch-icon-144-precomposed.png" />
+    <Content Include="Content\blue\images\ico\apple-touch-icon-57-precomposed.png" />
+    <Content Include="Content\blue\images\ico\apple-touch-icon-72-precomposed.png" />
+    <Content Include="Content\blue\images\ico\favicon.ico" />
+    <Content Include="Content\blue\images\logo.png" />
+    <Content Include="Content\blue\images\portfolio\full\item1.jpg" />
+    <Content Include="Content\blue\images\portfolio\full\item2.jpg" />
+    <Content Include="Content\blue\images\portfolio\full\item3.jpg" />
+    <Content Include="Content\blue\images\portfolio\full\item4.jpg" />
+    <Content Include="Content\blue\images\portfolio\full\item5.jpg" />
+    <Content Include="Content\blue\images\portfolio\full\item6.jpg" />
+    <Content Include="Content\blue\images\portfolio\full\item7.jpg" />
+    <Content Include="Content\blue\images\portfolio\thumb\item1.jpg" />
+    <Content Include="Content\blue\images\portfolio\thumb\item2.jpg" />
+    <Content Include="Content\blue\images\portfolio\thumb\item3.jpg" />
+    <Content Include="Content\blue\images\portfolio\thumb\item4.jpg" />
+    <Content Include="Content\blue\images\portfolio\thumb\item5.jpg" />
+    <Content Include="Content\blue\images\portfolio\thumb\item6.jpg" />
+    <Content Include="Content\blue\images\portfolio\thumb\item7.jpg" />
+    <Content Include="Content\blue\images\prettyPhoto\dark_rounded\btnNext.png" />
+    <Content Include="Content\blue\images\prettyPhoto\dark_rounded\btnPrevious.png" />
+    <Content Include="Content\blue\images\prettyPhoto\dark_rounded\contentPattern.png" />
+    <Content Include="Content\blue\images\prettyPhoto\dark_rounded\default_thumbnail.gif" />
+    <Content Include="Content\blue\images\prettyPhoto\dark_rounded\loader.gif" />
+    <Content Include="Content\blue\images\prettyPhoto\dark_rounded\sprite.png" />
+    <Content Include="Content\blue\images\prettyPhoto\dark_square\btnNext.png" />
+    <Content Include="Content\blue\images\prettyPhoto\dark_square\btnPrevious.png" />
+    <Content Include="Content\blue\images\prettyPhoto\dark_square\contentPattern.png" />
+    <Content Include="Content\blue\images\prettyPhoto\dark_square\default_thumbnail.gif" />
+    <Content Include="Content\blue\images\prettyPhoto\dark_square\loader.gif" />
+    <Content Include="Content\blue\images\prettyPhoto\dark_square\sprite.png" />
+    <Content Include="Content\blue\images\prettyPhoto\default\default_thumb.png" />
+    <Content Include="Content\blue\images\prettyPhoto\default\loader.gif" />
+    <Content Include="Content\blue\images\prettyPhoto\default\sprite.png" />
+    <Content Include="Content\blue\images\prettyPhoto\default\sprite_next.png" />
+    <Content Include="Content\blue\images\prettyPhoto\default\sprite_prev.png" />
+    <Content Include="Content\blue\images\prettyPhoto\default\sprite_x.png" />
+    <Content Include="Content\blue\images\prettyPhoto\default\sprite_y.png" />
+    <Content Include="Content\blue\images\prettyPhoto\facebook\btnNext.png" />
+    <Content Include="Content\blue\images\prettyPhoto\facebook\btnPrevious.png" />
+    <Content Include="Content\blue\images\prettyPhoto\facebook\contentPatternBottom.png" />
+    <Content Include="Content\blue\images\prettyPhoto\facebook\contentPatternLeft.png" />
+    <Content Include="Content\blue\images\prettyPhoto\facebook\contentPatternRight.png" />
+    <Content Include="Content\blue\images\prettyPhoto\facebook\contentPatternTop.png" />
+    <Content Include="Content\blue\images\prettyPhoto\facebook\default_thumbnail.gif" />
+    <Content Include="Content\blue\images\prettyPhoto\facebook\loader.gif" />
+    <Content Include="Content\blue\images\prettyPhoto\facebook\sprite.png" />
+    <Content Include="Content\blue\images\prettyPhoto\light_rounded\btnNext.png" />
+    <Content Include="Content\blue\images\prettyPhoto\light_rounded\btnPrevious.png" />
+    <Content Include="Content\blue\images\prettyPhoto\light_rounded\default_thumbnail.gif" />
+    <Content Include="Content\blue\images\prettyPhoto\light_rounded\loader.gif" />
+    <Content Include="Content\blue\images\prettyPhoto\light_rounded\sprite.png" />
+    <Content Include="Content\blue\images\prettyPhoto\light_square\btnNext.png" />
+    <Content Include="Content\blue\images\prettyPhoto\light_square\btnPrevious.png" />
+    <Content Include="Content\blue\images\prettyPhoto\light_square\default_thumbnail.gif" />
+    <Content Include="Content\blue\images\prettyPhoto\light_square\loader.gif" />
+    <Content Include="Content\blue\images\prettyPhoto\light_square\sprite.png" />
+    <Content Include="Content\blue\images\shapebootstrap.png" />
+    <Content Include="Content\blue\images\slider-bg.jpg" />
+    <Content Include="Content\blue\images\team1.jpg" />
+    <Content Include="Content\blue\images\team2.jpg" />
+    <Content Include="Content\blue\images\team3.jpg" />
+    <Content Include="Content\blue\js\bootstrap.min.js" />
+    <Content Include="Content\blue\js\html5shiv.js" />
+    <Content Include="Content\blue\js\jquery.isotope.min.js" />
+    <Content Include="Content\blue\js\jquery.js" />
+    <Content Include="Content\blue\js\jquery.prettyPhoto.js" />
+    <Content Include="Content\blue\js\main.js" />
+    <Content Include="Content\blue\js\respond.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dataTables.bootstrap.css" />
@@ -192,6 +268,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="images\Sorting icons.psd" />
+    <Content Include="Content\blue\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\blue\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\blue\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\blue\fonts\FontAwesome.otf" />
+    <Content Include="Content\blue\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\blue\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\blue\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="pinkball.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -232,6 +315,7 @@
     <Content Include="Scripts\sb-admin-2.js" />
     <Content Include="Scripts\scrolling.js" />
     <Content Include="Scripts\smarttablejs.js" />
+    <None Include="Views\Home\corporate\blue.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -244,10 +328,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\GeojsonController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Json2Controller.cs" />
     <Compile Include="Controllers\JsonController.cs" />
     <Compile Include="Controllers\LocalMapController.cs" />
     <Compile Include="Controllers\MapController.cs" />
+    <Compile Include="Controllers\ThemeMapController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -324,6 +410,13 @@
     <Content Include="Views\LocalMap\localcolormap.cshtml" />
     <Content Include="Views\LocalMap\localsimpleclustermap.cshtml" />
     <Content Include="Views\Shared\_MapLayout - Copy.cshtml" />
+    <Content Include="Views\ThemeMap\_ViewStart.cshtml" />
+    <Content Include="Views\ThemeMap\localcolormap.cshtml" />
+    <Content Include="Views\ThemeMap\localmaplistpaged.cshtml" />
+    <Content Include="Views\ThemeMap\localmaplistscroller.cshtml" />
+    <Content Include="Views\ThemeMap\localsimpleclustermap.cshtml" />
+    <Content Include="Views\ThemeMap\localsimplemap.cshtml" />
+    <Content Include="Views\Shared\_ThemeMapLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -333,6 +426,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Home\local\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
