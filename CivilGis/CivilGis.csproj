@@ -139,6 +139,7 @@
     <Content Include="Content\blue\images\ico\apple-touch-icon-72-precomposed.png" />
     <Content Include="Content\blue\images\ico\favicon.ico" />
     <Content Include="Content\blue\images\logo.png" />
+    <Content Include="Content\blue\images\logo0.png" />
     <Content Include="Content\blue\images\portfolio\full\item1.jpg" />
     <Content Include="Content\blue\images\portfolio\full\item2.jpg" />
     <Content Include="Content\blue\images\portfolio\full\item3.jpg" />
@@ -417,6 +418,9 @@
     <Content Include="Views\ThemeMap\localsimpleclustermap.cshtml" />
     <Content Include="Views\ThemeMap\localsimplemap.cshtml" />
     <Content Include="Views\Shared\_ThemeMapLayout.cshtml" />
+    <Content Include="Views\Home\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_HomeLayout.cshtml" />
+    <Content Include="Views\Shared\_parks_side_panel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

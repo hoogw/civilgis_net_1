@@ -59,7 +59,7 @@ namespace CivilGis.Controllers
         {
 
             ViewBag.Subject = subject; // for api call 
-            ViewBag.Subject_uppercase = subject.ToUpper(); // for display title in view
+            ViewBag.Side_Bar = area;
 
             ViewBag.Area = area;
 
@@ -71,7 +71,7 @@ namespace CivilGis.Controllers
         {
 
             ViewBag.Subject = subject; // for api call 
-            ViewBag.Subject_uppercase = subject.ToUpper(); // for display title in view
+            ViewBag.Side_Bar = area;
 
             ViewBag.Area = area;
 
@@ -83,7 +83,7 @@ namespace CivilGis.Controllers
         {
 
             ViewBag.Subject = subject; // for api call 
-            ViewBag.Subject_uppercase = subject.ToUpper(); // for display title in view
+            ViewBag.Side_Bar = area;
 
             ViewBag.Area = area;
 

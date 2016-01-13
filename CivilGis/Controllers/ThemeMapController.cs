@@ -8,6 +8,10 @@ namespace CivilGis.Controllers
 {
     public class ThemeMapController : Controller
     {
+
+
+        string _view_path;
+
         // GET: themeMap
         public ActionResult Index()
         {
@@ -34,10 +38,10 @@ namespace CivilGis.Controllers
 
 
 
-        public ActionResult thememaplistpaged(string area)
+        public ActionResult thememaplistpaged(string area, string subject)
         {
-
-
+            ViewBag.Subject = subject;
+            ViewBag.Side_Bar = subject;
 
             ViewBag.Area = area;
 
@@ -45,10 +49,10 @@ namespace CivilGis.Controllers
             return View();
         }
 
-        public ActionResult thememaplistscroller(string area)
+        public ActionResult thememaplistscroller(string area, string subject)
         {
-
-
+            ViewBag.Subject = subject;
+            ViewBag.Side_Bar = subject;
 
             ViewBag.Area = area;
 
@@ -61,36 +65,38 @@ namespace CivilGis.Controllers
         {
 
             ViewBag.Subject = subject; // for api call 
-            ViewBag.Subject_uppercase = subject.ToUpper(); // for display title in view
+            
 
             ViewBag.Area = area;
 
+            ViewBag.Side_Bar = subject;
 
-            return View();
+            _view_path = "~/Views/LocalMap/localsimplemap.cshtml";
+            return View(_view_path);
         }
 
         public ActionResult themesimpleclustermap(string area, string subject)
         {
 
             ViewBag.Subject = subject; // for api call 
-            ViewBag.Subject_uppercase = subject.ToUpper(); // for display title in view
+            ViewBag.Side_Bar = subject;
 
             ViewBag.Area = area;
 
-
-            return View();
+            _view_path = "~/Views/LocalMap/localsimpleclustermap.cshtml";
+            return View(_view_path);
         }
 
         public ActionResult themecolormap(string area, string subject)
         {
 
             ViewBag.Subject = subject; // for api call 
-            ViewBag.Subject_uppercase = subject.ToUpper(); // for display title in view
+            ViewBag.Side_Bar = subject;
 
             ViewBag.Area = area;
-
-
-            return View();
+            
+                _view_path = "~/Views/LocalMap/localcolormap.cshtml";
+            return View(_view_path);
         }
 
     }
