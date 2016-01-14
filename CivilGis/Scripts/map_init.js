@@ -42,6 +42,12 @@ var _column = {};
 var _geometry_type;
 var _geometry_coord;
 var _column_count;
+
+var _mouseover_polygon;
+var _mouseover_line;
+var _mouseover_point;
+var _mouseover_coord;
+
 var _click_polygon;
 var _click_line;
 var _click_point;

@@ -4,26 +4,16 @@
 
 <script src="~/Scripts/infobox.js"></script>
 <script src="~/Scripts/markerclusterer.js"></script>
-    
 
 
 
 <script src="~/Scripts/map_init.js"></script>
-<script src="~/Scripts/localmap/localcolormap.js"></script>
+
+<script src="~/Scripts/localmap/localsimplemap.js"></script>
 
 
 
 
-<!-- script type="text/javascript" src="<?php echo Config::get('URL'); ?>public/js/googlemapjs.js"></script -->
-<!-- webGL layer
-<!-- script type="text/javascript" src="<?php echo Config::get('URL'); ?>public/js/gmapgl.js"></script>
-
-
-<script type="text/javascript" src="<?php echo Config::get('URL'); ?>public/js/CanvasLayer.js"></script>
-<script type="text/javascript" src="<?php echo Config::get('URL'); ?>public/js/ShaderProgram.js"></script>
-<script type="text/javascript" src="<?php echo Config::get('URL'); ?>public/js/libtess.cat.js"></script>
-<script type="text/javascript" src="<?php echo Config::get('URL'); ?>public/js/WebGLLayer.js"></script>
--->
 
 
 
@@ -32,13 +22,13 @@
 
 <input type="hidden" id="areaID" value=@ViewBag.Area />
 <input type="hidden" id="subjectID" value=@ViewBag.Subject />
-
+<input type="hidden" id="sidebarID" value=@ViewBag.Side_Bar />
 
 
 
 
 @{
-    string _side_panel_path = "~/Views/Shared/_" + ViewBag.Subject + "_side_panel.cshtml";
+    string _side_panel_path = "~/Views/Shared/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
 
     Html.RenderPartial(_side_panel_path); 
     

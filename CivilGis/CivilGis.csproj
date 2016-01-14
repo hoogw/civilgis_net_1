@@ -411,13 +411,6 @@
     <Content Include="Views\LocalMap\localcolormap.cshtml" />
     <Content Include="Views\LocalMap\localsimpleclustermap.cshtml" />
     <Content Include="Views\Shared\_MapLayout - Copy.cshtml" />
-    <Content Include="Views\ThemeMap\_ViewStart.cshtml" />
-    <Content Include="Views\ThemeMap\localcolormap.cshtml" />
-    <Content Include="Views\ThemeMap\localmaplistpaged.cshtml" />
-    <Content Include="Views\ThemeMap\localmaplistscroller.cshtml" />
-    <Content Include="Views\ThemeMap\localsimpleclustermap.cshtml" />
-    <Content Include="Views\ThemeMap\localsimplemap.cshtml" />
-    <Content Include="Views\Shared\_ThemeMapLayout.cshtml" />
     <Content Include="Views\Home\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
     <Content Include="Views\Shared\_parks_side_panel.cshtml" />
