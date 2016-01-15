@@ -136,11 +136,14 @@ function feed_datatables(_geojson_obj){
                                                                       var _latlng = _feature_geometry.get();
                                                                         _highlight_marker = new google.maps.Marker({
                                                                            map: map,
-                                                                           position: _latlng
+                                                                           position: _latlng,
                                                                            // icon: iconBase + 'custome_icon.png'
-                                                                           
+                                                                            //label: ' ', 
+                                                                            // must set zIndex to bring this marker to front, on top of other markers.other wise, it will hide behind.
+                                                                           zIndex: google.maps.Marker.MAX_ZINDEX + 1
+
                                                                         }); // marker
-                                                                        _highlight_marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png')
+                                                                        _highlight_marker.setIcon('http://maps.google.com/mapfiles/ms/icons/grn-pushpin.png');
                                                                //  }//if feature
                                                                     
                                                                       
@@ -1287,12 +1290,14 @@ function datatablesX(){
                                              _click_point = new google.maps.Marker({
                                                 map: map,
                                                 
-                                                position: {lat: _geometry_coord[1], lng: _geometry_coord[0]}
+                                                position: {lat: _geometry_coord[1], lng: _geometry_coord[0]},
                                                 // icon: iconBase + 'custome_icon.png'
-                                                
+                                                 //label: ' ', 
+                                                 // must set zIndex to bring this marker to front, on top of other markers.other wise, it will hide behind.
+                                                zIndex: google.maps.Marker.MAX_ZINDEX + 1
                                              });
-                                             
-                                      _click_point.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
+
+                                            _click_point.setIcon('http://maps.google.com/mapfiles/ms/icons/ltblu-pushpin.png');
                                       
                                       var _center = new google.maps.LatLng(_geometry_coord[1], _geometry_coord[0]);
                                            
