@@ -1019,7 +1019,11 @@ function datatablesX(){
                                             
                                 "lengthMenu": [ 50, 100 ],
 
+                                           //"pagingType": "full_numbers",
                                            
+                                           //for input page number plugin
+                                           //"sPaginationType": "input",
+                                           //"sPaginationType": "scrolling",
                                            
                                                             "processing": true,
                                                             "serverSide": true,
@@ -1048,9 +1052,8 @@ function datatablesX(){
                                                                 
                                                                     // ------------ scroller section --------     
                                                               
-                                                                                           deferRender: true,
-                                                                                           
-                                //scrollCollapse: true,  //only use it on client side, Do not use it on server side, it cause not draw, not send request to server until 25 record after 
+                                                                                        deferRender: true,
+                                // scrollCollapse: true, //only use it on client side, Do not use it on server side, it cause not draw, not send request to server until 25 record after 
                                                                                            scroller: true
                                                                 
                                                                    // ------------ scroller section end--------  

@@ -117,11 +117,16 @@ function feed_datatables(_geojson_obj){
                                             //var _Data_Feature =  map.data.getFeatureById(_geo_ID);
                                             map.data.forEach( function(_feature)
                                             {
+
+                                                // GeoFeatureID define at ajax_geoJSON() 
+                                                //alert(_feature.getProperty('GeoFeatureID'));
+                                                alert(_feature.getProperty('GeoFeatureType'));
+
                                                 
                                                 if (_feature.getProperty('GeoFeatureID') === _geo_ID)
                                                 {
                                                     
-                                                            //alert(_feature.getProperty('GeoFeatureID'));
+                                                    
                                                     
                                                             if(_feature.getProperty('GeoFeatureType') === 'Point')
                                                             {
@@ -519,7 +524,7 @@ function ajax_GeoJSON(gmap,_apiURI) {
                                                   _id_obj = eachFeatueItem['_id'];
                                                   _id_obj_id = _id_obj['$id'];
                                                  _propty_obj = eachFeatueItem['properties'];
-                                                 var _geo_type = eachFeatueItem['geometry'];
+                                                 
                                                  
                                                  _propty_obj['GeoFeatureType']=_geo_type['type'];
                                                  _propty_obj['GeoFeatureID'] = _id_obj_id;
@@ -532,13 +537,15 @@ function ajax_GeoJSON(gmap,_apiURI) {
 
 
                                              // ------ asp.net format -----------
-                                                 _id_obj_id = eachFeatueItem['_id'];
+                                               var _geo_type = eachFeatueItem['geometry'];
 
 
 
                                                  _propty_obj = eachFeatueItem['properties'];
-                                                 _propty_obj['GeoFeatureID'] = _id_obj_id;
-
+                                                 
+                                                 _propty_obj['GeoFeatureType'] = _geo_type['type'];     
+                                                 _propty_obj['GeoFeatureID'] = eachFeatueItem['_id'];
+                                                 
 
                                              });// features_array_foreach
 

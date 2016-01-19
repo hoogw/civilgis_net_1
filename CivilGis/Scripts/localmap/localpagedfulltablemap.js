@@ -89,15 +89,9 @@ function feed_datatables(_geojson_obj){
                                     
                                     // resize the datatables height here scrollY:150
                                     scrollY: 200,
-                                    scrollX: true,
+                                    scrollX: true
                                     
-                                          // ------------ scroller section --------     
-                                                              
-                                          deferRender: true,
-                                      scrollCollapse: true,
-                                      scroller: true
-                                                                
-                                // ------------ scroller section end--------  
+                                    
                                                     
                             }); // datatable
                             
@@ -109,7 +103,9 @@ function feed_datatables(_geojson_obj){
                   var table = $('#tabledata').DataTable();
                             
                         $('#tabledata tbody').on('mouseover', 'td', function () 
-                                   {
+                        {
+
+                            
                                            var instant_info = "<ul>";
                                                                                     
                                            var colIdx = table.cell(this).index().column;
@@ -123,15 +119,21 @@ function feed_datatables(_geojson_obj){
                                             //var _Data_Feature =  map.data.getFeatureById(_geo_ID);
                                             map.data.forEach( function(_feature)
                                             {
+
+                                                // GeoFeatureID define at ajax_geoJSON() 
+                                                //alert(_feature.getProperty('GeoFeatureID'));
+                                                //alert(_feature.getProperty('GeoFeatureType'));
+
                                                 
                                                 if (_feature.getProperty('GeoFeatureID') === _geo_ID)
                                                 {
                                                     
-                                                            //alert(_feature.getProperty('GeoFeatureID'));
+                                                    
                                                     
                                                             if(_feature.getProperty('GeoFeatureType') === 'Point')
                                                             {
                                                                     
+                                                                
                                                               // if (_feature instanceof google.maps.Data.Point) {
                                                                         if(_highlight_marker)
                                                                         {
@@ -149,6 +151,8 @@ function feed_datatables(_geojson_obj){
                                                                            zIndex: google.maps.Marker.MAX_ZINDEX + 1
 
                                                                         }); // marker
+
+                                                                        
                                                                         _highlight_marker.setIcon('http://maps.google.com/mapfiles/ms/icons/grn-pushpin.png');
                                                                //  }//if feature
                                                                     
@@ -160,9 +164,10 @@ function feed_datatables(_geojson_obj){
                                                             else{
                                                                     map.data.revertStyle();
                                                                     map.data.overrideStyle(_feature, {
-                                                                                                    strokeWeight: 5,
-                                                                                                    strokeColor: 'blue',
-                                                                                                    fillOpacity: 0
+                                                                                           strokeWeight: 5,
+                                                                                           strokeColor: 'blue',
+                                                                                           fillOpacity: 0
+                                                                                           
                                                                                        });// overrideStyle
 
                                                                    }//else
@@ -204,7 +209,7 @@ function feed_datatables(_geojson_obj){
                                        
                                         // remove all high light yellow the feature polygon on google map
                                        // Remove custom styles.
-                                     map.data.revertStyle();
+                                        map.data.revertStyle();
                                         
                                         
                                         // empty bottom <div>
@@ -482,7 +487,7 @@ function ajax_GeoJSON(gmap,_apiURI) {
                             add_tiles();
                             
                             
-           
+            
             
             
                
@@ -554,6 +559,7 @@ function ajax_GeoJSON(gmap,_apiURI) {
                                         //---------------------------------------------------------------
 
 
+
                             //----------------  add new geojson, then remove last geojson --------------------
 
                                          map.data.setStyle({
@@ -562,8 +568,6 @@ function ajax_GeoJSON(gmap,_apiURI) {
                                              strokeWeight: 1
 
                                          });
-
-
                                          _last_geojson_layer = _current_geojson_layer;
 
                                          _current_geojson_layer = map.data.addGeoJson(_geojson_object);
@@ -582,9 +586,6 @@ function ajax_GeoJSON(gmap,_apiURI) {
 
 
                             //------------------------end add new geojson, then remove last geojson------------------------- ---------------
-
-
-
 
 
 
@@ -1017,9 +1018,11 @@ function datatablesX(){
                             //  datatable
                             $('#tabledataX').DataTable({
                                             
-                                "lengthMenu": [ 50, 100 ],
-
+                                           "pagingType": "full_numbers",
                                            
+                                           //for input page number plugin
+                                           //"sPaginationType": "input",
+                                           //"sPaginationType": "scrolling",
                                            
                                                             "processing": true,
                                                             "serverSide": true,
@@ -1044,16 +1047,9 @@ function datatablesX(){
                                                                 
                                                                 
                                                                 scrollY: 200,
-                                                                scrollX: true,
+                                                                scrollX: true
                                                                 
-                                                                    // ------------ scroller section --------     
-                                                              
-                                                                                           deferRender: true,
-                                                                                           
-                                //scrollCollapse: true,  //only use it on client side, Do not use it on server side, it cause not draw, not send request to server until 25 record after 
-                                                                                           scroller: true
                                                                 
-                                                                   // ------------ scroller section end--------  
                                                                 
                                                                 
                                                                 
@@ -1336,14 +1332,27 @@ function datatablesX(){
                                   
                                   //--------------------------------------------------------------------------------
                                 
+                                
+                                
+                                
+                               
+                                
+                                
+                                
+                                          
+                                   
+                                
                         } ); // click cell event  
                               
-                            
-                            
+
+
+
+
+           
            //================================ begin mouse over and mouse end high light polygon line marker, do not fly to , do not zoom in ==============================
 
 
-
+         
                             $('#tabledataX tbody').on('mouseover', 'tr', function () {
 
                                 //------ click select the row --------------
@@ -1483,7 +1492,7 @@ function datatablesX(){
 
                                     _mouseover_polygon.setMap(map);
 
-
+                                    
 
                                 }
                                 else if (_geometry_type === 'LineString') {
@@ -1556,14 +1565,12 @@ function datatablesX(){
 
                                         position: { lat: _geometry_coord[1], lng: _geometry_coord[0] },
                                         // icon: iconBase + 'custome_icon.png'
-                                        //label: ' ', 
-                                        // must set zIndex to bring this marker to front, on top of other markers.other wise, it will hide behind.
-                                        zIndex: google.maps.Marker.MAX_ZINDEX + 1
+
                                     });
 
-                                    _mouseover_point.setIcon('http://maps.google.com/mapfiles/ms/icons/ylw-pushpin.png');
+                                    _mouseover_point.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png')
 
-
+                                   
 
                                 }
                                 else if (_geometry_type === 'No_Geometry') {
@@ -1602,7 +1609,7 @@ function datatablesX(){
 
                                 }
 
-
+                                
                             });
 
 
@@ -1610,10 +1617,7 @@ function datatablesX(){
 
 
            //============================== end mouse over and mouse end high light polygon line marker, do not fly to , do not zoom in========================================
-
-
-
-
+                            
                             
                      /*   temperary  disable,    mouseover and mouseout event display row info on info-table div
                             

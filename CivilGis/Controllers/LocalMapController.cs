@@ -32,6 +32,8 @@ namespace CivilGis.Controllers
 
 
 
+        //-------------------------------- maplist section -------------------------------- 
+
         public ActionResult localmaplistpaged(string area)
         {
 
@@ -54,7 +56,11 @@ namespace CivilGis.Controllers
             return View();
         }
 
+        //-------------------------------- End maplist section -------------------------------- 
 
+
+
+        //----------------------- simple map section -------------------------------
         public ActionResult localsimplemap(string area, string subject)
         {
 
@@ -79,6 +85,7 @@ namespace CivilGis.Controllers
             return View();
         }
 
+
         public ActionResult localcolormap(string area, string subject)
         {
 
@@ -90,6 +97,47 @@ namespace CivilGis.Controllers
 
             return View();
         }
+
+
+
+        //----------------------- End simple map section -------------------------------
+
+
+
+
+        //----------------------- table map section -------------------------------
+
+        public ActionResult localpagedfulltablemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+
+        public ActionResult localscrollerfulltablemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+        //-----------------------End  table map section -------------------------------
+
 
 
     }

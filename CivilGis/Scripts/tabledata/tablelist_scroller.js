@@ -31,7 +31,7 @@
                                                                 scrollY: 300,
                                                                 //scrollX: true,
                                                                 deferRender: true,
-                                                                scrollCollapse: true,
+                                //scrollCollapse: true, //only use it on client side, Do not use it on server side, it cause not draw, not send request to server until 25 record after 
                                                                 scroller: true,
                                                                 //stateSave: true,
                                                                 //fixedColumns: true,
