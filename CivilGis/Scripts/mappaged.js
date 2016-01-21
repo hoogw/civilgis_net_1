@@ -792,6 +792,7 @@ function initialize() {
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         map.setZoom(initial_location[3]);
         
+        add_area_boundary($("#areaID").val());
         
         
          //------tile[1] ---------
@@ -925,7 +926,7 @@ google.maps.Polygon.prototype.getBounds = function() {
             
         //--------------------------------------------------------------------------------------------------
     
-    add_area_boundary($("#areaID").val());
+    
         
     }// initialize
     

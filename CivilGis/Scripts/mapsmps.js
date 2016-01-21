@@ -400,6 +400,9 @@ function initialize() {
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         map.setZoom(initial_location[3]);
         
+
+        add_area_boundary($("#areaID").val());
+
         
          //------tile[1] ---------
         init_tiling();
@@ -536,7 +539,7 @@ function initialize() {
             ajax_GeoJSON(map,_url_init);
             
         
-        add_area_boundary($("#areaID").val());
+        
     }// initialize
     
     

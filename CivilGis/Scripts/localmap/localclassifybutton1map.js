@@ -17,15 +17,15 @@ function ajax_GeoJSON(gmap,_apiURI) {
 
     //------tile[3] ---------
     add_tiles();
-            
-            
+          
+        
             
             
             // test url if return a number means too many polygon to show.otherwise add polygon to map.
             $.get(_apiURI, function(data){
            
                         if(isNaN(data)){
-                            
+                           
                             
                           
                           // ---------   processing data(geoJson) to fill datatables -----------------
@@ -43,51 +43,55 @@ function ajax_GeoJSON(gmap,_apiURI) {
 
 
 
-
                             var _geojson_object = JSON.parse(data);
 
-                            //----- marker cluster  [2.1] ------each time before you add new point geojson, need to clear old last time marker clusters.
-                            markerClusterer.clearMarkers();
-                            //--------------------------------------------   
+                           //----- marker cluster  [2.1] ------each time before you add new point geojson, need to clear old last time marker clusters.
+                           //   markerClusterer.clearMarkers();
+                           //--------------------------------------------   
 
-
+                             
 
 
                             //----------------  add new geojson, then remove last geojson --------------------
 
-                            map.data.setStyle({
-                                fillOpacity: 0,
-                                strokeColor: 'yellow',
-                                strokeWeight: 1
+                              map.data.setStyle({
+                                  fillOpacity: 0,
+                                  strokeColor: 'yellow',
+                                  strokeWeight: 1
 
-                            });
+                              });
 
-                            _last_geojson_layer = _current_geojson_layer;
+                              _last_geojson_layer = _current_geojson_layer;
 
-                            _current_geojson_layer = map.data.addGeoJson(_geojson_object);
+                              _current_geojson_layer = map.data.addGeoJson(_geojson_object);
+
+                              
 
                             // ---- after add new geojson, now remove last time old geojson -------------
                             // don't use Array.ForEach is about 95% slower than for() in JavaScript.
 
-                            if (_last_geojson_layer) {
+                              if (_last_geojson_layer){
+                              
+                                  for (var l = 0, len = _last_geojson_layer.length; l < len; l++)
+                                  {
+                                  
+                                              gmap.data.remove(_last_geojson_layer[l]);
 
-                                for (var l = 0, len = _last_geojson_layer.length; l < len; l++) {
-
-                                    gmap.data.remove(_last_geojson_layer[l]);
-
-                                }// for
-                            }// if
-
+                                          }// for
+                              }// if
+                               
 
                             //------------------------end add new geojson, then remove last geojson------------------------- ---------------
 
 
 
                             //---------------marker cluster  [2.2]-------------------
-                            if (_cluster_in_use) {
-                                map.data.setMap(null);
-                                _cluster_in_use = false;
+                            /*
+                              if (_cluster_in_use) {
+                                  map.data.setMap(null);
+                                  _cluster_in_use = false;
                             }
+                            */
                             //-------------------------------------------------------
                            
                            
@@ -106,13 +110,14 @@ function ajax_GeoJSON(gmap,_apiURI) {
                             
                            
                             
-                            // styleFeature function is only in script block in city.cshtml
-                                if (($("#subjectID").val() === 'zoning') || ($("#subjectID").val() === 'general_landuse'))
-                            {              
-                                // color the zoning and general land use.
-                                gmap.data.setStyle(styleFeature);
+                            /* styleFeature function is only in script block in city.cshtml
+                               if (($("#subjectID").val() === 'zoning') || ($("#subjectID").val() === 'general_landuse'))
+                           {              
+                               // color the zoning and general land use.
+                               gmap.data.setStyle(styleFeature);
 
-                            }
+                           }
+                           */
                             
                             
                           
@@ -121,8 +126,7 @@ function ajax_GeoJSON(gmap,_apiURI) {
                              // returning number of count
                         else{ 
                             
-                            
-                            
+
                             // ---------- if return number, should remove last time geojson -----------
                             _last_geojson_layer = _current_geojson_layer;
                             if (_last_geojson_layer) {
@@ -133,11 +137,13 @@ function ajax_GeoJSON(gmap,_apiURI) {
 
                                 }// for
                             }// if
-                            //-------------------- end remove last geojson ------------------------------                                              
-                                                                                                        
+                            //-------------------- end remove last geojson ------------------------------
                             
+                                                                                            
+                                                                                                        
+                            //---------------marker cluster  [2.3]-------------------
                             //  need to clear old last time marker clusters.
-                            markerClusterer.clearMarkers();
+                           // markerClusterer.clearMarkers();
                             
                             
                             document.getElementById("ajaxload").style.display = "none";
@@ -421,7 +427,7 @@ function initialize() {
         add_area_boundary($("#areaID").val());
 
 
-        
+
         //------tile[1] ---------
         init_tiling();
          
@@ -429,8 +435,8 @@ function initialize() {
         
         
         
-        
-        clustering_point();
+        //---------- marker cluster [1]------------
+       // clustering_point();
         
         
         

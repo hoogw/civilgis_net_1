@@ -110,13 +110,14 @@ function ajax_GeoJSON(gmap,_apiURI) {
                             
                            
                             
-                            // styleFeature function is only in script block in city.cshtml
-                                if (($("#subjectID").val() === 'zoning') || ($("#subjectID").val() === 'general_landuse'))
-                            {              
-                                // color the zoning and general land use.
-                                gmap.data.setStyle(styleFeature);
+                            /* styleFeature function is only in script block in city.cshtml
+                               if (($("#subjectID").val() === 'zoning') || ($("#subjectID").val() === 'general_landuse'))
+                           {              
+                               // color the zoning and general land use.
+                               gmap.data.setStyle(styleFeature);
 
-                            }
+                           }
+                           */
                             
                             
                           
@@ -423,6 +424,8 @@ function initialize() {
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         map.setZoom(initial_location[3]);
         
+        add_area_boundary($("#areaID").val());
+
         
         //------tile[1] ---------
         init_tiling();
@@ -546,7 +549,7 @@ function initialize() {
         */
     
    
-    add_area_boundary($("#areaID").val());
+    
             
         
     }// initialize
