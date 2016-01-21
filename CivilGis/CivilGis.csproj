@@ -248,9 +248,13 @@
     <Content Include="Scripts\area_boundary\New_York.js" />
     <Content Include="Scripts\area_boundary\San_Francisco.js" />
     <Content Include="Scripts\classification\area\city\zoning.js" />
+    <Content Include="Scripts\classification\checkboxbutton.js" />
+    <Content Include="Scripts\classification\classification_button_style.css" />
+    <Content Include="Scripts\classification\radiobutton.js" />
+    <Content Include="Scripts\localmap\localclassifyradiobuttonmap.js" />
     <Content Include="Scripts\localmap\localpagedfulltablemap.js" />
     <Content Include="Scripts\localmap\localscrollerfulltablemap.js" />
-    <Content Include="Scripts\localmap\localclassifybutton1map.js" />
+    <Content Include="Scripts\localmap\localclassifycheckboxbuttonmap.js" />
     <Content Include="Scripts\tabledata\tabledata_paged.js" />
     <Content Include="Scripts\tabledata\tabledata_scroller.js" />
     <Content Include="Scripts\dataTables.bootstrap.js" />
@@ -420,6 +424,8 @@
     <Content Include="Views\Shared\_parks_side_panel.cshtml" />
     <Content Include="Views\LocalMap\localpagedfulltablemap.cshtml" />
     <Content Include="Views\LocalMap\localscrollerfulltablemap.cshtml" />
+    <Content Include="Views\LocalMap\localclassifycheckboxbuttonmap.cshtml" />
+    <Content Include="Views\LocalMap\localclassifyradiobuttonmap.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

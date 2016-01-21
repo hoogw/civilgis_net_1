@@ -1,0 +1,274 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 20, 2016, 3:10:30 PM
+    Author     : HU_J
+*/
+
+/*--------------------------------------------
+*/
+
+
+
+.btn-yellow1 { 
+  color: #000000; 
+  background-color: #FFFF00; 
+  border-color: #130269; 
+} 
+ 
+.btn-yellow1:hover, 
+.btn-yellow1:focus, 
+.btn-yellow1:active, 
+.btn-yellow1.active, 
+.open .dropdown-toggle.btn-yellow1 { 
+  color: #000000; 
+  background-color: #FFFF99; 
+  border-color: #130269; 
+} 
+ 
+.btn-yellow1:active, 
+.btn-yellow1.active, 
+.open .dropdown-toggle.btn-yellow1 { 
+  background-image: none; 
+} 
+ 
+.btn-yellow1.disabled, 
+.btn-yellow1[disabled], 
+fieldset[disabled] .btn-yellow1, 
+.btn-yellow1.disabled:hover, 
+.btn-yellow1[disabled]:hover, 
+fieldset[disabled] .btn-yellow1:hover, 
+.btn-yellow1.disabled:focus, 
+.btn-yellow1[disabled]:focus, 
+fieldset[disabled] .btn-yellow1:focus, 
+.btn-yellow1.disabled:active, 
+.btn-yellow1[disabled]:active, 
+fieldset[disabled] .btn-yellow1:active, 
+.btn-yellow1.disabled.active, 
+.btn-yellow1[disabled].active, 
+fieldset[disabled] .btn-yellow1.active { 
+  background-color: #FFFF00; 
+  border-color: #130269; 
+} 
+ 
+.btn-yellow1 .badge { 
+  color: #FFFF00; 
+  background-color: #000000; 
+}
+
+/*--------------------------------------------
+*/
+
+.btn-gold { 
+  color: #000000; 
+  background-color: #FFD700; 
+  border-color: #130269; 
+} 
+ 
+.btn-gold:hover, 
+.btn-gold:focus, 
+.btn-gold:active, 
+.btn-gold.active, 
+.open .dropdown-toggle.btn-gold { 
+  color: #000000; 
+  background-color: #FFEF99; 
+  border-color: #130269; 
+} 
+ 
+.btn-gold:active, 
+.btn-gold.active, 
+.open .dropdown-toggle.btn-gold { 
+  background-image: none; 
+} 
+ 
+.btn-gold.disabled, 
+.btn-gold[disabled], 
+fieldset[disabled] .btn-gold, 
+.btn-gold.disabled:hover, 
+.btn-gold[disabled]:hover, 
+fieldset[disabled] .btn-gold:hover, 
+.btn-gold.disabled:focus, 
+.btn-gold[disabled]:focus, 
+fieldset[disabled] .btn-gold:focus, 
+.btn-gold.disabled:active, 
+.btn-gold[disabled]:active, 
+fieldset[disabled] .btn-gold:active, 
+.btn-gold.disabled.active, 
+.btn-gold[disabled].active, 
+fieldset[disabled] .btn-gold.active { 
+  background-color: #FFD700; 
+  border-color: #130269; 
+} 
+ 
+.btn-gold .badge { 
+  color: #FFD700; 
+  background-color: #000000; 
+}
+
+/*--------------------------------------------
+*/
+
+.btn-blue { 
+  color: #FFFFFF; 
+  background-color: #0000FF; 
+  border-color: #000000; 
+} 
+ 
+.btn-blue:hover, 
+.btn-blue:focus, 
+.btn-blue:active, 
+.btn-blue.active, 
+.open .dropdown-toggle.btn-blue { 
+  color: #FFFFFF; 
+  background-color: #9999FF; 
+  border-color: #000000; 
+} 
+ 
+.btn-blue:active, 
+.btn-blue.active, 
+.open .dropdown-toggle.btn-blue { 
+  background-image: none; 
+} 
+ 
+.btn-blue.disabled, 
+.btn-blue[disabled], 
+fieldset[disabled] .btn-blue, 
+.btn-blue.disabled:hover, 
+.btn-blue[disabled]:hover, 
+fieldset[disabled] .btn-blue:hover, 
+.btn-blue.disabled:focus, 
+.btn-blue[disabled]:focus, 
+fieldset[disabled] .btn-blue:focus, 
+.btn-blue.disabled:active, 
+.btn-blue[disabled]:active, 
+fieldset[disabled] .btn-blue:active, 
+.btn-blue.disabled.active, 
+.btn-blue[disabled].active, 
+fieldset[disabled] .btn-blue.active { 
+  background-color: #0000FF; 
+  border-color: #000000; 
+} 
+ 
+.btn-blue .badge { 
+  color: #0000FF; 
+  background-color: #FFFFFF; 
+}
+/*--------------------------------------------
+*/
+
+.btn-green { 
+  color: #FFFFFF; 
+  background-color: #008000; 
+  border-color: #000000; 
+} 
+ 
+.btn-green:hover, 
+.btn-green:focus, 
+.btn-green:active, 
+.btn-green.active, 
+.open .dropdown-toggle.btn-green { 
+  color: #FFFFFF; 
+  background-color: #99ff99; 
+  border-color: #000000; 
+} 
+ 
+.btn-green:active, 
+.btn-green.active, 
+.open .dropdown-toggle.btn-green { 
+  background-image: none; 
+} 
+ 
+.btn-green.disabled, 
+.btn-green[disabled], 
+fieldset[disabled] .btn-green, 
+.btn-green.disabled:hover, 
+.btn-green[disabled]:hover, 
+fieldset[disabled] .btn-green:hover, 
+.btn-green.disabled:focus, 
+.btn-green[disabled]:focus, 
+fieldset[disabled] .btn-green:focus, 
+.btn-green.disabled:active, 
+.btn-green[disabled]:active, 
+fieldset[disabled] .btn-green:active, 
+.btn-green.disabled.active, 
+.btn-green[disabled].active, 
+fieldset[disabled] .btn-green.active { 
+  background-color: #008000; 
+  border-color: #000000; 
+} 
+ 
+.btn-green .badge { 
+  color: #008000; 
+  background-color: #FFFFFF; 
+}
+
+/*--------------------------------------------
+*/
+
+.btn-red { 
+  color: #ffffff; 
+  background-color: #FF0000; 
+  border-color: #000000; 
+} 
+ 
+.btn-red:hover, 
+.btn-red:focus, 
+.btn-red:active, 
+.btn-red.active, 
+.open .dropdown-toggle.btn-red { 
+  color: #ffffff; 
+  background-color: #ff9999; 
+  border-color: #000000; 
+} 
+ 
+.btn-red:active, 
+.btn-red.active, 
+.open .dropdown-toggle.btn-red { 
+  background-image: none; 
+} 
+ 
+.btn-red.disabled, 
+.btn-red[disabled], 
+fieldset[disabled] .btn-red, 
+.btn-red.disabled:hover, 
+.btn-red[disabled]:hover, 
+fieldset[disabled] .btn-red:hover, 
+.btn-red.disabled:focus, 
+.btn-red[disabled]:focus, 
+fieldset[disabled] .btn-red:focus, 
+.btn-red.disabled:active, 
+.btn-red[disabled]:active, 
+fieldset[disabled] .btn-red:active, 
+.btn-red.disabled.active, 
+.btn-red[disabled].active, 
+fieldset[disabled] .btn-red.active { 
+  background-color: #FF0000; 
+  border-color: #000000; 
+} 
+ 
+.btn-red .badge { 
+  color: #FF0000; 
+  background-color: #ffffff; 
+}
+
+/*--------------------------------------------
+*/
+
+
+
+/*--------------------------------------------
+*/
+
+
+/*--------------------------------------------
+*/
+
+
+
+
+/*--------------------------------------------
+*/
+

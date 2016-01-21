@@ -140,5 +140,39 @@ namespace CivilGis.Controllers
 
 
 
+
+        //----------------------- classification map section -------------------------------
+        public ActionResult localclassifycheckboxbuttonmap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+        public ActionResult localclassifyradiobuttonmap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+
+        //-----------------------end  classification map section -------------------------------
+
+
+
     }
 }
