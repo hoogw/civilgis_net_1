@@ -9,8 +9,9 @@
 
 
 
+// ---------- map click event [3]--------add _get_click --------
 
-function ajax_GeoJSON(gmap,_apiURI) {
+function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
     
     // Load a GeoJSON from the server 
    
@@ -119,6 +120,19 @@ function ajax_GeoJSON(gmap,_apiURI) {
                             }
                             */
                             
+
+
+                            // ------------- map click event [3] -------------------
+                            if (_map_click_event) {
+                            }
+                            else {
+                                _mapclick_in_use = false;
+                            }
+
+                            //-------------------------------------------------------------
+
+
+
                           
                            
                         }
@@ -159,10 +173,20 @@ function ajax_GeoJSON(gmap,_apiURI) {
                 
                                             document.getElementById("title_info").innerHTML = "Nothing found";
                                             document.getElementById("legend").innerHTML = "Nothing found";
-                                }
-                        }
+                            }
 
-                     });// get
+
+
+                            // ------------- map click event [4] -------------------
+
+                            _mapclick_in_use = true;
+
+                            //-------------------------------------------------------------
+
+
+                        }// else return number only
+
+            });// get
     
     
 }// function ajax_GeoJSON
@@ -189,7 +213,7 @@ function get_map_bound(){
                  var _url = "/api/geojson/feature/" + initial_location[0] + '/' + $("#subjectID").val() + "/" + SWlong + "/" + SWlat + "/" + NElong + "/" + NElat + "/";
             
                   document.getElementById("ajaxload").style.display = "block";
-                  ajax_GeoJSON(map,_url);
+                  ajax_GeoJSON(map,_url,false);
     
     
     
@@ -202,6 +226,74 @@ function remove_map_listener(){
      google.maps.event.removeListener(listener_zoom_changed);
     
 }
+
+
+
+
+
+
+
+
+
+
+// ---------  map click event [2] -------------------------------
+
+function get_click_latlng(_click_event_lat, _click_event_lng) {
+
+
+    if (_mapclick_in_use) {
+
+
+        // --- current use 2X2 grid boundary (as click event latlong is on center point), you can use 3x3 grid or adjust house length to make larger/smaller select area. 
+        var _square_house_length = 0.0002;
+
+
+        SWlong = _click_event_lng - _square_house_length;
+        SWlat = _click_event_lat - _square_house_length;
+        NElong = _click_event_lng + _square_house_length;
+        NElat = _click_event_lat + _square_house_length;
+
+
+
+
+        var _url_click_event = "/api/geojson/feature/" + $("#areaID").val() + '/' + $("#subjectID").val() + "/" + SWlong + "/" + SWlat + "/" + NElong + "/" + NElat + "/";
+
+        document.getElementById("ajaxload").style.display = "block";
+        ajax_GeoJSON(map, _url_click_event, true);
+
+
+
+    }
+
+
+
+
+}
+
+
+
+function back_full_extend() {
+
+    map.setZoom(initial_location[3]);
+    map.setCenter(new google.maps.LatLng(initial_location[1], initial_location[2]));
+}
+
+
+
+//------------------ End map click event [2] -------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function add_map_listener(){
     
@@ -224,184 +316,24 @@ function add_map_listener(){
              });
     
     
-    
-    
-}
 
-function clustering_point(){
-    /*  ----------- marker cluster  [1]--------------
-            add each marker to it when the data layer fires the addfeature event.
+    // ---------  map click event [1] ------ search for a single feature where clicked ------------
+         listener_click = map.addListener('click', function (click_event_location) {
 
-            markerClusterer.addMarker(marker);
-            hide the data layer markers.
-         */
-        
-            // must stay to close info window if user click out side polygon 
-         google.maps.event.addListener(map,'click',function() {
-             // cluster marker infobox
-             //alert("close infowindow");
-             //infobox.close();
-             infowindow.close();
-             document.getElementById("info-table").innerHTML = "";
-              
-              
+             get_click_latlng(click_event_location.latLng.lat(), click_event_location.latLng.lng());
          });
-         
-       
-     // maxZoom level = 17 means more than 17 will No cluster.
-       var markers = []; 
-       var mcOptions = {gridSize: 50, maxZoom: 17};
-          markerClusterer=new MarkerClusterer(map,markers, mcOptions);
 
 
+         listener_rightclick = map.addListener('rightclick', function () {
 
-                /*
-                  map.data.addListener('addfeature',function(e){
-                   var geo=  e.feature.getGeometry();
+             back_full_extend();
+         });
 
-                   if(geo.getType()==='Point'){
-
-                    markerClusterer.addMarker(new google.maps.Marker
-                                                                    ({
-                                                                        position:geo.get(),
-                                                                        title   :e.feature.getProperty('name')
-                                                                        })
-                                               );
-                     map.data.remove(e.feature);
-                   }
-                  });
-                */
-        
-        
-           
-        /*
-        
-                            boxText = document.createElement("div");
-                            boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
-                           
-                             infobox = new InfoBox({
-                                content: boxText,
-                                disableAutoPan: false,
-                                maxWidth: 0,
-                                pixelOffset: new google.maps.Size(-140, 0),
-                                zIndex: null,
-                                boxStyle: {
-                                    background: "url('tipbox.gif') no-repeat",
-                                    opacity: 0.75,
-                                    width: "280px"
-                                },
-                                closeBoxMargin: "10px 2px 2px 2px",
-                                closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
-                                infoBoxClearance: new google.maps.Size(1, 1),
-                                isHidden: false,
-                                pane: "floatPane",
-                                enableEventPropagation: false
-                            });
-        */
-        
-        
-            google.maps.event.addListener(map.data, 'addfeature', function (e) 
-            {
-                
-                                if (e.feature.getGeometry().getType() === 'Point') 
-                                {
-                                          // [1] create marker
-                                                    var marker = new google.maps.Marker({
-                                                        position: e.feature.getGeometry().get(),
-                                                        //title: e.feature.getProperty('FULL_ADDRE'),
-                                                        map: map
-                                                    }); // if
-
-
-                                           // [2] add marker click event open infoBox when the marker is clicked
-                                                    google.maps.event.addListener(marker, 'click', function (marker, e) {
-                                                        return function () 
-                                                        {
-                                                            var infobox_popup ="<div style='width:200px; height:150px;text-align: center;'><table>";                
-                                                            e.feature.forEachProperty(function(_value, _property){
-                                                                infobox_popup = infobox_popup + "<tr><td>"+ _property + "</td><td>"+  _value + "</td></tr>";
-                                                              });            
-                                                             infobox_popup = infobox_popup + "</table></div>";     
-
-
-                                                            //var myHTML = e.feature.getProperty('FULL_ADDRE');
-                                                            //boxText.innerHTML = "<div style='text-align: center;'><b>" + myHTML + "</b></div>";
-                                                            /*
-                                                            boxText.innerHTML = infobox_popup;
-                                                            infobox.setPosition(e.feature.getGeometry().get());
-                                                            infobox.setOptions({
-                                                                pixelOffset: new google.maps.Size(0, 0)
-                                                            });
-                                                            infobox.open(map);
-                                                            */
-
-                                                                infowindow.setContent("<div style='width:200px; height:150px;text-align: center;'>"+ infobox_popup +"</div>");
-                                                                infowindow.setPosition(e.feature.getGeometry().get());
-                                                                infowindow.open(map);
-
-
-                                                            };
-                                                        }(marker, e));
-
-
-
-                                              // [3] add marker mouseover listener
-                                                       google.maps.event.addListener(marker, 'mouseover', function (marker, e) {
-                                                        return function () 
-                                                        {
-                                                            var instant_info = "<ul>";
-                                                                         
-                                                            
-                                                            e.feature.forEachProperty(function(_value, _property)
-                                                            {
-                                                               
-                                                                instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;"+ _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" +_value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+ "</li>";
-                                                                                
-                                                              });   
-                                                              
-                                                            
-                                                             instant_info = instant_info + "</ul>";
-
-                                                                // update bottom <div>
-                                                              document.getElementById("info-table").innerHTML = instant_info;
-
-
-                                                            };
-                                                        }(marker, e));
-
-
-                                              // [4] add marker mouseout listener
-                                              
-                                                       google.maps.event.addListener(marker, 'mouseout', function (marker, e) {
-                                                        return function () 
-                                                        {
-                                                           // empty bottom <div>
-                                                            document.getElementById("info-table").innerHTML = "";
-                                                            //infowindow.close();
-
-                                                            };
-                                                        }(marker, e));
-
-
-
-
-
-                                                        markerClusterer.addMarker(marker);
-
-                                                        // remove below 3 line, do not zoom to marker extend.
-                                                          //bounds.extend(e.feature.getGeometry().get());
-                                                        //map.fitBounds(bounds);
-                                                       // map.setCenter(e.feature.getGeometry().get());
-
-
-                                                       _cluster_in_use = true;
-                                    }// if point
-                
-            }); // google map event
-            
-        
-        // ---------------- end of marker cluster [1]-----------------------
+    //--------------------------End  map right click event ---------- back to full extend ----------------------
+    
+    
 }
+
 
 
 function initialize() {
@@ -530,7 +462,7 @@ function initialize() {
             
             var _url_init = '/api/geojson/feature/' + initial_location[0] + '/' + $("#subjectID").val() + initial_location[4];
 
-            ajax_GeoJSON(map,_url_init);
+            ajax_GeoJSON(map,_url_init, false);
       //---------------------------------------------------------------------------------------------------------------------------------------------- 
    
     

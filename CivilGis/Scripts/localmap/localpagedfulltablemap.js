@@ -777,11 +777,7 @@ function add_map_listener(){
 
 function initialize() {
     
-        
-         //   base_url = '/civilgis/public/';
-         //base_url = document.getElementById('base_url').value;
-         
-        // alert(base_url);
+       
           
             
             initial_location = set_initial_location($("#areaID").val());

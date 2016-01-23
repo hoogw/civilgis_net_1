@@ -87,6 +87,22 @@ var _designation = [];
 
 
 
+// ---------  map click event [0-4] ---------------- cluster map conflict with map click event, so do not use with cluster.------------
+
+var listener_click;
+var listener_rightclick;
+var _mapclick_in_use = false;
+
+
+
+//-----------------------------------------
+
+
+
+
+
+
+
 function add_area_boundary(_area) {
 
 
