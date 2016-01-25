@@ -248,9 +248,7 @@
     <Content Include="Scripts\area_boundary\New_York.js" />
     <Content Include="Scripts\area_boundary\San_Francisco.js" />
     <Content Include="Scripts\classification\area\city\zoning.js" />
-    <Content Include="Scripts\classification\checkboxbutton.js" />
     <Content Include="Scripts\classification\classification_button_style.css" />
-    <Content Include="Scripts\classification\radiobutton.js" />
     <Content Include="Scripts\localmap\localclassifyradiobuttonmap.js" />
     <Content Include="Scripts\localmap\localpagedfulltablemap.js" />
     <Content Include="Scripts\localmap\localscrollerfulltablemap.js" />

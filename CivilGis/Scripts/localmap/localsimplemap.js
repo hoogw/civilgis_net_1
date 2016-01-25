@@ -9,7 +9,7 @@
 
 
 
-// ---------- map click event [3]--------add _get_click --------
+// ---------- map click event [3]--------add _map_click --------
 
 function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
     

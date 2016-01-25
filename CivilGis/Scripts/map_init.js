@@ -82,6 +82,7 @@ var _last_geojson_layer = null;
 //--------------classification-------------------------
 
 var _designation = [];
+var _code_column_name = '';
 
 //---------------------------------
 
