@@ -120,48 +120,48 @@ fieldset[disabled] .btn-black.active {
 
 
 
-.btn-yellow1 { 
+.btn-yellow { 
   color: #000000; 
   background-color: #FFFF00; 
   border-color: #130269; 
 } 
  
-.btn-yellow1:hover, 
-.btn-yellow1:focus, 
-.btn-yellow1:active, 
-.btn-yellow1.active, 
-.open .dropdown-toggle.btn-yellow1 { 
+.btn-yellow:hover, 
+.btn-yellow:focus, 
+.btn-yellow:active, 
+.btn-yellow.active, 
+.open .dropdown-toggle.btn-yellow { 
   color: #000000; 
   background-color: #FFFF99; 
   border-color: #130269; 
 } 
  
-.btn-yellow1:active, 
-.btn-yellow1.active, 
-.open .dropdown-toggle.btn-yellow1 { 
+.btn-yellow:active, 
+.btn-yellow.active, 
+.open .dropdown-toggle.btn-yellow { 
   background-image: none; 
 } 
  
-.btn-yellow1.disabled, 
-.btn-yellow1[disabled], 
-fieldset[disabled] .btn-yellow1, 
-.btn-yellow1.disabled:hover, 
-.btn-yellow1[disabled]:hover, 
-fieldset[disabled] .btn-yellow1:hover, 
-.btn-yellow1.disabled:focus, 
-.btn-yellow1[disabled]:focus, 
-fieldset[disabled] .btn-yellow1:focus, 
-.btn-yellow1.disabled:active, 
-.btn-yellow1[disabled]:active, 
-fieldset[disabled] .btn-yellow1:active, 
-.btn-yellow1.disabled.active, 
-.btn-yellow1[disabled].active, 
-fieldset[disabled] .btn-yellow1.active { 
+.btn-yellow.disabled, 
+.btn-yellow[disabled], 
+fieldset[disabled] .btn-yellow, 
+.btn-yellow.disabled:hover, 
+.btn-yellow[disabled]:hover, 
+fieldset[disabled] .btn-yellow:hover, 
+.btn-yellow.disabled:focus, 
+.btn-yellow[disabled]:focus, 
+fieldset[disabled] .btn-yellow:focus, 
+.btn-yellow.disabled:active, 
+.btn-yellow[disabled]:active, 
+fieldset[disabled] .btn-yellow:active, 
+.btn-yellow.disabled.active, 
+.btn-yellow[disabled].active, 
+fieldset[disabled] .btn-yellow.active { 
   background-color: #FFFF00; 
   border-color: #130269; 
 } 
  
-.btn-yellow1 .badge { 
+.btn-yellow .badge { 
   color: #FFFF00; 
   background-color: #000000; 
 }

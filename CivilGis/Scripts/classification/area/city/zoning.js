@@ -11,7 +11,7 @@ _code_column_name = 'ZONE_CODE';
 
 _designation['city_zoning'] = [
 
-    { 'code': 'R1', 'description': "Single Family Residential", 'color': "yellow1" },
+    { 'code': 'R1', 'description': "Single Family Residential", 'color': "yellow" },
     { 'code': 'R2-MD', 'description': "Multiple Family Residential (Medium Density)", 'color': "blue" },
     { 'code': 'R2-HD', 'description': "Multiple Family Residential (High Density)", 'color': "green" },
     { 'code': 'R3', 'description': 'Multiple Family Residential', 'color': "gold" },
