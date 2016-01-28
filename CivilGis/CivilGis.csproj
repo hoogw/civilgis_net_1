@@ -204,6 +204,7 @@
     <Content Include="Content\blue\js\jquery.prettyPhoto.js" />
     <Content Include="Content\blue\js\main.js" />
     <Content Include="Content\blue\js\respond.min.js" />
+    <Content Include="Content\bootstrap-switch.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dataTables.bootstrap.css" />
@@ -247,6 +248,7 @@
     <Content Include="Scripts\area_boundary\Newport_Beach.js" />
     <Content Include="Scripts\area_boundary\New_York.js" />
     <Content Include="Scripts\area_boundary\San_Francisco.js" />
+    <Content Include="Scripts\bootstrap-switch.js" />
     <Content Include="Scripts\classification\area\city\zoning.js" />
     <Content Include="Scripts\classification\classification_button_style.css" />
     <Content Include="Scripts\localmap\localclassifyradiobuttonmap.js" />

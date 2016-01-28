@@ -310,9 +310,9 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
                             //----------------  add new geojson, then remove last geojson --------------------
 
                                          map.data.setStyle({
-                                             fillOpacity: 0,
-                                             strokeColor: 'yellow',
-                                             strokeWeight: 1
+                                             fillOpacity: _default_fillOpacity,
+                                             strokeColor: _default_strokeColor,
+                                             strokeWeight: _default_strokeWeight
 
                                          });
 
@@ -620,9 +620,9 @@ function add_mapdata_listener() {
     map.data.addListener('mouseover', function (event) {
         //map.data.revertStyle();                 
         map.data.overrideStyle(event.feature, {
-            strokeWeight: 8,
-            strokeColor: '#fff',
-            fillOpacity: 0.01
+            strokeWeight: _highlight_strokeWeight,
+            strokeColor: _highlight_strokeColor,
+            fillOpacity: _highlight_fillOpacity
             //fillColor:''
         });
 

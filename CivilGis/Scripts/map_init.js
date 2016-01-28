@@ -102,7 +102,24 @@ var _mapclick_in_use = false;
 //-----------------------------------------
 
 
+// --------default feature style -----------
+_default_fillOpacity = 0;
+_default_strokeColor = 'yellow';
+_default_strokeWeight = 1;
 
+
+_highlight_fillOpacity = 0;
+_highlight_strokeColor = '#fff';
+_highlight_strokeWeight = 8;
+
+
+
+_classfiy_fillOpacity = 0;
+_classfiy_strokeColor = 'yellow';
+_classfiy_strokeWeight = 0.2;
+
+
+//---------------------------------
 
 
 
@@ -300,127 +317,15 @@ function add_tiles(){
     
 }
 
+function remove_tiles() {
+
+    //map.overlayMapTypes.clear();
+    //map.overlayMapTypes.pop();
+    map.overlayMapTypes.removeAt(0);
+
+}
 
 
-
- /* color zoning
-    function styleFeature(feature) {
-
-
-        var _strokecolor = "000000";
-        var _fillcolor = "000000";
-        var _fillopacity = 0.1;
-        var _zone = "";
-
-        if ($("#subjectID").val() == 'zoning') {
-             _zone = feature.getProperty('ZONE_CODE')
-
-        }
-        else   // general_landuse
-                { 
-
-
-            _zone = feature.getProperty('GP_CODE')
-
-                }
-
-        
-        // zoning
-
-        // residential
-        if ((_zone == 'R1') || (_zone == 'R3') || (_zone == 'R2-MD') || (_zone == 'R2-HD') || (_zone == 'LDR') || (_zone == 'MDR') || (_zone == 'HDR')) {
-          
-            _fillcolor = "#FFFF66";
-            _fillopacity = 0.6;
-        }
-        
-        // commercial
-
-        if ((_zone == 'CL') || (_zone == 'C1') || (_zone == 'C1-S') || (_zone == 'C2') || (_zone == 'TC') || (_zone == 'PDC') || (_zone == 'CC') || (_zone == 'GC') || (_zone == 'CR') || (_zone == 'NC') || (_zone == 'RC') || (_zone == 'UCC')) {
-           
-            _fillcolor = "#FF0000";
-            _fillopacity = 0.6;
-        }
-
-
-        // industrial
-
-        if ((_zone == 'MG') || (_zone == 'MP') || (_zone == 'PDI') || (_zone == 'LI') || (_zone == 'IP') || (_zone == 'CAC')) {
-           
-            _fillcolor = "#0000FF";
-            _fillopacity = 0.6;
-        }
-
-
-        // recreation institutional 
-
-        if ((_zone == 'I&R') || (_zone == 'PI') || (_zone == 'F') || (_zone == 'GC')) {
-           
-            _fillcolor = "#669900";
-            _fillopacity = 0.6;
-        }
-
-
-        // general landuse 
-
-        // residential
-        if (  (_zone == 'MDR') || (_zone == 'HDR')) {
-
-            _fillcolor = "#99CCFF";
-            _fillopacity = 0.6;
-        }
-
-        if ((_zone == 'LDR') ) {
-
-            _fillcolor = "#FFFF00";
-            _fillopacity = 0.6;
-        }
-
-
-        // commercial
-
-        if ( (_zone == 'CC') || (_zone == 'GC') || (_zone == 'CR') || (_zone == 'NC') || (_zone == 'RC') || (_zone == 'UCC')) {
-
-            _fillcolor = "#66FF66";
-            _fillopacity = 0.6;
-        }
-
-
-        // industrial
-
-        if ( (_zone == 'LI') || (_zone == 'IP') || (_zone == 'CAC')) {
-
-            _fillcolor = "#CC6699";
-            _fillopacity = 0.6;
-        }
-
-
-        // recreation institutional 
-
-        if ( (_zone == 'PI') || (_zone == 'F') || (_zone == 'GC')) {
-
-            _fillcolor = "#669999";
-            _fillopacity = 0.6;
-        }
-
-
-
-        return {
-            // disable stroke color looks like google bug, fail to correctly color it. 
-            // strokeColor: _strokecolor,
-
-            strokeWeight: 0,
-            fillColor: _fillcolor,
-            
-            fillOpacity: _fillopacity,
-            //visible: true
-
-        };
-
-
-    }// style Feature
-
-    */
 
 
 function geocodeAddress(geocoder, resultsMap) {

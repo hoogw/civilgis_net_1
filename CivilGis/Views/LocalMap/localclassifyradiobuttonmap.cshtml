@@ -2,9 +2,6 @@
 
 
 
-<script src="~/Scripts/infobox.js"></script>
-<script src="~/Scripts/markerclusterer.js"></script>
-
 
 
 <script src="~/Scripts/map_init.js"></script>
@@ -18,8 +15,8 @@
 <link href="~/Scripts/classification/classification_button_style.css" rel="stylesheet" />
 
 
-
-
+<script src="~/Scripts/bootstrap-switch.js"></script>
+<link href="~/Content/bootstrap-switch.css" rel="stylesheet" />
 
 
   <!-- this hidden value carry the map subject from controller use it in javascript api call-->
@@ -90,6 +87,16 @@
                                         <div id="classification_section" class="well">
                                             <!--	<div class="btn-group" data-toggle="buttons">        btn-group cause not space between button -->
                                             <div id="classification_buttons" data-toggle="buttons">
+
+
+                                                <input type="checkbox" name="color_tiles_switch" checked>
+
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <label id="label_high_light_off" class="btn btn-black">
+                                                    <input name="high_light_off" id="radio_high_light_off" type="radio">Highlight OFF
+                                                </label>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+
 
                                                 <!-- test
                                                          <label id="label_1" class="btn btn-blue">
