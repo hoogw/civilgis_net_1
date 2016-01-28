@@ -252,9 +252,11 @@
     <Content Include="Scripts\classification\area\city\zoning.js" />
     <Content Include="Scripts\classification\classification_button_style.css" />
     <Content Include="Scripts\localmap\localclassifyradiobuttonmap.js" />
+    <Content Include="Scripts\localmap\localclusterscrollerclienttablemap.js" />
     <Content Include="Scripts\localmap\localpagedfulltablemap.js" />
     <Content Include="Scripts\localmap\localscrollerfulltablemap.js" />
     <Content Include="Scripts\localmap\localclassifycheckboxbuttonmap.js" />
+    <Content Include="Scripts\localmap\localclusterpagedclienttablemap.js" />
     <Content Include="Scripts\tabledata\tabledata_paged.js" />
     <Content Include="Scripts\tabledata\tabledata_scroller.js" />
     <Content Include="Scripts\dataTables.bootstrap.js" />
@@ -426,6 +428,8 @@
     <Content Include="Views\LocalMap\localscrollerfulltablemap.cshtml" />
     <Content Include="Views\LocalMap\localclassifycheckboxbuttonmap.cshtml" />
     <Content Include="Views\LocalMap\localclassifyradiobuttonmap.cshtml" />
+    <Content Include="Views\LocalMap\localclusterpagedclienttablemap.cshtml" />
+    <Content Include="Views\LocalMap\localclusterscrollerclienttablemap.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

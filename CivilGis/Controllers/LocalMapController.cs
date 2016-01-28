@@ -86,6 +86,33 @@ namespace CivilGis.Controllers
         }
 
 
+        public ActionResult localclusterpagedclienttablemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+        public ActionResult localclusterscrollerclienttablemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
         public ActionResult localcolormap(string area, string subject)
         {
 
