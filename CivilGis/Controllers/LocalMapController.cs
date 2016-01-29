@@ -73,6 +73,22 @@ namespace CivilGis.Controllers
             return View();
         }
 
+
+
+        public ActionResult localjusttiles(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
         public ActionResult localsimpleclustermap(string area, string subject)
         {
 

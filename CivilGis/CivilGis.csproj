@@ -257,6 +257,7 @@
     <Content Include="Scripts\localmap\localscrollerfulltablemap.js" />
     <Content Include="Scripts\localmap\localclassifycheckboxbuttonmap.js" />
     <Content Include="Scripts\localmap\localclusterpagedclienttablemap.js" />
+    <Content Include="Scripts\localmap\localjusttiles.js" />
     <Content Include="Scripts\tabledata\tabledata_paged.js" />
     <Content Include="Scripts\tabledata\tabledata_scroller.js" />
     <Content Include="Scripts\dataTables.bootstrap.js" />
@@ -430,6 +431,7 @@
     <Content Include="Views\LocalMap\localclassifyradiobuttonmap.cshtml" />
     <Content Include="Views\LocalMap\localclusterpagedclienttablemap.cshtml" />
     <Content Include="Views\LocalMap\localclusterscrollerclienttablemap.cshtml" />
+    <Content Include="Views\LocalMap\localjusttiles.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
