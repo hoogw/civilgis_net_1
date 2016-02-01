@@ -649,6 +649,7 @@ function initialize() {
      geocoder = new google.maps.Geocoder();
 
      document.getElementById('search_addr').addEventListener('click', function () {
+         //alert("click");
          geocodeAddress(geocoder, map);
      });
 

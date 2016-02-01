@@ -332,7 +332,7 @@ function geocodeAddress(geocoder, resultsMap) {
 
     var address = document.getElementById('addr_txt').value;
 
-
+   
 
     _addr_info = new google.maps.InfoWindow();
 
@@ -342,20 +342,20 @@ function geocodeAddress(geocoder, resultsMap) {
         if (status === google.maps.GeocoderStatus.OK) {
            
             
-            if(marker)  //if marker is not null then clear last marker
+            if (search_address_marker)  //if marker is not null then clear last marker
             {
-                marker.setMap(null);
+                search_address_marker.setMap(null);
 
              }
 
-             marker = new google.maps.Marker({
+            search_address_marker = new google.maps.Marker({
                 map: resultsMap,
                 position: results[0].geometry.location,
                 // icon: iconBase + 'custome_icon.png'
                 label: 'X'
              });
 
-
+            //alert(address);
             // add new marker then change to marker location and trigger zoom_change event to load geojson
             //resultsMap.panTo(results[0].geometry.location);
 
@@ -370,30 +370,30 @@ function geocodeAddress(geocoder, resultsMap) {
 
 
         // marker double click to close 
-        marker.addListener('dblclick', function (event) {
+        search_address_marker.addListener('dblclick', function (event) {
 
 
 
-            marker.setMap(null);
+            search_address_marker.setMap(null);
 
         });// marker listener
 
 
 
         // marker mouse hove over
-        marker.addListener('mouseover', function (event) {
+        search_address_marker.addListener('mouseover', function (event) {
 
             // Set the info window's content and position.
             _addr_info.setContent(results[0].formatted_address);
             //_addr_info.setPosition(marker.);
 
-            _addr_info.open(resultsMap, marker);
+            _addr_info.open(resultsMap, search_address_marker);
 
         });// marker listener
 
 
         // marker mouse out
-        marker.addListener('mouseout', function (event) {
+        search_address_marker.addListener('mouseout', function (event) {
 
             
 
@@ -404,7 +404,7 @@ function geocodeAddress(geocoder, resultsMap) {
 
 
         // marker click 
-        marker.addListener('click', function (event) {
+        search_address_marker.addListener('click', function (event) {
            // _addr_info.setContent(results[0].formatted_address);
            // _addr_info.open(resultsMap, marker);
 

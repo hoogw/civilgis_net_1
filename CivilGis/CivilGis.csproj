@@ -253,7 +253,11 @@
     <Content Include="Scripts\classification\classification_button_style.css" />
     <Content Include="Scripts\localmap\localclassifyradiobuttonmap.js" />
     <Content Include="Scripts\localmap\localclusterscrollerclienttablemap.js" />
+    <Content Include="Scripts\localmap\localpagedclienttablemap.js" />
+    <Content Include="Scripts\localmap\localpagedservertablemap.js" />
     <Content Include="Scripts\localmap\localpagedfulltablemap.js" />
+    <Content Include="Scripts\localmap\localscrollerclienttablemap.js" />
+    <Content Include="Scripts\localmap\localscrollerservertablemap.js" />
     <Content Include="Scripts\localmap\localscrollerfulltablemap.js" />
     <Content Include="Scripts\localmap\localclassifycheckboxbuttonmap.js" />
     <Content Include="Scripts\localmap\localclusterpagedclienttablemap.js" />
@@ -432,6 +436,10 @@
     <Content Include="Views\LocalMap\localclusterpagedclienttablemap.cshtml" />
     <Content Include="Views\LocalMap\localclusterscrollerclienttablemap.cshtml" />
     <Content Include="Views\LocalMap\localjusttiles.cshtml" />
+    <Content Include="Views\LocalMap\localpagedclienttablemap.cshtml" />
+    <Content Include="Views\LocalMap\localscrollerclienttablemap.cshtml" />
+    <Content Include="Views\LocalMap\localpagedservertablemap.cshtml" />
+    <Content Include="Views\LocalMap\localscrollerservertablemap.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

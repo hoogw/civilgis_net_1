@@ -150,6 +150,63 @@ namespace CivilGis.Controllers
 
         //----------------------- table map section -------------------------------
 
+        public ActionResult localpagedclienttablemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+
+        public ActionResult localscrollerclienttablemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+        public ActionResult localpagedservertablemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+
+        public ActionResult localscrollerservertablemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
         public ActionResult localpagedfulltablemap(string area, string subject)
         {
 
