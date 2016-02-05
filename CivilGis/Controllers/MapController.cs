@@ -123,20 +123,20 @@ namespace CivilGis.Controllers
         }
 
 
-        public ActionResult Maplistpaged(string subject)
+        public ActionResult Maplistpaged(string area)
         {
 
-            ViewBag.Area = subject; // for api call 
+            ViewBag.Area = area; // for api call 
            // ViewBag.Subject_uppercase = subject.ToUpper(); // for display title in view
 
             return View();
         }
 
 
-        public ActionResult Maplistscroller(string subject)
+        public ActionResult Maplistscroller(string area)
         {
 
-            ViewBag.Area = subject; // for api call 
+            ViewBag.Area = area; // for api call 
             //ViewBag.Subject_uppercase = subject.ToUpper(); // for display title in view
 
             return View();

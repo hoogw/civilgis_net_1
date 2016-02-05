@@ -68,7 +68,7 @@ namespace CivilGis
             routes.MapRoute(
             name: "home",
             url: "home/{action}/{area}/",
-            defaults: new { controller = "Home", action = "local" }
+            defaults: new { controller = "Home", action = "local",  area = "city" }
         );
 
 
@@ -86,15 +86,15 @@ namespace CivilGis
                 defaults: new { controller = "LocalMap", action = "index" }
             );
 
-/*
+
 
             routes.MapRoute(
                 name: "localmap2",
                 url: "localmap/{action}/{area}/",
-                defaults: new { controller = "LocalMap", action = "index" }
+                defaults: new { controller = "LocalMap", action = "localmaplistpaged", area = "city" }
             );
 
-*/
+
 
             routes.MapRoute(
                 name: "map",
@@ -102,14 +102,14 @@ namespace CivilGis
                 defaults: new { controller = "Map", action = "index" }
             );
 
-/*
+
             routes.MapRoute(
                name: "map2",
-               url: "map/{action}/{subject}/",
-               defaults: new { controller = "Map", action = "city", subject = "zoning" }
+               url: "map/{action}/{area}/",
+               defaults: new { controller = "Map", action = "maplistpaged", area = "city" }
            );
             
-   */           
+             
 
             routes.MapRoute(
                name: "Default",

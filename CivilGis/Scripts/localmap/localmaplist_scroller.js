@@ -57,7 +57,7 @@
                                                                         var _remove_area = _area + "_";
                                                                         var trunk_name = full_name.replace(_remove_area, "");
 
-                                                                        return '<a href="/map/mapscroller/' + _area + "/" + trunk_name + '">' + data + '</a>';
+                                                                        return '<a href="/localmap/localsimplemap/' + _area + "/" + trunk_name + '">' + data + '</a>';
                                                                     }
                                                                 }]
 
@@ -81,7 +81,7 @@
                                                                          var trunk_name =   full_name.replace(_remove,"");
                    
                                                                          
-                                                                         var _url_new_tab = "/map/mapscroller/" + _area + "/" + trunk_name + "/";
+                                                                         var _url_new_tab = "/localmap/localsimplemap/" + _area + "/" + trunk_name + "/";
                                                                          var win = window.open(_url_new_tab, '_self');
                                                                         win.focus();
                                                                          
