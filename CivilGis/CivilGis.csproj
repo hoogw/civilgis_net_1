@@ -411,7 +411,6 @@
     <Content Include="Views\Map\mapsmpp.cshtml" />
     <Content Include="Views\Map\mapsmps.cshtml" />
     <Content Include="Views\Map\mappaged.cshtml" />
-    <Content Include="Views\Map\Index - Copy.cshtml" />
     <Content Include="Views\LocalMap\localsimplemap.cshtml" />
     <Content Include="Views\LocalMap\_ViewStart.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -426,7 +425,7 @@
     <Content Include="Views\LocalMap\localcolormap.cshtml" />
     <Content Include="Views\LocalMap\localsimpleclustermap.cshtml" />
     <Content Include="Views\Shared\_MapLayout - Copy.cshtml" />
-    <Content Include="Views\Home\_ViewStart.cshtml" />
+    <Content Include="Views\Home\corporate\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
     <Content Include="Views\Shared\_parks_side_panel.cshtml" />
     <Content Include="Views\LocalMap\localpagedfulltablemap.cshtml" />
@@ -440,6 +439,9 @@
     <Content Include="Views\LocalMap\localscrollerclienttablemap.cshtml" />
     <Content Include="Views\LocalMap\localpagedservertablemap.cshtml" />
     <Content Include="Views\LocalMap\localscrollerservertablemap.cshtml" />
+    <Content Include="Views\Map\Index - Copy.cshtml" />
+    <Content Include="Views\Home\local\_ViewStart.cshtml" />
+    <Content Include="Views\Home\local\city.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -451,7 +453,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\classification\area\Denver\" />
     <Folder Include="Scripts\classification\area\New_York\" />
-    <Folder Include="Views\Home\local\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

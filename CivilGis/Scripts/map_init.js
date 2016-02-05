@@ -171,7 +171,7 @@ function add_area_boundary(_area) {
                     geodesic: true,
                     strokeColor: '#0000FF',
                     strokeOpacity: 0.8,
-                    strokeWeight: 2
+                    strokeWeight: 5
 
                 });
 
@@ -195,7 +195,7 @@ function add_area_boundary(_area) {
                 geodesic: true,
                 strokeColor: '#0000FF',
                 strokeOpacity: 0.8,
-                strokeWeight: 2
+                strokeWeight: 5
 
             });
             _area_polyline.setMap(map);
