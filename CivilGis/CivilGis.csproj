@@ -420,7 +420,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\LocalMap\localmaplistpaged.cshtml" />
     <Content Include="Views\LocalMap\localmaplistscroller.cshtml" />
-    <Content Include="Views\Shared\_county_side_panel.cshtml" />
     <Content Include="Views\Map\mapscroller.cshtml" />
     <Content Include="Views\LocalMap\localcolormap.cshtml" />
     <Content Include="Views\LocalMap\localsimpleclustermap.cshtml" />
@@ -442,6 +441,8 @@
     <Content Include="Views\Map\Index - Copy.cshtml" />
     <Content Include="Views\Home\local\_ViewStart.cshtml" />
     <Content Include="Views\Home\local\city.cshtml" />
+    <Content Include="Views\Shared\_county_side_panel.cshtml" />
+    <Content Include="Views\Home\local\county.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
