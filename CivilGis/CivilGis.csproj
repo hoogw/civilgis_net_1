@@ -443,6 +443,8 @@
     <Content Include="Views\Home\local\city.cshtml" />
     <Content Include="Views\Shared\_county_side_panel.cshtml" />
     <Content Include="Views\Home\local\county.cshtml" />
+    <Content Include="Views\Home\local\Newport_Beach.cshtml" />
+    <Content Include="Views\Shared\_Newport_Beach_side_panel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
