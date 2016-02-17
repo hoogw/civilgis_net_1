@@ -1,0 +1,217 @@
+﻿<!-- this hidden value carry the map subject from controller use it in javascript api call-->
+
+<input type="hidden" id="areaID" value=@ViewBag.Area />
+
+
+
+
+
+@{
+    string _side_panel_path = "~/Views/Shared/_" + ViewBag.Area + "_side_panel.cshtml";
+
+    Html.RenderPartial(_side_panel_path);
+
+}
+
+
+
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">@ViewBag.Area - Department of City Planning </h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            
+                               Zoning
+                        
+                           </div>
+                        <div class="panel-body">
+                            <p>
+                                
+                               
+                               
+
+                                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/localmap/localclassifycheckboxbuttonmap/Los_Angeles/Zoning_Overlook'">Zoning Overlook - check box button</button>
+                                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/localmap/localclassifyradiobuttonmap/Los_Angeles/Zoning_Overlook'">Zoning Overlook - radio button</button>
+                                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/localmap/localclassifycheckboxbuttonmap/Los_Angeles/Zoning'">Zoning - Parcel based </button>
+
+
+                                <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/localmap/localclassifycheckboxbuttonmap/Los_Angeles/General_Land_Use_Overlook'">General Land Use Overlook - check box button</button>
+                                <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/localmap/localclassifyradiobuttonmap/Los_Angeles/General_Land_Use_Overlook'">General Land Use Overlook  - radio button</button>
+                                <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/localmap/localclassifycheckboxbuttonmap/Los_Angeles/General_Land_Use'">General Land Use  - Parcel based </button>
+
+
+
+                               </p>
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+
+
+            <!-- /.row -->
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Planning Area
+                        </div>
+                        <div class="panel-body">
+                            <p>
+
+                               
+                                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/localmap/localpagedclienttablemap/Los_Angeles/Area_Planning_Commissions'">Area Planning Commissions</button>
+
+                                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/localmap/localpagedclienttablemap/Los_Angeles/Communities_And_Planning_Areas'">Communities and Planning Areas</button>
+
+                                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/localmap/localpagedclienttablemap/Los_Angeles/Specific_Plans'">Specific Plans</button>
+
+                                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/localmap/localpagedclienttablemap/Los_Angeles/Other_Districts'">Other Districts</button>
+
+
+                                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/localmap/localpagedclienttablemap/Los_Angeles/Historic_Preservation_Overlay_Zone'">Historic Preservation Overlay Zone</button>
+                                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/localmap/localpagedclienttablemap/Los_Angeles/Historic_Cultural_Monuments'">Historic Cultural Monuments</button>
+
+
+                            </p>
+
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            Economic Development Areas
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                               
+
+
+                                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/localmap/localsimplemap/Los_Angeles/Federal_Renewal_Community'">Federal Renewal Community</button>
+                                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/localmap/localsimplemap/Los_Angeles/State_Enterprise_Zone'">State Enterprise Zone</button>
+                                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/localmap/localsimplemap/Los_Angeles/Business_Improvement_District'">Business Improvement District</button>
+                                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/localmap/localsimplemap/Los_Angeles/Targeted_Neighborhood_Initiative'">Targeted Neighborhood Initiative</button>
+
+
+
+
+
+                            </p>
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+            
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            Permission for use of these proprietary data is granted by the City of Los Angeles Department of City Planning. &nbsp; &nbsp; Copyright &copy; @DateTime.Now.Year City of Los Angeles. All Rights Reserved
+                        </div>
+
+                        <!--
+                        <div class="panel-body">
+                            <p>
+                               
+                                
+
+                            </p>
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+
+                            -->
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+
+          
+            <div class="row">
+                
+                    <div class="col-lg-12">
+                        
+                            <p>
+                               
+
+
+                                <ul>
+                                    <li style="display:inline;"><a href="#"><i class="fa fa-copyright"></i> @DateTime.Now.Year - TransparentGov </a></li>
+                                    &nbsp&nbsp&nbsp&nbsp
+                                    <li style="display:inline;"><a href="http://transparentgov.net"><i class="fa fa-windows"></i> .Net</a></li>
+                                    &nbsp&nbsp&nbsp&nbsp
+                                    <li style="display:inline;"><a href="http://phpmap.transparentgov.net"> PHP</a></li>
+                                    &nbsp&nbsp&nbsp&nbsp
+                                    <li style="display:inline;"><a href="#"><i class="fa fa-apple"></i> ios</a></li>
+                                    &nbsp&nbsp&nbsp&nbsp
+                                    <li style="display:inline;"><a href="#"><i class="fa fa-android"></i> Android </a></li>
+                                    &nbsp&nbsp&nbsp&nbsp
+                                    <li style="display:inline;"><a href="#"> Java </a></li>
+                                </ul>
+
+                            </p>
+                        
+                    </div>
+
+
+                </div>
+
+                </div>
+                <!-- /#page-wrapper -->
+                <!-- /#page-wrapper -->
+          
+
+
+
+
+
+
+
+
+            <!-- /#wrapper -->
+        </div>
+
+
+</body>
+</html>
