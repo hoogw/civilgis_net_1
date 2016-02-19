@@ -247,9 +247,13 @@
     <Content Include="Scripts\area_boundary\Los_Angeles.js" />
     <Content Include="Scripts\area_boundary\Newport_Beach.js" />
     <Content Include="Scripts\area_boundary\New_York.js" />
+    <Content Include="Scripts\area_boundary\Santa_Monica.js" />
     <Content Include="Scripts\area_boundary\San_Francisco.js" />
     <Content Include="Scripts\bootstrap-switch.js" />
     <Content Include="Scripts\classification\area\city\zoning.js" />
+    <Content Include="Scripts\classification\area\Newport_Beach\General_Land_Use.js" />
+    <Content Include="Scripts\classification\area\Newport_Beach\Zoning.js" />
+    <Content Include="Scripts\classification\area\Santa_Monica\Zoning.js" />
     <Content Include="Scripts\classification\classification_button_style.css" />
     <Content Include="Scripts\localmap\localclassifyradiobuttonmap.js" />
     <Content Include="Scripts\localmap\localclusterscrollerclienttablemap.js" />
