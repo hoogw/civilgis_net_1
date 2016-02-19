@@ -9,7 +9,7 @@
 _code_column_name ='ZONING_UPD';
 
 
-_designation['Newport_Beach_zoning']=[
+_designation['Newport_Beach_Zoning']=[
     
    
     
