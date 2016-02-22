@@ -183,6 +183,14 @@ namespace CivilGis.Controllers
 
 
 
+            BsonDocument geometryBsonDoc;
+            string geometryTypeBsonDoc;
+            BsonArray coordinatesBsonArray;
+            string coordinatesBsonDoc;
+
+
+
+
             //=============================    processing request parameters  =================================================
 
             /* ---------  handle request from datatables post ajax call, api reference  ----------------
@@ -452,32 +460,64 @@ namespace CivilGis.Controllers
                                                                 var idBsonDoc = objectIdBsonDoc.ToString();
 
 
-                                                                var geometryBsonDoc = bsonDocument["geometry"].AsBsonDocument;
-
-                                                                var geometryTypeBsonDoc = geometryBsonDoc["type"].AsString;
-
-                                                                var coordinatesBsonArray = geometryBsonDoc["coordinates"].AsBsonArray;
-                                                                var coordinatesBsonDoc = coordinatesBsonArray.ToJson();
-
 
                                                                 foreach (var _property in propertiesBsonDoc)
-                                                            {
+                                                                {
 
-                                                                // BsonElement (key-value) pair,     key -> _property.Name;  value ->_property.Value;
+                                                                    // BsonElement (key-value) pair,     key -> _property.Name;  value ->_property.Value;
 
-                                                                //row.Add(new KeyValuePair<string, string>(_property.Name, _property.Value.ToString()));
+                                                                    //row.Add(new KeyValuePair<string, string>(_property.Name, _property.Value.ToString()));
 
-                                                                // for dictionary type
-                                                                row.Add(_property.Name, _property.Value.ToString());
-
-                                                            }// foreach each row
+                                                                    // for dictionary type
 
 
 
-                                                            // for dictionary type
-                                                            row.Add("geoFID", idBsonDoc);
-                                                            row.Add("geometry_type", geometryTypeBsonDoc);
-                                                            row.Add("coordinate", coordinatesBsonDoc);
+
+
+                                                                                if (_property.Value.IsBsonNull)
+                                                                                {
+                                                                                    row.Add(_property.Name, "");
+                                                                                }
+
+
+                                                                                else {
+                                                                                    row.Add(_property.Name, _property.Value.ToString());
+                                                                                }
+
+                                                                }// foreach each row
+
+
+
+
+
+
+                                                                            // if geometry is Bsonnull, must do special 
+                                                                            if (bsonDocument["geometry"].IsBsonNull)
+                                                                            {
+                                                                                row.Add("geoFID", "");
+                                                                                row.Add("geometry_type", "");
+                                                                                row.Add("coordinate", "");
+
+                                                                            }
+                                                                            else {
+
+
+                                                                                geometryBsonDoc = bsonDocument["geometry"].AsBsonDocument;
+
+                                                                                geometryTypeBsonDoc = geometryBsonDoc["type"].AsString;
+
+                                                                                coordinatesBsonArray = geometryBsonDoc["coordinates"].AsBsonArray;
+                                                                                coordinatesBsonDoc = coordinatesBsonArray.ToJson();
+
+
+                                                                                // for dictionary type
+                                                                                row.Add("geoFID", idBsonDoc);
+                                                                                row.Add("geometry_type", geometryTypeBsonDoc);
+                                                                                row.Add("coordinate", coordinatesBsonDoc);
+
+                                                                            }//else
+
+
 
 
                                                             rows.Add(row);
@@ -549,20 +589,6 @@ namespace CivilGis.Controllers
                                             var idBsonDoc = objectIdBsonDoc.ToString();
 
 
-                                            var geometryBsonDoc = bsonDocument["geometry"].AsBsonDocument;
-
-                                            var geometryTypeBsonDoc = geometryBsonDoc["type"].AsString;
-
-
-                                           
-                                            var coordinatesBsonArray = geometryBsonDoc["coordinates"].AsBsonArray;
-                                            var coordinatesBsonDoc = coordinatesBsonArray.ToJson();
-
-                                            //var coordinatesBsonDoc = geometryBsonDoc["coordinates"].AsBsonArray;
-
-                                            
-
-
                                             foreach (var _property in propertiesBsonDoc)
                                             {
 
@@ -571,48 +597,92 @@ namespace CivilGis.Controllers
                                                 //row.Add(new KeyValuePair<string, string>(_property.Name, _property.Value.ToString()));
 
                                                 // for dictionary type
-                                                row.Add(_property.Name, _property.Value.ToString());
-
-                                            }// foreach each row
 
 
-                                            // current no need sort, because column_def in datatable js used. 
-                                            // why need sort because mongoDB do not like mysql sqlserver, column order on each row varied. mysql and sqlserver, column order are fixed for each row 
-                                            // fore each row, sort by columns(key) both "sort" "orderby" works
+                                                        if (_property.Value.IsBsonNull)
+                                                                {
+                                                                    row.Add(_property.Name, "");
+                                                                }
 
-                                            //_row.OrderBy(o => o.Key);
-                                            //row.Sort((x, y) => x.Key.CompareTo(y.Key));
 
-                                            // row is dictionary, can't use this way to sort. 
-                                            //row.OrderBy(key => key.Key);
+                                                                    else { 
+                                                                                row.Add(_property.Name, _property.Value.ToString());
+                                                                        }
 
 
 
-                                            // add last 3 columns, only geoFID column will be visible, the other two are used to fly on map and draw polygon/line/marker on location
-                                            /*
+                                                }// foreach each row
 
-                                            row.Add(new KeyValuePair<string, string>("geoFID", idBsonDoc));
-                                           row.Add(new KeyValuePair<string, string>("geometry_type", geometryTypeBsonDoc));
-                                           row.Add(new KeyValuePair<string, string>("coordinate", coordinatesBsonDoc));
-                                            */
 
-                                            // for dictionary type
-                                            row.Add("geoFID", idBsonDoc);
-                                            row.Add("geometry_type", geometryTypeBsonDoc);
-                                            row.Add("coordinate", coordinatesBsonDoc);
+
+
+
+                                        // if geometry is Bsonnull, must do special 
+                                        if (bsonDocument["geometry"].IsBsonNull)
+                                                    {
+                                                        row.Add("geoFID", "");
+                                                        row.Add("geometry_type", "");
+                                                        row.Add("coordinate", "");
+
+                                                    }
+                                                    else {
+                                                        geometryBsonDoc = bsonDocument["geometry"].AsBsonDocument;
+
+                                                         geometryTypeBsonDoc = geometryBsonDoc["type"].AsString;
+
+
+
+                                                         coordinatesBsonArray = geometryBsonDoc["coordinates"].AsBsonArray;
+                                                         coordinatesBsonDoc = coordinatesBsonArray.ToJson();
+
+                                                        // coordinatesBsonDoc = geometryBsonDoc["coordinates"].AsBsonArray;
+
+
+
+                                                        // add last 3 columns, only geoFID column will be visible, the other two are used to fly on map and draw polygon/line/marker on location
+                                                        /*
+
+                                                        row.Add(new KeyValuePair<string, string>("geoFID", idBsonDoc));
+                                                       row.Add(new KeyValuePair<string, string>("geometry_type", geometryTypeBsonDoc));
+                                                       row.Add(new KeyValuePair<string, string>("coordinate", coordinatesBsonDoc));
+                                                        */
+
+                                                        // for dictionary type
+                                                        row.Add("geoFID", idBsonDoc);
+                                                        row.Add("geometry_type", geometryTypeBsonDoc);
+                                                        row.Add("coordinate", coordinatesBsonDoc);
+
+
+                                                          }//else
+
+                                        
 
 
                                             rows.Add(row);
 
 
-                                        }// foreach
+
+                    // current no need sort, because column_def in datatable js used. 
+                    // why need sort because mongoDB do not like mysql sqlserver, column order on each row varied. mysql and sqlserver, column order are fixed for each row 
+                    // fore each row, sort by columns(key) both "sort" "orderby" works
+
+                    //_row.OrderBy(o => o.Key);
+                    //row.Sort((x, y) => x.Key.CompareTo(y.Key));
+
+                    // row is dictionary, can't use this way to sort. 
+                    //row.OrderBy(key => key.Key);
 
 
-                                    //------------------- end use Find ------------------------
+
+
+                }// foreach
+
+
+                //------------------- end use Find ------------------------
 
 
 
-                                }//else
+            }//else
 
 
                                 // +++++++++++++++ end filtered result by search value  ++++++++++++++++++++++++++++++++

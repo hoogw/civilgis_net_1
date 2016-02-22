@@ -53,7 +53,17 @@ function feed_datatables(_geojson_obj){
                             
                             // build column.data def
                             _column0 = {};
-                            _column0['data'] = 'properties.'+k;
+                            _column0['data'] = 'properties.' + k;
+
+          //---------- hide last 2 column geoFID, geoFeatureType---------
+                            if ((k === 'GeoFeatureID') || (k === 'GeoFeatureType')) {
+
+                                _column0['visible'] = false;
+
+                            }
+          //--------------------------------------------------------
+
+
                             _column_def.push(_column0);   
                                
                              _dt_columns_count = _dt_columns_count +1;  
@@ -784,6 +794,15 @@ function datatablesX(){
                                               //--------- build column.data def ------------
                                                 _column = {};
                                                 _column['data'] = val;
+
+                                            //---------- hide last 2 column geoFID, geoFeatureType---------
+                                                if ((val === 'geometry_type') || (val === 'geoFID')) {
+
+                                                    _column['visible'] = false;
+
+                                                }
+                                            //--------------------------------------------------------
+
                                                 _column_count = _column_count+1;
                                            
                                            
