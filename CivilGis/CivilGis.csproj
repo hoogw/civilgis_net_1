@@ -241,6 +241,19 @@
     <Content Include="images\sort_both.png" />
     <Content Include="images\sort_desc.png" />
     <Content Include="images\sort_desc_disabled.png" />
+    <Content Include="Scripts\area_boundary\Chicago.js" />
+    <Content Include="Scripts\area_boundary\city.js" />
+    <Content Include="Scripts\area_boundary\county.js" />
+    <Content Include="Scripts\area_boundary\Los_Angeles.js" />
+    <Content Include="Scripts\area_boundary\Newport_Beach.js" />
+    <Content Include="Scripts\area_boundary\New_York.js" />
+    <Content Include="Scripts\area_boundary\New_York_Bronx.js" />
+    <Content Include="Scripts\area_boundary\New_York_Brooklyn.js" />
+    <Content Include="Scripts\area_boundary\New_York_Manhattan.js" />
+    <Content Include="Scripts\area_boundary\New_York_Queens.js" />
+    <Content Include="Scripts\area_boundary\New_York_Staten_Island.js" />
+    <Content Include="Scripts\area_boundary\Santa_Monica.js" />
+    <Content Include="Scripts\area_boundary\San_Francisco.js" />
     <Content Include="Scripts\bootstrap-switch.js" />
     <Content Include="Scripts\classification\area\city\zoning.js" />
     <Content Include="Scripts\classification\area\Newport_Beach\General_Land_Use.js" />
@@ -454,7 +467,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\area_boundary\" />
     <Folder Include="Scripts\classification\area\Denver\" />
     <Folder Include="Scripts\classification\area\New_York\" />
   </ItemGroup>
