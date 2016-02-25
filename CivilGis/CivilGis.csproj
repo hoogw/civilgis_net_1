@@ -458,6 +458,9 @@
     <Content Include="Views\Shared\_Los_Angeles_side_panel.cshtml" />
     <Content Include="Views\Home\local\Santa_Monica.cshtml" />
     <Content Include="Views\Shared\_Santa_Monica_side_panel.cshtml" />
+    <Content Include="Views\Home\local\New_York.cshtml" />
+    <Content Include="Views\Shared\_New_York_side_panel.cshtml" />
+    <Content Include="Views\Home\local\New_York_Manhattan.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
