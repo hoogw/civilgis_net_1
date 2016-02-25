@@ -138,37 +138,35 @@
                             Local Maps
                         </div>
                         <div class="panel-body">
-                            <p>
+                            
                                 
                                 <button type="button" class="btn btn-outline btn-warning" onclick="location.href = '/home/local/Newport_Beach'">
                                     <img src="~/images/logo/newport_beach.png" alt="" />
                                 </button>
+
+                                &nbsp;&nbsp;
 
                                 <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/home/local/Santa_Monica'">
                                     <img src="~/images/logo/santa_monica.jpg" alt="" />
                                 </button>
 
                                
-
-
-                                <button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/home/local/city'">city</button>
                                 
+                                
+                                &nbsp;&nbsp;
+
+
                                 <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/home/local/Los_Angeles'">
                                     <img src="~/images/logo/city_of_los_angeles.png" alt="" />
                                 </button>
 
 
-
-
-                                <button type="button" class="btn btn-outline btn-warning" onclick="location.href = '/home/local/county'">
-
-                                    <img src="~/images/logo/orange_county.png" />
-                                </button>
+                               
 
                                 
 
                                 
-
+                                &nbsp;&nbsp;
 
                                     
 
@@ -176,24 +174,35 @@
                                         <img src="~/images/logo/nyc.png" alt="" />
                                     </button>
 
+                                &nbsp;&nbsp;
+
+
                                 <button type="button" class="btn btn-outline btn-warning" onclick="location.href = '/home/local/Chicago'">
-                                    <img src="~/images/logo/city-of-chicago-logo.png" alt="" />
+                                    <img src="~/images/logo/city-of-chicago-logo.jpg" alt="" />
                                 </button>
 
-                               
+                                &nbsp;&nbsp;
 
                                 <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/home/local/San_Francisco'">
                                     <img src="~/images/logo/San-Francisco-Logo.png" alt="" />
                                 </button>
 
-                                    
-                                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/home/local/Los_Angeles_County'">
-                                    <img src="~/images/logo/la_county.png" />
-                                </button>
+                            &nbsp;&nbsp;
+
+                            <button type="button" class="btn btn-outline btn-warning" onclick="location.href = '/home/local/county'">
+
+                                <img src="~/images/logo/orange_county.png" />
+                            </button>
+
+
+                            &nbsp;&nbsp;
+
+                            <button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/home/local/city'">Sample city</button>
+                               
 
                                 
 
-                            </p>
+                            
                         </div>
                         <div class="panel-footer">
 
@@ -204,46 +213,129 @@
             </div>
 
 
+          
+
+
             <!-- /.row -->
             <div class="row">
-
                 <div class="col-lg-12">
-                    <div class="panel panel-green">
+                    <div class="panel panel-default">
                         <div class="panel-heading">
                             Featured Maps
                         </div>
+                        <!-- .panel-heading -->
                         <div class="panel-body">
-                            <p>
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Zoning Land Use</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/localmap/localclassifycheckboxbuttonmap/Santa_Monica/Zoning'">Santa Monica Zoning [check box button]</button>
 
-                                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/localmap/localpagedfulltablemap/city/address'">address point</button>
-                                <button type="button" class="btn btn-outline btn-warning" onclick="location.href = '/localmap/localpagedfulltablemap/city/parcels'">parcel polygon </button>
-                               
-
-                                <button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/localmap/localclassifycheckboxbuttonmap/city/zoning'"> Zoning [check box button]</button>
-                                <button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/localmap/localclassifyradiobuttonmap/city/zoning'">Zoning [radio button]</button>
-                                <button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/localmap/localclassifycheckboxbuttonmap/city/general_landuse'">General Land Use</button>
-
-                                <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/localmap/localclusterpagedclienttablemap/county/education_facility'">Point Cluster with paged table[ Education Facility]</button>
-                                <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/localmap/localclusterscrollerclienttablemap/county/fire_stations'">Point Cluster with scroller table [ Fire Stations]</button>
-
-
-                                
-                                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/localmap/localscrollerfulltablemap/map/city/streets'">street lines</button>
+                                            &nbsp;&nbsp;
+                                            <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/localmap/localclassifyradiobuttonmap/Santa_Monica/Zoning'">Santa Monica Zoning [radio button]</button>
 
 
-                                
-                                <button type="button" class="btn btn-outline btn-danger"></button>
+                                            &nbsp;&nbsp;
 
-                            </p>
+                                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/localmap/localclassifycheckboxbuttonmap/city/zoning'">Sample City Zoning - check box</button>
 
+                                            &nbsp;&nbsp;
+                                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/localmap/localclassifyradiobuttonmap/city/zoning'">Sample City Zoning - radio</button>
+                                            &nbsp;&nbsp;
+
+                                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/localmap/localclassifycheckboxbuttonmap/city/general_land_use'">Sample City General Land Use - check box</button>
+                                            &nbsp;&nbsp;
+                                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/localmap/localclassifyradiobuttonmap/city/general_land_use'">Sample City General Land Use - radio</button>
+                                            &nbsp;&nbsp;
+                                        
+                                        
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Parcels</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse collapse">
+                                        <div class="panel-body">
+
+                                            <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/localmap/localscrollerfulltablemap/Newport_Beach/Parcels'">Newport Beach Parcels </button>
+                                            &nbsp;&nbsp;
+                                            <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/localmap/localscrollerfulltablemap/city/parcels'">Sample City Parcels </button>
+                                            &nbsp;&nbsp;
+
+                                            <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/localmap/localscrollerfulltablemap/New_York_Manhattan/Zoning'">New York City Manhattan Parcels </button>
+
+                                        
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Address And Streets</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            
+                                            
+                                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/localmap/localscrollerfulltablemap/Newport_Beach/Address'">Newport Beach Address </button>
+                                            &nbsp;&nbsp;
+                                            <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/localmap/localscrollerfulltablemap/Santa_Monica/Streets'">Santa Monica Street</button>
+                                            &nbsp;&nbsp;
+
+                                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/localmap/localscrollerfulltablemap/city/address'">Sample City Address </button>
+                                            &nbsp;&nbsp;
+                                            <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/localmap/localscrollerfulltablemap/city/streets'">Sample City Street Lines</button>
+                                            &nbsp;&nbsp;
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Others</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseFour" class="panel-collapse collapse">
+                                        <div class="panel-body">
+
+                                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/localmap/localclusterpagedclienttablemap/county/education_facility'">Point Cluster with paged table[ Education Facility]</button>
+                                            &nbsp;&nbsp;
+                                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/localmap/localclusterscrollerclienttablemap/county/fire_stations'">Point Cluster with scroller table [ Fire Stations]</button>
+                                            &nbsp;&nbsp;
+
+                                            <button type="button" class="btn btn-outline btn-info">...</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
                         </div>
-                        <div class="panel-footer">
-
-                        </div>
+                        <!-- .panel-body -->
                     </div>
+                    <!-- /.panel -->
                 </div>
-
+                <!-- /.col-lg-12 -->
             </div>
+            <!-- /.row -->
 
 
 
@@ -285,9 +377,13 @@
                                     -->
 
 
-                                <button type="button" class="btn btn-outline btn-info"></button>
-                                <button type="button" class="btn btn-outline btn-warning"></button>
-                                <button type="button" class="btn btn-outline btn-danger"></button>
+                                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/data/listscroller/Chicago/'">Chicago </button>
+                                &nbsp;&nbsp;
+
+                                <button type="button" class="btn btn-outline btn-warning" onclick="location.href = '/data/listscroller/New_York/'">New York</button>
+                                &nbsp;&nbsp;
+
+                                <button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/data/listscroller/San_Francisco/'">San Francisco</button>
 
                             </p>
                         </div>
