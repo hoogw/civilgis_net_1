@@ -97,6 +97,29 @@ namespace CivilGis
 
 
             routes.MapRoute(
+                name: "bingmap",
+                url: "bingmap/{action}/{area}/{subject}/",
+                defaults: new { controller = "BingMap", action = "index" }
+            );
+
+
+            routes.MapRoute(
+                name: "openlayersmap",
+                url: "openlayers/{action}/{area}/{subject}/",
+                defaults: new { controller = "Openlayers", action = "index" }
+            );
+
+
+            routes.MapRoute(
+                name: "leafletmap",
+                url: "leaflet/{action}/{area}/{subject}/",
+                defaults: new { controller = "Leaflet", action = "index" }
+            );
+
+
+
+
+            routes.MapRoute(
                 name: "map",
                 url: "map/{action}/{area}/{subject}/",
                 defaults: new { controller = "Map", action = "index" }

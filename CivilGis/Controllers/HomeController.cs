@@ -41,6 +41,55 @@ namespace CivilGis.Controllers
 
 
 
+        public ActionResult bing(string area)
+        {
+
+
+
+            ViewBag.Area = area;
+
+            _view_path = "~/Views/Home/bing/" + area + ".cshtml";
+
+
+            return View(_view_path);
+        }
+
+
+
+        public ActionResult leaflet(string area)
+        {
+
+
+
+            ViewBag.Area = area;
+
+            _view_path = "~/Views/Home/leaflet/" + area + ".cshtml";
+
+
+            return View(_view_path);
+        }
+
+
+
+        public ActionResult openlayers(string area)
+        {
+
+
+
+            ViewBag.Area = area;
+
+            _view_path = "~/Views/Home/openlayers/" + area + ".cshtml";
+
+
+            return View(_view_path);
+        }
+
+
+
+
+
+
+
         public ActionResult Index()
         {
             return View();
