@@ -43,22 +43,7 @@ namespace CivilGis
 
             // mapping -----------------
 
-            /*
-              routes.MapRoute(
-                  name: "city",
-                  url: "map/city/",
-                  defaults: new { controller = "Map", action = "city", subject = "zoning" }
-              );
-
-
-
-              routes.MapRoute(
-                  name: "county",
-                  url: "map/county/",
-                  defaults: new { controller = "Map", action = "county", subject = "bounds" }
-              );
-
-           */
+         
 
 
 
@@ -127,12 +112,19 @@ namespace CivilGis
 
 
             routes.MapRoute(
-               name: "map2",
+               name: "maplist",
                url: "map/{action}/{area}/",
                defaults: new { controller = "Map", action = "maplistpaged", area = "city" }
            );
-            
-             
+
+
+            routes.MapRoute(
+               name: "map_provider",
+               url: "map/{action}/",
+               defaults: new { controller = "Map", action = "Index" }
+           );
+
+
 
             routes.MapRoute(
                name: "Default",

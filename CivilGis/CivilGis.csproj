@@ -264,6 +264,8 @@
     <Content Include="Scripts\bingmap\simplemap.js" />
     <Content Include="Scripts\bootstrap-switch.js" />
     <Content Include="Scripts\classification\area\city\zoning.js" />
+    <Content Include="Scripts\classification\area\Los_Angeles\General_Land_Use.js" />
+    <Content Include="Scripts\classification\area\Los_Angeles\Zoning.js" />
     <Content Include="Scripts\classification\area\Newport_Beach\General_Land_Use.js" />
     <Content Include="Scripts\classification\area\Newport_Beach\Zoning.js" />
     <Content Include="Scripts\classification\area\Santa_Monica\Zoning.js" />
@@ -579,6 +581,9 @@
     <Content Include="Views\Openlayers\scrollerservertablemap.cshtml" />
     <Content Include="Views\Openlayers\simpleclustermap.cshtml" />
     <Content Include="Views\Openlayers\simplemap.cshtml" />
+    <Content Include="Views\Map\Bingmap.cshtml" />
+    <Content Include="Views\Map\Leaflet.cshtml" />
+    <Content Include="Views\Map\Openlayers.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -33,19 +33,44 @@ namespace CivilGis.Controllers
 
 
 
-        // GET: Map
+        //    map/index default is google map
         public ActionResult Index()
         {
-            
-            
-           // CivilGisEntities GE = new CivilGisEntities();
-           // return View(GE.Locations.ToList());
-
             return View();
-           //return  PartialView();
+           
         }
 
 
+
+      
+        public ActionResult Bingmap()
+        {
+            
+            return View();
+
+        }
+
+
+        
+        public ActionResult Leaflet()
+        {
+
+            return View();
+
+        }
+
+
+
+        public ActionResult Openlayers()
+        {
+
+            return View();
+
+        }
+
+
+
+        // -------------   below are old, testing only, not in use --------------------------        
 
         public ActionResult mapsmpp(string area, string subject)
         {
@@ -144,13 +169,10 @@ namespace CivilGis.Controllers
 
 
 
-        [HttpPost]
-        public ActionResult Search(string Location)
-        {
 
-            CivilGisEntities GE = new CivilGisEntities();
-            var result = GE.Locations.Where(x => x.LocationName.StartsWith(Location)).ToList();
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
+
+        //--------------------above testing only, not in use --------------------------------------
+
+
     }
 }
