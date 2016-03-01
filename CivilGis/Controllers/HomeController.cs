@@ -41,14 +41,75 @@ namespace CivilGis.Controllers
 
 
 
-        public ActionResult bing(string area)
+
+        public ActionResult mapbox(string area)
         {
 
 
 
             ViewBag.Area = area;
 
-            _view_path = "~/Views/Home/bing/" + area + ".cshtml";
+            _view_path = "~/Views/Home/mapbox/" + area + ".cshtml";
+
+
+            return View(_view_path);
+        }
+
+        public ActionResult mapquest(string area)
+        {
+
+
+
+            ViewBag.Area = area;
+
+            _view_path = "~/Views/Home/mapquest/" + area + ".cshtml";
+
+
+            return View(_view_path);
+        }
+
+
+
+        public ActionResult heremap(string area)
+        {
+
+
+
+            ViewBag.Area = area;
+
+            _view_path = "~/Views/Home/heremap/" + area + ".cshtml";
+
+
+            return View(_view_path);
+        }
+
+
+
+
+        public ActionResult bingmap(string area)
+        {
+
+
+
+            ViewBag.Area = area;
+
+            _view_path = "~/Views/Home/bingmap/" + area + ".cshtml";
+
+
+            return View(_view_path);
+        }
+
+
+
+
+        public ActionResult googlemap(string area)
+        {
+
+
+
+            ViewBag.Area = area;
+
+            _view_path = "~/Views/Home/googlemap/" + area + ".cshtml";
 
 
             return View(_view_path);

@@ -42,7 +42,38 @@ namespace CivilGis.Controllers
 
 
 
-      
+        public ActionResult Googlemap()
+        {
+
+            return View();
+
+        }
+
+        public ActionResult Heremap()
+        {
+
+            return View();
+
+        }
+
+
+        public ActionResult Mapbox()
+        {
+
+            return View();
+
+        }
+
+
+        public ActionResult Mapquest()
+        {
+
+            return View();
+
+        }
+
+
+
         public ActionResult Bingmap()
         {
             

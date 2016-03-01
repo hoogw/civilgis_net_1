@@ -82,6 +82,36 @@ namespace CivilGis
 
 
             routes.MapRoute(
+                name: "googlemap",
+                url: "googlemap/{action}/{area}/{subject}/",
+                defaults: new { controller = "GoogleMap", action = "index" }
+            );
+
+
+            routes.MapRoute(
+                name: "mapbox",
+                url: "mapbox/{action}/{area}/{subject}/",
+                defaults: new { controller = "MapBox", action = "index" }
+            );
+
+
+            routes.MapRoute(
+               name: "mapquest",
+               url: "mapquest/{action}/{area}/{subject}/",
+               defaults: new { controller = "MapQuest", action = "index" }
+           );
+
+
+
+            routes.MapRoute(
+               name: "heremap",
+               url: "heremap/{action}/{area}/{subject}/",
+               defaults: new { controller = "HereMap", action = "index" }
+           );
+
+
+
+            routes.MapRoute(
                 name: "bingmap",
                 url: "bingmap/{action}/{area}/{subject}/",
                 defaults: new { controller = "BingMap", action = "index" }
