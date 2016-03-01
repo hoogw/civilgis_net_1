@@ -1,0 +1,156 @@
+﻿<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+
+
+
+
+<script src="~/Scripts/map_init/openlayers.js"></script>
+
+
+
+<script src="~/Scripts/openlayers/classifyradiobuttonmap.js"></script>
+
+
+
+<link href="~/Scripts/classification/classification_button_style.css" rel="stylesheet" />
+
+
+<script src="~/Scripts/bootstrap-switch.js"></script>
+<link href="~/Content/bootstrap-switch.css" rel="stylesheet" />
+
+
+  <!-- this hidden value carry the map subject from controller use it in javascript api call-->
+
+<input type="hidden" id="areaID" value=@ViewBag.Area />
+<input type="hidden" id="subjectID" value=@ViewBag.Subject />
+<input type="hidden" id="sidebarID" value=@ViewBag.Side_Bar />
+
+
+
+
+@{
+    string _side_panel_path = "~/Views/Shared/openlayers/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
+
+    Html.RenderPartial(_side_panel_path); 
+    
+    }
+
+
+
+
+
+
+
+
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <div id="title_info"> </div>
+                    <img id="ajaxload" src="~/Content/img/devoops_getdata.GIF" alt="Loading ... " style="top: 25px;left: 15px;color:#ebebeb;" />
+
+                </div>
+                <!-- /.panel-heading -->
+
+                <div class="panel-body">
+
+
+
+                    <div id="map-canvas" style="position: relative;-webkit-border-radius: 0 0 3px 3px;-moz-border-radius: 0 0 3px 3px;border-radius: 0 0 3px 3px;padding: 15px;background: #FCFCFC;height: 800px;"></div>
+
+                    <div id="legend" class="alert alert-warning"></div>
+
+
+                                        <!-- checkbox button -->
+
+
+                                        <div id="classification_section" class="well">
+                                            <!--	<div class="btn-group" data-toggle="buttons">        btn-group cause not space between button -->
+                                            <div id="classification_buttons" data-toggle="buttons">
+
+
+                                                <input type="checkbox" name="color_tiles_switch" checked>
+
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <label id="label_high_light_off" class="btn btn-black">
+                                                    <input name="high_light_off" id="radio_high_light_off" type="radio">Highlight OFF
+                                                </label>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                                                <!-- test
+                                                         <label id="label_1" class="btn btn-blue">
+                                                                 <input id="checkbox_1" type="checkbox"> KKKKKKKKKKKK
+                                                         </label>
+
+
+
+                                                         <label id="label_2" class="btn btn-green">
+                                                                 <input id="checkbox_2" type="checkbox"> PPPPPPPPPPPPPPPP
+                                                         </label>
+
+
+
+                                                         <label id="label_3" class="btn btn-red">
+                                                                 <input id="checkbox_3" type="checkbox"> OOOOOOOOOOOOOOOOO
+                                                         </label>
+
+
+                                                         <label id="label_4" class="btn btn-gold">
+                                                                     <input id="checkbox_4" type="checkbox"> TTTTTTTTTTTTTTT
+                                                             </label>
+
+                                             - end test -->
+
+
+                                            </div>
+                                        </div>
+
+                                        <!--  End of checkbox button -->
+
+
+
+                    <div id="info-table">
+
+                    </div>
+
+
+                </div>
+                <!-- /.panel-body -->
+                <!-- hr / -->
+
+
+
+                <div class="panel-footer">
+
+
+                    <p>
+
+
+
+                    </p>
+
+
+
+
+
+
+                </div>
+
+
+
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.row -->
+    </div>
+
+
+
+
+    <!-- /#page-wrapper -->
+</div>
+

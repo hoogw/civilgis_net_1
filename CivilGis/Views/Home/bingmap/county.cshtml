@@ -1,0 +1,176 @@
+﻿<!-- this hidden value carry the map subject from controller use it in javascript api call-->
+
+<input type="hidden" id="areaID" value=@ViewBag.Area />
+
+
+
+
+
+@{
+    string _side_panel_path = "~/Views/Shared/bingmap/_" + ViewBag.Area + "_side_panel.cshtml";
+
+    Html.RenderPartial(_side_panel_path);
+
+}
+
+
+
+
+       
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                           Base Map
+                        </div>
+                        <div class="panel-body">
+                           
+                                
+                                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/bingmap/scrollerclienttablemap/county/cities'">Cities</button>
+                            &nbsp;&nbsp;<button type="button" class="btn btn-outline btn-success" onclick="location.href = '/bingmap/simplemap/county/rails'">Rails</button>
+                               
+                            &nbsp;&nbsp;<button disabled="disabled" type="button" class="btn btn-outline btn-default" onclick="location.href = '#'">Address</button>
+
+                            &nbsp;&nbsp; <button disabled="disabled" type="button" class="btn btn-outline btn-default" onclick="location.href = '#'">Streets</button>
+
+                               
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+
+
+            <!-- /.row -->
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Parks & Recreation Map
+                        </div>
+                        <div class="panel-body">
+                          
+
+                               
+
+                                <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/bingmap/scrollerclienttablemap/county/parks'"> Parks</button>
+                            &nbsp;&nbsp;<button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/bingmap/simplemap/county/water'">Water</button>
+                                
+
+
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            Education and Health
+                        </div>
+                        <div class="panel-body">
+                           
+                                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/bingmap/clusterscrollerclienttablemap/county/education_facility'">Education Facility</button>
+                            &nbsp;&nbsp; <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/bingmap/simplemap/county/hospitals'">Hospitals</button>
+                          
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+            
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            School Education
+                        </div>
+                        <div class="panel-body">
+                            
+                                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/bingmap/clusterscrollerclienttablemap/county/fire_stations'">Fire station</button>
+
+                            
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+
+          
+            <div class="row">
+                
+                    <div class="col-lg-12">
+                        
+                            <p>
+                               
+
+
+                                <ul>
+                                    <li style="display:inline;"><a href="#"><i class="fa fa-copyright"></i> @DateTime.Now.Year - TransparentGov </a></li>
+                                    &nbsp&nbsp&nbsp&nbsp
+                                    <li style="display:inline;"><a href="http://transparentgov.net"><i class="fa fa-windows"></i> .Net</a></li>
+                                    &nbsp&nbsp&nbsp&nbsp
+                                    <li style="display:inline;"><a href="http://phpmap.transparentgov.net"> PHP</a></li>
+                                    &nbsp&nbsp&nbsp&nbsp
+                                    <li style="display:inline;"><a href="#"><i class="fa fa-apple"></i> ios</a></li>
+                                    &nbsp&nbsp&nbsp&nbsp
+                                    <li style="display:inline;"><a href="#"><i class="fa fa-android"></i> Android </a></li>
+                                    &nbsp&nbsp&nbsp&nbsp
+                                    <li style="display:inline;"><a href="#"> Java </a></li>
+                                </ul>
+
+                            </p>
+                        
+                    </div>
+
+
+                </div>
+
+                </div>
+                <!-- /#page-wrapper -->
+                <!-- /#page-wrapper -->
+          
+
+
+
+
+
+
+
+
+            <!-- /#wrapper -->
+        </div>
+
+
+</body>
+</html>
