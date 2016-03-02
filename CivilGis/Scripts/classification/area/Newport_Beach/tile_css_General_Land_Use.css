@@ -1,0 +1,198 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 22, 2016, 4:18:10 PM
+    Author     : HU_J
+*/
+
+Map {
+  background-color: rgba(0,0,0,0);
+}
+
+
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='CN']{
+  line-color:#800080;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#800080;
+}
+
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='CM']{
+  line-color:#DDA0DD;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#DDA0DD;
+}
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='CC']{
+  line-color:#FF0000;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FF0000;
+}
+
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='CG']{
+  line-color:#FF6347;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FF6347;
+}
+
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='CV']{
+  line-color:#EE82EE;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#EE82EE;
+}
+
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='IG']{
+  line-color:#0000FF;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#0000FF;
+}
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='AO']{
+  line-color:#B22222;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#B22222;
+}
+
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='CO-G']{
+  line-color:#FF00FF;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FF00FF;
+}
+
+
+
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='CO-M']{
+  line-color:#F5DEB3;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#F5DEB3;
+}
+
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='CO-R']{
+  line-color:#D2B48C;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#D2B48C;
+}
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='OS']{
+  line-color:#87CEEB;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#87CEEB;
+}
+
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='OS(RV)']{
+  line-color:#FFA500;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FFA500;
+}
+
+
+
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='PF']{
+  line-color:#FFEFD5;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FFEFD5;
+}
+
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='PI']{
+  line-color:#FFDAB9;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FFDAB9;
+}
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='PR']{
+  line-color:#008000;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#008000;
+}
+
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='RS-A']{
+  line-color:#FFFF00;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FFFF00;
+}
+
+
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='RS-D']{
+  line-color:#FF7F50;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FF7F50;
+}
+
+
+
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='RT']{
+  line-color:#FF69B4;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FF69B4;
+}
+
+
+
+
+
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='RM']{
+  line-color:#A52A2A;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#A52A2A;
+}
+
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='TS']{
+  line-color:#00FF00;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#00FF00;
+}
+
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='RM-D']{
+  line-color:#808000;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#808000;
+}
+
+
+#Newport_Beach_General_Land_Use[GP_UPDATE_='ROW']{
+  line-color:#7FFFD4;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#7FFFD4;
+}
+

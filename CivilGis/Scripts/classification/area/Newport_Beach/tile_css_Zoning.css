@@ -1,0 +1,238 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 22, 2016, 4:17:50 PM
+    Author     : HU_J
+*/
+
+Map {
+  background-color: rgba(0,0,0,0);
+}
+
+
+
+#Newport_Beach_Zoning[ZONING_UPD='CN']{
+  line-color:#800080;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#800080;
+}
+
+
+#Newport_Beach_Zoning[ZONING_UPD='CM']{
+  line-color:#DDA0DD;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#DDA0DD;
+}
+
+#Newport_Beach_Zoning[ZONING_UPD='CC']{
+  line-color:#FF0000;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FF0000;
+}
+
+
+#Newport_Beach_Zoning[ZONING_UPD='CG']{
+  line-color:#FF6347;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FF6347;
+}
+
+
+#Newport_Beach_Zoning[ZONING_UPD='CV']{
+  line-color:#EE82EE;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#EE82EE;
+}
+
+
+#Newport_Beach_Zoning[ZONING_UPD='IG']{
+  line-color:#0000FF;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#0000FF;
+}
+
+#Newport_Beach_Zoning[ZONING_UPD='OA']{
+  line-color:#B22222;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#B22222;
+}
+
+
+#Newport_Beach_Zoning[ZONING_UPD='OG']{
+  line-color:#FF00FF;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FF00FF;
+}
+
+
+
+
+#Newport_Beach_Zoning[ZONING_UPD='OM']{
+  line-color:#F5DEB3;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#F5DEB3;
+}
+
+
+#Newport_Beach_Zoning[ZONING_UPD='OR']{
+  line-color:#D2B48C;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#D2B48C;
+}
+
+#Newport_Beach_Zoning[ZONING_UPD='OS']{
+  line-color:#87CEEB;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#87CEEB;
+}
+
+
+#Newport_Beach_Zoning[ZONING_UPD='PC']{
+  line-color:#FFA500;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FFA500;
+}
+
+
+
+
+#Newport_Beach_Zoning[ZONING_UPD='PF']{
+  line-color:#FFEFD5;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FFEFD5;
+}
+
+
+#Newport_Beach_Zoning[ZONING_UPD='PI']{
+  line-color:#FFDAB9;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FFDAB9;
+}
+
+#Newport_Beach_Zoning[ZONING_UPD='PR']{
+  line-color:#008000;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#008000;
+}
+
+
+#Newport_Beach_Zoning[ZONING_UPD='R-1']{
+  line-color:#FFFF00;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FFFF00;
+}
+
+
+
+#Newport_Beach_Zoning[ZONING_UPD='R-1-10000']{
+  line-color:#FF7F50;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FF7F50;
+}
+
+
+#Newport_Beach_Zoning[ZONING_UPD='R-1-6000']{
+  line-color:#D2691E;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#D2691E;
+}
+
+#Newport_Beach_Zoning[ZONING_UPD='R-1-7200']{
+  line-color:#8A2BE2;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#8A2BE2;
+}
+
+
+#Newport_Beach_Zoning[ZONING_UPD='R-2']{
+  line-color:#FF69B4;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FF69B4;
+}
+
+
+
+
+#Newport_Beach_Zoning[ZONING_UPD='R-2-6000']{
+  line-color:#4B0082;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#4B0082;
+}
+
+
+#Newport_Beach_Zoning[ZONING_UPD='R-BI']{
+  line-color:#ADD8E6;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#ADD8E6;
+}
+
+#Newport_Beach_Zoning[ZONING_UPD='RM']{
+  line-color:#A52A2A;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#A52A2A;
+}
+
+
+#Newport_Beach_Zoning[ZONING_UPD='RM-6000']{
+  line-color:#00FF00;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#00FF00;
+}
+
+
+#Newport_Beach_Zoning[ZONING_UPD='RM-D']{
+  line-color:#808000;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#808000;
+}
+
+
+#Newport_Beach_Zoning[ZONING_UPD='ROW']{
+  line-color:#7FFFD4;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#7FFFD4;
+}
+
+#Newport_Beach_Zoning[ZONING_UPD='SP-7']{
+  line-color:#8B4513;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#8B4513;
+}
+
+
+#Newport_Beach_Zoning[ZONING_UPD='WATER']{
+  line-color:#00FFFF;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#00FFFF;
+}

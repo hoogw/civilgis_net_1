@@ -1,0 +1,331 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 22, 2016, 4:17:30 PM
+    Author     : HU_J
+*/
+
+Map {
+  background-color: rgba(0,0,0,0);
+}
+
+
+
+#Santa_Monica_Zoning[ZONING='Airport']{
+  line-color:#0000FF;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#0000FF;
+}
+
+#Santa_Monica_Zoning[ZONING='Beach']{
+  line-color:#FF7F50;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FF7F50;
+}
+
+
+
+
+#Santa_Monica_Zoning[ZONING='BCD']{
+  line-color:#8A2BE2;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#8A2BE2;
+}
+
+
+
+
+
+#Santa_Monica_Zoning[ZONING='BSC1']{
+  line-color:#8B4513;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#8B4513;
+}
+
+
+#Santa_Monica_Zoning[ZONING='BSC2']{
+  line-color:#8B4513;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#8B4513;
+}
+
+
+#Santa_Monica_Zoning[ZONING='BSC3']{
+  line-color:#8B4513;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#8B4513;
+}
+
+#Santa_Monica_Zoning[ZONING='BSC4']{
+  line-color:#8B4513;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#8B4513;
+}
+
+
+
+#Santa_Monica_Zoning[ZONING='BPD']{
+  line-color:#00FFFF;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#00FFFF;
+}
+
+
+
+
+
+#Santa_Monica_Zoning[ZONING='C2']{
+  line-color:#800080;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#800080;
+}
+
+
+#Santa_Monica_Zoning[ZONING='C3']{
+  line-color:#DDA0DD;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#DDA0DD;
+}
+
+
+#Santa_Monica_Zoning[ZONING='C3C']{
+  line-color:#DDA0DD;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#DDA0DD;
+}
+
+
+
+
+#Santa_Monica_Zoning[ZONING='C4']{
+  line-color:#FF0000;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FF0000;
+}
+
+
+#Santa_Monica_Zoning[ZONING='C5']{
+  line-color:#FF6347;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FF6347;
+}
+
+
+#Santa_Monica_Zoning[ZONING='C6']{
+  line-color:#EE82EE;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#EE82EE;
+}
+
+
+#Santa_Monica_Zoning[ZONING='CC']{
+  line-color:#0000FF;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#0000FF;
+}
+
+#Santa_Monica_Zoning[ZONING='CM2']{
+  line-color:#B22222;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#B22222;
+}
+
+#Santa_Monica_Zoning[ZONING='CM3']{
+  line-color:#B22222;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#B22222;
+}
+
+
+#Santa_Monica_Zoning[ZONING='CM4']{
+  line-color:#B22222;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#B22222;
+}
+
+
+
+#Santa_Monica_Zoning[ZONING='CP3']{
+  line-color:#FF00FF;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FF00FF;
+}
+
+
+#Santa_Monica_Zoning[ZONING='CP5']{
+  line-color:#FF00FF;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FF00FF;
+}
+
+
+
+#Santa_Monica_Zoning[ZONING='DP']{
+  line-color:#008000;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#008000;
+}
+
+
+
+#Santa_Monica_Zoning[ZONING='LMSD']{
+  line-color:#F5DEB3;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#F5DEB3;
+}
+
+
+#Santa_Monica_Zoning[ZONING='M1']{
+  line-color:#D2B48C;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#D2B48C;
+}
+
+#Santa_Monica_Zoning[ZONING='OP']{
+  line-color:#87CEEB;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#87CEEB;
+}
+
+
+#Santa_Monica_Zoning[ZONING='OP1']{
+  line-color:#FFA500;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FFA500;
+}
+
+
+
+
+#Santa_Monica_Zoning[ZONING='OP2']{
+  line-color:#FFEFD5;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FFEFD5;
+}
+
+
+#Santa_Monica_Zoning[ZONING='OP3']{
+  line-color:#FFDAB9;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FFDAB9;
+}
+
+
+
+#Santa_Monica_Zoning[ZONING='R1']{
+  line-color:#FFFF00;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FFFF00;
+}
+
+
+
+
+
+
+#Santa_Monica_Zoning[ZONING='OP4']{
+  line-color:#D2691E;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#D2691E;
+}
+
+
+
+
+#Santa_Monica_Zoning[ZONING='R2']{
+  line-color:#FF69B4;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#FF69B4;
+}
+
+
+
+
+#Santa_Monica_Zoning[ZONING='R2B']{
+  line-color:#4B0082;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#4B0082;
+}
+
+#Santa_Monica_Zoning[ZONING='R2R']{
+  line-color:#4B0082;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#4B0082;
+}
+
+
+
+
+#Santa_Monica_Zoning[ZONING='R3']{
+  line-color:#ADD8E6;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#ADD8E6;
+}
+
+#Santa_Monica_Zoning[ZONING='R3R']{
+  line-color:#A52A2A;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#A52A2A;
+}
+
+
+#Santa_Monica_Zoning[ZONING='R4']{
+  line-color:#00FF00;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#00FF00;
+}
+
+
+#Santa_Monica_Zoning[ZONING='RMH']{
+  line-color:#808000;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#808000;
+}
+
+
+#Santa_Monica_Zoning[ZONING='RVC']{
+  line-color:#7FFFD4;
+  line-width:0.5;
+  polygon-opacity:0.6;
+  polygon-fill:#7FFFD4;
+}
+

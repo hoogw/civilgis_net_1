@@ -1,0 +1,601 @@
+Map {
+  background-color: rgba(0,0,0,0);
+}
+
+
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='R1']{
+  line-color:#FFFF00;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFFF00;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='R2']{
+  line-color:#FF7F50;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF7F50;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='R4']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='R4(PV)']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='R4P']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='R3']{
+  line-color:#A52A2A;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#A52A2A;
+}
+
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RE']{
+  line-color:#FFF8DC;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFF8DC;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RE11']{
+  line-color:#FFF8DC;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFF8DC;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='RE15']{
+  line-color:#FFF8DC;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFF8DC;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='RE20']{
+  line-color:#FFF8DC;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFF8DC;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='RE40']{
+  line-color:#FFF8DC;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFF8DC;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='RE9']{
+  line-color:#FFF8DC;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFF8DC;
+}
+
+
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='C4']{
+  line-color:#800080;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#800080;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='C4(OX)']{
+  line-color:#800080;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#800080;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='C5']{
+  line-color:#800080;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#800080;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='CCS']{
+  line-color:#800080;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#800080;
+}
+
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='P']{
+  line-color:#DDA0DD;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#DDA0DD;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='C1']{
+  line-color:#FF0000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF0000;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='C1.5']{
+  line-color:#FF0000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF0000;
+}
+
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='C2']{
+  line-color:#FF6347;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF6347;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='CEC']{
+  line-color:#FF6347;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF6347;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='CM']{
+  line-color:#EE82EE;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#EE82EE;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='CM(GM)']{
+  line-color:#EE82EE;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#EE82EE;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='CM(UV)']{
+  line-color:#EE82EE;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#EE82EE;
+}
+
+
+
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='R5']{
+  line-color:#FFEFD5;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFEFD5;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='R5P']{
+  line-color:#FFEFD5;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFEFD5;
+}
+
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RA']{
+  line-color:#FFDAB9;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFDAB9;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RAP']{
+  line-color:#FFDAB9;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFDAB9;
+}
+
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RAS3']{
+  line-color:#8B4513;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8B4513;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='RAS3(UV)']{
+  line-color:#8B4513;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8B4513;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RAS4']{
+  line-color:#8B4513;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8B4513;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RAS4(UV)']{
+  line-color:#8B4513;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8B4513;
+}
+
+
+
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RD1.5']{
+  line-color:#FFA500;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFA500;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='RD2']{
+  line-color:#FFA500;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFA500;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RD3']{
+  line-color:#FFA500;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFA500;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='RD3']{
+  line-color:#FFA500;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFA500;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='RD5']{
+  line-color:#FFA500;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFA500;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='RD6']{
+  line-color:#FFA500;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFA500;
+}
+
+
+
+
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RW1']{
+  line-color:#87CEEB;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#87CEEB;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RW2']{
+  line-color:#87CEEB;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#87CEEB;
+}
+
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='A1']{
+  line-color:#008000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#008000;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='A2']{
+  line-color:#008000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#008000;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='A2(PV)']{
+  line-color:#008000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#008000;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='ADP']{
+  line-color:#008000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#008000;
+}
+
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='M1']{
+  line-color:#0000FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#0000FF;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='M1(PV)']{
+  line-color:#0000FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#0000FF;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='M3']{
+  line-color:#8A2BE2;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8A2BE2;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RMP']{
+  line-color:#FF69B4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF69B4;
+}
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RS']{
+  line-color:#FF00FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF00FF;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RSP']{
+  line-color:#FF00FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF00FF;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RU']{
+  line-color:#FF00FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF00FF;
+}
+
+
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RZ2.5']{
+  line-color:#4B0082;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#4B0082;
+}
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RZ3']{
+  line-color:#4B0082;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#4B0082;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RZ4']{
+  line-color:#4B0082;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#4B0082;
+}
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='RZ5']{
+  line-color:#4B0082;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#4B0082;
+}
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='CR(PKM)']{
+  line-color:#ADD8E6;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#ADD8E6;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='CR']{
+  line-color:#ADD8E6;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#ADD8E6;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='CW']{
+  line-color:#ADD8E6;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#ADD8E6;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='GW(CA)']{
+  line-color:#ADD8E6;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#ADD8E6;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='LASED']{
+  line-color:#ADD8E6;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#ADD8E6;
+}
+
+
+
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='LAX']{
+  line-color:#00FF00;
+  line-width:1;
+  polygon-opacity:0.5;
+  polygon-fill:#00FF00;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='M2']{
+  line-color:#7FFFD4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#7FFFD4;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='MR1']{
+  line-color:#808000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#808000;
+}
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='MR2']{
+  line-color:#00FFFF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#00FFFF;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='OS']{
+  line-color:#C0C0C0;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#C0C0C0;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='OS(PV)']{
+  line-color:#C0C0C0;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#C0C0C0;
+}
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='PB']{
+  line-color:#F5DEB3;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#F5DEB3;
+}
+
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='PF(UV)']{
+  line-color:#D2B48C;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2B48C;
+}
+
+#Los_Angeles_Zoning[ZONE_CLASS='PF']{
+  line-color:#D2B48C;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2B48C;
+}
+
+
+#Los_Angeles_Zoning[ZONE_CLASS='PVSP']{
+  line-color:#D2B48C;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2B48C;
+}
+
+
+
+
+
+
+
+

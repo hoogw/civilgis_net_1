@@ -1,0 +1,138 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 22, 2016, 4:04:45 PM
+    Author     : HU_J
+*/
+
+Map {
+  background-color: rgba(0,0,0,0);
+}
+
+
+
+
+
+#City_General_Land_Use[GP_CODE='LDR']{
+  line-color:#FFFF00;
+  line-width:0.5;
+  polygon-opacity:6;
+  polygon-fill:#FFFF00;
+}
+
+#City_General_Land_Use[GP_CODE='MDR']{
+  line-color:#FF7F50;
+  line-width:0.5;
+  polygon-opacity:6;
+  polygon-fill:#FF7F50;
+}
+
+
+#City_General_Land_Use[GP_CODE='HDR']{
+  line-color:#D2691E;
+  line-width:0.5;
+  polygon-opacity:6;
+  polygon-fill:#D2691E;
+}
+
+
+#City_General_Land_Use[GP_CODE='F']{
+  line-color:#A52A2A;
+  line-width:0.5;
+  polygon-opacity:6;
+  polygon-fill:#A52A2A;
+}
+
+
+#City_General_Land_Use[GP_CODE='G']{
+  line-color:#FFF8DC;
+  line-width:0.5;
+  polygon-opacity:6;
+  polygon-fill:#FFF8DC;
+}
+
+
+#City_General_Land_Use[GP_CODE='GC']{
+  line-color:#800080;
+  line-width:0.5;
+  polygon-opacity:6;
+  polygon-fill:#800080;
+}
+
+
+#City_General_Land_Use[GP_CODE='CC']{
+  line-color:#DDA0DD;
+  line-width:0.5;
+  polygon-opacity:6;
+  polygon-fill:#DDA0DD;
+}
+
+
+#City_General_Land_Use[GP_CODE='CR']{
+  line-color:#FF0000;
+  line-width:0.5;
+  polygon-opacity:6;
+  polygon-fill:#FF0000;
+}
+
+#City_General_Land_Use[GP_CODE='NC']{
+  line-color:#FF6347;
+  line-width:0.5;
+  polygon-opacity:6;
+  polygon-fill:#FF6347;
+}
+
+
+
+#City_General_Land_Use[GP_CODE='RC']{
+  line-color:#EE82EE;
+  line-width:0.5;
+  polygon-opacity:6;
+  polygon-fill:#EE82EE;
+}
+
+
+
+
+#City_General_Land_Use[GP_CODE='UCC']{
+  line-color:#FFA500;
+  line-width:0.5;
+  polygon-opacity:6;
+  polygon-fill:#FFA500;
+}
+
+#City_General_Land_Use[GP_CODE='PDI']{
+  line-color:#87CEEB;
+  line-width:0.5;
+  polygon-opacity:6;
+  polygon-fill:#87CEEB;
+}
+
+
+
+#City_General_Land_Use[GP_CODE='PI']{
+  line-color:#008000;
+  line-width:0.5;
+  polygon-opacity:6;
+  polygon-fill:#008000;
+}
+
+
+#City_General_Land_Use[GP_CODE='LI']{
+  line-color:#0000FF;
+  line-width:0.5;
+  polygon-opacity:6;
+  polygon-fill:#0000FF;
+}
+
+
+#City_General_Land_Use[GP_CODE='IP']{
+  line-color:#8A2BE2;
+  line-width:0.5;
+  polygon-opacity:6;
+  polygon-fill:#8A2BE2;
+}
+

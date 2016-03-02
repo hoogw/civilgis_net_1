@@ -1,0 +1,851 @@
+Map {
+  background-color: rgba(0,0,0,0);
+}
+
+
+
+
+
+
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='BPC']{
+  line-color:#00FFFF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#00FFFF;
+}
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C1-6']{
+  line-color:#7FFFD4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#7FFFD4;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C1-6A']{
+  line-color:#7FFFD4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#7FFFD4;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C1-7']{
+  line-color:#7FFFD4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#7FFFD4;
+}
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C1-7A']{
+  line-color:#7FFFD4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#7FFFD4;
+}
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C1-8']{
+  line-color:#7FFFD4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#7FFFD4;
+}
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C1-8A']{
+  line-color:#7FFFD4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#7FFFD4;
+}
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C1-8X']{
+  line-color:#7FFFD4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#7FFFD4;
+}
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C1-9']{
+  line-color:#7FFFD4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#7FFFD4;
+}
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C1-9A']{
+  line-color:#7FFFD4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#7FFFD4;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C2-6']{
+  line-color:#0000FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#0000FF;
+}
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C2-6A']{
+  line-color:#0000FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#0000FF;
+}
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C2-7']{
+  line-color:#0000FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#0000FF;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C2-7A']{
+  line-color:#0000FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#0000FF;
+}
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C2-8']{
+  line-color:#0000FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#0000FF;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C2-8A']{
+  line-color:#0000FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#0000FF;
+}
+
+
+
+
+
+
+
+
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C4-2F']{
+  line-color:#8A2BE2;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8A2BE2;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C4-4']{
+  line-color:#8A2BE2;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8A2BE2;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C4-4A']{
+  line-color:#8A2BE2;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8A2BE2;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C4-4D']{
+  line-color:#8A2BE2;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8A2BE2;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C4-5']{
+  line-color:#8A2BE2;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8A2BE2;
+}
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C4-5A']{
+  line-color:#8A2BE2;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8A2BE2;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C4-5X']{
+  line-color:#8A2BE2;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8A2BE2;
+}
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C4-6']{
+  line-color:#8A2BE2;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8A2BE2;
+}
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C4-6A']{
+  line-color:#8A2BE2;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8A2BE2;
+}
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C4-7']{
+  line-color:#8A2BE2;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8A2BE2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C5-1']{
+  line-color:#A52A2A;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#A52A2A;
+}
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C5-1A']{
+  line-color:#A52A2A;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#A52A2A;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C5-2']{
+  line-color:#A52A2A;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#A52A2A;
+}
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C5-2.5']{
+  line-color:#A52A2A;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#A52A2A;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C5-3']{
+  line-color:#A52A2A;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#A52A2A;
+}
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C5-5']{
+  line-color:#A52A2A;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#A52A2A;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C5-P']{
+  line-color:#A52A2A;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#A52A2A;
+}
+
+
+
+
+
+
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-1']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-1G']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-2']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-2A']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-2G']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-2M']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-3']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-3A']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-3X']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-4']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-4.5']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-4A']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-4M']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-4X']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-5']{
+  line-color:#FF7F50;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF7F50;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-5.5']{
+  line-color:#FF7F50;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF7F50;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-6']{
+  line-color:#FF7F50;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF7F50;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-6.5']{
+  line-color:#FF7F50;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF7F50;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-7']{
+  line-color:#FF7F50;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF7F50;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-7T']{
+  line-color:#FF7F50;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF7F50;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C6-9']{
+  line-color:#FF7F50;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF7F50;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='C8-3']{
+  line-color:#FFF8DC;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFF8DC;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='C8-4']{
+  line-color:#FFF8DC;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFF8DC;
+}
+
+
+
+
+
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='M1-1']{
+  line-color:#FF00FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF00FF;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='M1-2']{
+  line-color:#FF00FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF00FF;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='M1-4']{
+  line-color:#FF00FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF00FF;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='M1-6']{
+  line-color:#FF00FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF00FF;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='M1-6D']{
+  line-color:#FF00FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF00FF;
+}
+
+
+
+
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='PARK']{
+  line-color:#008000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#008000;
+}
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='M1-5/R7-2']{
+  line-color:#FF69B4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF69B4;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='M1-5/R7X']{
+  line-color:#FF69B4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF69B4;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='M1-5A']{
+  line-color:#FF69B4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF69B4;
+}
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='M1-5B']{
+  line-color:#FF69B4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF69B4;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='M1-5M']{
+  line-color:#FF69B4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF69B4;
+}
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='M1-5']{
+  line-color:#FF69B4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF69B4;
+}
+
+
+
+
+
+
+
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='M2-1']{
+  line-color:#4B0082;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#4B0082;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='M2-2']{
+  line-color:#4B0082;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#4B0082;
+}
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='M2-3']{
+  line-color:#4B0082;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#4B0082;
+}
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='M2-4']{
+  line-color:#4B0082;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#4B0082;
+}
+
+
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='M3-1']{
+  line-color:#00FF00;
+  line-width:1;
+  polygon-opacity:0.5;
+  polygon-fill:#00FF00;
+}
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='M3-2']{
+  line-color:#00FF00;
+  line-width:1;
+  polygon-opacity:0.5;
+  polygon-fill:#00FF00;
+}
+
+
+
+
+
+
+
+
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='R10']{
+  line-color:#ADD8E6;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#ADD8E6;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='R10A']{
+  line-color:#ADD8E6;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#ADD8E6;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='R10B']{
+  line-color:#ADD8E6;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#ADD8E6;
+}
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='R3-2']{
+  line-color:#808000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#808000;
+}
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='R5']{
+  line-color:#FFA500;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFA500;
+}
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='R6']{
+  line-color:#800080;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#800080;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='R6A']{
+  line-color:#800080;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#800080;
+}
+
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='R7-1']{
+  line-color:#FFEFD5;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFEFD5;
+}
+#New_York_Manhattan_Zoning[ZoneDist1='R7-2']{
+  line-color:#FFEFD5;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFEFD5;
+}
+
+
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='R7A']{
+  line-color:#FFDAB9;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFDAB9;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='R7B']{
+  line-color:#FFDAB9;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFDAB9;
+}
+#New_York_Manhattan_Zoning[ZoneDist1='R7D']{
+  line-color:#FFDAB9;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFDAB9;
+}
+#New_York_Manhattan_Zoning[ZoneDist1='R7X']{
+  line-color:#FFDAB9;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFDAB9;
+}
+
+
+
+
+
+
+
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='R8']{
+  line-color:#DDA0DD;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#DDA0DD;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='R8A']{
+  line-color:#DDA0DD;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#DDA0DD;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='R8B']{
+  line-color:#DDA0DD;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#DDA0DD;
+}
+
+#New_York_Manhattan_Zoning[ZoneDist1='R8X']{
+  line-color:#DDA0DD;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#DDA0DD;
+}
+
+
+
+
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='R9']{
+  line-color:#FF0000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF0000;
+}
+#New_York_Manhattan_Zoning[ZoneDist1='R9A']{
+  line-color:#FF0000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF0000;
+}
+#New_York_Manhattan_Zoning[ZoneDist1='R9X']{
+  line-color:#FF0000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF0000;
+}
+
+
+
+
+#New_York_Manhattan_Zoning[ZoneDist1='ZNA']{
+  line-color:#C0C0C0;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#C0C0C0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
