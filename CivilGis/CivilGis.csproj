@@ -275,6 +275,10 @@
     <Content Include="Scripts\classification\area\Newport_Beach\tile_css_General_Land_Use.css" />
     <Content Include="Scripts\classification\area\Newport_Beach\tile_css_Zoning.css" />
     <Content Include="Scripts\classification\area\Newport_Beach\Zoning.js" />
+    <Content Include="Scripts\classification\area\New_York\Commercial_Zone.js" />
+    <Content Include="Scripts\classification\area\New_York\tile_css_Commercial_Zone.css" />
+    <Content Include="Scripts\classification\area\New_York\tile_css_Zone_Districts.css" />
+    <Content Include="Scripts\classification\area\New_York\Zone_Districts.js" />
     <Content Include="Scripts\classification\area\New_York_Manhattan\tile_css_Zoning.css" />
     <Content Include="Scripts\classification\area\New_York_Manhattan\Zoning.js" />
     <Content Include="Scripts\classification\area\Santa_Monica\tile_css_Zoning.css" />
@@ -833,7 +837,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\classification\area\Denver\" />
-    <Folder Include="Scripts\classification\area\New_York\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

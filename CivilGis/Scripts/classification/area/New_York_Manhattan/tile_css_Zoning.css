@@ -268,7 +268,7 @@ Map {
 }
 
 
-#New_York_Manhattan_Zoning[ZoneDist1='C5-2.5']{
+#New_York_Manhattan_Zoning[ZoneDist1='C5-2_5']{
   line-color:#A52A2A;
   line-width:0;
   polygon-opacity:0.5;
@@ -375,7 +375,7 @@ Map {
   polygon-fill:#D2691E;
 }
 
-#New_York_Manhattan_Zoning[ZoneDist1='C6-4.5']{
+#New_York_Manhattan_Zoning[ZoneDist1='C6-4_5']{
   line-color:#D2691E;
   line-width:0;
   polygon-opacity:0.5;
@@ -425,7 +425,7 @@ Map {
   polygon-fill:#FF7F50;
 }
 
-#New_York_Manhattan_Zoning[ZoneDist1='C6-5.5']{
+#New_York_Manhattan_Zoning[ZoneDist1='C6-5_5']{
   line-color:#FF7F50;
   line-width:0;
   polygon-opacity:0.5;
@@ -439,7 +439,7 @@ Map {
   polygon-fill:#FF7F50;
 }
 
-#New_York_Manhattan_Zoning[ZoneDist1='C6-6.5']{
+#New_York_Manhattan_Zoning[ZoneDist1='C6-6_5']{
   line-color:#FF7F50;
   line-width:0;
   polygon-opacity:0.5;
@@ -549,19 +549,7 @@ Map {
 
 
 
-#New_York_Manhattan_Zoning[ZoneDist1='M1-5/R7-2']{
-  line-color:#FF69B4;
-  line-width:0;
-  polygon-opacity:0.5;
-  polygon-fill:#FF69B4;
-}
 
-#New_York_Manhattan_Zoning[ZoneDist1='M1-5/R7X']{
-  line-color:#FF69B4;
-  line-width:0;
-  polygon-opacity:0.5;
-  polygon-fill:#FF69B4;
-}
 
 #New_York_Manhattan_Zoning[ZoneDist1='M1-5A']{
   line-color:#FF69B4;

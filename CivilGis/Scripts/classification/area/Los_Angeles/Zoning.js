@@ -22,7 +22,7 @@ _designation['Los_Angeles_Zoning'] = [
     { 'code': 'R3', 'description': "Multiple Dwelling Zone", 'color': "brown" },
 
     { 'code': 'R4', 'description': "Multiple Dwelling Zone", 'color': "chocolate" },
-    { 'code': 'R4(PV)', 'description': "Multiple Dwelling Zone", 'color': "chocolate" },
+    { 'code': 'R4_PV', 'description': "Multiple Dwelling Zone", 'color': "chocolate" },
     { 'code': 'R4P', 'description': "Multiple Dwelling Zone", 'color': "chocolate" },
 
     { 'code': 'R5', 'description': 'Multiple Dwelling Zone', 'color': "papayawhip" },
@@ -34,12 +34,12 @@ _designation['Los_Angeles_Zoning'] = [
 
 
      { 'code': 'RAS3', 'description': 'Residential Accessory Services Zone', 'color': "saddlebrown" },
-     { 'code': 'RAS3(UV)', 'description': 'Residential Accessory Services Zone', 'color': "saddlebrown" },
+     { 'code': 'RAS3_UV', 'description': 'Residential Accessory Services Zone', 'color': "saddlebrown" },
     { 'code': 'RAS4', 'description': 'Residential Accessory Services Zone', 'color': "saddlebrown" },
-    { 'code': 'RAS4(UV)', 'description': 'Residential Accessory Services Zone', 'color': "saddlebrown" },
+    { 'code': 'RAS4_UV', 'description': 'Residential Accessory Services Zone', 'color': "saddlebrown" },
 
 
-    { 'code': 'RD1.5', 'description': 'Restricted Density Multiple Dwelling Zone', 'color': "orange" },
+    { 'code': 'RD1_5', 'description': 'Restricted Density Multiple Dwelling Zone', 'color': "orange" },
     { 'code': 'RD2', 'description': 'Restricted Density Multiple Dwelling Zone', 'color': "orange" },
     { 'code': 'RD3', 'description': 'Restricted Density Multiple Dwelling Zone', 'color': "orange" },
     { 'code': 'RD4', 'description': 'Restricted Density Multiple Dwelling Zone', 'color': "orange" },
@@ -64,7 +64,7 @@ _designation['Los_Angeles_Zoning'] = [
      { 'code': 'RW2', 'description': 'Residential Waterways Zone', 'color': "skyblue" },
 
 
-     { 'code': 'RZ2.5', 'description': 'Residential Zero Side Yard Zone', 'color': "indigo" },
+     { 'code': 'RZ2_5', 'description': 'Residential Zero Side Yard Zone', 'color': "indigo" },
     { 'code': 'RZ3', 'description': 'Residential Zero Side Yard Zone', 'color': "indigo" },
      { 'code': 'RZ4', 'description': 'Residential Zero Side Yard Zone', 'color': "indigo" },
      { 'code': 'RZ5', 'description': 'Residential Zero Side Yard Zone', 'color': "indigo" },
@@ -75,42 +75,42 @@ _designation['Los_Angeles_Zoning'] = [
 
      { 'code': 'A1', 'description': 'Agriculture Zone', 'color': "green" },
      { 'code': 'A2', 'description': 'Agriculture Zone', 'color': "green" },
-    { 'code': 'A2(PV)', 'description': 'Agriculture Zone', 'color': "green" },
+    { 'code': 'A2_PV', 'description': 'Agriculture Zone', 'color': "green" },
     { 'code': 'ADP', 'description': 'Agriculture Zone', 'color': "green" },
 
 
 
 
     { 'code': 'C1', 'description': 'Limited Commercial Zone', 'color': "red" },
-    { 'code': 'C1.5', 'description': 'Limited Commercial Zone', 'color': "red" },
+    { 'code': 'C1_5', 'description': 'Limited Commercial Zone', 'color': "red" },
 
     { 'code': 'C2', 'description': 'Commercial Zone', 'color': "tomato" },
     { 'code': 'CEC', 'description': 'Commercial Zone', 'color': "tomato" },
 
     { 'code': 'C4', 'description': 'Commercial Zone', 'color': "purple" },
-     { 'code': 'C4(OX)', 'description': 'Commercial Zone', 'color': "purple" },
+     { 'code': 'C4_OX', 'description': 'Commercial Zone', 'color': "purple" },
     { 'code': 'C5', 'description': 'Commercial Zone', 'color': "purple" },
     { 'code': 'CCS', 'description': 'Century City South Specific Plan Studio Zone', 'color': "purple" },
 
 
 
     { 'code': 'CM', 'description': 'Commercial Manufacturing Zone', 'color': "violet" },
-    { 'code': 'CM(GM)', 'description': 'Commercial Manufacturing Zone', 'color': "violet" },
-    { 'code': 'CM(UV)', 'description': 'Commercial Manufacturing Zone', 'color': "violet" },
+    { 'code': 'CM_GM', 'description': 'Commercial Manufacturing Zone', 'color': "violet" },
+    { 'code': 'CM_UV', 'description': 'Commercial Manufacturing Zone', 'color': "violet" },
 
 
 
     { 'code': 'CR', 'description': 'Limited Commercial Zone', 'color': "lightblue" },
-    { 'code': 'CR(PKM)', 'description': 'Limited Commercial Zone', 'color': "lightblue" },
+    { 'code': 'CR_PKM', 'description': 'Limited Commercial Zone', 'color': "lightblue" },
      { 'code': 'CW', 'description': 'Central City West Specific Plan Zone', 'color': "lightblue" },
-    { 'code': 'GW(CA)', 'description': 'Central City West Specific Plan Zone', 'color': "lightblue" },
+    { 'code': 'GW_CA', 'description': 'Central City West Specific Plan Zone', 'color': "lightblue" },
     { 'code': 'LASED', 'description': 'Central City West Specific Plan Zone', 'color': "lightblue" },
 
 
     { 'code': 'LAX', 'description': 'Los Angeles International Airport Specific Plan Zone', 'color': "lime" },
 
     { 'code': 'M1', 'description': 'Limited Industrial Zone', 'color': "blue" },
-    { 'code': 'M1(PV)', 'description': 'Limited Industrial Zone', 'color': "blue" },
+
 
     { 'code': 'M2', 'description': 'Light Industrial Zone', 'color': "aquamarine" },
 
@@ -121,7 +121,7 @@ _designation['Los_Angeles_Zoning'] = [
     { 'code': 'MR2', 'description': 'Restricted Industrial Zone', 'color': "aqua" },
 
      { 'code': 'OS', 'description': 'Open Space Zone', 'color': "silver" },
-     { 'code': 'OS(PV)', 'description': 'Open Space Zone', 'color': "silver" },
+     { 'code': 'OS_PV', 'description': 'Open Space Zone', 'color': "silver" },
 
 
     { 'code': 'P', 'description': 'Automobile Parking Zone', 'color': "plum" },
@@ -129,7 +129,7 @@ _designation['Los_Angeles_Zoning'] = [
     { 'code': 'PB', 'description': 'Parking Building Zone', 'color': "wheat" },
 
     { 'code': 'PF', 'description': 'Public Facilities Zone', 'color': "tan" },
-    { 'code': 'PF(UV)', 'description': 'Public Facilities Zone', 'color': "tan" },
+    { 'code': 'PF_UV', 'description': 'Public Facilities Zone', 'color': "tan" },
      { 'code': 'PVSP', 'description': 'Public Facilities Zone', 'color': "tan" }
 ];
 

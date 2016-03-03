@@ -28,7 +28,7 @@ Map {
 }
 
 
-#Los_Angeles_Zoning[ZONE_CLASS='R4(PV)']{
+#Los_Angeles_Zoning[ZONE_CLASS='R4_PV']{
   line-color:#D2691E;
   line-width:0;
   polygon-opacity:0.5;
@@ -112,7 +112,7 @@ Map {
 }
 
 
-#Los_Angeles_Zoning[ZONE_CLASS='C4(OX)']{
+#Los_Angeles_Zoning[ZONE_CLASS='C4_OX']{
   line-color:#800080;
   line-width:0;
   polygon-opacity:0.5;
@@ -151,7 +151,7 @@ Map {
   polygon-fill:#FF0000;
 }
 
-#Los_Angeles_Zoning[ZONE_CLASS='C1.5']{
+#Los_Angeles_Zoning[ZONE_CLASS='C1_5']{
   line-color:#FF0000;
   line-width:0;
   polygon-opacity:0.5;
@@ -184,14 +184,14 @@ Map {
   polygon-fill:#EE82EE;
 }
 
-#Los_Angeles_Zoning[ZONE_CLASS='CM(GM)']{
+#Los_Angeles_Zoning[ZONE_CLASS='CM_GM']{
   line-color:#EE82EE;
   line-width:0;
   polygon-opacity:0.5;
   polygon-fill:#EE82EE;
 }
 
-#Los_Angeles_Zoning[ZONE_CLASS='CM(UV)']{
+#Los_Angeles_Zoning[ZONE_CLASS='CM_UV']{
   line-color:#EE82EE;
   line-width:0;
   polygon-opacity:0.5;
@@ -245,7 +245,7 @@ Map {
   polygon-fill:#8B4513;
 }
 
-#Los_Angeles_Zoning[ZONE_CLASS='RAS3(UV)']{
+#Los_Angeles_Zoning[ZONE_CLASS='RAS3_UV']{
   line-color:#8B4513;
   line-width:0;
   polygon-opacity:0.5;
@@ -261,7 +261,7 @@ Map {
 }
 
 
-#Los_Angeles_Zoning[ZONE_CLASS='RAS4(UV)']{
+#Los_Angeles_Zoning[ZONE_CLASS='RAS4_UV']{
   line-color:#8B4513;
   line-width:0;
   polygon-opacity:0.5;
@@ -273,7 +273,7 @@ Map {
 
 
 
-#Los_Angeles_Zoning[ZONE_CLASS='RD1.5']{
+#Los_Angeles_Zoning[ZONE_CLASS='RD1_5']{
   line-color:#FFA500;
   line-width:0;
   polygon-opacity:0.5;
@@ -356,7 +356,7 @@ Map {
 }
 
 
-#Los_Angeles_Zoning[ZONE_CLASS='A2(PV)']{
+#Los_Angeles_Zoning[ZONE_CLASS='A2_PV']{
   line-color:#008000;
   line-width:0;
   polygon-opacity:0.5;
@@ -381,12 +381,6 @@ Map {
 }
 
 
-#Los_Angeles_Zoning[ZONE_CLASS='M1(PV)']{
-  line-color:#0000FF;
-  line-width:0;
-  polygon-opacity:0.5;
-  polygon-fill:#0000FF;
-}
 
 
 #Los_Angeles_Zoning[ZONE_CLASS='M3']{
@@ -433,7 +427,7 @@ Map {
 
 
 
-#Los_Angeles_Zoning[ZONE_CLASS='RZ2.5']{
+#Los_Angeles_Zoning[ZONE_CLASS='RZ2_5']{
   line-color:#4B0082;
   line-width:0;
   polygon-opacity:0.5;
@@ -468,7 +462,7 @@ Map {
 
 
 
-#Los_Angeles_Zoning[ZONE_CLASS='CR(PKM)']{
+#Los_Angeles_Zoning[ZONE_CLASS='CR_PKM']{
   line-color:#ADD8E6;
   line-width:0;
   polygon-opacity:0.5;
@@ -492,7 +486,7 @@ Map {
 }
 
 
-#Los_Angeles_Zoning[ZONE_CLASS='GW(CA)']{
+#Los_Angeles_Zoning[ZONE_CLASS='GW_CA']{
   line-color:#ADD8E6;
   line-width:0;
   polygon-opacity:0.5;
@@ -552,7 +546,7 @@ Map {
 }
 
 
-#Los_Angeles_Zoning[ZONE_CLASS='OS(PV)']{
+#Los_Angeles_Zoning[ZONE_CLASS='OS_PV']{
   line-color:#C0C0C0;
   line-width:0;
   polygon-opacity:0.5;
@@ -570,7 +564,7 @@ Map {
 
 
 
-#Los_Angeles_Zoning[ZONE_CLASS='PF(UV)']{
+#Los_Angeles_Zoning[ZONE_CLASS='PF_UV']{
   line-color:#D2B48C;
   line-width:0;
   polygon-opacity:0.5;
