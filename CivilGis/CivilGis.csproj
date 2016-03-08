@@ -283,6 +283,10 @@
     <Content Include="Scripts\classification\area\New_York_Manhattan\Zoning.js" />
     <Content Include="Scripts\classification\area\Santa_Monica\tile_css_Zoning.css" />
     <Content Include="Scripts\classification\area\Santa_Monica\Zoning.js" />
+    <Content Include="Scripts\classification\area\San_Francisco\tile_css_Downtown_Zoning.css" />
+    <Content Include="Scripts\classification\area\San_Francisco\Zoning_Districts.js" />
+    <Content Include="Scripts\classification\area\San_Francisco\Downtown_Zoning.js" />
+    <Content Include="Scripts\classification\area\San_Francisco\Downtown_Land_Use.js" />
     <Content Include="Scripts\classification\classification_button_style.css" />
     <Content Include="Scripts\googlemap\classifycheckboxbuttonmap.js" />
     <Content Include="Scripts\googlemap\classifyradiobuttonmap.js" />

@@ -13,7 +13,7 @@ Map {
 
 #New_York_Commercial_Zone[OVERLAY='C1-1']{
   line-color:#DDA0DD;
-  line-width:0;
+  line-width:1;
   polygon-opacity:0.5;
   polygon-fill:#DDA0DD;
 }
@@ -21,7 +21,7 @@ Map {
 
 #New_York_Commercial_Zone[OVERLAY='C1-2']{
   line-color:#FF0000;
-  line-width:0;
+  line-width:1;
   polygon-opacity:0.5;
   polygon-fill:#FF0000;
 }
@@ -30,7 +30,7 @@ Map {
 
 #New_York_Commercial_Zone[OVERLAY='C1-3']{
   line-color:#C0C0C0;
-  line-width:0;
+  line-width:1;
   polygon-opacity:0.5;
   polygon-fill:#C0C0C0;
 }
@@ -42,7 +42,7 @@ Map {
 
 #New_York_Commercial_Zone[OVERLAY='C1-4']{
   line-color:#87CEEB;
-  line-width:0;
+  line-width:1;
   polygon-opacity:0.5;
   polygon-fill:#87CEEB;
 }
@@ -50,7 +50,7 @@ Map {
 
 #New_York_Commercial_Zone[OVERLAY='C1-5']{
   line-color:#8B4513;
-  line-width:0;
+  line-width:1;
   polygon-opacity:0.5;
   polygon-fill:#8B4513;
 }
@@ -60,7 +60,7 @@ Map {
 
 #New_York_Commercial_Zone[OVERLAY='C2-1']{
   line-color:#FF6347;
-  line-width:0;
+  line-width:1;
   polygon-opacity:0.5;
   polygon-fill:#FF6347;
 }
@@ -68,7 +68,7 @@ Map {
 
 #New_York_Commercial_Zone[OVERLAY='C2-2']{
   line-color:#D2B48C;
-  line-width:0;
+  line-width:1;
   polygon-opacity:0.5;
   polygon-fill:#D2B48C;
 }
@@ -77,7 +77,7 @@ Map {
 
 #New_York_Commercial_Zone[OVERLAY='C2-3']{
   line-color:#EE82EE;
-  line-width:0;
+  line-width:1;
   polygon-opacity:0.5;
   polygon-fill:#EE82EE;
 }
@@ -86,7 +86,7 @@ Map {
 
 #New_York_Commercial_Zone[OVERLAY='C2-4']{
   line-color:#F5DEB3;
-  line-width:0;
+  line-width:1;
   polygon-opacity:0.5;
   polygon-fill:#F5DEB3;
 }
@@ -97,7 +97,7 @@ Map {
 
 #New_York_Commercial_Zone[OVERLAY='C2-5']{
   line-color:#FFFF00;
-  line-width:0;
+  line-width:1;
   polygon-opacity:0.5;
   polygon-fill:#FFFF00;
 }

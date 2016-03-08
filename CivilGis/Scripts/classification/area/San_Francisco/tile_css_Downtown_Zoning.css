@@ -1,0 +1,441 @@
+Map {
+  background-color: rgba(0,0,0,0);
+}
+
+
+
+
+
+
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='C-2']{
+  line-color:#00FFFF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#00FFFF;
+}
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='C-3-G']{
+  line-color:#7FFFD4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#7FFFD4;
+}
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='C-3-O']{
+  line-color:#7FFFD4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#7FFFD4;
+}
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='C-3-R']{
+  line-color:#7FFFD4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#7FFFD4;
+}
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='C-3-S']{
+  line-color:#7FFFD4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#7FFFD4;
+}
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='CCB']{
+  line-color:#0000FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#0000FF;
+}
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='CRNC']{
+  line-color:#8A2BE2;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8A2BE2;
+}
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='CVR']{
+  line-color:#A52A2A;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#A52A2A;
+}
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='M-1']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='M-2']{
+  line-color:#FF7F50;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF7F50;
+}
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='MB-O']{
+  line-color:#FFF8DC;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFF8DC;
+}
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='MB-RA']{
+  line-color:#FFF8DC;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFF8DC;
+}
+
+
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='MUG']{
+  line-color:#FF00FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF00FF;
+}
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='MUO']{
+  line-color:#008000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#008000;
+}
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='MUR']{
+  line-color:#FF69B4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF69B4;
+}
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='NC-1']{
+  line-color:#4B0082;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#4B0082;
+}
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='NC-2']{
+  line-color:#4B0082;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#4B0082;
+}
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='NC-3']{
+  line-color:#4B0082;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#4B0082;
+}
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='NC-3']{
+  line-color:#4B0082;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#4B0082;
+}
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='NCD']{
+  line-color:#00FF00;
+  line-width:1;
+  polygon-opacity:0.5;
+  polygon-fill:#00FF00;
+}
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='NCT']{
+  line-color:#00FF00;
+  line-width:1;
+  polygon-opacity:0.5;
+  polygon-fill:#00FF00;
+}
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='NCT-3']{
+  line-color:#ADD8E6;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#ADD8E6;
+}
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='P']{
+  line-color:#808000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#808000;
+}
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='PDR-1-D']{
+  line-color:#FFA500;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFA500;
+}
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='PDR-1-G']{
+  line-color:#FFA500;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFA500;
+}
+
+
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='RC-3']{
+  line-color:#800080;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#800080;
+}
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='RC-4']{
+  line-color:#FFEFD5;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFEFD5;
+}
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='RCD']{
+  line-color:#FFDAB9;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFDAB9;
+}
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='RED']{
+  line-color:#DDA0DD;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#DDA0DD;
+}
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='RED-MX']{
+  line-color:#DDA0DD;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#DDA0DD;
+}
+
+
+
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='RH-1']{
+  line-color:#FF0000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF0000;
+}
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='RH-2']{
+  line-color:#FF0000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF0000;
+}
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='RH-3']{
+  line-color:#FF0000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF0000;
+}
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='RH-DTR']{
+  line-color:#FF0000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF0000;
+}
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='RM-1']{
+  line-color:#C0C0C0;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#C0C0C0;
+}
+
+
+
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='RM-2']{
+  line-color:#87CEEB;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#87CEEB;
+}
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='RM-3']{
+  line-color:#8B4513;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8B4513;
+}
+#San_Francisco_Downtown_Zoning[ZONING_SIM='RM-4']{
+  line-color:#8B4513;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8B4513;
+}
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='RTO']{
+  line-color:#FF6347;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF6347;
+}
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='RTO-M']{
+  line-color:#FF6347;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF6347;
+}
+#San_Francisco_Downtown_Zoning[ZONING_SIM='RSD']{
+  line-color:#FF6347;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF6347;
+}
+
+
+
+
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='SALI']{
+  line-color:#D2B48C;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2B48C;
+}
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='SB-DTR']{
+  line-color:#EE82EE;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#EE82EE;
+}
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='SLI']{
+  line-color:#F5DEB3;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#F5DEB3;
+}
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='SPD']{
+  line-color:#F5DEB3;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#F5DEB3;
+}
+#San_Francisco_Downtown_Zoning[ZONING_SIM='SSO']{
+  line-color:#F5DEB3;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#F5DEB3;
+}
+
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='TB-DTR']{
+  line-color:#FFFF00;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFFF00;
+}
+
+
+
+
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='UMU']{
+  line-color:#00FFFF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#00FFFF;
+}
+
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='WMUG']{
+  line-color:#7FFFD4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#7FFFD4;
+}
+
+#San_Francisco_Downtown_Zoning[ZONING_SIM='WMUO']{
+  line-color:#7FFFD4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#7FFFD4;
+}
+
+
+
