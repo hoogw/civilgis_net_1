@@ -1,9 +1,9 @@
 ﻿
 
-_code_column_name = 'ZONING_SIM';
+_code_column_name = 'GPLU_CODE';
 
 
-_designation['San_Francisco_Zoning_Districts'] = [
+_designation['Los_Angeles_General_Land_Use'] = [
 
 
 
@@ -39,7 +39,7 @@ _designation['San_Francisco_Zoning_Districts'] = [
    
    
 { 'code': 'AN', 'description': 'Airport Northside', 'color': "lime" },
-{ 'code': 'AA', 'description': 'Airport Airside', 'color': "lime" },
+
 { 'code': 'PF', 'description': 'Public Facilities', 'color': "lightblue" },
      
      
@@ -60,7 +60,7 @@ _designation['San_Francisco_Zoning_Districts'] = [
     
     
 { 'code': 'HM', 'description': 'Heavy Manufacturing', 'color': "silver" },
-{ 'code': 'HI', 'description': 'Heavy Industrial', 'color': "silver" },
+
 { 'code': 'LM', 'description': 'Light Manufacturing', 'color': "skyblue" },
 { 'code': 'HR', 'description': 'High Residential', 'color': "saddlebrown" },
     
@@ -74,7 +74,7 @@ _designation['San_Francisco_Zoning_Districts'] = [
     
     
 { 'code': 'CM', 'description': 'Commercial Manufacturing', 'color': "wheat" },
-{ 'code': 'CF', 'description': 'Commercial Fishing', 'color': "wheat" },
+
 
     
 

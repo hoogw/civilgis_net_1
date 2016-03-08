@@ -1,0 +1,140 @@
+Map {
+  background-color: rgba(0,0,0,0);
+}
+
+
+
+
+
+
+
+
+
+
+#San_Francisco_Downtown_Land_Use[LANDCODE='VIS']{
+  line-color:#800080;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#800080;
+}
+
+
+
+#San_Francisco_Downtown_Land_Use[LANDCODE='VAC']{
+  line-color:#FFEFD5;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFEFD5;
+}
+
+
+
+#San_Francisco_Downtown_Land_Use[LANDCODE='ROW']{
+  line-color:#FFDAB9;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFDAB9;
+}
+
+
+
+#San_Francisco_Downtown_Land_Use[LANDCODE='RET_ENT']{
+  line-color:#DDA0DD;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#DDA0DD;
+}
+
+
+#San_Francisco_Downtown_Land_Use[LANDCODE='R']{
+  line-color:#FF0000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF0000;
+}
+
+
+
+#San_Francisco_Downtown_Land_Use[LANDCODE='PDR']{
+  line-color:#C0C0C0;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#C0C0C0;
+}
+
+
+
+
+
+
+#San_Francisco_Downtown_Land_Use[LANDCODE='OS']{
+  line-color:#87CEEB;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#87CEEB;
+}
+
+
+#San_Francisco_Downtown_Land_Use[LANDCODE='MIXRES']{
+  line-color:#8B4513;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8B4513;
+}
+
+
+
+
+#San_Francisco_Downtown_Land_Use[LANDCODE='MIXED']{
+  line-color:#FF6347;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF6347;
+}
+
+
+#San_Francisco_Downtown_Land_Use[LANDCODE='MISS']{
+  line-color:#D2B48C;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2B48C;
+}
+
+
+
+#San_Francisco_Downtown_Land_Use[LANDCODE='MIPS']{
+  line-color:#EE82EE;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#EE82EE;
+}
+
+
+
+#San_Francisco_Downtown_Land_Use[LANDCODE='MED']{
+  line-color:#F5DEB3;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#F5DEB3;
+}
+
+
+
+
+
+#San_Francisco_Downtown_Land_Use[LANDCODE='CIE']{
+  line-color:#FFFF00;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFFF00;
+}
+
+
+
+
+
+
+
+
+
+

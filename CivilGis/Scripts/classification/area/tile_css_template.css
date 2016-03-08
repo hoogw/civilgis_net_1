@@ -120,12 +120,7 @@ Map {
 
 
 
-#Los_Angeles_General_Land_Use[GPLU_CODE='AA']{
-  line-color:#00FF00;
-  line-width:1;
-  polygon-opacity:0.5;
-  polygon-fill:#00FF00;
-}
+
 
 
 
@@ -208,12 +203,7 @@ Map {
 }
 
 
-#Los_Angeles_General_Land_Use[GPLU_CODE='HI']{
- line-color:#C0C0C0;
-  line-width:0;
-  polygon-opacity:0.5;
-  polygon-fill:#C0C0C0;
-}
+
 
 
 
@@ -269,12 +259,7 @@ Map {
 }
 
 
-#Los_Angeles_General_Land_Use[GPLU_CODE='CF']{
-  line-color:#F5DEB3;
-  line-width:0;
-  polygon-opacity:0.5;
-  polygon-fill:#F5DEB3;
-}
+
 
 
 #Los_Angeles_General_Land_Use[GPLU_CODE='LR']{

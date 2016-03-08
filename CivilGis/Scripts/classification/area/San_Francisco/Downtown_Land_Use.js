@@ -1,84 +1,48 @@
 ﻿
 
-_code_column_name = 'GPLU_CODE';
-
-
-_designation['Los_Angeles_General_Land_Use'] = [
 
 
 
 
 
-{ 'code': 'HIC', 'description': 'Hazard Industrial and Commercial', 'color': "aqua" },
-{ 'code': 'NHIC', 'description': 'Non-Hazard Industrial and Commercial', 'color': "aquamarine" },
+_code_column_name = 'LANDCODE';
+
+
+_designation['San_Francisco_Downtown_Land_Use'] = [
+
  
- 
-{ 'code': 'LM', 'description': 'Limited Manufacturing', 'color': "blue" },
-{ 'code': 'HI', 'description': 'Hybrid Industrial', 'color': "blueviolet" },
-{ 'code': 'MR', 'description': "Medium Residential", 'color': "brown" },
-    
-    
-{ 'code': 'LMR', 'description': "Low Medium Residential", 'color': "chocolate" },
-{ 'code': 'MNMR', 'description': 'Minimum Residential', 'color': "coral" },
-    
-    
-{ 'code': 'NOC', 'description': 'Neighborhood Office Commercial', 'color': "firebrick" },
-{ 'code': 'HMR', 'description': 'High Medium Residential', 'color': "fuchsia" },
-    
-    
-    
-{ 'code': 'AL', 'description': 'Airport Landside', 'color': "green" },
-    
-    
-    
-{ 'code': 'CC', 'description': 'Community Commercial', 'color': "hotpink" },
-    
-    
-    
-{ 'code': 'LI', 'description': 'Light Industrial', 'color': "indigo" },      
-   
-   
-{ 'code': 'AN', 'description': 'Airport Northside', 'color': "lime" },
-{ 'code': 'AA', 'description': 'Airport Airside', 'color': "lime" },
-{ 'code': 'PF', 'description': 'Public Facilities', 'color': "lightblue" },
-     
-     
-{ 'code': 'OS', 'description': 'Open Space', 'color': "olive" },
-{ 'code': 'GC', 'description': 'General Commercial', 'color': "orange" },
-     
-     
-     
-{ 'code': 'RCC', 'description': 'Regional Center Commercial', 'color': "purple" },   
-{ 'code': 'VHR', 'description': 'Very High Residential', 'color': "papayawhip" },
-{ 'code': 'VLR', 'description': "Very Low Residential", 'color': "peachpuff" },    
-{ 'code': 'HOLC', 'description': 'Highway Oriented and Limited Commercial', 'color': "plum" },
+{ 'code': 'VIS', 'description': 'Hotels Visitor Services', 'color': "purple" },   
+
+{ 'code': 'VAC', 'description': 'Vacant', 'color': "papayawhip" },
+
+{ 'code': 'ROW', 'description': "Right of Way", 'color': "peachpuff" }, 
+
+{ 'code': 'RET_ENT', 'description': 'Retail Entertainment', 'color': "plum" },
 
     
-{ 'code': 'LC', 'description': 'Limited Commercial', 'color': "red" },
+{ 'code': 'R', 'description': 'Resident', 'color': "red" },
+    
+    
+{ 'code': 'PDR', 'description': 'Industrial Production Distribution Repair', 'color': "silver" },
+
+{ 'code': 'OS', 'description': 'Open Space', 'color': "skyblue" },
+
+{ 'code': 'MIXRES', 'description': 'Mixed Uses With Residential', 'color': "saddlebrown" },
     
     
     
-    
-{ 'code': 'HM', 'description': 'Heavy Manufacturing', 'color': "silver" },
-{ 'code': 'HI', 'description': 'Heavy Industrial', 'color': "silver" },
-{ 'code': 'LM', 'description': 'Light Manufacturing', 'color': "skyblue" },
-{ 'code': 'HR', 'description': 'High Residential', 'color': "saddlebrown" },
+{ 'code': 'MIXED', 'description': 'Mixed Uses Without Residential', 'color': "tomato" },
+{ 'code': 'MISS', 'description': 'Missing Data', 'color': "tan" },
     
     
-    
-{ 'code': 'RC', 'description': 'Regional Commercial', 'color': "tomato" },
-{ 'code': 'HOC', 'description': 'Highway Oriented Commercial', 'color': "tan" },
+{ 'code': 'MIPS', 'description': 'Office - Management Information Professional Services', 'color': "violet" },
     
     
-{ 'code': 'NC', 'description': 'Neighborhood Commercial', 'color': "violet" },
-    
-    
-{ 'code': 'CM', 'description': 'Commercial Manufacturing', 'color': "wheat" },
-{ 'code': 'CF', 'description': 'Commercial Fishing', 'color': "wheat" },
+{ 'code': 'MED', 'description': 'Medical', 'color': "wheat" },
+
 
     
 
-{ 'code': 'LR', 'description': "Low Residential", 'color': "yellow" }
-   
+{ 'code': 'CIE', 'description': "Cultural Institutional Educational", 'color': "yellow" }
+
 ];
-
