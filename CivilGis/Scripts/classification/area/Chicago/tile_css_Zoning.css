@@ -1,0 +1,515 @@
+Map {
+  background-color: rgba(0,0,0,0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#Chicago_Zoning[ZONE_CLASS='T']{
+  line-color:#FF7F50;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF7F50;
+}
+
+
+#Chicago_Zoning[ZONE_CLASS='RT-4']{
+  line-color:#FFF8DC;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFF8DC;
+}
+
+#Chicago_Zoning[ZONE_CLASS='RT-4A']{
+  line-color:#FFF8DC;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFF8DC;
+}
+
+
+
+
+#Chicago_Zoning[ZONE_CLASS='RT-3_5']{
+  line-color:#FF00FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF00FF;
+}
+
+
+#Chicago_Zoning[ZONE_CLASS='RS-3']{
+  line-color:#008000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#008000;
+}
+
+
+
+#Chicago_Zoning[ZONE_CLASS='RS-2']{
+  line-color:#FF69B4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF69B4;
+}
+
+
+
+#Chicago_Zoning[ZONE_CLASS='RS-1']{
+  line-color:#4B0082;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#4B0082;
+}
+
+
+
+#Chicago_Zoning[ZONE_CLASS='RM-4_5']{
+  line-color:#00FF00;
+  line-width:1;
+  polygon-opacity:0.5;
+  polygon-fill:#00FF00;
+}
+
+#Chicago_Zoning[ZONE_CLASS='RM-5_5']{
+  line-color:#00FF00;
+  line-width:1;
+  polygon-opacity:0.5;
+  polygon-fill:#00FF00;
+}
+
+#Chicago_Zoning[ZONE_CLASS='RM-6_5']{
+  line-color:#00FF00;
+  line-width:1;
+  polygon-opacity:0.5;
+  polygon-fill:#00FF00;
+}
+
+
+#Chicago_Zoning[ZONE_CLASS='RM-5']{
+  line-color:#00FF00;
+  line-width:1;
+  polygon-opacity:0.5;
+  polygon-fill:#00FF00;
+}
+
+#Chicago_Zoning[ZONE_CLASS='RM-6']{
+  line-color:#00FF00;
+  line-width:1;
+  polygon-opacity:0.5;
+  polygon-fill:#00FF00;
+}
+
+
+
+
+#Chicago_Zoning[ZONE_CLASS='PD']{
+  line-color:#ADD8E6;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#ADD8E6;
+}
+
+
+
+#Chicago_Zoning[ZONE_CLASS='POS-1']{
+  line-color:#808000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#808000;
+}
+
+#Chicago_Zoning[ZONE_CLASS='POS-2']{
+  line-color:#808000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#808000;
+}
+
+
+#Chicago_Zoning[ZONE_CLASS='PMD']{
+  line-color:#FFA500;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFA500;
+}
+
+
+
+#Chicago_Zoning[ZONE_CLASS='M3-1']{
+  line-color:#800080;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#800080;
+}
+
+#Chicago_Zoning[ZONE_CLASS='M3-2']{
+  line-color:#800080;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#800080;
+}
+
+#Chicago_Zoning[ZONE_CLASS='M3-3']{
+  line-color:#800080;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#800080;
+}
+
+
+
+
+
+
+
+
+#Chicago_Zoning[ZONE_CLASS='M2-1']{
+  line-color:#FFEFD5;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFEFD5;
+}
+
+#Chicago_Zoning[ZONE_CLASS='M2-2']{
+  line-color:#FFEFD5;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFEFD5;
+}
+
+#Chicago_Zoning[ZONE_CLASS='M2-3']{
+  line-color:#FFEFD5;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFEFD5;
+}
+
+
+
+#Chicago_Zoning[ZONE_CLASS='M1-1']{
+  line-color:#FFDAB9;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFDAB9;
+}
+
+#Chicago_Zoning[ZONE_CLASS='M1-2']{
+  line-color:#FFDAB9;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFDAB9;
+}
+#Chicago_Zoning[ZONE_CLASS='M1-3']{
+  line-color:#FFDAB9;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFDAB9;
+}
+
+
+
+
+
+
+#Chicago_Zoning[ZONE_CLASS='DX-12']{
+  line-color:#DDA0DD;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#DDA0DD;
+}
+
+#Chicago_Zoning[ZONE_CLASS='DX-16']{
+  line-color:#DDA0DD;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#DDA0DD;
+}
+
+
+#Chicago_Zoning[ZONE_CLASS='DX-3']{
+  line-color:#DDA0DD;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#DDA0DD;
+}
+
+#Chicago_Zoning[ZONE_CLASS='DX-5']{
+  line-color:#DDA0DD;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#DDA0DD;
+}
+
+
+#Chicago_Zoning[ZONE_CLASS='DX-7']{
+  line-color:#DDA0DD;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#DDA0DD;
+}
+
+
+#Chicago_Zoning[ZONE_CLASS='DS-3']{
+  line-color:#FF0000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF0000;
+}
+
+#Chicago_Zoning[ZONE_CLASS='DS-5']{
+  line-color:#FF0000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF0000;
+}
+
+
+
+#Chicago_Zoning[ZONE_CLASS='DR-10']{
+  line-color:#C0C0C0;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#C0C0C0;
+}
+
+#Chicago_Zoning[ZONE_CLASS='DR-3']{
+  line-color:#C0C0C0;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#C0C0C0;
+}
+
+#Chicago_Zoning[ZONE_CLASS='DR-5']{
+  line-color:#C0C0C0;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#C0C0C0;
+}
+
+#Chicago_Zoning[ZONE_CLASS='DR-7']{
+  line-color:#C0C0C0;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#C0C0C0;
+}
+
+
+
+
+
+#Chicago_Zoning[ZONE_CLASS='DC-12']{
+  line-color:#87CEEB;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#87CEEB;
+}
+
+#Chicago_Zoning[ZONE_CLASS='DC-16']{
+  line-color:#87CEEB;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#87CEEB;
+}
+
+
+#Chicago_Zoning[ZONE_CLASS='C3-1']{
+  line-color:#8B4513;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8B4513;
+}
+
+#Chicago_Zoning[ZONE_CLASS='C3-2']{
+  line-color:#8B4513;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8B4513;
+}
+
+#Chicago_Zoning[ZONE_CLASS='C3-3']{
+  line-color:#8B4513;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8B4513;
+}
+
+#Chicago_Zoning[ZONE_CLASS='C3-5']{
+  line-color:#8B4513;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8B4513;
+}
+
+
+
+
+#Chicago_Zoning[ZONE_CLASS='C2-1']{
+  line-color:#FF6347;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF6347;
+}
+
+#Chicago_Zoning[ZONE_CLASS='C2-2']{
+  line-color:#FF6347;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF6347;
+}
+
+
+#Chicago_Zoning[ZONE_CLASS='C2-3']{
+  line-color:#FF6347;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF6347;
+}
+
+
+#Chicago_Zoning[ZONE_CLASS='C2-5']{
+  line-color:#FF6347;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF6347;
+}
+
+
+#Chicago_Zoning[ZONE_CLASS='C1-1']{
+  line-color:#D2B48C;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2B48C;
+}
+
+#Chicago_Zoning[ZONE_CLASS='C1-2']{
+  line-color:#D2B48C;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2B48C;
+}
+
+
+#Chicago_Zoning[ZONE_CLASS='C1-3']{
+  line-color:#D2B48C;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2B48C;
+}
+
+#Chicago_Zoning[ZONE_CLASS='C1-5']{
+  line-color:#D2B48C;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2B48C;
+}
+
+
+
+#Chicago_Zoning[ZONE_CLASS='B3-1']{
+  line-color:#EE82EE;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#EE82EE;
+}
+
+#Chicago_Zoning[ZONE_CLASS='B3-2']{
+  line-color:#EE82EE;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#EE82EE;
+}
+
+#Chicago_Zoning[ZONE_CLASS='B3-3']{
+  line-color:#EE82EE;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#EE82EE;
+}
+
+#Chicago_Zoning[ZONE_CLASS='B3-5']{
+  line-color:#EE82EE;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#EE82EE;
+}
+
+
+
+#Chicago_Zoning[ZONE_CLASS='B2-1']{
+  line-color:#F5DEB3;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#F5DEB3;
+}
+
+#Chicago_Zoning[ZONE_CLASS='B2-2']{
+  line-color:#F5DEB3;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#F5DEB3;
+}
+
+#Chicago_Zoning[ZONE_CLASS='B2-3']{
+  line-color:#F5DEB3;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#F5DEB3;
+}
+
+#Chicago_Zoning[ZONE_CLASS='B2-5']{
+  line-color:#F5DEB3;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#F5DEB3;
+}
+
+
+
+
+#Chicago_Zoning[ZONE_CLASS='B1-1']{
+  line-color:#FFFF00;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFFF00;
+}
+
+#Chicago_Zoning[ZONE_CLASS='B1-2']{
+  line-color:#FFFF00;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFFF00;
+}
+
+#Chicago_Zoning[ZONE_CLASS='B1-3']{
+  line-color:#FFFF00;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFFF00;
+}
+
+#Chicago_Zoning[ZONE_CLASS='B1-5']{
+  line-color:#FFFF00;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFFF00;
+}
+
+
+
+
+
+
+
+
+
+
