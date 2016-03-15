@@ -10,7 +10,8 @@ using System.Web;
 
 using System.Data;
 using System.Data.SqlClient;
-
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 
 
 // Json2 controller connect to sqlserver ( Not in use )
@@ -181,7 +182,7 @@ namespace CivilGis.Controllers
             }//sqlconnection using 
 
 
-            System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            //System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
 
             // use dynamic or object both works 
             Dictionary<string, dynamic> _response = new Dictionary<string, dynamic>();
@@ -224,7 +225,9 @@ namespace CivilGis.Controllers
 
 
 
-            result = serializer.Serialize(_response);
+            // do not use javascript serializer, becaue datetime formate will not show correctly, instead use new newtonsoft.json converter below 
+            //  result = serializer.Serialize(_response);
+            result = JsonConvert.SerializeObject(_response);
 
 
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result, "text/plain");
@@ -379,8 +382,8 @@ namespace CivilGis.Controllers
 
                 //  -----------------  just get total count --------------------
 
-                sql = "SELECT count(*) FROM " + tabledata_name;
-                using (SqlCommand commandRowCount = new SqlCommand(sql, con))
+               string sql_count = "SELECT count(*) FROM " + tabledata_name;
+                using (SqlCommand commandRowCount = new SqlCommand(sql_count, con))
                 {
                     commandRowCount.CommandType = CommandType.Text;
 
@@ -408,7 +411,7 @@ namespace CivilGis.Controllers
                     // if there is a search parameter
 
                     sql = "SELECT * FROM " + tabledata_name + " WHERE ";
-
+                    sql_count = "SELECT count(*) FROM " + tabledata_name + " WHERE ";
 
                     for (int i = 0; i < columns.Count; i++)
                     {
@@ -416,12 +419,34 @@ namespace CivilGis.Controllers
                         if (i > 0)
                         {
                             sql = sql + " OR ";
-
+                            sql_count = sql_count + " OR ";
                         }// if
 
                         sql = sql + columns[i] + " LIKE '%" + searchValue + "%' ";
+                        sql_count = sql_count + columns[i] + " LIKE '%" + searchValue + "%' ";
 
                     }// for
+
+
+
+                    //  -----------------  get filtered count --------------------
+
+                   
+                    using (SqlCommand commandRowCount = new SqlCommand(sql_count, con))
+                    {
+                        commandRowCount.CommandType = CommandType.Text;
+
+                        object countStart = commandRowCount.ExecuteScalar();
+                        int? _count = (int?)(!Convert.IsDBNull(countStart) ? countStart : null);
+                       
+                       
+                        totalFiltered = Convert.ToInt32(_count);
+
+                    }  // sqlcommand
+
+                    //----------------------end get filtered count    ------------------
+
+
 
 
 
@@ -443,7 +468,7 @@ namespace CivilGis.Controllers
                         SqlDataAdapter da = new SqlDataAdapter(cmd);
                         da.Fill(dt_body);
 
-                        totalFiltered = dt_body.Rows.Count;
+                        //totalFiltered = dt_body.Rows.Count;
 
 
                     }// sqlcommand
@@ -483,7 +508,7 @@ namespace CivilGis.Controllers
             }//sqlconnection using 
 
 
-            System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+           // System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
 
             // use dynamic or object both works 
             Dictionary<string, dynamic> _response = new Dictionary<string, dynamic>();
@@ -526,7 +551,9 @@ namespace CivilGis.Controllers
 
 
 
-            result = serializer.Serialize(_response);
+            // do not use javascript serializer, becaue datetime formate will not show correctly, instead use new newtonsoft.json converter below 
+            // result = serializer.Serialize(_response);
+            result = JsonConvert.SerializeObject(_response);
 
 
 
@@ -570,7 +597,7 @@ namespace CivilGis.Controllers
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     da.Fill(dt);
 
-                    System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+                    //System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
 
                     ArrayList arrayList = new ArrayList();
                     //create arraylsit from DataTable
@@ -583,7 +610,11 @@ namespace CivilGis.Controllers
                     Dictionary<string, ArrayList> dict = new Dictionary<string, ArrayList>();
                     dict["columns"] = arrayList;
 
-                    result = serializer.Serialize(dict);
+
+
+                    // do not use javascript serializer, becaue datetime formate will not show correctly, instead use new newtonsoft.json converter below 
+                    //  result = serializer.Serialize(dict);
+                    result = JsonConvert.SerializeObject(dict);
 
 
                     /*  loop through all rows all cells

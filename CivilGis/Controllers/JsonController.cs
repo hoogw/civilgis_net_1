@@ -11,6 +11,8 @@ using System.Web;
 using System.Data;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 
 
 
@@ -161,7 +163,7 @@ namespace CivilGis.Controllers
             }//sqlconnection using 
 
 
-            System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+           // System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
 
             // use dynamic or object both works 
             Dictionary<string, dynamic> _response = new Dictionary<string, dynamic>();
@@ -201,7 +203,11 @@ namespace CivilGis.Controllers
 
 
 
-            result = serializer.Serialize(_response);
+            
+
+            // do not use javascript serializer, becaue datetime formate will not show correctly, instead use new newtonsoft.json converter below 
+            //  result = serializer.Serialize(_response);
+            result = JsonConvert.SerializeObject(_response);
 
 
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result, "text/plain");
@@ -366,8 +372,8 @@ namespace CivilGis.Controllers
 
                         //  -----------------  just get total count --------------------
 
-                        sql = "SELECT count(*) FROM " + tabledata_name;
-                        using (MySqlCommand cmd = new MySqlCommand(sql, con))
+                       string sql_count = "SELECT count(*) FROM " + tabledata_name;
+                        using (MySqlCommand cmd = new MySqlCommand(sql_count, con))
                         {
                             con.Open();
 
@@ -393,20 +399,44 @@ namespace CivilGis.Controllers
                                      // if there is a search parameter
                                    
                                                    sql = "SELECT * FROM " + tabledata_name +" WHERE ";
-                                                  
-                                                   
-                                                   for (int i = 0; i < columns.Count; i++) 
+                                                   sql_count = sql_count + " WHERE ";
+
+
+                                                 for (int i = 0; i < columns.Count; i++) 
                                                    {
                                         
                                                         if (i > 0) 
                                                                { 
-                                                                  sql= sql + " OR "; 
-                                                  
-                                                               }// if
+                                                                  sql= sql + " OR ";
+                                                                 sql_count = sql_count + " OR ";
+                                                                }// if
 
                                                            sql= sql +  columns[i]+ " LIKE '%"+ searchValue +"%' ";
-                                            
-                                                       }// for
+                                                           sql_count = sql_count + columns[i] + " LIKE '%" + searchValue + "%' ";
+
+                    }// for
+
+
+
+
+
+                    //  -----------------   get filtered count --------------------
+
+                    
+                    using (MySqlCommand cmd = new MySqlCommand(sql_count, con))
+                    {
+                       // con.Open();
+
+
+
+                      
+                        totalFiltered = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    }  // sqlcommand
+
+                    //----------------------end filtered count   ------------------
+
+
 
 
 
@@ -420,7 +450,7 @@ namespace CivilGis.Controllers
 
 
                     // sql = sql + " ORDER BY " + columns[orderColumn] + "   " + orderDir  + "  OFFSET " + iDisplayStart + "  ROWS FETCH NEXT  " +iDisplayLength + "  ROWS ONLY  "; 
-                       sql = sql + " ORDER BY " + columns[orderColumn] + "   " + orderDir + "  LIMIT " + iDisplayStart + " ," + iDisplayLength + "   ";
+                    sql = sql + " ORDER BY " + columns[orderColumn] + "   " + orderDir + "  LIMIT " + iDisplayStart + " ," + iDisplayLength + "   ";
 
                                                         using (MySqlCommand cmd = new MySqlCommand(sql, con))
                                                         {
@@ -432,11 +462,11 @@ namespace CivilGis.Controllers
                                                                 sda.SelectCommand = cmd;
 
                                                                 sda.Fill(dt_body);
-                                                                
-                                                                totalFiltered = dt_body.Rows.Count;
+
+                                                            
 
 
-                                                            }// mysqlcommand
+                        }// mysqlcommand
 
                                                         }// mysql adapter                   
                                     
@@ -479,11 +509,13 @@ namespace CivilGis.Controllers
 
                       }//sqlconnection using 
 
+                      // do not use this, becaue datetime formate will not show correctly, instead use new newtonsoft.json converter below 
+                     // System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+                      
 
-                      System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-                     
-                     // use dynamic or object both works 
-                      Dictionary<string, dynamic> _response = new Dictionary<string, dynamic>();
+
+            // use dynamic or object both works 
+            Dictionary<string, dynamic> _response = new Dictionary<string, dynamic>();
                       //Dictionary<string, object> _response = new Dictionary<string, object>();
                       
               
@@ -522,9 +554,9 @@ namespace CivilGis.Controllers
                       _response["data"] = rows;
 
 
-
-                      result = serializer.Serialize(_response);
-
+            // do not use javascript serializer, becaue datetime formate will not show correctly, instead use new newtonsoft.json converter below 
+            // result = serializer.Serialize(_response);
+            result = JsonConvert.SerializeObject(_response);
 
 
 
@@ -580,7 +612,7 @@ namespace CivilGis.Controllers
 
                        
 
-                        System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+                        //System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
 
                         ArrayList arrayList = new ArrayList();
                         //create arraylsit from DataTable
@@ -593,9 +625,11 @@ namespace CivilGis.Controllers
                         Dictionary<string, ArrayList> dict = new Dictionary<string, ArrayList>();
                         dict["columns"] = arrayList;
 
-                        result = serializer.Serialize(dict);
 
-                        
+                        // do not use javascript serializer, becaue datetime formate will not show correctly, instead use new newtonsoft.json converter below 
+                        //  result = serializer.Serialize(dict);
+                        result = JsonConvert.SerializeObject(dict);
+
 
 
                     }// mysqldata adaper
