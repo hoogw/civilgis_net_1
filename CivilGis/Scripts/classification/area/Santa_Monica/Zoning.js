@@ -98,7 +98,7 @@ _designation['Santa_Monica_Zoning']=[
     
     {'code':'RMH','description':'Residential Mobile Home Park', 'color':"olive"},
     
-    {'code':'RVC','description':'Right of Way', 'color':"Residential-Visitor Commercial"}
+    { 'code': 'RVC', 'description': 'Right of Way', 'color': "aquamarine" }
     
    
     
