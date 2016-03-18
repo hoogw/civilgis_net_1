@@ -238,7 +238,6 @@
     <Content Include="images\logo\land.png" />
     <Content Include="images\logo\landarea.png" />
     <Content Include="images\logo\leaflet-logo.png" />
-    <Content Include="images\logo\longbeach_seal.png" />
     <Content Include="images\logo\mapbox-logo.png" />
     <Content Include="images\logo\mapquest.png" />
     <Content Include="images\logo\new-york.png" />
@@ -253,6 +252,7 @@
     <Content Include="images\logo\santa_monica.png" />
     <Content Include="images\logo\san_francisco.png" />
     <Content Include="images\logo\San_Jose_logo.png" />
+    <Content Include="images\logo\shoreline_logo.jpg" />
     <Content Include="images\logo\zoning.png" />
     <Content Include="images\sort_asc.png" />
     <Content Include="images\sort_asc_disabled.png" />
