@@ -1,5 +1,10 @@
 var base_map_tile_layer;
 var overlay_tile_layer;
+var lasttime_overlay_tile_layer;
+var geojson_default_style;
+var geojson_mouseover_highlight_style;
+var geojson_clienttable_mouseover_highlight_style;
+
 
 
 var _addr_info;
@@ -114,6 +119,11 @@ _highlight_fillOpacity = 0;
 _highlight_strokeColor = '#fff';
 _highlight_strokeWeight = 8;
 
+_clienttable_mouseover_highlight_fillColor = '#000080';
+_clienttable_mouseover_highlight_fillOpacity = 0.5;
+_clienttable_mouseover_highlight_strokeColor = '#FF0000';
+_clienttable_mouseover_highlight_strokeWeight = 5;
+
 
 
 _classfiy_fillOpacity = 0;
@@ -122,6 +132,33 @@ _classfiy_strokeWeight = 0.2;
 
 
 //---------------------------------
+
+
+geojson_default_style = {
+
+    "color": _default_strokeColor,
+    "weight": _default_strokeWeight,
+    "fillOpacity": _default_fillOpacity
+};
+
+
+geojson_mouseover_highlight_style = {
+
+    "color": _highlight_strokeColor,
+    "weight": _highlight_strokeWeight,
+    "fillOpacity": _highlight_fillOpacity
+};
+
+
+geojson_clienttable_mouseover_highlight_style = {
+
+    "color": _clienttable_mouseover_highlight_strokeColor,
+    "weight": _clienttable_mouseover_highlight_strokeWeight,
+    "fillColor": _clienttable_mouseover_highlight_fillColor,
+    "fillOpacity": _clienttable_mouseover_highlight_fillOpacity
+};
+
+
 
 
 
@@ -302,15 +339,11 @@ function init_tiling(){
     // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
 
 
-
-
-
-
-     var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
+     var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.png';
      var overlay_tile_Attrib = 'Map data &#169; <a href="http://transparentgov.net">transparentgov.net</a> contributors';
-     tile_MapType = new L.TileLayer(overlay_tile_Url, { minZoom: 3, maxZoom: 22, attribution: overlay_tile_Attrib });
+     tile_MapType = new L.TileLayer(overlay_tile_Url, { minZoom: 3, maxZoom: 22, errorTileUrl:'  ', unloadInvisibleTiles: true, reuseTiles:true, attribution: overlay_tile_Attrib });
 
-    
+    // ===== above must define errorTileUrl:'  ', must have some character or space in '  ' above. If not define this, missing tile will show a broken image icon on map everywhere, if define this, it just failed to load empty URL, not showing broken image icon
 
 
      overlay_tile_layer = map.addLayer(tile_MapType);
@@ -328,12 +361,14 @@ function add_tiles(){
        
     
     // before add tile, need to clean all previous tiles, without this line, it will add more and more layers on top to each other, color will get darker and darker.
-    map.overlayMapTypes.clear();
-
-    map.overlayMapTypes.insertAt(0, tile_MapType);
-
    
-    
+    if (overlay_tile_layer) {
+
+        lasttime_overlay_tile_layer = overlay_tile_layer;
+        map.removeLayer(lasttime_overlay_tile_layer);
+        overlay_tile_layer = map.addLayer(tile_MapType);
+
+    }
     
 }
 

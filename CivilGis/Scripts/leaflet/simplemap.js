@@ -1,26 +1,17 @@
-
-
-
-
-
-
-
-
-
-
+﻿
 
 // ---------- map click event [3]--------add _map_click --------
 
 function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
-   // alert(_apiURI);
+    // alert(_apiURI);
 
     // Load a GeoJSON from the server 
 
 
     //------tile[3] ---------
-    //add_tiles();
+    add_tiles();
 
 
 
@@ -47,7 +38,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-            var _geojson_object = JSON.parse(data);
+             _geojson_object = JSON.parse(data);
 
             //----- marker cluster  [2.1] ------each time before you add new point geojson, need to clear old last time marker clusters.
             //   markerClusterer.clearMarkers();
@@ -58,23 +49,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
             //----------------  add new geojson, then remove last geojson --------------------
 
-           // alert("add geojson");
-
-
-            var geojson_default_style = {
-                
-                "color": _default_strokeColor,
-                "weight": _default_strokeWeight,
-                "fillOpacity": _default_fillOpacity
-            };
-
-
-            var geojson_mouseover_highlight_style = {
-
-                "color": _highlight_strokeColor,
-                "weight": _highlight_strokeWeight,
-                "fillOpacity": _highlight_fillOpacity
-            };
+             
 
 
             _last_geojson_layer = _current_geojson_layer;
@@ -95,17 +70,17 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
                     layer.on('mouseover', function (e) {
                         // e = event
                         // console.log(e); 
-                        
+
                         // You can make your ajax call declaration here
                         //$.ajax(... 
 
-                        
+
                         layer.setStyle(geojson_mouseover_highlight_style);
-                        
+
 
 
                         var instant_info = "<ul>";
-                        
+
 
                         for (var _key in layer.feature.properties) {
                             var _value = String(layer.feature.properties[_key]);
@@ -140,13 +115,13 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             }).bindPopup(function (layer) {
 
 
-               // when user click each feature, it will popup a info window by the feature.
+                // when user click each feature, it will popup a info window by the feature.
 
 
                 var popup = "<table>";
                 for (var _key in layer.feature.properties) {
                     var _value = String(layer.feature.properties[_key]);
-                      // popup = popup + "<tr><td>" + _key + "</td><td>" + _value + "</td></tr>";
+                    // popup = popup + "<tr><td>" + _key + "</td><td>" + _value + "</td></tr>";
 
                     popup = popup + "<tr><td><span style=\'background-color: #454545;\'><font color=\'white\'>" + _key + "</span>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;" + _value + "</td></tr>";
 
@@ -156,7 +131,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
                 return popup;
 
-                
+
             }).addTo(map);
 
 
@@ -168,7 +143,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
                 //alert("remove last geojson");
 
                 map.removeLayer(_last_geojson_layer);
-               
+
             }// if
 
 
@@ -236,7 +211,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
                 map.removeLayer(_last_geojson_layer);
 
-               
+
             }// if
             //-------------------- end remove last geojson ------------------------------
 
@@ -286,7 +261,7 @@ function get_map_bound() {
 
 
 
-   
+
 
 
     bounds = map.getBounds();
@@ -310,15 +285,6 @@ function get_map_bound() {
 
 
 }
-
-
-function remove_map_listener() {
-
-    google.maps.event.removeListener(listener_dragend);
-    google.maps.event.removeListener(listener_zoom_changed);
-
-}
-
 
 
 
@@ -372,11 +338,11 @@ function back_full_extend() {
 
 function add_map_listener_idle() {
 
-   
 
-    
 
-    
+
+
+
 
     listener_idle = map.on('moveend', function (e) {
         //alert(e.latlng);
@@ -390,33 +356,21 @@ function add_map_listener_idle() {
 
 
 
-    //// ---------  map click event [1] ------ search for a single feature where clicked ------------
-    //listener_click = map.addListener('click', function (click_event_location) {
-
-    //    get_click_latlng(click_event_location.latLng.lat(), click_event_location.latLng.lng());
-    //});
-
-
-    //listener_rightclick = map.addListener('rightclick', function () {
-
-    //    back_full_extend();
-    //});
-
-    ////--------------------------End  map right click event ---------- back to full extend ----------------------
+   
 
 
     // ---------  map click event [1] ------ search for a single feature where clicked ------------
-    //listener_click = map.addListener('click', function (click_event_location) {
+    listener_click = map.on('click', function (click_event_location) {
 
-    //    alert(click_event_location.latLng.lat);
-    //    get_click_latlng(click_event_location.latLng.lat, click_event_location.latLng.lng);
-    //});
+       // alert(click_event_location.latlng.lat);
+        get_click_latlng(click_event_location.latlng.lat, click_event_location.latlng.lng);
+    });
 
 
-    //listener_rightclick = map.addListener('rightclick', function () {
+    listener_rightclick = map.on('rightclick', function () {
 
-    //    back_full_extend();
-    //});
+        back_full_extend();
+    });
 
     //--------------------------End  map right click event ---------- back to full extend ----------------------
 
@@ -427,108 +381,12 @@ function add_map_listener_idle() {
 //------------------ End map click event [2] -------------------------------
 
 
-
-
-
-
-
-
-
-
-function add_map_listener() {
-
-    //map.addListener('bounds_changed', function() {  // does not work well
-    listener_dragend = map.addListener('dragend', function () {
-
-        get_map_bound();
-
-
-    });
-
-
-
-
-
-
-    listener_zoom_changed = map.addListener('zoom_changed', function () {
-
-        get_map_bound();
-    });
-
-
-
-}
-
-
-function add_mapdata_listener() {
-
-    // click listener
-    map.data.addListener('click', function (event) {
-        //var myHTML = event.feature.getProperty("NAME_ABV_A");
-
-        // map.data.overrideStyle(event.feature, {fillColor: 'yellow'});
-
-        // info window table style
-        var popup = "<table>";
-        event.feature.forEachProperty(function (_value, _property) {
-            popup = popup + "<tr><td>" + _property + "</td><td>" + _value + "</td></tr>";
-        });
-        popup = popup + "</table>";
-
-        infowindow.setContent("<div style='width:200px; height:150px;text-align: center;'>" + popup + "</div>");
-        infowindow.setPosition(event.latLng);
-        infowindow.open(map);
-
-    });    // click listener
-
-
-
-
-
-    // mouse over listener
-    map.data.addListener('mouseover', function (event) {
-        //map.data.revertStyle();                 
-        map.data.overrideStyle(event.feature, {
-            strokeWeight: _highlight_strokeWeight,
-            strokeColor: _highlight_strokeColor,
-            fillOpacity: _highlight_fillOpacity
-            //fillColor:''
-        });
-
-        var instant_info = "<ul>";
-        event.feature.forEachProperty(function (_value, _property) {
-            instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
-        });
-        instant_info = instant_info + "</ul>";
-
-
-        // update bottom <div>
-        document.getElementById("info-table").innerHTML = instant_info;
-
-    });
-
-
-    // mouse out listener
-    map.data.addListener('mouseout', function (event) {
-        map.data.revertStyle(event.feature);
-
-        // empty bottom <div>
-        document.getElementById("info-table").innerHTML = "";
-        //infowindow.close();
-
-    });
-
-}
-
-
 function initialize() {
 
 
 
 
 
-
-    //infowindow = new google.maps.InfoWindow();
 
 
 
@@ -554,11 +412,7 @@ function initialize() {
 
 
 
-    base_map_tile_layer =   map.addLayer(osm);
-
-
-    
-
+    base_map_tile_layer = map.addLayer(osm);
 
 
 
@@ -572,14 +426,9 @@ function initialize() {
 
 
     //------tile[1] ---------
-     init_tiling();
+    init_tiling();
 
 
-
-
-
-    //---------- marker cluster [1]------------
-    // clustering_point();
 
 
 
@@ -593,23 +442,6 @@ function initialize() {
     //   });
 
     // ---------- 
-
-
-
-
-    //   map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('legend'));
-
-
-
-
-
-    //   add_mapdata_listener();
-
-    
-
-      
-
-
 
 
 
@@ -629,7 +461,7 @@ $(document).ready(function () {
 
 
 
-    
+
     initialize();
 
 
