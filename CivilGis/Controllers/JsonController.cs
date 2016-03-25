@@ -171,7 +171,7 @@ namespace CivilGis.Controllers
 
 
 
-            _response["draw"] = Convert.ToInt16(sEcho);
+            _response["draw"] = Convert.ToInt32(sEcho);
 
             _response["recordsTotal"] = totalData;
             _response["recordsFiltered"] = totalFiltered;
@@ -520,7 +520,7 @@ namespace CivilGis.Controllers
                       
               
 
-                      _response["draw"] = Convert.ToInt16(sEcho);
+                      _response["draw"] = Convert.ToInt32(sEcho);
                      
                       _response["recordsTotal"] = totalData;
                       _response["recordsFiltered"] = totalFiltered;

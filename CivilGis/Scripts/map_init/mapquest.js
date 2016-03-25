@@ -160,6 +160,16 @@ function set_initial_location(_area) {
     _area_db["New_York_Staten_Island"] = ["New_York_Staten_Island", 40.60300547512703, -74.1353988647461, 13, "/-74.2679214477539/40.48795409096868/-74.04716491699219/40.657461921354866/"];
 
 
+    // resize map div height based on user's browser resolution.
+
+    var browser_width = $(window).width();
+    var browser_height = $(window).height();
+
+    var _map_canvas_height_small = Math.round(browser_height / 2) - 100;
+    $("#map-canvas").height(_map_canvas_height_small);
+
+
+    // End of browser resize
 
     return _area_db[_area];
 

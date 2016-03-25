@@ -570,8 +570,8 @@ namespace CivilGis.Controllers
                 // ------------------- use Find ----------------------------------------
                 //var _listBsonDoc = await _mongoCollection.Find(_filter_all).ToListAsync();
                 //var _listBsonDoc = await _mongoCollection.Find(_filter_all).Sort(_sort).ToListAsync();
-                var _listBsonDoc = await _mongoCollection.Find(_filter_all).Sort(_sort).Limit(Convert.ToInt16(iDisplayLength)).Skip(Convert.ToInt16(iDisplayStart)).ToListAsync();
-
+                //var _listBsonDoc = await _mongoCollection.Find(_filter_all).Sort(_sort).Limit(Convert.ToInt16(iDisplayLength)).Skip(Convert.ToInt16(iDisplayStart)).ToListAsync();
+                var _listBsonDoc = await _mongoCollection.Find(_filter_all).Sort(_sort).Limit(Convert.ToInt32(iDisplayLength)).Skip(Convert.ToInt32(iDisplayStart)).ToListAsync();
 
 
                 foreach (var bsonDocument in _listBsonDoc)

@@ -161,6 +161,19 @@ function set_initial_location(_area) {
 
 
 
+
+
+    // resize map div height based on user's browser resolution.
+
+    var browser_width = $(window).width();
+    var browser_height = $(window).height();
+
+    var _map_canvas_height_small = Math.round(browser_height / 2) - 100;
+    $("#map-canvas").height(_map_canvas_height_small);
+
+
+    // End of browser resize
+
     return _area_db[_area];
 
 }

@@ -159,7 +159,16 @@ function set_initial_location(_area) {
     _area_db["New_York_Queens"] = ["New_York_Queens", 40.72280306615735, -73.79997253417969, 13, "/-73.95206451416016/40.53911243826349/-73.68221282958984/40.8662760559589/"];
     _area_db["New_York_Staten_Island"] = ["New_York_Staten_Island", 40.60300547512703, -74.1353988647461, 13, "/-74.2679214477539/40.48795409096868/-74.04716491699219/40.657461921354866/"];
 
+    // resize map div height based on user's browser resolution.
 
+    var browser_width = $(window).width();
+    var browser_height = $(window).height();
+
+    var _map_canvas_height_small = Math.round(browser_height / 2) - 100;
+    $("#map-canvas").height(_map_canvas_height_small);
+
+
+    // End of browser resize
 
     return _area_db[_area];
 

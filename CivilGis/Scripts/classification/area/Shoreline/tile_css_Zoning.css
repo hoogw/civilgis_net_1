@@ -1,0 +1,172 @@
+Map {
+  background-color: rgba(0,0,0,0);
+}
+
+
+
+
+
+
+
+
+
+#Shoreline_Zoning[CURR_ZONE='C']{
+  line-color:#00FFFF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#00FFFF;
+}
+
+
+#Shoreline_Zoning[CURR_ZONE='CB']{
+  line-color:#7FFFD4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#7FFFD4;
+}
+
+
+
+#Shoreline_Zoning[CURR_ZONE='CZ']{
+  line-color:#0000FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#0000FF;
+}
+
+
+#Shoreline_Zoning[CURR_ZONE='MB']{
+  line-color:#8A2BE2;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8A2BE2;
+}
+
+
+#Shoreline_Zoning[CURR_ZONE='MUR-35']{
+  line-color:#A52A2A;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#A52A2A;
+}
+
+
+
+#Shoreline_Zoning[CURR_ZONE='MUR-45']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+
+#Shoreline_Zoning[CURR_ZONE='MUR-70']{
+  line-color:#FF7F50;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF7F50;
+}
+
+
+#Shoreline_Zoning[CURR_ZONE='NB']{
+  line-color:#FFF8DC;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFF8DC;
+}
+
+
+#Shoreline_Zoning[CURR_ZONE='PA_3']{
+  line-color:#FF00FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF00FF;
+}
+
+
+#Shoreline_Zoning[CURR_ZONE='R12']{
+  line-color:#008000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#008000;
+}
+
+
+
+#Shoreline_Zoning[CURR_ZONE='R18']{
+  line-color:#FF69B4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF69B4;
+}
+
+
+
+#Shoreline_Zoning[CURR_ZONE='R24']{
+  line-color:#4B0082;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#4B0082;
+}
+
+
+
+#Shoreline_Zoning[CURR_ZONE='R4']{
+  line-color:#00FF00;
+  line-width:1;
+  polygon-opacity:0.5;
+  polygon-fill:#00FF00;
+}
+
+
+
+
+
+
+
+#Shoreline_Zoning[CURR_ZONE='R48']{
+  line-color:#ADD8E6;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#ADD8E6;
+}
+
+
+
+#Shoreline_Zoning[CURR_ZONE='R6']{
+  line-color:#808000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#808000;
+}
+
+
+
+#Shoreline_Zoning[CURR_ZONE='R8']{
+  line-color:#FFA500;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFA500;
+}
+
+
+
+#Shoreline_Zoning[CURR_ZONE='TC']{
+  line-color:#800080;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#800080;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

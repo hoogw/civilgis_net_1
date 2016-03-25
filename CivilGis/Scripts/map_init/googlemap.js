@@ -129,7 +129,7 @@ function set_initial_location(_area) {
     _areaID = $("#areaID").val();
     _subjectID = $("#subjectID").val();
 
-    _flyto_zoomlevel = 18; // default for parcels, point, street, small feature.
+    _flyto_zoomlevel = 17; // default for parcels, point, street, small feature.
 
     //if (($("#areaID").val() === "county") && ($("#subjectID").val() === "cities")){  _flyto_zoomlevel = 11 }
     if ($("#subjectID").val() === "cities") { _flyto_zoomlevel = 11 }
@@ -160,6 +160,19 @@ function set_initial_location(_area) {
     _area_db["New_York_Staten_Island"] = ["New_York_Staten_Island", 40.60300547512703, -74.1353988647461, 13, "/-74.2679214477539/40.48795409096868/-74.04716491699219/40.657461921354866/"];
 
 
+    
+    // resize map div height based on user's browser resolution.
+
+    var browser_width = $(window).width();
+    var browser_height = $(window).height();
+   
+        var _map_canvas_height_small = Math.round(browser_height / 2) - 100 ;
+        $("#map-canvas").height(_map_canvas_height_small);
+      
+
+    // End of browser resize
+
+    
 
     return _area_db[_area];
 
@@ -172,7 +185,7 @@ function add_area_boundary(_area) {
 
 
     _multi_polyline = 'No';
-    var _js_url = "/Scripts/area_boundary/" + _area + ".js";
+    var _js_url = "/Scripts/area_boundary/googlemap/" + _area + ".js";
 
 
 

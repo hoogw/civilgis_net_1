@@ -1,3 +1,5 @@
+var base_map_tile_layer;
+var overlay_tile_layer;
 
 
 var _addr_info;
@@ -104,7 +106,7 @@ var _mapclick_in_use = false;
 
 // --------default feature style -----------
 _default_fillOpacity = 0;
-_default_strokeColor = 'yellow';
+_default_strokeColor = '#0000FF'; //blue
 _default_strokeWeight = 1;
 
 
@@ -115,7 +117,7 @@ _highlight_strokeWeight = 8;
 
 
 _classfiy_fillOpacity = 0;
-_classfiy_strokeColor = 'yellow';
+_classfiy_strokeColor = '#0000FF'; //blue
 _classfiy_strokeWeight = 0.2;
 
 
@@ -160,6 +162,16 @@ function set_initial_location(_area) {
     _area_db["New_York_Staten_Island"] = ["New_York_Staten_Island", 40.60300547512703, -74.1353988647461, 13, "/-74.2679214477539/40.48795409096868/-74.04716491699219/40.657461921354866/"];
 
 
+    // resize map div height based on user's browser resolution.
+
+    var browser_width = $(window).width();
+    var browser_height = $(window).height();
+
+    var _map_canvas_height_small = Math.round(browser_height / 2) - 100;
+    $("#map-canvas").height(_map_canvas_height_small);
+
+
+    // End of browser resize
 
     return _area_db[_area];
 
@@ -172,7 +184,7 @@ function add_area_boundary(_area) {
 
 
     _multi_polyline = 'No';
-    var _js_url = "/Scripts/area_boundary/" + _area + ".js";
+    var _js_url = "/Scripts/area_boundary/leaflet/" + _area + ".js";
 
 
 
@@ -209,20 +221,9 @@ function add_area_boundary(_area) {
 
 
 
-                var _area_polyline_multi = new google.maps.Polyline({
+                var _area_polyline_multi = L.polyline(parentArray[i], { color: '#0000FF', weight: 5, opacity: 0.8 }).addTo(map);
 
-                    path: parentArray[i],
-                    geodesic: true,
-                    strokeColor: '#FFA500',
-                    strokeOpacity: 0.8,
-                    strokeWeight: 5
-
-                });
-
-                _area_polyline_multi.setMap(map);
-
-
-
+                   
 
             }// outer for
 
@@ -231,18 +232,14 @@ function add_area_boundary(_area) {
         }
         else {
 
+           
 
-            // for only one line
-            _area_polyline = new google.maps.Polyline({
 
-                path: _area_polygon_coord[_area],
-                geodesic: true,
-                strokeColor: '#FFA500',
-                strokeOpacity: 0.8,
-                strokeWeight: 5
+            _area_polyline = L.polyline(_area_polygon_coord[_area], { color: '#0000FF', weight: 5, opacity: 0.8 }).addTo(map);
 
-            });
-            _area_polyline.setMap(map);
+           
+
+           
         }//else
 
 
@@ -306,20 +303,20 @@ function init_tiling(){
 
 
 
-     tile_MapType = new google.maps.ImageMapType({
-         getTileUrl: function (coord, zoom) {
 
 
 
-             return _tile_baseURL + _areaID + '_' + _subjectID + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
+     var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
+     var overlay_tile_Attrib = 'Map data &#169; <a href="http://transparentgov.net">transparentgov.net</a> contributors';
+     tile_MapType = new L.TileLayer(overlay_tile_Url, { minZoom: 3, maxZoom: 22, attribution: overlay_tile_Attrib });
+
+    
 
 
-         },
-         tileSize: new google.maps.Size(256, 256),
-         maxZoom: 19,
-         minZoom: 0
+     overlay_tile_layer = map.addLayer(tile_MapType);
 
-     });
+
+
 
 }// init tile
 

@@ -1,0 +1,280 @@
+Map {
+  background-color: rgba(0,0,0,0);
+}
+
+
+
+
+
+
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='HIC']{
+  line-color:#00FFFF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#00FFFF;
+}
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='NHIC']{
+  line-color:#7FFFD4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#7FFFD4;
+}
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='LM']{
+  line-color:#0000FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#0000FF;
+}
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='HI']{
+  line-color:#8A2BE2;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8A2BE2;
+}
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='MR']{
+  line-color:#A52A2A;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#A52A2A;
+}
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='LMR']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='MNMR']{
+  line-color:#FF7F50;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF7F50;
+}
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='NOC']{
+  line-color:#FFF8DC;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFF8DC;
+}
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='HMR']{
+  line-color:#FF00FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF00FF;
+}
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='AL']{
+  line-color:#008000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#008000;
+}
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='CC']{
+  line-color:#FF69B4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF69B4;
+}
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='LI']{
+  line-color:#4B0082;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#4B0082;
+}
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='AN']{
+  line-color:#00FF00;
+  line-width:1;
+  polygon-opacity:0.5;
+  polygon-fill:#00FF00;
+}
+
+
+
+
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='PF']{
+  line-color:#ADD8E6;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#ADD8E6;
+}
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='OS']{
+  line-color:#808000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#808000;
+}
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='GC']{
+  line-color:#FFA500;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFA500;
+}
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='RCC']{
+  line-color:#800080;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#800080;
+}
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='VHR']{
+  line-color:#FFEFD5;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFEFD5;
+}
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='VLR']{
+  line-color:#FFDAB9;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFDAB9;
+}
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='HOLC']{
+  line-color:#DDA0DD;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#DDA0DD;
+}
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='LC']{
+  line-color:#FF0000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF0000;
+}
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='HM']{
+  line-color:#C0C0C0;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#C0C0C0;
+}
+
+
+
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='LM']{
+  line-color:#87CEEB;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#87CEEB;
+}
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='HR']{
+  line-color:#8B4513;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8B4513;
+}
+
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='RC']{
+  line-color:#FF6347;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF6347;
+}
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='HOC']{
+  line-color:#D2B48C;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2B48C;
+}
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='NC']{
+  line-color:#EE82EE;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#EE82EE;
+}
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='CM']{
+  line-color:#F5DEB3;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#F5DEB3;
+}
+
+
+
+
+
+#Los_Angeles_General_Land_Use[GPLU_CODE='LR']{
+  line-color:#FFFF00;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFFF00;
+}
+
+
+
+
+
+
+
+
+
+

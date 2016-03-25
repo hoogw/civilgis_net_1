@@ -1,0 +1,149 @@
+Map {
+  background-color: rgba(0,0,0,0);
+}
+
+
+
+
+
+
+
+
+
+
+
+#Shoreline_Land_Use_Comp_Plan[COMPLU='IC']{
+  line-color:#8A2BE2;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#8A2BE2;
+}
+
+
+#Shoreline_Land_Use_Comp_Plan[COMPLU='HDR']{
+  line-color:#A52A2A;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#A52A2A;
+}
+
+
+
+#Shoreline_Land_Use_Comp_Plan[COMPLU='LDR']{
+  line-color:#D2691E;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#D2691E;
+}
+
+
+#Shoreline_Land_Use_Comp_Plan[COMPLU='MDR']{
+  line-color:#FF7F50;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF7F50;
+}
+
+
+#Shoreline_Land_Use_Comp_Plan[COMPLU='MU-1']{
+  line-color:#FFF8DC;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFF8DC;
+}
+
+
+#Shoreline_Land_Use_Comp_Plan[COMPLU='PA_3']{
+  line-color:#FF00FF;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF00FF;
+}
+
+
+#Shoreline_Land_Use_Comp_Plan[COMPLU='MU-2']{
+  line-color:#008000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#008000;
+}
+
+
+
+#Shoreline_Land_Use_Comp_Plan[COMPLU='PF']{
+  line-color:#FF69B4;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FF69B4;
+}
+
+
+
+#Shoreline_Land_Use_Comp_Plan[COMPLU='PrOS']{
+  line-color:#4B0082;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#4B0082;
+}
+
+
+
+#Shoreline_Land_Use_Comp_Plan[COMPLU='PubOS']{
+  line-color:#00FF00;
+  line-width:1;
+  polygon-opacity:0.5;
+  polygon-fill:#00FF00;
+}
+
+
+
+
+
+
+
+#Shoreline_Land_Use_Comp_Plan[COMPLU='TCD']{
+  line-color:#ADD8E6;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#ADD8E6;
+}
+
+
+
+#Shoreline_Land_Use_Comp_Plan[COMPLU='SA3']{
+  line-color:#808000;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#808000;
+}
+
+
+
+#Shoreline_Land_Use_Comp_Plan[COMPLU='SA2']{
+  line-color:#FFA500;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#FFA500;
+}
+
+
+
+#Shoreline_Land_Use_Comp_Plan[COMPLU='SA1']{
+  line-color:#800080;
+  line-width:0;
+  polygon-opacity:0.5;
+  polygon-fill:#800080;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
