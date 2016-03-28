@@ -3,22 +3,22 @@
 
 
 
-function feed_datatables(_geojson_obj){
-    
-    
+function feed_datatables(_geojson_obj) {
 
-     
-       //_geojson_obj_array = _geojson_object.features;
-       _geojson_obj_array = _geojson_obj["features"];
-      
-      
-      // get the key [column name]
-      var _properties =  _geojson_obj_array[0].properties;
-      
-      
-      var tableHeaders="";
-      $("#tableDiv").empty();
-     
+
+
+
+    //_geojson_obj_array = _geojson_object.features;
+    _geojson_obj_array = _geojson_obj["features"];
+
+
+    // get the key [column name]
+    var _properties = _geojson_obj_array[0].properties;
+
+
+    var tableHeaders = "";
+    $("#tableDiv").empty();
+
     /* 
      var _column_def = [
                                                 { data : 'properties.LANDNAME' },
@@ -27,205 +27,184 @@ function feed_datatables(_geojson_obj){
                                                 { data: 'properties.CFCC' }
                                             ];
     */
-     _dt_columns_count = 0;
-     var _column_def = [];
-     var _column0 = {};
-     /*
-      _column0['data'] = 'properties.LANDNAME';
-      _column_def.push(_column0);
-      _column0 = {};
-      _column0['data'] = 'properties.ID';
-      _column_def.push(_column0);
-      _column0 = {};
-      _column0['data'] = 'properties.COUNTY';
-      _column_def.push(_column0);
-      _column0 = {};
-      _column0['data'] = 'properties.CFCC';
-      _column_def.push(_column0);
-     */
-      
-      Object.keys(_properties).forEach(function(k) 
-                        {
-                            //alert(k);
-                            //_dt_columns.push(k);
-                            
-                            tableHeaders += "<th>" + k + "</th>";
-                            
-                            // build column.data def
-                            _column0 = {};
-                            _column0['data'] = 'properties.' + k;
+    _dt_columns_count = 0;
+    var _column_def = [];
+    var _column0 = {};
+    /*
+     _column0['data'] = 'properties.LANDNAME';
+     _column_def.push(_column0);
+     _column0 = {};
+     _column0['data'] = 'properties.ID';
+     _column_def.push(_column0);
+     _column0 = {};
+     _column0['data'] = 'properties.COUNTY';
+     _column_def.push(_column0);
+     _column0 = {};
+     _column0['data'] = 'properties.CFCC';
+     _column_def.push(_column0);
+    */
 
-          //---------- hide last 2 column geoFID, geoFeatureType---------
-                            if ((k === 'GeoFeatureID') || (k === 'GeoFeatureType')) {
+    Object.keys(_properties).forEach(function (k) {
+        //alert(k);
+        //_dt_columns.push(k);
 
-                                _column0['visible'] = false;
+        tableHeaders += "<th>" + k + "</th>";
 
-                            }
-          //--------------------------------------------------------
+        // build column.data def
+        _column0 = {};
+        _column0['data'] = 'properties.' + k;
+
+        //---------- hide last 2 column geoFID, geoFeatureType---------
+        if ((k === 'GeoFeatureID') || (k === 'GeoFeatureType')) {
+
+            _column0['visible'] = false;
+
+        }
+        //--------------------------------------------------------
 
 
-                            _column_def.push(_column0);   
-                               
-                             _dt_columns_count = _dt_columns_count +1;  
-                               
-                            
-                        }); // object key
-          
-         /* define last column as geo feaure ID
-         tableHeaders += "<th> Geo.Feature.ID</th>";   
-         _column0 = {};
-         _column0['data'] = '_id.$id';
-         _column_def.push(_column0); 
-         */
-         
-         $("#tableDiv").append('<table id="tabledata" class="display nowrap" cellspacing="0" width="100%"><thead><tr>' + tableHeaders + '</tr></thead><tfoot><tr>'+ tableHeaders + '</tr></tfoot></table>');
-      //$("#tableDiv").append('<table id="tabledata" class="display" cellspacing="0" width="100%"><thead><tr>' + tableHeaders + '</tr></thead></table>');
-      //$("#tableDiv").find("table thead tr").append(tableHeaders); 
-      
-                         
-      
-      
-           //  datatable
-          $('#tabledata').DataTable({
-                                   // must put destroy:true, to destroy last time old datatable initialization, before put new initialization
-                                   destroy: true,
-                                   data: _geojson_obj_array,
-                                   
-                                   
-                                   columns: _column_def,
-                                    
-                                    
-                                    "pagingType": "full_numbers",    
-                                    
-                                    // resize the datatables height here scrollY:150
-                                    scrollY: 200,
-                                    scrollX: true,
-                                    
-                                          // ------------ scroller section --------     
-                                                              
-                                          deferRender: true,
-                                      scrollCollapse: true,
-                                      scroller: true
-                                                                
-                                // ------------ scroller section end--------  
-                                                    
-                            }); // datatable
-                            
-                            
-                            
-                            
-                           
-                            // ajax click row event show corespoinding data.feature[] on google map 
-                  var table = $('#tabledata').DataTable();
-                            
-                        $('#tabledata tbody').on('mouseover', 'td', function () 
-                                   {
-                                           var instant_info = "<ul>";
-                                                                                    
-                                           var colIdx = table.cell(this).index().column;
-                                                                                     
-                                           var rowIdx =  table.cell(this).index().row;
-                                                                                     
-                                           var _geo_ID = table.cell(rowIdx, _dt_columns_count-1 ).data();           
-                                                                    
-                                            // high light yellow the feature polygon on google map
-                                            
-                                            //var _Data_Feature =  map.data.getFeatureById(_geo_ID);
-                                            map.data.forEach( function(_feature)
-                                            {
-                                                
-                                                if (_feature.getProperty('GeoFeatureID') === _geo_ID)
-                                                {
-                                                    
-                                                            //alert(_feature.getProperty('GeoFeatureID'));
-                                                    
-                                                            if(_feature.getProperty('GeoFeatureType') === 'Point')
-                                                            {
-                                                                    
-                                                              // if (_feature instanceof google.maps.Data.Point) {
-                                                                        if(_highlight_marker)
-                                                                        {
-                                                                               _highlight_marker.setMap(null);
-                                                                           }
-                                                                       // alert(_feature.getGeometry());
-                                                                      var _feature_geometry = _feature.getGeometry();
-                                                                      var _latlng = _feature_geometry.get();
-                                                                        _highlight_marker = new google.maps.Marker({
-                                                                           map: map,
-                                                                           position: _latlng,
-                                                                           // icon: iconBase + 'custome_icon.png'
-                                                                            //label: ' ', 
-                                                                            // must set zIndex to bring this marker to front, on top of other markers.other wise, it will hide behind.
-                                                                           zIndex: google.maps.Marker.MAX_ZINDEX + 1
+        _column_def.push(_column0);
 
-                                                                        }); // marker
-                                                                        _highlight_marker.setIcon('http://maps.google.com/mapfiles/ms/icons/grn-pushpin.png');
-                                                               //  }//if feature
-                                                                    
-                                                                      
-                                                            
-                                                               
+        _dt_columns_count = _dt_columns_count + 1;
 
-                                                            }
-                                                            else{
-                                                                    map.data.revertStyle();
-                                                                    map.data.overrideStyle(_feature, {
-                                                                                                    strokeWeight: 5,
-                                                                                                    strokeColor: 'blue',
-                                                                                                    fillOpacity: 0
-                                                                                       });// overrideStyle
 
-                                                                   }//else
-                                                }//map foreach
-                                                
-                                                /*
-                                                        var _a="";
-                                                       _feature.forEachProperty(function(_value, _property){
-                                                            _a = _a +_property + ':' + _value + '   ';
-                                                            
-                                                            });// forEachProperty
-                                                 */
+    }); // object key
 
-                                            });// map.data.foreach
-                                            
-                                                           
-                            
-                                           table.columns().every( function (cllmnIndex) 
-                                                {                                 
-                                                   // alert(table.cell(rowIdx, cllmnIndex ).data());
-                                                            
-                                                  var _property = table.column(cllmnIndex).header();
-                                                  var _value = table.cell(rowIdx, cllmnIndex ).data();
-                                                    
-                                                  instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;"+ $(_property).html() + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+ "</li>";
+    /* define last column as geo feaure ID
+    tableHeaders += "<th> Geo.Feature.ID</th>";   
+    _column0 = {};
+    _column0['data'] = '_id.$id';
+    _column_def.push(_column0); 
+    */
 
-                                                  instant_info = instant_info + "</ul>";
-                                                                                      
-                                                } );// loop through each column for that specific row
-                                                   
-                                                // update bottom <div>
-                                             document.getElementById("info-table").innerHTML = instant_info;   
-                                                                   
-                                   } ); // click cell event    
-                            
-                            
-                         $('#tabledata tbody').on('mouseout', 'td', function () 
-                                   {
-                                       
-                                        // remove all high light yellow the feature polygon on google map
-                                       // Remove custom styles.
-                                     map.data.revertStyle();
-                                        
-                                        
-                                        // empty bottom <div>
-                                         document.getElementById("info-table").innerHTML = "";
-                            } ); 
-                           
-                         
-                  
-    
-    
-    
+    $("#tableDiv").append('<table id="tabledata" class="display nowrap" cellspacing="0" width="100%"><thead><tr>' + tableHeaders + '</tr></thead><tfoot><tr>' + tableHeaders + '</tr></tfoot></table>');
+    //$("#tableDiv").append('<table id="tabledata" class="display" cellspacing="0" width="100%"><thead><tr>' + tableHeaders + '</tr></thead></table>');
+    //$("#tableDiv").find("table thead tr").append(tableHeaders); 
+
+
+
+
+    //  datatable
+    $('#tabledata').DataTable({
+        // must put destroy:true, to destroy last time old datatable initialization, before put new initialization
+        destroy: true,
+        data: _geojson_obj_array,
+
+
+        columns: _column_def,
+
+
+        //"pagingType": "full_numbers",
+
+        // resize the datatables height here scrollY:150
+        scrollY: 200,
+        scrollX: true,
+
+
+        // ------------ scroller section --------     
+
+        deferRender: true,
+        scrollCollapse: true,
+        scroller: true
+
+        // ------------ scroller section end--------  
+
+
+
+    }); // datatable
+
+
+
+
+
+    // ajax click row event show corespoinding data.feature[] on google map 
+    var table = $('#tabledata').DataTable();
+
+    $('#tabledata tbody').on('mouseover', 'td', function () {
+
+
+        var instant_info = "<ul>";
+
+        var colIdx = table.cell(this).index().column;
+
+        var rowIdx = table.cell(this).index().row;
+
+        var _geo_ID = table.cell(rowIdx, _dt_columns_count - 1).data();
+
+        
+
+
+
+        // -----------leaflet --------------
+
+
+
+
+
+        _current_geojson_layer.eachLayer(
+             function (featureInstanceLayer) {
+
+                 var click_row_geofeatureID = featureInstanceLayer.feature.properties.GeoFeatureID;
+                 var click_row_geofeaturetype = featureInstanceLayer.feature.properties.GeoFeatureType;
+
+
+
+                 if (click_row_geofeatureID === _geo_ID) {
+
+
+                     featureInstanceLayer.setStyle(
+                         geojson_clienttable_mouseover_highlight_style
+                         );
+
+
+
+                 }// if
+
+             }// function
+
+             );
+
+
+        //------------ end of leaflet ----------------
+
+
+
+
+
+        table.columns().every(function (cllmnIndex) {
+            // alert(table.cell(rowIdx, cllmnIndex ).data());
+
+            var _property = table.column(cllmnIndex).header();
+            var _value = table.cell(rowIdx, cllmnIndex).data();
+
+            instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + $(_property).html() + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+
+            instant_info = instant_info + "</ul>";
+
+        });// loop through each column for that specific row
+
+        // update bottom <div>
+        document.getElementById("info-table").innerHTML = instant_info;
+
+    }); // click cell event    
+
+
+    $('#tabledata tbody').on('mouseout', 'td', function () {
+
+        // remove all high light yellow the feature polygon on google map
+        // Remove custom styles.
+        //map.data.revertStyle();
+        _current_geojson_layer.setStyle(geojson_default_style);
+
+        // empty bottom <div>
+        document.getElementById("info-table").innerHTML = "";
+    });
+
+
+
+
+
+
 }
 
 
@@ -263,6 +242,8 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             _geojson_object = JSON.parse(data);
 
 
+
+            // ================= append two column GeoFeatureType GeoFeatureID to properties. =========================
             //-------------    php format add each _id:{"$id": "55e8c24e382f9fe337f0d8fe"}  to properties before draw on map. -------------
             //-------------asp.net format add each  {"_id" : "55c532cf21167708171b02a2"}  to properties before draw on map. -------------
 
@@ -310,29 +291,26 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             _geojson_object['features'] = _features_array;
             //---------------------------------------------------------------
 
+            // =================End of  append two column GeoFeatureType GeoFeatureID to properties. =========================
+
+
 
 
             //----------------  add new geojson, then remove last geojson --------------------
 
-            var geojson_default_style = {
-
-                "color": _default_strokeColor,
-                "weight": _default_strokeWeight,
-                "fillOpacity": _default_fillOpacity
-            };
-
-
-            var geojson_mouseover_highlight_style = {
-
-                "color": _highlight_strokeColor,
-                "weight": _highlight_strokeWeight,
-                "fillOpacity": _highlight_fillOpacity
-            };
 
 
             _last_geojson_layer = _current_geojson_layer;
 
             _current_geojson_layer = L.geoJson(_geojson_object, {
+
+
+
+                // for point feature, by default it use marker, but instead of use marker, here change marker to polygon (circle marker) 
+                pointToLayer: function (feature, latlng) {
+                    return L.circleMarker(latlng, geojson_Marker_style_Options);
+                },
+
 
                 style: geojson_default_style,
 
@@ -623,7 +601,7 @@ function add_map_listener_idle() {
     // ---------  map click event [1] ------ search for a single feature where clicked ------------
     listener_click = map.on('click', function (click_event_location) {
 
-        alert(click_event_location.latlng.lat);
+        //alert(click_event_location.latlng.lat);
         get_click_latlng(click_event_location.latlng.lat, click_event_location.latlng.lng);
     });
 
@@ -716,10 +694,15 @@ $(document).ready(function () {
 
 
 
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+

@@ -4,7 +4,9 @@ var lasttime_overlay_tile_layer;
 var geojson_default_style;
 var geojson_mouseover_highlight_style;
 var geojson_clienttable_mouseover_highlight_style;
-
+var geojson_Marker_style_Options;
+var _current_markers_cluster;
+var _last_markers_cluster;
 
 
 var _addr_info;
@@ -157,6 +159,22 @@ geojson_clienttable_mouseover_highlight_style = {
     "fillColor": _clienttable_mouseover_highlight_fillColor,
     "fillOpacity": _clienttable_mouseover_highlight_fillOpacity
 };
+
+
+geojson_Marker_style_Options = {
+
+    radius: 3,
+    fillColor: "#ff7800",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+
+
+};
+
+
+
 
 
 

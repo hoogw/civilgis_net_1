@@ -124,43 +124,7 @@ function feed_datatables(_geojson_obj){
                                                                                      
                                            var _geo_ID = table.cell(rowIdx, _dt_columns_count-1 ).data();           
                                                                     
-                                            // high light yellow the feature polygon on google map
                                             
-                                          
-                                                    
-                                                    
-                                                            //if(_feature.getProperty('GeoFeatureType') === 'Point')
-                                                            //{
-                                                                    
-                                                                
-                                                            //  // if (_feature instanceof google.maps.Data.Point) {
-                                                            //            if(_highlight_marker)
-                                                            //            {
-                                                            //                   _highlight_marker.setMap(null);
-                                                            //               }
-                                                            //           // alert(_feature.getGeometry());
-                                                            //          var _feature_geometry = _feature.getGeometry();
-                                                            //          var _latlng = _feature_geometry.get();
-                                                            //            _highlight_marker = new google.maps.Marker({
-                                                            //               map: map,
-                                                            //               position: _latlng,
-                                                            //               // icon: iconBase + 'custome_icon.png'
-                                                            //                //label: ' ', 
-                                                            //                // must set zIndex to bring this marker to front, on top of other markers.other wise, it will hide behind.
-                                                            //               zIndex: google.maps.Marker.MAX_ZINDEX + 1
-
-                                                            //            }); // marker
-
-                                                                        
-                                                            //            _highlight_marker.setIcon('http://maps.google.com/mapfiles/ms/icons/grn-pushpin.png');
-                                                            //   //  }//if feature
-                                                                    
-                                                                      
-                                                            
-                                                               
-
-                                                            //}
-                                                           
                                             
 
 
@@ -181,25 +145,9 @@ function feed_datatables(_geojson_obj){
                                                         if (click_row_geofeatureID === _geo_ID) {
 
 
-
-                                                            if (click_row_geofeaturetype === 'Point') {
-
-                                                                }
-                                                            else {
-
-                                                                
-
-                                                                                
-
                                                                 featureInstanceLayer.setStyle(
                                                                     geojson_clienttable_mouseover_highlight_style
                                                                     );
-
-
-
-                                                        }
-
-
 
 
                                                         
@@ -289,6 +237,8 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
                             _geojson_object = JSON.parse(data);
 
 
+
+                            // ================= append two column GeoFeatureType GeoFeatureID to properties. =========================
                             //-------------    php format add each _id:{"$id": "55e8c24e382f9fe337f0d8fe"}  to properties before draw on map. -------------
                             //-------------asp.net format add each  {"_id" : "55c532cf21167708171b02a2"}  to properties before draw on map. -------------
 
@@ -337,6 +287,9 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
                                          _geojson_object['features'] = _features_array;
                                         //---------------------------------------------------------------
 
+                            // =================End of  append two column GeoFeatureType GeoFeatureID to properties. =========================
+
+
 
 
                             //----------------  add new geojson, then remove last geojson --------------------
@@ -346,6 +299,14 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
                                          _last_geojson_layer = _current_geojson_layer;
 
                                          _current_geojson_layer = L.geoJson(_geojson_object, {
+
+
+
+                                             // for point feature, by default it use marker, but instead of use marker, here change marker to polygon (circle marker) 
+                                             pointToLayer: function (feature, latlng) {
+                                                 return L.circleMarker(latlng, geojson_Marker_style_Options);
+                                             },
+
 
                                              style: geojson_default_style,
 

@@ -40,9 +40,24 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
              _geojson_object = JSON.parse(data);
 
-            //----- marker cluster  [2.1] ------each time before you add new point geojson, need to clear old last time marker clusters.
-            //   markerClusterer.clearMarkers();
-            //--------------------------------------------   
+           
+
+
+           
+
+
+
+
+
+            
+            // determine feature is point or not point
+            // var _geojson_feature_geometry_type = _geojson_object['features'][0]['geometry']['type'];
+             
+            
+           
+
+
+
 
 
 
@@ -54,15 +69,23 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
             _last_geojson_layer = _current_geojson_layer;
 
+
+
+
+
+
             _current_geojson_layer = L.geoJson(_geojson_object, {
+
+
+                // for point feature, by default it use marker, but instead of use marker, here change marker to polygon (circle marker) 
+                pointToLayer: function (feature, latlng) {
+                    return L.circleMarker(latlng, geojson_Marker_style_Options);
+                },
+
 
                 style: geojson_default_style,
 
                 onEachFeature: function onEachFeature(feature, layer) {
-
-
-
-
 
 
 
@@ -140,7 +163,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
             if (_last_geojson_layer) {
 
-                //alert("remove last geojson");
+              
 
                 map.removeLayer(_last_geojson_layer);
 
@@ -151,15 +174,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-            //---------------marker cluster  [2.2]-------------------
-            /*
-              if (_cluster_in_use) {
-                  map.data.setMap(null);
-                  _cluster_in_use = false;
-            }
-            */
-            //-------------------------------------------------------
-
+          
 
             // hidden the title_info
             document.getElementById("ajaxload").style.display = "none";
@@ -176,14 +191,6 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-            /* styleFeature function is only in script block in city.cshtml
-                if (($("#subjectID").val() === 'zoning') || ($("#subjectID").val() === 'general_landuse'))
-            {              
-                // color the zoning and general land use.
-                gmap.data.setStyle(styleFeature);
-
-            }
-            */
 
 
 
@@ -216,10 +223,6 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             //-------------------- end remove last geojson ------------------------------
 
 
-
-            //---------------marker cluster  [2.3]-------------------
-            //  need to clear old last time marker clusters.
-            // markerClusterer.clearMarkers();
 
 
             document.getElementById("ajaxload").style.display = "none";

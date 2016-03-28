@@ -473,6 +473,7 @@
     <Content Include="Scripts\leaflet\scrollerfulltablemap.js" />
     <Content Include="Scripts\leaflet\scrollerservertablemap.js" />
     <Content Include="Scripts\leaflet\simpleclustermap.js" />
+    <Content Include="Scripts\leaflet\simpleclustermap_copy.js" />
     <Content Include="Scripts\leaflet\simplemap.js" />
     <Content Include="Scripts\localmap\localclassifyradiobuttonmap.js" />
     <Content Include="Scripts\localmap\localclusterscrollerclienttablemap.js" />
@@ -517,6 +518,10 @@
     <Content Include="Scripts\mapquest\scrollerservertablemap.js" />
     <Content Include="Scripts\mapquest\simpleclustermap.js" />
     <Content Include="Scripts\mapquest\simplemap.js" />
+    <Content Include="Scripts\map_api\leaflet.markercluster\Notworking_leaflet.markercluster.js" />
+    <Content Include="Scripts\map_api\leaflet.markercluster\MarkerCluster.css" />
+    <Content Include="Scripts\map_api\leaflet.markercluster\MarkerCluster.Default.css" />
+    <Content Include="Scripts\map_api\leaflet.markercluster\working_leaflet.markercluster-src.js_for_1.0_beta_1.js" />
     <Content Include="Scripts\map_api\leaflet\images\layers-2x.png" />
     <Content Include="Scripts\map_api\leaflet\images\layers.png" />
     <Content Include="Scripts\map_api\leaflet\images\marker-icon-2x.png" />
