@@ -473,7 +473,6 @@
     <Content Include="Scripts\leaflet\scrollerfulltablemap.js" />
     <Content Include="Scripts\leaflet\scrollerservertablemap.js" />
     <Content Include="Scripts\leaflet\simpleclustermap.js" />
-    <Content Include="Scripts\leaflet\simpleclustermap_copy.js" />
     <Content Include="Scripts\leaflet\simplemap.js" />
     <Content Include="Scripts\localmap\localclassifyradiobuttonmap.js" />
     <Content Include="Scripts\localmap\localclusterscrollerclienttablemap.js" />

@@ -1,3 +1,5 @@
+
+var leaflet_open_street_map_max_zoom_level = 19;
 var base_map_tile_layer;
 var overlay_tile_layer;
 var lasttime_overlay_tile_layer;
@@ -7,6 +9,14 @@ var geojson_clienttable_mouseover_highlight_style;
 var geojson_Marker_style_Options;
 var _current_markers_cluster;
 var _last_markers_cluster;
+var _click_polygon_style;
+var _click_line_style;
+var _mouseover_polygon_style;
+var _mouseover_line_style;
+
+
+
+
 
 
 var _addr_info;
@@ -173,10 +183,43 @@ geojson_Marker_style_Options = {
 
 };
 
+_click_polygon_style = {
+    
+    color: '#FF0000',
+    opacity: 0.8,
+    weight: 12,
+    fillColor: '#FF0000',
+    fillOpacity: 0.01
+};
 
 
+_click_line_style = {
+
+    color: '#FF0000',
+    opacity: 0.8,
+    weight: 12,
+    fillColor: '#FF0000',
+    fillOpacity: 0.01
+};
+
+_mouseover_polygon_style = {
+    
+    color: '#F7D358',
+    opacity: 0.8,
+    weight: 12,
+    fillColor: '#FF0000',
+    fillOpacity: 0.01
+};
 
 
+_mouseover_line_style = {
+
+    color: '#F7D358',
+    opacity: 0.8,
+    weight: 12,
+    fillColor: '#FF0000',
+    fillOpacity: 0.01
+};
 
 
 

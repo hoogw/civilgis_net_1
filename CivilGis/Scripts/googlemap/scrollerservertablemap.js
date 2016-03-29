@@ -1494,7 +1494,8 @@ function datatablesX(){
         
 
 
-       
+     // load data for upper entire datatable
+     datatablesX();
 
 
        //  load data for google map and lower datatable 
@@ -1502,8 +1503,7 @@ function datatablesX(){
 
     
     
-        // load data for upper entire datatable
-          datatablesX();
+       
     
 
     }); // document ready function

@@ -1494,7 +1494,8 @@ function datatablesX(){
 
         
 
-
+     // load data for upper entire datatable
+     datatablesX();
        
 
 
@@ -1503,8 +1504,7 @@ function datatablesX(){
 
     
     
-        // load data for upper entire datatable
-          datatablesX();
+        
     
 
     }); // document ready function
