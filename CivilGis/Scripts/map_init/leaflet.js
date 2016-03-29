@@ -128,7 +128,7 @@ _default_strokeWeight = 1;
 
 
 _highlight_fillOpacity = 0;
-_highlight_strokeColor = '#fff';
+_highlight_strokeColor = '#000000'; // black
 _highlight_strokeWeight = 8;
 
 _clienttable_mouseover_highlight_fillColor = '#000080';

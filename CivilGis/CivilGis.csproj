@@ -1010,6 +1010,8 @@
     <Content Include="Views\Shared\mapquest\_Chicago_side_panel.cshtml" />
     <Content Include="Views\Shared\openlayers\_San_Francisco_side_panel.cshtml" />
     <Content Include="Views\Shared\openlayers\_Chicago_side_panel.cshtml" />
+    <Content Include="Views\Home\heremap\Shoreline.cshtml" />
+    <Content Include="Views\Shared\heremap\_Shoreline_side_panel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
