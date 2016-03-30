@@ -372,9 +372,13 @@ function init_tiling(){
                 minZoom: 0
 
             }); // tile_maptype
+            
+            map.overlayMapTypes.insertAt(0, tile_MapType);
 
 
             _tile_exist = true;
+
+           
 
         }// if
 
@@ -388,10 +392,11 @@ function init_tiling(){
 
 function add_tiles(){
     
+   // alert(_tile_exist);
     if (_tile_exist){
              // ---- if returning total number, not geoJOSN feature, then add tiling layer on top ---------------------------
        
-    
+        
             // before add tile, need to clean all previous tiles, without this line, it will add more and more layers on top to each other, color will get darker and darker.
             map.overlayMapTypes.clear();
 

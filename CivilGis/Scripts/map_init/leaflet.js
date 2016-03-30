@@ -125,7 +125,7 @@ var _mapclick_in_use = false;
 // --------default feature style -----------
 _default_fillOpacity = 0;
 _default_strokeColor = '#0000FF'; //blue
-_default_strokeWeight = 1;
+_default_strokeWeight = 2;
 
 
 _highlight_fillOpacity = 0;
