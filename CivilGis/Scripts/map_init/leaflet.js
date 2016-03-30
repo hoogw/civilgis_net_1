@@ -17,7 +17,8 @@ var _mouseover_line_style;
 
 
 
-
+var _tile_exist = false;
+var _tile_list;
 
 var _addr_info;
 var search_address_marker;
@@ -260,6 +261,23 @@ function set_initial_location(_area) {
     _area_db["New_York_Staten_Island"] = ["New_York_Staten_Island", 40.60300547512703, -74.1353988647461, 13, "/-74.2679214477539/40.48795409096868/-74.04716491699219/40.657461921354866/"];
 
 
+
+    _area_db["Arura"] = ["Arura", 39.723296392333026, -104.84081268310547, 13, "/-104.97127532958984/39.61573894281141/-104.501953125/39.818557296839344/"];
+    _area_db["Bakersfield"] = ["Bakersfield", 39.818557296839344, -104.501953125, 13, "/-119.19822692871094/35.266365060848436/-118.78177642822266/35.44808511462123/"];
+    _area_db["Baltimore"] = ["Baltimore", 35.44808511462123, -118.78177642822266, 13, "/-76.74568176269531/39.24714385893248/-76.42021179199219/39.44520783247914/"];
+    _area_db["Denver"] = ["Denver", 39.44520783247914, -76.42021179199219, 13, "/-105.10276794433594/39.612565174816254/-104.59259033203125/39.90657598772841/"];
+    _area_db["Orlando"] = ["Orlando", 39.90657598772841, -104.59259033203125, 13, "/-81.47872924804688/28.4463551910418/-81.265869140625/28.6080342113753/"];
+    _area_db["Palo_Alto"] = ["Palo_Alto", 28.6080342113753, -81.265869140625, 13, "/-122.22702026367188/37.339045928741186/-122.10411071777344/37.49529038649112/"];
+    _area_db["Philadelphia"] = ["Philadelphia", 37.49529038649112, -122.10411071777344, 13, "/-75.24845123291016/39.87048617098581/-74.95491027832031/40.13794057716276/"];
+    _area_db["Portland"] = ["Portland", 40.13794057716276, -74.95491027832031, 13, "/-122.75264739990234/45.433153642271414/-122.46803283691406/45.58473142874248/"];
+    _area_db["San_Jose"] = ["San_Jose", 45.58473142874248, -122.46803283691406, 13, "/-122.06428527832031/37.22076028799717/-121.82052612304688/37.45469273789926/"];
+    _area_db["Seattle"] = ["Seattle", 37.45469273789926, -121.82052612304688, 13, "/-122.43644714355469/47.514186307885765/-122.20745086669922/47.741863047356425/"];
+    _area_db["Shoreline"] = ["Shoreline", 47.75479043701335, -122.34392166137695, 13, "/-122.38700866699219/47.730202558631625/-122.27182388305664/47.77936670249429/"];
+    _area_db["Stockton"] = ["Stockton", 47.77936670249429, -122.27182388305664, 13, "/-121.42827987670898/37.890705366311686/-121.18932723999023/38.063635376296816/"];
+    _area_db["Washington_DC"] = ["Washington_DC", 38.063635376296816, -121.18932723999023, 13, "/-77.12041854858398/38.87900680425525/-76.88146591186523/39.0045114938785/"];
+
+
+
     // resize map div height based on user's browser resolution.
 
     var browser_width = $(window).width();
@@ -395,21 +413,52 @@ function add_area_boundary(_area) {
 
 function init_tiling(){
     
-    //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
-     _tile_baseURL = 'http://tile.transparentgov.net/v2/';
-    // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
+    // --------------------- dynamic load javascript file  ---------------------------
 
 
-     var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.png';
-     var overlay_tile_Attrib = 'Map data &#169; <a href="http://transparentgov.net">transparentgov.net</a> contributors';
-     tile_MapType = new L.TileLayer(overlay_tile_Url, { minZoom: 3, maxZoom: 22, errorTileUrl:'  ', unloadInvisibleTiles: true, reuseTiles:true, attribution: overlay_tile_Attrib });
+    
+    var _tile_list_js = "/Scripts/map_init/tile_list/googlemap_tile_list.js";
 
-    // ===== above must define errorTileUrl:'  ', must have some character or space in '  ' above. If not define this, missing tile will show a broken image icon on map everywhere, if define this, it just failed to load empty URL, not showing broken image icon
+    $.when(
+             $.getScript(_tile_list_js)
+     /*
+    $.getScript( "/mypath/myscript1.js" ),
+    $.getScript( "/mypath/myscript2.js" ),
+    $.getScript( "/mypath/myscript3.js" ),
+    */
+
+    ).done(function () {
+
+        var  _tile_name = _areaID + "_" + _subjectID;
+        var _i = _tile_list.indexOf(_tile_name);
+        //alert(_tile_name);
+        if (_i >= 0) {
 
 
-     overlay_tile_layer = map.addLayer(tile_MapType);
 
 
+
+                        //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
+                         _tile_baseURL = 'http://tile.transparentgov.net/v2/';
+                        // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
+
+
+                         var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.png';
+                         var overlay_tile_Attrib = 'Map data &#169; <a href="http://transparentgov.net">transparentgov.net</a> contributors';
+                         tile_MapType = new L.TileLayer(overlay_tile_Url, { minZoom: 3, maxZoom: 22, errorTileUrl:'  ', unloadInvisibleTiles: true, reuseTiles:true, attribution: overlay_tile_Attrib });
+
+                        // ===== above must define errorTileUrl:'  ', must have some character or space in '  ' above. If not define this, missing tile will show a broken image icon on map everywhere, if define this, it just failed to load empty URL, not showing broken image icon
+
+
+                         overlay_tile_layer = map.addLayer(tile_MapType);
+
+
+                         _tile_exist = true;
+
+                     }// if
+
+
+    }); // when done
 
 
 }// init tile
@@ -420,119 +469,170 @@ function add_tiles(){
     
      // ---- if returning total number, not geoJOSN feature, then add tiling layer on top ---------------------------
        
-    
-    // before add tile, need to clean all previous tiles, without this line, it will add more and more layers on top to each other, color will get darker and darker.
-   
-    if (overlay_tile_layer) {
+    if (_tile_exist) {
+        // before add tile, need to clean all previous tiles, without this line, it will add more and more layers on top to each other, color will get darker and darker.
 
-        lasttime_overlay_tile_layer = overlay_tile_layer;
-        map.removeLayer(lasttime_overlay_tile_layer);
-        overlay_tile_layer = map.addLayer(tile_MapType);
+        if (overlay_tile_layer) {
 
+            lasttime_overlay_tile_layer = overlay_tile_layer;
+            map.removeLayer(lasttime_overlay_tile_layer);
+            overlay_tile_layer = map.addLayer(tile_MapType);
+
+        }
     }
-    
 }
 
 function remove_tiles() {
+    if (_tile_exist) {
+        if (overlay_tile_layer) {
 
-    map.overlayMapTypes.clear();
-    //map.overlayMapTypes.pop();
-    //map.overlayMapTypes.removeAt(0);
+            
+            map.removeLayer(overlay_tile_layer);
+            
+
+        }
+    }
+}
+
+
+//------------- leaflet basic simple map function -----------------------------
+
+function get_map_bound() {
+
+    //document.getElementById("title_info").innerHTML = "MAP BOUNDS [SouthWest, NorthEast] "+ map.getBounds();
+    // get current map bounds as URL parameters. 
+
+
+
+
+
+
+    bounds = map.getBounds();
+    southWest = bounds.getSouthWest();
+    northEast = bounds.getNorthEast();
+    SWlong = southWest.lng;
+    SWlat = southWest.lat;
+    NElong = northEast.lng;
+    NElat = northEast.lat;
+
+    //alert(SWlong);
+
+    // http://localhost:10/civilgis/api/load/general_landuse/SWlong/SWlat/NElong/NElat/   This is sample URI
+    //var _url = base_url + 'api/loadall/' + $("#areaID").val() + '/' + $("#subjectID").val() + '/' + SWlong + '/' + SWlat + '/' + NElong + '/' + NElat + '/';
+    var _url = "/api/geojson/feature/" + initial_location[0] + '/' + $("#subjectID").val() + "/" + SWlong + "/" + SWlat + "/" + NElong + "/" + NElat + "/";
+
+    document.getElementById("ajaxload").style.display = "block";
+    ajax_GeoJSON(map, _url, false);
+
+
+
+
+}
+
+
+function get_click_latlng(_click_event_lat, _click_event_lng) {
+
+
+    if (_mapclick_in_use) {
+
+
+        // --- current use 2X2 grid boundary (as click event latlong is on center point), you can use 3x3 grid or adjust house length to make larger/smaller select area. 
+        var _square_house_length = 0.0004; // average is 0.0003-0.0004
+
+
+        SWlong = _click_event_lng - _square_house_length;
+        SWlat = _click_event_lat - _square_house_length;
+        NElong = _click_event_lng + _square_house_length;
+        NElat = _click_event_lat + _square_house_length;
+
+
+
+
+        var _url_click_event = "/api/geojson/feature/" + $("#areaID").val() + '/' + $("#subjectID").val() + "/" + SWlong + "/" + SWlat + "/" + NElong + "/" + NElat + "/";
+
+        document.getElementById("ajaxload").style.display = "block";
+        ajax_GeoJSON(map, _url_click_event, true);
+
+
+
+    }
+
+
+
 
 }
 
 
 
+function back_full_extend() {
 
-function geocodeAddress(geocoder, resultsMap) {
-
-    var address = document.getElementById('addr_txt').value;
-
-   
-
-    _addr_info = new google.maps.InfoWindow();
-
-    //alert(address);
-    geocoder.geocode({ 'address': address }, function (results, status) {
-
-        if (status === google.maps.GeocoderStatus.OK) {
-           
-            
-            if (search_address_marker)  //if marker is not null then clear last marker
-            {
-                search_address_marker.setMap(null);
-
-             }
-
-            search_address_marker = new google.maps.Marker({
-                map: resultsMap,
-                position: results[0].geometry.location,
-                // icon: iconBase + 'custome_icon.png'
-                label: 'X'
-             });
-
-            //alert(address);
-            // add new marker then change to marker location and trigger zoom_change event to load geojson
-            //resultsMap.panTo(results[0].geometry.location);
-
-             resultsMap.setCenter(results[0].geometry.location);
-             resultsMap.setZoom(18); // to fix the bug must zoom twice, level from large to small,  getBound will get the first zoom level.  
-             resultsMap.setZoom(19);
-
-        } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-        }
+    map.setView(new L.LatLng(initial_location[1], initial_location[2]), initial_location[3]);
+}
 
 
-
-        // marker double click to close 
-        search_address_marker.addListener('dblclick', function (event) {
-
-
-
-            search_address_marker.setMap(null);
-
-        });// marker listener
-
-
-
-        // marker mouse hove over
-        search_address_marker.addListener('mouseover', function (event) {
-
-            // Set the info window's content and position.
-            _addr_info.setContent(results[0].formatted_address);
-            //_addr_info.setPosition(marker.);
-
-            _addr_info.open(resultsMap, search_address_marker);
-
-        });// marker listener
-
-
-        // marker mouse out
-        search_address_marker.addListener('mouseout', function (event) {
-
-            
-
-            _addr_info.close();
-
-        });// marker listener
-
-
-
-        // marker click 
-        search_address_marker.addListener('click', function (event) {
-           // _addr_info.setContent(results[0].formatted_address);
-           // _addr_info.open(resultsMap, marker);
-
-            resultsMap.panTo(event.latLng);
-            //resultsMap.panBy(5,5);
-            resultsMap.setZoom(18);
-            resultsMap.setZoom(19);
-        });
+function add_map_listener_idle() {
 
 
 
 
 
-    }); //geocoder
-} // function
+
+
+    listener_idle = map.on('moveend', function (e) {
+        //alert(e.latlng);
+        get_map_bound();
+
+
+    });
+
+
+
+
+
+
+
+
+
+    // ---------  map click event [1] ------ search for a single feature where clicked ------------
+    listener_click = map.on('click', function (click_event_location) {
+
+        // alert(click_event_location.latlng.lat);
+        get_click_latlng(click_event_location.latlng.lat, click_event_location.latlng.lng);
+    });
+
+
+    listener_rightclick = map.on('rightclick', function () {
+
+        back_full_extend();
+    });
+
+    //--------------------------End  map right click event ---------- back to full extend ----------------------
+
+
+
+
+}
+
+
+function geocoding() {
+
+    // --------  search address ------- geocoding -----------
+    new L.Control.GeoSearch({
+
+
+        provider: new L.GeoSearch.Provider.Esri(),
+
+        // google and open streetmap is ok, but result zoom level is too high for open street map. 
+        //provider: new L.GeoSearch.Provider.Google(),
+        //provider: new L.GeoSearch.Provider.OpenStreetMap(),
+
+        retainZoomLevel: false
+    }).addTo(map);
+
+    // ---------- End of search address ------- geocoding -----------
+
+
+
+}
+
+//----------------End of leaflet basic simple map function  ------------------------

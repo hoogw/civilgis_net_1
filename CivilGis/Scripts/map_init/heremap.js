@@ -1,4 +1,6 @@
 
+var _tile_exist = false;
+var _tile_list;
 
 var _addr_info;
 var search_address_marker;
@@ -129,7 +131,7 @@ function set_initial_location(_area) {
     _areaID = $("#areaID").val();
     _subjectID = $("#subjectID").val();
 
-    _flyto_zoomlevel = 18; // default for parcels, point, street, small feature.
+    _flyto_zoomlevel = 17; // default for parcels, point, street, small feature.
 
     //if (($("#areaID").val() === "county") && ($("#subjectID").val() === "cities")){  _flyto_zoomlevel = 11 }
     if ($("#subjectID").val() === "cities") { _flyto_zoomlevel = 11 }
@@ -146,7 +148,7 @@ function set_initial_location(_area) {
 
 
     _area_db["Los_Angeles"] = ["Los_Angeles", 34.043556504127444, -118.24928283691406, 11, "/-118.51638793945312/33.73633183280655/-118.07281494140625/34.13908837343848/"];
-    _area_db["San_Francisco"] = ["San_Francisco", 37.77559951996456, -122.41722106933594, 12, "/-122.53034591674805/37.686265625259175/-122.3573112487793/37.84164803953047/"];
+    _area_db["San_Francisco"] = ["San_Francisco", 37.77559951996456, -122.41722106933594, 13, "/-122.53034591674805/37.686265625259175/-122.3573112487793/37.84164803953047/"];
     _area_db["New_York"] = ["New_York", 40.753499070431374, -73.98948669433594, 11, "/-74.29985046386719/40.463143910531016/-71.79428100585938/41.35774173825275/"];
     _area_db["Chicago"] = ["Chicago", 41.874673839758024, -87.63175964355469, 11, "/-87.75535583496094/41.56562822121976/-87.330322265625/42.03501434990212/"];
     _area_db["Denver"] = ["Denver", 39.74336227378035, -104.99101638793945, 12, "/-105.14053344726562/39.58029027440865/-104.57199096679688/39.96238554917605/"];
@@ -158,8 +160,6 @@ function set_initial_location(_area) {
     _area_db["New_York_Manhattan"] = ["New_York_Manhattan", 40.764421348741976, -73.97815704345703, 13, "/-74.02416229248047/40.700682761880564/-73.91738891601562/40.86471823388759/"];
     _area_db["New_York_Queens"] = ["New_York_Queens", 40.72280306615735, -73.79997253417969, 13, "/-73.95206451416016/40.53911243826349/-73.68221282958984/40.8662760559589/"];
     _area_db["New_York_Staten_Island"] = ["New_York_Staten_Island", 40.60300547512703, -74.1353988647461, 13, "/-74.2679214477539/40.48795409096868/-74.04716491699219/40.657461921354866/"];
-
-
 
 
     _area_db["Arura"] = ["Arura", 39.723296392333026, -104.84081268310547, 13, "/-104.97127532958984/39.61573894281141/-104.501953125/39.818557296839344/"];
@@ -175,7 +175,6 @@ function set_initial_location(_area) {
     _area_db["Shoreline"] = ["Shoreline", 47.75479043701335, -122.34392166137695, 13, "/-122.38700866699219/47.730202558631625/-122.27182388305664/47.77936670249429/"];
     _area_db["Stockton"] = ["Stockton", 47.77936670249429, -122.27182388305664, 13, "/-121.42827987670898/37.890705366311686/-121.18932723999023/38.063635376296816/"];
     _area_db["Washington_DC"] = ["Washington_DC", 38.063635376296816, -121.18932723999023, 13, "/-77.12041854858398/38.87900680425525/-76.88146591186523/39.0045114938785/"];
-    
 
 
 
@@ -190,6 +189,8 @@ function set_initial_location(_area) {
 
     // End of browser resize
 
+
+
     return _area_db[_area];
 
 }
@@ -201,7 +202,7 @@ function add_area_boundary(_area) {
 
 
     _multi_polyline = 'No';
-    var _js_url = "/Scripts/area_boundary/" + _area + ".js";
+    var _js_url = "/Scripts/area_boundary/googlemap/" + _area + ".js";
 
 
 
@@ -327,54 +328,87 @@ function add_area_boundary(_area) {
 
 
 
-function init_tiling(){
-    
-    //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
-     _tile_baseURL = 'http://tile.transparentgov.net/v2/';
-    // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
+function init_tiling() {
+
+    // --------------------- dynamic load javascript file  ---------------------------
 
 
 
-     tile_MapType = new google.maps.ImageMapType({
-         getTileUrl: function (coord, zoom) {
+    var _tile_list_js = "/Scripts/map_init/tile_list/googlemap_tile_list.js";
+
+    $.when(
+             $.getScript(_tile_list_js)
+     /*
+    $.getScript( "/mypath/myscript1.js" ),
+    $.getScript( "/mypath/myscript2.js" ),
+    $.getScript( "/mypath/myscript3.js" ),
+    */
+
+    ).done(function () {
+
+        var _tile_name = _areaID + "_" + _subjectID;
+        var _i = _tile_list.indexOf(_tile_name);
+        //alert(_tile_name);
+        if (_i >= 0) {
+
+
+            //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
+            _tile_baseURL = 'http://tile.transparentgov.net/v2/';
+            // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
 
 
 
-             return _tile_baseURL + _areaID + '_' + _subjectID + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
+            tile_MapType = new google.maps.ImageMapType({
+                getTileUrl: function (coord, zoom) {
 
 
-         },
-         tileSize: new google.maps.Size(256, 256),
-         maxZoom: 19,
-         minZoom: 0
 
-     });
+                    return _tile_baseURL + _areaID + '_' + _subjectID + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
+
+
+                },
+                tileSize: new google.maps.Size(256, 256),
+                maxZoom: 22,
+                minZoom: 0
+
+            }); // tile_maptype
+
+
+            _tile_exist = true;
+
+        }// if
+
+
+    }); // when done
+
 
 }// init tile
 
 
 
-function add_tiles(){
-    
-     // ---- if returning total number, not geoJOSN feature, then add tiling layer on top ---------------------------
-       
-    
-    // before add tile, need to clean all previous tiles, without this line, it will add more and more layers on top to each other, color will get darker and darker.
-    map.overlayMapTypes.clear();
+function add_tiles() {
 
-    map.overlayMapTypes.insertAt(0, tile_MapType);
+    if (_tile_exist) {
+        // ---- if returning total number, not geoJOSN feature, then add tiling layer on top ---------------------------
 
-   
-    
-    
+
+        // before add tile, need to clean all previous tiles, without this line, it will add more and more layers on top to each other, color will get darker and darker.
+        map.overlayMapTypes.clear();
+
+        map.overlayMapTypes.insertAt(0, tile_MapType);
+
+    }
+
+
 }
 
 function remove_tiles() {
 
-    map.overlayMapTypes.clear();
-    //map.overlayMapTypes.pop();
-    //map.overlayMapTypes.removeAt(0);
-
+    if (_tile_exist) {
+        map.overlayMapTypes.clear();
+        //map.overlayMapTypes.pop();
+        //map.overlayMapTypes.removeAt(0);
+    }
 }
 
 
@@ -384,7 +418,7 @@ function geocodeAddress(geocoder, resultsMap) {
 
     var address = document.getElementById('addr_txt').value;
 
-   
+
 
     _addr_info = new google.maps.InfoWindow();
 
@@ -392,28 +426,28 @@ function geocodeAddress(geocoder, resultsMap) {
     geocoder.geocode({ 'address': address }, function (results, status) {
 
         if (status === google.maps.GeocoderStatus.OK) {
-           
-            
+
+
             if (search_address_marker)  //if marker is not null then clear last marker
             {
                 search_address_marker.setMap(null);
 
-             }
+            }
 
             search_address_marker = new google.maps.Marker({
                 map: resultsMap,
                 position: results[0].geometry.location,
                 // icon: iconBase + 'custome_icon.png'
                 label: 'X'
-             });
+            });
 
             //alert(address);
             // add new marker then change to marker location and trigger zoom_change event to load geojson
             //resultsMap.panTo(results[0].geometry.location);
 
-             resultsMap.setCenter(results[0].geometry.location);
-             resultsMap.setZoom(18); // to fix the bug must zoom twice, level from large to small,  getBound will get the first zoom level.  
-             resultsMap.setZoom(19);
+            resultsMap.setCenter(results[0].geometry.location);
+            resultsMap.setZoom(18); // to fix the bug must zoom twice, level from large to small,  getBound will get the first zoom level.  
+            resultsMap.setZoom(19);
 
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
@@ -447,7 +481,7 @@ function geocodeAddress(geocoder, resultsMap) {
         // marker mouse out
         search_address_marker.addListener('mouseout', function (event) {
 
-            
+
 
             _addr_info.close();
 
@@ -457,8 +491,8 @@ function geocodeAddress(geocoder, resultsMap) {
 
         // marker click 
         search_address_marker.addListener('click', function (event) {
-           // _addr_info.setContent(results[0].formatted_address);
-           // _addr_info.open(resultsMap, marker);
+            // _addr_info.setContent(results[0].formatted_address);
+            // _addr_info.open(resultsMap, marker);
 
             resultsMap.panTo(event.latLng);
             //resultsMap.panBy(5,5);

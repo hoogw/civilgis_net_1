@@ -462,7 +462,6 @@
     <Content Include="Scripts\leaflet\classifyradiobuttonmap.js" />
     <Content Include="Scripts\leaflet\clusterpagedclienttablemap.js" />
     <Content Include="Scripts\leaflet\clusterscrollerclienttablemap.js" />
-    <Content Include="Scripts\leaflet\colormap.js" />
     <Content Include="Scripts\leaflet\justtiles.js" />
     <Content Include="Scripts\leaflet\maplist_paged.js" />
     <Content Include="Scripts\leaflet\maplist_scroller.js" />
@@ -529,6 +528,16 @@
     <Content Include="Scripts\map_api\leaflet\leaflet-src.js" />
     <Content Include="Scripts\map_api\leaflet\leaflet.css" />
     <Content Include="Scripts\map_api\leaflet\leaflet.js" />
+    <Content Include="Scripts\map_api\leaflet_GeoSearch\css\l.geosearch.css" />
+    <Content Include="Scripts\map_api\leaflet_GeoSearch\img\alert.png" />
+    <Content Include="Scripts\map_api\leaflet_GeoSearch\img\geosearch.png" />
+    <Content Include="Scripts\map_api\leaflet_GeoSearch\img\spinner.gif" />
+    <Content Include="Scripts\map_api\leaflet_GeoSearch\js\l.control.geosearch.js" />
+    <Content Include="Scripts\map_api\leaflet_GeoSearch\js\l.geosearch.provider.bing.js" />
+    <Content Include="Scripts\map_api\leaflet_GeoSearch\js\l.geosearch.provider.esri.js" />
+    <Content Include="Scripts\map_api\leaflet_GeoSearch\js\l.geosearch.provider.google.js" />
+    <Content Include="Scripts\map_api\leaflet_GeoSearch\js\l.geosearch.provider.nokia.js" />
+    <Content Include="Scripts\map_api\leaflet_GeoSearch\js\l.geosearch.provider.openstreetmap.js" />
     <Content Include="Scripts\map_init\bingmap.js" />
     <Content Include="Scripts\map_init\heremap.js" />
     <Content Include="Scripts\map_init\mapquest.js" />
@@ -536,6 +545,7 @@
     <Content Include="Scripts\map_init\openlayers.js" />
     <Content Include="Scripts\map_init\leaflet.js" />
     <Content Include="Scripts\map_init\googlemap.js" />
+    <Content Include="Scripts\map_init\tile_list\googlemap_tile_list.js" />
     <Content Include="Scripts\openlayers\classifycheckboxbuttonmap.js" />
     <Content Include="Scripts\openlayers\classifyradiobuttonmap.js" />
     <Content Include="Scripts\openlayers\clusterpagedclienttablemap.js" />
@@ -839,7 +849,6 @@
     <Content Include="Views\Leaflet\classifyradiobuttonmap.cshtml" />
     <Content Include="Views\Leaflet\clusterpagedclienttablemap.cshtml" />
     <Content Include="Views\Leaflet\clusterscrollerclienttablemap.cshtml" />
-    <Content Include="Views\Leaflet\colormap.cshtml" />
     <Content Include="Views\Leaflet\justtiles.cshtml" />
     <Content Include="Views\Leaflet\maplistpaged.cshtml" />
     <Content Include="Views\Leaflet\maplistscroller.cshtml" />
