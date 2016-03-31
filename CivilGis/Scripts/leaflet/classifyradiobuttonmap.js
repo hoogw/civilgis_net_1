@@ -3,7 +3,7 @@
 
 //-------------------------- Classification button section -------------------------------------------
 
-function init_classification_buttons(_area, _subject) {
+function init_classification_buttons_radio(_area, _subject) {
 
 
 
@@ -432,16 +432,15 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
     // Load a GeoJSON from the server 
 
 
-    //------tile[3] ---------
-    if ($('input[name="color_tiles_switch"]').bootstrapSwitch('state')) {
-        add_tiles();
 
-    }
+
+
 
 
 
 
     // test url if return a number means too many polygon to show.otherwise add polygon to map.
+
     $.get(_apiURI, function (data) {
 
         if (isNaN(data)) {
@@ -450,24 +449,156 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-            var _geojson_object = JSON.parse(data);
+            _geojson_object = JSON.parse(data);
+
+
+
+            // ================= append two column GeoFeatureType GeoFeatureID to properties. =========================
+            //-------------    php format add each _id:{"$id": "55e8c24e382f9fe337f0d8fe"}  to properties before draw on map. -------------
+            //-------------asp.net format add each  {"_id" : "55c532cf21167708171b02a2"}  to properties before draw on map. -------------
+
+            var _features_array = _geojson_object['features'];
+
+            var _id_obj;
+            var _id_obj_id;
+            var _propty_obj;
+
+            _features_array.forEach(function (eachFeatueItem) {
+
+
+                /*
+                  // --- php format ------
+                  
+                     _id_obj = eachFeatueItem['_id'];
+                     _id_obj_id = _id_obj['$id'];
+                    _propty_obj = eachFeatueItem['properties'];
+                    var _geo_type = eachFeatueItem['geometry'];
+                    
+                    _propty_obj['GeoFeatureType']=_geo_type['type'];
+                    _propty_obj['GeoFeatureID'] = _id_obj_id;
+
+
+
+              
+                    // ---end  php format ------
+                 */
+
+
+                // ------ asp.net format -----------
+                var _geo_type = eachFeatueItem['geometry'];
+
+
+
+                _propty_obj = eachFeatueItem['properties'];
+
+                _propty_obj['GeoFeatureType'] = _geo_type['type'];
+                _propty_obj['GeoFeatureID'] = eachFeatueItem['_id'];
+
+
+            });// features_array_foreach
+
+            _geojson_object['features'] = {};
+            _geojson_object['features'] = _features_array;
+            //---------------------------------------------------------------
+
+            // =================End of  append two column GeoFeatureType GeoFeatureID to properties. =========================
 
 
 
 
             //----------------  add new geojson, then remove last geojson --------------------
 
-            map.data.setStyle({
-                fillOpacity: _classfiy_fillOpacity,
-                strokeColor: _classfiy_strokeColor,
-                strokeWeight: _classfiy_strokeWeight
 
-            });
 
             _last_geojson_layer = _current_geojson_layer;
 
-            _current_geojson_layer = map.data.addGeoJson(_geojson_object);
+            _current_geojson_layer = L.geoJson(_geojson_object, {
 
+
+
+                // for point feature, by default it use marker, but instead of use marker, here change marker to polygon (circle marker) 
+                pointToLayer: function (feature, latlng) {
+                    return L.circleMarker(latlng, geojson_Marker_style_Options);
+                },
+
+
+                style: geojson_default_style,
+
+                onEachFeature: function onEachFeature(feature, layer) {
+
+
+
+
+
+
+
+                    //bind click
+                    layer.on('mouseover', function (e) {
+                        // e = event
+                        // console.log(e); 
+
+                        // You can make your ajax call declaration here
+                        //$.ajax(... 
+
+
+                        layer.setStyle(geojson_mouseover_highlight_style);
+
+
+
+                        var instant_info = "<ul>";
+
+
+                        for (var _key in layer.feature.properties) {
+                            var _value = String(layer.feature.properties[_key]);
+                            instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _key + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+
+                        }
+
+
+                        instant_info = instant_info + "</ul>";
+
+
+                        // update bottom <div>
+                        document.getElementById("info-table").innerHTML = instant_info;
+
+
+
+                    });// layer.on mouseover
+
+
+                    layer.on('mouseout', function (e) {
+
+                        layer.setStyle(geojson_default_style);
+
+                        // empty bottom <div>
+                        document.getElementById("info-table").innerHTML = "";
+                        //infowindow.close();
+
+                    });// layer.on mouseout
+
+                }// oneach function
+
+            }).bindPopup(function (layer) {
+
+
+                // when user click each feature, it will popup a info window by the feature.
+
+
+                var popup = "<table>";
+                for (var _key in layer.feature.properties) {
+                    var _value = String(layer.feature.properties[_key]);
+                    // popup = popup + "<tr><td>" + _key + "</td><td>" + _value + "</td></tr>";
+
+                    popup = popup + "<tr><td><span style=\'background-color: #454545;\'><font color=\'white\'>" + _key + "</span>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;" + _value + "</td></tr>";
+
+                }
+                popup = popup + "</table>";
+
+
+                return popup;
+
+
+            }).addTo(map);
 
 
             // ---- after add new geojson, now remove last time old geojson -------------
@@ -475,17 +606,19 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
             if (_last_geojson_layer) {
 
-                for (var l = 0, len = _last_geojson_layer.length; l < len; l++) {
+                //alert("remove last geojson");
 
-                    gmap.data.remove(_last_geojson_layer[l]);
+                map.removeLayer(_last_geojson_layer);
 
-                }// for
             }// if
 
 
             //------------------------end add new geojson, then remove last geojson------------------------- ---------------
 
 
+
+
+          
 
 
 
@@ -503,6 +636,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             document.getElementById("legend").innerHTML = "";
 
 
+
             // ------------- map click event [3] -------------------
             if (_map_click_event) {
             }
@@ -512,35 +646,29 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
             //-------------------------------------------------------------
 
-            // everytime load new geojson, need to apply color on those checkbox which is checked------------------------ classification [4] --------------------
-            apply_checkbox();
 
 
 
         }
-            // returning number of count
+            // returning number of count, no geojson, clean the datatables
         else {
-
 
             // ---------- if return number, should remove last time geojson -----------
             _last_geojson_layer = _current_geojson_layer;
             if (_last_geojson_layer) {
 
-                for (var l = 0, len = _last_geojson_layer.length; l < len; l++) {
+                map.removeLayer(_last_geojson_layer);
 
-                    gmap.data.remove(_last_geojson_layer[l]);
 
-                }// for
             }// if
             //-------------------- end remove last geojson ------------------------------
-
-
-
 
 
             document.getElementById("ajaxload").style.display = "none";
             document.getElementById("title_info").style.display = "inline";
             document.getElementById("legend").style.display = "inline";
+
+            
 
             if (data > 0) {
 
@@ -549,24 +677,30 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
                 document.getElementById('legend').innerHTML = "Found [ " + data + " ] records ZOOM IN for Details ";
 
             } else {
+               
 
                 document.getElementById("title_info").innerHTML = "Nothing found";
                 document.getElementById("legend").innerHTML = "Nothing found";
             }
-
-
             // ------------- map click event [4] -------------------
 
             _mapclick_in_use = true;
 
             //-------------------------------------------------------------
 
-            // -------------- classification [5] --------------------
-            uncheck_all_checkbox_button();
 
-        }
 
-    });// get
+
+        }// if else
+
+
+
+    });// get // promist.then
+
+
+
+
+
 
 
 }// function ajax_GeoJSON
@@ -574,31 +708,49 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
+
+
+
+
+
 function initialize() {
 
-    infowindow = new google.maps.InfoWindow();
+
+
 
 
 
     initial_location = set_initial_location($("#areaID").val());
 
-
-    // load classification button [1]
-    init_classification_buttons($("#areaID").val(), $("#subjectID").val());
+    
 
 
+    // set up the map
+    map = new L.Map('map-canvas');
 
-    var mapOptions = {
 
-        //center: new google.maps.LatLng(33.65992448007282, -117.91505813598633),
-        center: new google.maps.LatLng(initial_location[1], initial_location[2]),
-        //mapTypeId: google.maps.MapTypeId.ROADMAP
-        mapTypeId: google.maps.MapTypeId.HYBRID
-    };
-    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    map.setZoom(initial_location[3]);
+    add_map_listener_idle();
+
+
+    // create the tile layer with correct attribution
+    var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    var osmAttrib = 'Map data &#169; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+    var osm = new L.TileLayer(osmUrl, { minZoom: 3, maxZoom: 22, attribution: osmAttrib });
+
+    // start the map
+    map.setView(new L.LatLng(initial_location[1], initial_location[2]), initial_location[3]);
+
+
+
+    base_map_tile_layer = map.addLayer(osm);
+
+
 
     add_area_boundary($("#areaID").val());
+
+
+
+
 
 
 
@@ -606,34 +758,12 @@ function initialize() {
     init_tiling();
 
 
+    geocoding();
 
 
 
-
-
-
-    // --------  search address
-    geocoder = new google.maps.Geocoder();
-
-    document.getElementById('search_addr').addEventListener('click', function () {
-        geocodeAddress(geocoder, map);
-    });
-
-    // ---------- 
-
-
-
-
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('legend'));
-
-
-
-
-
-    add_mapdata_listener();
-
-    add_map_listener_idle();
-
+    // load classification button [1]
+    init_classification_buttons_radio($("#areaID").val(), $("#subjectID").val());
 
 
 
@@ -647,20 +777,15 @@ function initialize() {
 
 
 
-
+// datatables paged js
 $(document).ready(function () {
 
-    // base_url = document.getElementById('base_url').value;
 
+   
 
-
-
-
-    //  load data for google map and lower datatable 
-    google.maps.event.addDomListener(window, 'load', initialize);
-
-
+    initialize();
 
 
 
 }); // document ready function
+

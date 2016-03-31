@@ -61,7 +61,7 @@ function init_classification_buttons_checkbox(_area, _subject) {
 
 
             _labelID = 'label_' + _code;
-            __label_Class = 'btn btn-' + _color + ' btn-xs';
+            _label_Class = 'btn btn-' + _color + ' btn-xs';
             _checkboxID = 'checkbox_' + _code;
             _checkbox_Value = _code + " - " + _description;
 
@@ -124,48 +124,22 @@ function init_classification_buttons_checkbox(_area, _subject) {
                     // if button clicked(check box checked), do nothing. mouse over disable.
                 }
                 else {
-
-
                     // loop through all current featurs on map 
+                    map.data.forEach(function (_feature) {
 
-                    // -----------leaflet --------------
+                        if (_feature.getProperty(_code_column_name) == _current_code_mouseover) {
 
-
-
-
-
-                    _current_geojson_layer.eachLayer(
-                         function (featureInstanceLayer) {
-
-                            // var click_row_geofeatureID = featureInstanceLayer.feature.properties.GeoFeatureID;
-                             var _this_code_column = featureInstanceLayer.feature.properties._code_column_name;
-                             
-
-                             if (_this_code_column == _current_code_mouseover) {
-                                 alert(_this_code_column);
-
-                                 featureInstanceLayer.setStyle(
-                                     geojson_classification_mouseover_highlight_style
-                                     );
+                            //map.data.revertStyle();
+                            map.data.overrideStyle(_feature, {
+                                strokeWeight: 1,
+                                strokeColor: 'white',
+                                fillColor: 'white',
+                                fillOpacity: 0.7
+                            });// overrideStyle
 
 
-
-                             }// if
-
-                         });// function
-
-                         
-
-
-                    //------------ end of leaflet ----------------
-
-
-
-
-
-
-
-                   
+                        }//if
+                    });// map.data.foreach
 
 
 
@@ -194,64 +168,21 @@ function init_classification_buttons_checkbox(_area, _subject) {
                 else {
 
                     // loop through all current featurs on map 
-                    //map.data.forEach(function (_feature) {
+                    map.data.forEach(function (_feature) {
 
-                    //    if (_feature.getProperty(_code_column_name) == _current_code_mouseout) {
+                        if (_feature.getProperty(_code_column_name) == _current_code_mouseout) {
 
-                    //        map.data.revertStyle(_feature);
-                    //        /*
-                    //        map.data.overrideStyle(_feature, {
-                    //                                              fillOpacity: 0,
-                    //                                              strokeColor: 'yellow',
-                    //                                              strokeWeight: 1
-                    //                                           });// overrideStyle
-                    //         */
+                            map.data.revertStyle(_feature);
+                            /*
+                            map.data.overrideStyle(_feature, {
+                                                                  fillOpacity: 0,
+                                                                  strokeColor: 'yellow',
+                                                                  strokeWeight: 1
+                                                               });// overrideStyle
+                             */
 
-                    //    }//if
-                    //});// map.data.foreach
-
-
-
-
-                    // -----------leaflet --------------
-
-
-
-
-
-                    _current_geojson_layer.eachLayer(
-                         function (featureInstanceLayer) {
-
-                             // var click_row_geofeatureID = featureInstanceLayer.feature.properties.GeoFeatureID;
-                             var _this_code_column = featureInstanceLayer.feature.properties._code_column_name;
-
-
-                             if (_this_code_column == _current_code_mouseout) {
-                                 alert(_this_code_column);
-
-                                 featureInstanceLayer.setStyle(
-                                     geojson_default_style
-                                     );
-
-                                 //featureInstanceLayer.resetStyle();
-
-                             }// if
-
-                         });// function
-
-                         
-
-
-                    //------------ end of leaflet ----------------
-
-
-
-
-
-
-
-
-
+                        }//if
+                    });// map.data.foreach
 
 
                 }// else
@@ -293,39 +224,22 @@ function init_classification_buttons_checkbox(_area, _subject) {
                     // alert($(_checkbox_current_selector).is(':checked'));
 
                     // loop through all current featurs on map, un do color, revert to origianl, remove color
+                    map.data.forEach(function (_feature) {
 
+                        if (_feature.getProperty(_code_column_name) == _current_code_click) {
 
-                    // -----------leaflet --------------
+                            map.data.revertStyle(_feature);
+                            /*
+                             map.data.overrideStyle(_feature, {
+                          
+                                                                   fillOpacity: 0,
+                                                                  strokeColor: 'yellow',
+                                                                  strokeWeight: 1
+                                                               });// overrideStyle
+                              */
 
-
-
-
-
-                    _current_geojson_layer.eachLayer(
-                         function (featureInstanceLayer) {
-
-                             // var click_row_geofeatureID = featureInstanceLayer.feature.properties.GeoFeatureID;
-                             var _this_code_column = featureInstanceLayer.feature.properties._code_column_name;
-
-
-                             if (_this_code_column == _current_code_click) {
-                                 alert(_this_code_column);
-
-                                 featureInstanceLayer.setStyle(
-                                     geojson_default_style
-                                     );
-
-                                 //featureInstanceLayer.resetStyle();
-
-                             }// if
-
-                         });
-
-
-
-
-
-                    //------------ end of leaflet ----------------
+                        }//if
+                    });// map.data.foreach
 
 
 
@@ -333,11 +247,9 @@ function init_classification_buttons_checkbox(_area, _subject) {
 
 
 
-                }//if
 
 
-
-
+                } // if end un do it
 
                 else {
                     //alert("  Do it ");
@@ -365,40 +277,22 @@ function init_classification_buttons_checkbox(_area, _subject) {
 
 
                     // loop through all current featurs on map 
-                    
+                    map.data.forEach(function (_feature) {
+
+                        if (_feature.getProperty(_code_column_name) == _current_code_click) {
+
+                            //map.data.revertStyle();
+                            map.data.overrideStyle(_feature, {
+
+                                strokeWeight: 1,
+                                strokeColor: _feature_fill_color,
+                                fillColor: _feature_fill_color,
+                                fillOpacity: 0.7
+                            });// overrideStyle
 
 
-                    // -----------leaflet --------------
-
-
-
-
-
-                    _current_geojson_layer.eachLayer(
-                         function (featureInstanceLayer) {
-
-                             // var click_row_geofeatureID = featureInstanceLayer.feature.properties.GeoFeatureID;
-                             var _this_code_column = featureInstanceLayer.feature.properties._code_column_name;
-
-
-                             if (_this_code_column == _current_code_click) {
-                                 alert(_this_code_column);
-
-                                 featureInstanceLayer.setStyle(
-                                     geojson_classification_mouseover_highlight_style
-                                     );
-
-
-
-                             }// if
-
-                         });// function
-
-
-
-
-                    //------------ end of leaflet ----------------
-
+                        }//if
+                    });// map.data.foreach
 
 
 
@@ -532,6 +426,7 @@ function uncheck_all_checkbox_button() {
 
 
 
+
 //--------------------------End of Classification button section -------------------------------------------
 
 
@@ -542,9 +437,6 @@ function uncheck_all_checkbox_button() {
 
 function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
-
-    // alert(_apiURI);
-
     // Load a GeoJSON from the server 
 
 
@@ -553,25 +445,15 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
+
+
     // test url if return a number means too many polygon to show.otherwise add polygon to map.
+
     $.get(_apiURI, function (data) {
 
         if (isNaN(data)) {
 
 
-
-            // ---------   processing data(geoJson) to fill datatables -----------------
-
-
-
-            //--------------------------------------------
-
-
-            //gmap.data.loadGeoJson(_apiURI);
-
-            // Note: data is a string, not a javascript object.
-            //the function addGeoJson needs a javascript object and not a string. so you must convert string to javascript object before feed into addGeoJson
-            // if you use loadGeoJson(url), do not need any formate change, feed URL return string, the loadGeoJson will do with returning string.
 
 
 
@@ -579,22 +461,55 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
+            // ================= append two column GeoFeatureType GeoFeatureID to properties. =========================
+            //-------------    php format add each _id:{"$id": "55e8c24e382f9fe337f0d8fe"}  to properties before draw on map. -------------
+            //-------------asp.net format add each  {"_id" : "55c532cf21167708171b02a2"}  to properties before draw on map. -------------
+
+            var _features_array = _geojson_object['features'];
+
+            var _id_obj;
+            var _id_obj_id;
+            var _propty_obj;
+
+            _features_array.forEach(function (eachFeatueItem) {
+
+
+                /*
+                  // --- php format ------
+                  
+                     _id_obj = eachFeatueItem['_id'];
+                     _id_obj_id = _id_obj['$id'];
+                    _propty_obj = eachFeatueItem['properties'];
+                    var _geo_type = eachFeatueItem['geometry'];
+                    
+                    _propty_obj['GeoFeatureType']=_geo_type['type'];
+                    _propty_obj['GeoFeatureID'] = _id_obj_id;
 
 
 
+              
+                    // ---end  php format ------
+                 */
+
+
+                // ------ asp.net format -----------
+                var _geo_type = eachFeatueItem['geometry'];
 
 
 
+                _propty_obj = eachFeatueItem['properties'];
+
+                _propty_obj['GeoFeatureType'] = _geo_type['type'];
+                _propty_obj['GeoFeatureID'] = eachFeatueItem['_id'];
 
 
-            // determine feature is point or not point
-            // var _geojson_feature_geometry_type = _geojson_object['features'][0]['geometry']['type'];
+            });// features_array_foreach
 
+            _geojson_object['features'] = {};
+            _geojson_object['features'] = _features_array;
+            //---------------------------------------------------------------
 
-
-
-
-
+            // =================End of  append two column GeoFeatureType GeoFeatureID to properties. =========================
 
 
 
@@ -603,15 +518,10 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-
             _last_geojson_layer = _current_geojson_layer;
 
-
-
-
-
-
             _current_geojson_layer = L.geoJson(_geojson_object, {
+
 
 
                 // for point feature, by default it use marker, but instead of use marker, here change marker to polygon (circle marker) 
@@ -620,9 +530,13 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
                 },
 
 
-                style: geojson_classification_style,
+                style: geojson_default_style,
 
                 onEachFeature: function onEachFeature(feature, layer) {
+
+
+
+
 
 
 
@@ -662,7 +576,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
                     layer.on('mouseout', function (e) {
 
-                        layer.setStyle(geojson_classification_style);
+                        layer.setStyle(geojson_default_style);
 
                         // empty bottom <div>
                         document.getElementById("info-table").innerHTML = "";
@@ -700,7 +614,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
             if (_last_geojson_layer) {
 
-
+                //alert("remove last geojson");
 
                 map.removeLayer(_last_geojson_layer);
 
@@ -708,6 +622,9 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
             //------------------------end add new geojson, then remove last geojson------------------------- ---------------
+
+
+
 
 
 
@@ -728,9 +645,6 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-
-
-
             // ------------- map click event [3] -------------------
             if (_map_click_event) {
             }
@@ -741,14 +655,11 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             //-------------------------------------------------------------
 
 
-            // everytime load new geojson, need to apply color on those checkbox which is checked------------------------ classification [4] --------------------
-            apply_checkbox();
 
 
         }
-            // returning number of count
+            // returning number of count, no geojson, clean the datatables
         else {
-
 
             // ---------- if return number, should remove last time geojson -----------
             _last_geojson_layer = _current_geojson_layer;
@@ -761,11 +672,11 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             //-------------------- end remove last geojson ------------------------------
 
 
-
-
             document.getElementById("ajaxload").style.display = "none";
             document.getElementById("title_info").style.display = "inline";
             document.getElementById("legend").style.display = "inline";
+
+
 
             if (data > 0) {
 
@@ -775,12 +686,10 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
             } else {
 
+
                 document.getElementById("title_info").innerHTML = "Nothing found";
                 document.getElementById("legend").innerHTML = "Nothing found";
             }
-
-
-
             // ------------- map click event [4] -------------------
 
             _mapclick_in_use = true;
@@ -789,18 +698,27 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-            // -------------- classification [5] --------------------
-            uncheck_all_checkbox_button();
+
+        }// if else
+
+
+
+    });// get // promist.then
 
 
 
 
-        }// else return number only
 
-    });// get
 
 
 }// function ajax_GeoJSON
+
+
+
+
+
+
+
 
 
 function initialize() {
@@ -810,11 +728,9 @@ function initialize() {
 
 
 
-
-
     initial_location = set_initial_location($("#areaID").val());
 
-   
+
 
 
     // set up the map
@@ -842,7 +758,7 @@ function initialize() {
 
 
 
-   
+
 
 
 
@@ -850,9 +766,8 @@ function initialize() {
     init_tiling();
 
 
-
-
     geocoding();
+
 
 
     // load classification button [1]
@@ -864,8 +779,14 @@ function initialize() {
 
 
 
-$(document).ready(function () {
 
+
+
+
+
+
+// datatables paged js
+$(document).ready(function () {
 
 
 
@@ -874,6 +795,5 @@ $(document).ready(function () {
 
 
 
-
-
 }); // document ready function
+
