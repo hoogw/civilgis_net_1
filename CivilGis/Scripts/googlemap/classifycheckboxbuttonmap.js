@@ -3,7 +3,7 @@
 
 //-------------------------- Classification button section -------------------------------------------
 
-function init_classification_buttons(_area, _subject) {
+function init_classification_buttons_checkbox(_area, _subject) {
 
 
 
@@ -426,6 +426,172 @@ function uncheck_all_checkbox_button() {
 
 
 
+function add_mapdata_listener_classification_checkbox() {
+
+
+    // ================= click listener ================
+    map.data.addListener('click', function (event) {
+        //var myHTML = event.feature.getProperty("NAME_ABV_A");
+
+        // map.data.overrideStyle(event.feature, {fillColor: 'yellow'});
+
+        // info window table style
+        var popup = "<table>";
+        event.feature.forEachProperty(function (_value, _property) {
+            popup = popup + "<tr><td width='50%'>" + _property + "</td><td>" + _value + "</td></tr>";
+        });
+        popup = popup + "</table>";
+
+        infowindow.setContent("<div style='width:200px; height:150px;text-align: center;'>" + popup + "</div>");
+        infowindow.setPosition(event.latLng);
+        infowindow.open(map);
+
+    });    // click listener
+
+
+
+
+
+    //================== mouse over listener =============================
+    map.data.addListener('mouseover', function (event) {
+
+
+        // map.data.revertStyle();                 
+        map.data.overrideStyle(event.feature, {
+            strokeWeight: _highlight_strokeWeight,
+            //strokeColor: '#fff',
+            fillOpacity: _highlight_fillOpacity
+            //fillColor:''
+        });
+
+
+
+
+        var instant_info = "<ul>";
+        event.feature.forEachProperty(function (_value, _property) {
+            instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+        });
+        instant_info = instant_info + "</ul>";
+
+
+        // update bottom <div>
+        document.getElementById("info-table").innerHTML = instant_info;
+
+
+
+
+        //------------------------------mouse over event for classify check box --------classification [2]-----------    
+
+        event.feature.forEachProperty(function (_value, _property) {
+
+            if (_property == _code_column_name) {
+
+
+                // ********** special char '&' is not allowed, must replace with '-'  ****************
+                if (typeof _value === 'string' || _value instanceof String) {
+                    if (_value.indexOf('&') >= 0) {
+
+                        _value = _value.replace("&", "-");
+
+                    }
+                }
+                // **********  end special char '&' is not allowed, must replace with '-'  **************** 
+
+
+
+
+
+                var _highlight_button = '#label_' + _value;
+
+
+                // **** if that element exist length >0  *******
+                if ($(_highlight_button).length) {
+
+                    _current_classifycheckbox_class = $(_highlight_button).attr('class');
+                    $(_highlight_button).removeClass(_current_classifycheckbox_class).addClass("btn btn-black");
+
+
+                    $("#label_highlight").text($(_highlight_button).text());
+
+
+                }
+
+            }
+
+        });
+
+
+
+
+        //------------------------------End of mouse over event for classify check box -------------------    
+
+    }); //mouse over listener
+
+
+
+
+
+
+
+
+    // =============== mouse out listener ===================================          
+    map.data.addListener('mouseout', function (event) {
+
+
+        map.data.revertStyle(event.feature);
+
+
+
+
+        // empty bottom <div>
+        document.getElementById("info-table").innerHTML = "";
+        //infowindow.close();
+
+
+        //------------------------------mouse out event for classify check box --------classification [3]-----------    
+
+        event.feature.forEachProperty(function (_value, _property) {
+
+            if (_property == _code_column_name) {
+
+                // ********** special char '&' is not allowed, must replace with '-'  ****************                                                 
+                if (typeof _value === 'string' || _value instanceof String) {
+                    if (_value.indexOf('&') >= 0) {
+
+                        _value = _value.replace("&", "-");
+
+                    }
+                }
+                // **********  end special char '&' is not allowed, must replace with '-'  ****************                     
+
+
+                var _highlight_button = '#label_' + _value;
+
+
+                if ($(_highlight_button).length) {
+
+                    //_current_classifycheckbox_class = $(_highlight_button).attr('class');
+                    $(_highlight_button).removeClass("btn btn-black").addClass(_current_classifycheckbox_class);
+
+
+                    $("#label_highlight").text("");
+
+                }
+
+            }
+
+        });
+
+        //------------------------------End of mouse out event for classify check box -------------------    
+
+
+
+
+    });    //mouse out listener 
+
+}
+
+
 //--------------------------End of Classification button section -------------------------------------------
 
 
@@ -438,11 +604,11 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
     // Load a GeoJSON from the server 
    
 
-    //------tile[3] ---------
-    if ($('input[name="color_tiles_switch"]').bootstrapSwitch('state')) {
-        add_tiles();
+    ////------tile[3] ---------
+    //if ($('input[name="color_tiles_switch"]').bootstrapSwitch('state')) {
+    //    add_tiles();
 
-    }
+    //}
           
         
             
@@ -590,7 +756,7 @@ function initialize() {
            
 
             // load classification button [1]
-             init_classification_buttons($("#areaID").val(), $("#subjectID").val());
+             init_classification_buttons_checkbox($("#areaID").val(), $("#subjectID").val());
 
 
             
@@ -629,7 +795,7 @@ function initialize() {
      
          
                
-              add_mapdata_listener();
+          add_mapdata_listener_classification_checkbox();
 
               add_map_listener_idle();
    

@@ -764,7 +764,7 @@ function add_mapdata_listener() {
 
 
 
-        //------------------------------mouse over event for classify check box --------classification [2]-----------    
+        //------------------------------mouse over event for classify radio --------classification [2]-----------    
 
         event.feature.forEachProperty(function (_value, _property) {
 
@@ -807,7 +807,7 @@ function add_mapdata_listener() {
 
 
 
-        //------------------------------End of mouse over event for classify check box -------------------    
+        //------------------------------End of mouse over event for classify radio -------------------    
 
     }); //mouse over listener
 
@@ -832,7 +832,7 @@ function add_mapdata_listener() {
         //infowindow.close();
 
 
-        //------------------------------mouse out event for classify check box --------classification [3]-----------    
+        //------------------------------mouse out event for classify radio --------classification [3]-----------    
 
         event.feature.forEachProperty(function (_value, _property) {
 
@@ -866,7 +866,7 @@ function add_mapdata_listener() {
 
         });
 
-        //------------------------------End of mouse out event for classify check box -------------------    
+        //------------------------------End of mouse out event for classify radio -------------------    
 
 
 
@@ -874,6 +874,10 @@ function add_mapdata_listener() {
     });    //mouse out listener 
 
 }
+
+
+
+
 
 function initialize() {
 

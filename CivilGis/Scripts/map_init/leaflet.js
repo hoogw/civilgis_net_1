@@ -4,6 +4,7 @@ var base_map_tile_layer;
 var overlay_tile_layer;
 var lasttime_overlay_tile_layer;
 var geojson_default_style;
+var geojson_classification_style;
 var geojson_mouseover_highlight_style;
 var geojson_clienttable_mouseover_highlight_style;
 var geojson_Marker_style_Options;
@@ -13,7 +14,7 @@ var _click_polygon_style;
 var _click_line_style;
 var _mouseover_polygon_style;
 var _mouseover_line_style;
-
+var geojson_classification_mouseover_highlight_style;
 
 
 
@@ -155,6 +156,16 @@ geojson_default_style = {
 };
 
 
+geojson_classification_style = {
+
+    "color": '#0000FF',
+    "weight": 0.2,
+    "fillOpacity": 0
+};
+
+
+
+
 geojson_mouseover_highlight_style = {
 
     "color": _highlight_strokeColor,
@@ -221,6 +232,20 @@ _mouseover_line_style = {
     fillColor: '#FF0000',
     fillOpacity: 0.01
 };
+
+
+
+geojson_classification_mouseover_highlight_style = {
+
+    Weight: 1,
+    Color: 'white',
+    fillColor: 'white',
+    fillOpacity: 0.7
+
+};
+
+
+
 
 
 
@@ -467,31 +492,21 @@ function init_tiling(){
 
 function add_tiles(){
     
-     // ---- if returning total number, not geoJOSN feature, then add tiling layer on top ---------------------------
-       
-    if (_tile_exist) {
-        // before add tile, need to clean all previous tiles, without this line, it will add more and more layers on top to each other, color will get darker and darker.
+   
 
-        if (overlay_tile_layer) {
-
-            lasttime_overlay_tile_layer = overlay_tile_layer;
-            map.removeLayer(lasttime_overlay_tile_layer);
-            overlay_tile_layer = map.addLayer(tile_MapType);
-
-        }
-    }
+    
+   
+        tile_MapType.bringToFront();
+        
+  
 }
 
 function remove_tiles() {
-    if (_tile_exist) {
-        if (overlay_tile_layer) {
 
-            
-            map.removeLayer(overlay_tile_layer);
-            
 
-        }
-    }
+    tile_MapType.bringToBack();
+
+
 }
 
 

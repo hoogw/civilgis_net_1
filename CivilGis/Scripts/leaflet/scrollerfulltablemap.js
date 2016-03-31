@@ -219,9 +219,6 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-    //------tile[3] ---------
-    add_tiles();
-
 
 
 
@@ -544,8 +541,7 @@ function initialize() {
 
 
 
-    // first time load geojson when map first time loaded.
-    get_map_bound();
+   
 
 
 

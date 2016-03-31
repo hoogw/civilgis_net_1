@@ -203,13 +203,7 @@ function feed_datatables(_geojson_obj) {
 function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
-    // alert(_apiURI);
-
-    // Load a GeoJSON from the server 
-
-
-    //------tile[3] ---------
-    add_tiles();
+    
 
 
 
@@ -578,8 +572,6 @@ function initialize() {
 
 
 
-    // first time load geojson when map first time loaded.
-    get_map_bound();
 
 
 

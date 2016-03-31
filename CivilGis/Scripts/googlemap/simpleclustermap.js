@@ -15,8 +15,6 @@ function ajax_GeoJSON(gmap,_apiURI) {
     // Load a GeoJSON from the server 
    
 
-    //------tile[3] ---------
-    add_tiles();
           
         
             

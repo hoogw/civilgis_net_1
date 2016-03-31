@@ -610,6 +610,14 @@ function add_map_listener_idle() {
     // ---------  map click event [1] ------ search for a single feature where clicked ------------
     listener_click = map.addListener('click', function (click_event_location) {
 
+        // the current popup infowindow should be close if click anywhere on map.
+        if (infowindow) {
+            infowindow.close();
+        }
+      
+
+
+
         get_click_latlng(click_event_location.latLng.lat(), click_event_location.latLng.lng());
     });
 
@@ -664,7 +672,7 @@ function add_mapdata_listener() {
         // info window table style
         var popup = "<table>";
         event.feature.forEachProperty(function (_value, _property) {
-            popup = popup + "<tr><td>" + _property + "</td><td>" + _value + "</td></tr>";
+            popup = popup + "<tr><td width='50%'>" + _property + "</td><td>" + _value + "</td></tr>";
         });
         popup = popup + "</table>";
 

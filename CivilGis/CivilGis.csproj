@@ -458,7 +458,7 @@
     <Content Include="Scripts\heremap\scrollerservertablemap.js" />
     <Content Include="Scripts\heremap\simpleclustermap.js" />
     <Content Include="Scripts\heremap\simplemap.js" />
-    <Content Include="Scripts\leaflet\classifycheckboxbuttonmap.js" />
+    <Content Include="Scripts\leaflet\classifycheckboxbuttonmap_failed.js" />
     <Content Include="Scripts\leaflet\classifyradiobuttonmap.js" />
     <Content Include="Scripts\leaflet\clusterpagedclienttablemap.js" />
     <Content Include="Scripts\leaflet\clusterscrollerclienttablemap.js" />
