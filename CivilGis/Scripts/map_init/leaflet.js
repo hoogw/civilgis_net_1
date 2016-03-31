@@ -237,10 +237,10 @@ _mouseover_line_style = {
 
 geojson_classification_mouseover_highlight_style = {
 
-    Weight: 1,
-    Color: 'white',
-    fillColor: 'white',
-    fillOpacity: 0.7
+    Weight: 2,
+    Color: '#000000',
+    fillColor: '#000000',
+    fillOpacity: 1
 
 };
 

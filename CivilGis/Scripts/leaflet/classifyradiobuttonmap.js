@@ -124,22 +124,40 @@ function init_classification_buttons_radio(_area, _subject) {
                     // if button clicked(check box checked), do nothing. mouse over disable.
                 }
                 else {
+                   
                     // loop through all current featurs on map 
-                    map.data.forEach(function (_feature) {
-
-                        if (_feature.getProperty(_code_column_name) == _current_code_mouseover) {
-
-                            //map.data.revertStyle();
-                            map.data.overrideStyle(_feature, {
-                                strokeWeight: 1,
-                                strokeColor: 'white',
-                                fillColor: 'white',
-                                fillOpacity: 0.7
-                            });// overrideStyle
 
 
-                        }//if
-                    });// map.data.foreach
+                    // -----------leaflet --------------
+
+
+
+
+
+
+                    _current_geojson_layer.eachLayer(
+                         function (featureInstanceLayer) {
+
+
+                             var _this_code_column = featureInstanceLayer.feature.properties[_code_column_name];
+
+                             if (_this_code_column == _current_code_mouseover) {
+
+
+                                 featureInstanceLayer.setStyle(
+                                     geojson_classification_mouseover_highlight_style
+                                     );
+
+
+
+                             }// if
+
+                         });// function
+
+
+
+
+                    //------------ end of leaflet ----------------
 
 
 
@@ -168,15 +186,37 @@ function init_classification_buttons_radio(_area, _subject) {
                 else {
 
                     // loop through all current featurs on map 
-                    map.data.forEach(function (_feature) {
+                    
 
-                        if (_feature.getProperty(_code_column_name) == _current_code_mouseout) {
+                    // -----------leaflet --------------
 
-                            map.data.revertStyle(_feature);
-                            
 
-                        }//if
-                    });// map.data.foreach
+
+
+
+                    _current_geojson_layer.eachLayer(
+                         function (featureInstanceLayer) {
+
+                             var _this_code_column = featureInstanceLayer.feature.properties[_code_column_name];
+
+
+                             if (_this_code_column == _current_code_mouseout) {
+
+
+                                 featureInstanceLayer.setStyle(
+                                     geojson_classification_style
+                                     );
+
+
+                             }// if
+
+                         });// function
+
+
+
+
+                    //------------ end of leaflet ----------------
+
 
 
                 }// else
@@ -237,8 +277,8 @@ function init_classification_buttons_radio(_area, _subject) {
 
                     //---------------radio button click, should turn other color off --------------
 
-                    map.data.revertStyle();
-
+                  
+                    _current_geojson_layer.setStyle(geojson_classification_style);
 
 
                     // get the feature fill color
@@ -260,22 +300,45 @@ function init_classification_buttons_radio(_area, _subject) {
 
 
                     // loop through all current featurs on map 
-                    map.data.forEach(function (_feature) {
-
-                        if (_feature.getProperty(_code_column_name) == _current_code_click) {
-
-                            //map.data.revertStyle();
-                            map.data.overrideStyle(_feature, {
-
-                                strokeWeight: 1,
-                                strokeColor: _feature_fill_color,
-                                fillColor: _feature_fill_color,
-                                fillOpacity: 0.7
-                            });// overrideStyle
+                    
+                    // -----------leaflet --------------
 
 
-                        }//if
-                    });// map.data.foreach
+
+
+
+                    _current_geojson_layer.eachLayer(
+                         function (featureInstanceLayer) {
+
+                             var _this_code_column = featureInstanceLayer.feature.properties[_code_column_name];
+
+
+                             if (_this_code_column == _current_code_click) {
+
+
+                                 featureInstanceLayer.setStyle(
+
+
+                                         {
+
+                                             weight: 1,
+                                             color: _feature_fill_color,
+                                             fillColor: _feature_fill_color,
+                                             fillOpacity: 0.9
+                                         }
+
+                                     );
+
+
+
+                             }// if
+
+                         });// function
+
+
+
+
+                    //------------ end of leaflet ----------------
 
 
 
@@ -305,11 +368,18 @@ function init_classification_buttons_radio(_area, _subject) {
 
 
 
-    // high light off button  
+    // ---- radio only -----------  high light off button   ----------------------
     $('#label_high_light_off').click(function () {
-        map.data.forEach(function (_feature) {
-            map.data.revertStyle(_feature);
-        });// map.data.foreach         
+
+
+
+
+        _current_geojson_layer.setStyle(geojson_classification_style);
+
+
+
+
+
     });
 
 
@@ -366,22 +436,44 @@ function apply_checkbox() {
 
 
             // loop through all current featurs on map 
-            map.data.forEach(function (_feature) {
-
-                if (_feature.getProperty(_code_column_name) == pArray[i]['code']) {
-
-                    //map.data.revertStyle();
-                    map.data.overrideStyle(_feature, {
-
-                        strokeWeight: 1,
-                        strokeColor: _feature_fill_color,
-                        fillColor: _feature_fill_color,
-                        fillOpacity: 0.7
-                    });// overrideStyle
+            // -----------leaflet --------------
 
 
-                }//if
-            });// map.data.foreach
+
+
+
+            _current_geojson_layer.eachLayer(
+                 function (featureInstanceLayer) {
+
+                     var _this_code_column = featureInstanceLayer.feature.properties[_code_column_name];
+
+
+                     if (_this_code_column == pArray[i]['code']) {
+
+
+                         featureInstanceLayer.setStyle(
+
+
+                                 {
+
+                                     weight: 1,
+                                     color: _feature_fill_color,
+                                     fillColor: _feature_fill_color,
+                                     fillOpacity: 0.9
+                                 }
+
+                             );
+
+
+
+                     }// if
+
+                 });// function
+
+
+
+
+            //------------ end of leaflet ----------------
 
 
 
@@ -429,17 +521,6 @@ function uncheck_all_checkbox_button() {
 
 function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
-    // Load a GeoJSON from the server 
-
-
-
-
-
-
-
-
-
-    // test url if return a number means too many polygon to show.otherwise add polygon to map.
 
     $.get(_apiURI, function (data) {
 
@@ -447,61 +528,41 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
+            // ---------   processing data(geoJson) to fill datatables -----------------
+
+
+
+            //--------------------------------------------
+
+
+            //gmap.data.loadGeoJson(_apiURI);
+
+            // Note: data is a string, not a javascript object.
+            //the function addGeoJson needs a javascript object and not a string. so you must convert string to javascript object before feed into addGeoJson
+            // if you use loadGeoJson(url), do not need any formate change, feed URL return string, the loadGeoJson will do with returning string.
+
 
 
             _geojson_object = JSON.parse(data);
 
 
 
-            // ================= append two column GeoFeatureType GeoFeatureID to properties. =========================
-            //-------------    php format add each _id:{"$id": "55e8c24e382f9fe337f0d8fe"}  to properties before draw on map. -------------
-            //-------------asp.net format add each  {"_id" : "55c532cf21167708171b02a2"}  to properties before draw on map. -------------
-
-            var _features_array = _geojson_object['features'];
-
-            var _id_obj;
-            var _id_obj_id;
-            var _propty_obj;
-
-            _features_array.forEach(function (eachFeatueItem) {
-
-
-                /*
-                  // --- php format ------
-                  
-                     _id_obj = eachFeatueItem['_id'];
-                     _id_obj_id = _id_obj['$id'];
-                    _propty_obj = eachFeatueItem['properties'];
-                    var _geo_type = eachFeatueItem['geometry'];
-                    
-                    _propty_obj['GeoFeatureType']=_geo_type['type'];
-                    _propty_obj['GeoFeatureID'] = _id_obj_id;
 
 
 
-              
-                    // ---end  php format ------
-                 */
-
-
-                // ------ asp.net format -----------
-                var _geo_type = eachFeatueItem['geometry'];
 
 
 
-                _propty_obj = eachFeatueItem['properties'];
-
-                _propty_obj['GeoFeatureType'] = _geo_type['type'];
-                _propty_obj['GeoFeatureID'] = eachFeatueItem['_id'];
 
 
-            });// features_array_foreach
+            // determine feature is point or not point
+            // var _geojson_feature_geometry_type = _geojson_object['features'][0]['geometry']['type'];
 
-            _geojson_object['features'] = {};
-            _geojson_object['features'] = _features_array;
-            //---------------------------------------------------------------
 
-            // =================End of  append two column GeoFeatureType GeoFeatureID to properties. =========================
+
+
+
+
 
 
 
@@ -510,10 +571,15 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
+
             _last_geojson_layer = _current_geojson_layer;
 
-            _current_geojson_layer = L.geoJson(_geojson_object, {
 
+
+
+
+
+            _current_geojson_layer = L.geoJson(_geojson_object, {
 
 
                 // for point feature, by default it use marker, but instead of use marker, here change marker to polygon (circle marker) 
@@ -522,13 +588,9 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
                 },
 
 
-                style: geojson_default_style,
+                style: geojson_classification_style,
 
                 onEachFeature: function onEachFeature(feature, layer) {
-
-
-
-
 
 
 
@@ -563,16 +625,69 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
+                        //---------------------- classification ---when -   mouse over  ------ highlight button and bottom big button ---------------------
+
+
+
+                        var _highlight_button_value = layer.feature.properties[_code_column_name];
+
+
+                        var _highlight_button = '#label_' + _highlight_button_value;
+
+
+                        // **** if that element exist length >0  *******
+                        if ($(_highlight_button).length) {
+
+                            _current_classifycheckbox_class = $(_highlight_button).attr('class');
+                            $(_highlight_button).removeClass(_current_classifycheckbox_class).addClass("btn btn-black");
+
+
+                            $("#label_highlight").text($(_highlight_button).text());
+
+
+                        }
+
+
+
+
+                        //----------------------End  classification ---when -   mouse over  ------ highlight button and bottom big button ---------------------
+
+
+
                     });// layer.on mouseover
 
 
                     layer.on('mouseout', function (e) {
 
-                        layer.setStyle(geojson_default_style);
+                        layer.setStyle(geojson_classification_style);
 
                         // empty bottom <div>
                         document.getElementById("info-table").innerHTML = "";
                         //infowindow.close();
+
+
+                        //---------------------- classification ---when -   mouse OUT  ------ highlight button and bottom big button ---------------------
+
+
+                        var _highlight_button_value = layer.feature.properties[_code_column_name];
+
+                        var _highlight_button = '#label_' + _highlight_button_value;
+
+
+                        if ($(_highlight_button).length) {
+
+                            //_current_classifycheckbox_class = $(_highlight_button).attr('class');
+                            $(_highlight_button).removeClass("btn btn-black").addClass(_current_classifycheckbox_class);
+
+
+                            $("#label_highlight").text("");
+
+                        }
+
+
+                        //----------------------End  classification ---when -   mouse OUT  ------ highlight button and bottom big button ---------------------
+
+
 
                     });// layer.on mouseout
 
@@ -606,7 +721,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
             if (_last_geojson_layer) {
 
-                //alert("remove last geojson");
+
 
                 map.removeLayer(_last_geojson_layer);
 
@@ -616,9 +731,6 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             //------------------------end add new geojson, then remove last geojson------------------------- ---------------
 
 
-
-
-          
 
 
 
@@ -637,6 +749,9 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
+
+
+
             // ------------- map click event [3] -------------------
             if (_map_click_event) {
             }
@@ -647,11 +762,14 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             //-------------------------------------------------------------
 
 
+            // everytime load new geojson, need to apply color on those checkbox which is checked------------------------ classification [4] --------------------
+            apply_checkbox();
 
 
         }
-            // returning number of count, no geojson, clean the datatables
+            // returning number of count
         else {
+
 
             // ---------- if return number, should remove last time geojson -----------
             _last_geojson_layer = _current_geojson_layer;
@@ -664,11 +782,11 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             //-------------------- end remove last geojson ------------------------------
 
 
+
+
             document.getElementById("ajaxload").style.display = "none";
             document.getElementById("title_info").style.display = "inline";
             document.getElementById("legend").style.display = "inline";
-
-            
 
             if (data > 0) {
 
@@ -677,11 +795,13 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
                 document.getElementById('legend').innerHTML = "Found [ " + data + " ] records ZOOM IN for Details ";
 
             } else {
-               
 
                 document.getElementById("title_info").innerHTML = "Nothing found";
                 document.getElementById("legend").innerHTML = "Nothing found";
             }
+
+
+
             // ------------- map click event [4] -------------------
 
             _mapclick_in_use = true;
@@ -690,22 +810,18 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-
-        }// if else
-
-
-
-    });// get // promist.then
+            // -------------- classification [5] --------------------
+            uncheck_all_checkbox_button();
 
 
 
 
+        }// else return number only
 
+    });// get
 
 
 }// function ajax_GeoJSON
-
-
 
 
 
