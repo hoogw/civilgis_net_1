@@ -372,8 +372,8 @@
     <Content Include="Scripts\classification\area\Denver\tile_css_template.css" />
     <Content Include="Scripts\classification\area\Orlando\classification_template.js" />
     <Content Include="Scripts\classification\area\Orlando\tile_css_template.css" />
-    <Content Include="Scripts\classification\area\Palo_Alto\classification_template.js" />
-    <Content Include="Scripts\classification\area\Palo_Alto\tile_css_template.css" />
+    <Content Include="Scripts\classification\area\Palo_Alto\Zoning.js" />
+    <Content Include="Scripts\classification\area\Palo_Alto\tile_css_Zoning.css" />
     <Content Include="Scripts\classification\area\Philadelphia\classification_template.js" />
     <Content Include="Scripts\classification\area\Philadelphia\tile_css_template.css" />
     <Content Include="Scripts\classification\area\Portland\classification_template.js" />
@@ -1021,6 +1021,8 @@
     <Content Include="Views\Shared\openlayers\_Chicago_side_panel.cshtml" />
     <Content Include="Views\Home\heremap\Shoreline.cshtml" />
     <Content Include="Views\Shared\heremap\_Shoreline_side_panel.cshtml" />
+    <Content Include="Views\Home\heremap\Palo_Alto.cshtml" />
+    <Content Include="Views\Shared\heremap\_Palo_Alto_side_panel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
