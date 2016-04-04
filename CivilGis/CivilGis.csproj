@@ -1034,7 +1034,46 @@
     <Content Include="Views\Home\mapboxgl\Newport_Beach.cshtml" />
     <Content Include="Views\Home\mapboxgl\San_Francisco.cshtml" />
     <Content Include="Views\Home\mapboxgl\Santa_Monica.cshtml" />
-    <Content Include="Views\MapBox - Copy\_ViewStart.cshtml" />
+    <Content Include="Views\MapBoxGL\_ViewStart.cshtml" />
+    <Content Include="Views\MapBox\classifycheckboxbuttonmap.cshtml" />
+    <Content Include="Views\MapBox\classifyradiobuttonmap.cshtml" />
+    <Content Include="Views\MapBox\clusterpagedclienttablemap.cshtml" />
+    <Content Include="Views\MapBox\clusterscrollerclienttablemap.cshtml" />
+    <Content Include="Views\MapBox\justtiles.cshtml" />
+    <Content Include="Views\MapBox\maplistpaged.cshtml" />
+    <Content Include="Views\MapBox\maplistscroller.cshtml" />
+    <Content Include="Views\MapBox\pagedclienttablemap.cshtml" />
+    <Content Include="Views\MapBox\pagedfulltablemap.cshtml" />
+    <Content Include="Views\MapBox\pagedservertablemap.cshtml" />
+    <Content Include="Views\MapBox\scrollerclienttablemap.cshtml" />
+    <Content Include="Views\MapBox\scrollerfulltablemap.cshtml" />
+    <Content Include="Views\MapBox\scrollerservertablemap.cshtml" />
+    <Content Include="Views\MapBox\simpleclustermap.cshtml" />
+    <Content Include="Views\MapBox\simplemap.cshtml" />
+    <Content Include="Views\MapBoxGL\classifycheckboxbuttonmap.cshtml" />
+    <Content Include="Views\MapBoxGL\classifyradiobuttonmap.cshtml" />
+    <Content Include="Views\MapBoxGL\clusterpagedclienttablemap.cshtml" />
+    <Content Include="Views\MapBoxGL\clusterscrollerclienttablemap.cshtml" />
+    <Content Include="Views\MapBoxGL\justtiles.cshtml" />
+    <Content Include="Views\MapBoxGL\maplistpaged.cshtml" />
+    <Content Include="Views\MapBoxGL\maplistscroller.cshtml" />
+    <Content Include="Views\MapBoxGL\pagedclienttablemap.cshtml" />
+    <Content Include="Views\MapBoxGL\pagedfulltablemap.cshtml" />
+    <Content Include="Views\MapBoxGL\pagedservertablemap.cshtml" />
+    <Content Include="Views\MapBoxGL\scrollerclienttablemap.cshtml" />
+    <Content Include="Views\MapBoxGL\scrollerfulltablemap.cshtml" />
+    <Content Include="Views\MapBoxGL\scrollerservertablemap.cshtml" />
+    <Content Include="Views\MapBoxGL\simpleclustermap.cshtml" />
+    <Content Include="Views\MapBoxGL\simplemap.cshtml" />
+    <Content Include="Views\Shared\mapboxgl\_Chicago_side_panel.cshtml" />
+    <Content Include="Views\Shared\mapboxgl\_city_side_panel.cshtml" />
+    <Content Include="Views\Shared\mapboxgl\_county_side_panel.cshtml" />
+    <Content Include="Views\Shared\mapboxgl\_Los_Angeles_side_panel.cshtml" />
+    <Content Include="Views\Shared\mapboxgl\_New_York_Manhattan_side_panel.cshtml" />
+    <Content Include="Views\Shared\mapboxgl\_New_York_side_panel.cshtml" />
+    <Content Include="Views\Shared\mapboxgl\_Newport_Beach_side_panel.cshtml" />
+    <Content Include="Views\Shared\mapboxgl\_San_Francisco_side_panel.cshtml" />
+    <Content Include="Views\Shared\mapboxgl\_Santa_Monica_side_panel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1044,6 +1083,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\map_api\mapbox\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

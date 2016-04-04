@@ -273,28 +273,39 @@ function initialize() {
 
 
 
-    // set up the map
-    map = new L.Map('map-canvas');
+    
 
 
-    add_map_listener_idle();
+   // add_map_listener_idle();
 
 
-    // create the tile layer with correct attribution
-    var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    var osmAttrib = 'Map data &#169; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-    var osm = new L.TileLayer(osmUrl, { minZoom: 3, maxZoom: 22, attribution: osmAttrib });
-
-    // start the map
-    map.setView(new L.LatLng(initial_location[1], initial_location[2]), initial_location[3]);
+   
 
 
 
-    base_map_tile_layer = map.addLayer(osm);
+
+    //---------------- init - mapboxGL  ----------------
+
+
+    mapboxgl.accessToken = mapboxgl_accessToken;
+    var map = new mapboxgl.Map({
+        container: 'map-canvas', // container id
+        style: 'mapbox://styles/mapbox/streets-v8', //stylesheet location
+        center: [initial_location[2], initial_location[1]], //  starting position[-74.50, 40],
+        zoom: initial_location[3] // starting zoom
+    });
+
+    //---------------- end of  // init - mapboxGL -----------
 
 
 
-    add_area_boundary($("#areaID").val());
+
+
+
+
+
+
+   // add_area_boundary($("#areaID").val());
 
 
 
@@ -303,12 +314,12 @@ function initialize() {
 
 
     //------tile[1] ---------
-    init_tiling();
+  //  init_tiling();
 
 
 
 
-    geocoding();
+  //  geocoding();
 
 
     
