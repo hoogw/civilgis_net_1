@@ -88,6 +88,13 @@ namespace CivilGis
             );
 
 
+
+            routes.MapRoute(
+               name: "mapboxgl",
+               url: "mapboxgl/{action}/{area}/{subject}/",
+               defaults: new { controller = "MapBoxGl", action = "index" }
+           );
+
             routes.MapRoute(
                 name: "mapbox",
                 url: "mapbox/{action}/{area}/{subject}/",

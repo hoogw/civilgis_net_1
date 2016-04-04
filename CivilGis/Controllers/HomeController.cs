@@ -42,6 +42,23 @@ namespace CivilGis.Controllers
 
 
 
+
+
+        public ActionResult mapboxgl(string area)
+        {
+
+
+
+            ViewBag.Area = area;
+
+            _view_path = "~/Views/Home/mapboxgl/" + area + ".cshtml";
+
+
+            return View(_view_path);
+        }
+
+
+
         public ActionResult mapbox(string area)
         {
 

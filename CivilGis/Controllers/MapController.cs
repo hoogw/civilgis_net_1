@@ -57,6 +57,14 @@ namespace CivilGis.Controllers
         }
 
 
+        public ActionResult Mapboxgl()
+        {
+
+            return View();
+
+        }
+
+
         public ActionResult Mapbox()
         {
 
