@@ -354,53 +354,7 @@ function add_area_boundary(_area) {
 
 
 
-        //if(_area_polygon_coord[_area][0] instanceof Array)
-        if (_multi_polyline == 'Yes') {
-            // for multi line
-
-
-
-            var parentArray = _area_polygon_coord[_area];
-
-
-            for (var i = 0; i < parentArray.length; i++) {
-
-
-
-
-                //---------- mapbox GL  --------------------------
-
-
-                 _area_polyline_multi = map.on('style.load', function () {
-                    map.addSource("boundary", _area_polygon_coord[_area]);
-
-                    map.addLayer({
-                        "id": "boundary",
-                        "type": "line",
-                        "source": "boundary",
-                        "layout": {
-                            "line-join": "round",
-                            "line-cap": "round"
-                        },
-                        "paint": {
-                            "line-color": "#0000CD",
-                            "line-width": 5
-                        }
-                    });
-
-                });
-                //--------- end mapbox GL -------
-
-
-               
-                   
-
-            }// outer for
-
-
-
-        }
-        else {
+       
 
            
 
@@ -431,7 +385,7 @@ function add_area_boundary(_area) {
            
 
            
-        }//else
+       
 
 
     }); // when done
