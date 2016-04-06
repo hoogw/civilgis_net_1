@@ -1,3 +1,7 @@
+var mapboxgl_accessToken = 'pk.eyJ1IjoiaG9vZ3ciLCJhIjoiYjdlZTA1Y2YyOGM4NjFmOWI2MjY3MmI5NWM3MmUyOWMifQ.gINCV5SXFGTG5wB8ouXxOw';
+
+
+
 
 var leaflet_open_street_map_max_zoom_level = 19;
 var base_map_tile_layer;

@@ -6,7 +6,7 @@
 <!-- our js -->
 
 
-<script src="~/Scripts/leaflet/maplist_paged.js"></script>
+<script src="~/Scripts/mapbox/maplist_paged.js"></script>
 
 
 <input type="hidden" id="areaID" value=@ViewBag.Area />
@@ -17,7 +17,7 @@
 
 
 @{
-    string _side_panel_path = "~/Views/Shared/leaflet/_" + ViewBag.Area + "_side_panel.cshtml";
+    string _side_panel_path = "~/Views/Shared/mapbox/_" + ViewBag.Area + "_side_panel.cshtml";
 
     Html.RenderPartial(_side_panel_path);
 

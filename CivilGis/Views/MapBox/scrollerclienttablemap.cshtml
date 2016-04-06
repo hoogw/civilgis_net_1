@@ -1,6 +1,5 @@
-﻿
-<script src="~/Scripts/map_api/leaflet/leaflet.js"></script>
-<link href="~/Scripts/map_api/leaflet/leaflet.css" rel="stylesheet" />
+﻿<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
 
 
 <script src="~/Scripts/map_api/leaflet_GeoSearch/js/l.control.geosearch.js"></script>
@@ -22,8 +21,8 @@
 
 
 
-<script src="~/Scripts/map_init/leaflet.js"></script>
-<script src="~/Scripts/leaflet/scrollerclienttablemap.js"></script>
+<script src="~/Scripts/map_init/mapbox.js"></script>
+<script src="~/Scripts/mapbox/scrollerclienttablemap.js"></script>
 
 
 
@@ -40,7 +39,7 @@
 <input type="hidden" id="sidebarID" value=@ViewBag.Side_Bar />
 
 @{
-    string _side_panel_path = "~/Views/Shared/leaflet/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
+    string _side_panel_path = "~/Views/Shared/mapbox/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
 
     Html.RenderPartial(_side_panel_path);
 

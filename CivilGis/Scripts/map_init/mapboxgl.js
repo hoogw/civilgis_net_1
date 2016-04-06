@@ -331,7 +331,7 @@ function add_area_boundary(_area) {
 
 
     _multi_polyline = 'No';
-    var _js_url = "/Scripts/area_boundary/mapbox/" + _area + ".js";
+    var _js_url = "/Scripts/area_boundary/mapboxgl/" + _area + ".js";
 
 
 
