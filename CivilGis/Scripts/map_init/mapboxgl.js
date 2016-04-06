@@ -81,6 +81,7 @@ var _click_coord;
 var _area_polygon;
 var _area_polygon_coord = [];
 var _area_polyline;
+var _area_polyline_multi;
 
 
 var _highlight_marker;
@@ -367,8 +368,31 @@ function add_area_boundary(_area) {
 
 
 
-                var _area_polyline_multi = L.polyline(parentArray[i], { color: '#0000FF', weight: 5, opacity: 0.8 }).addTo(map);
+                //---------- mapbox GL  --------------------------
 
+
+                 _area_polyline_multi = map.on('style.load', function () {
+                    map.addSource("boundary", _area_polygon_coord[_area]);
+
+                    map.addLayer({
+                        "id": "boundary",
+                        "type": "line",
+                        "source": "boundary",
+                        "layout": {
+                            "line-join": "round",
+                            "line-cap": "round"
+                        },
+                        "paint": {
+                            "line-color": "#0000CD",
+                            "line-width": 5
+                        }
+                    });
+
+                });
+                //--------- end mapbox GL -------
+
+
+               
                    
 
             }// outer for
@@ -381,60 +405,28 @@ function add_area_boundary(_area) {
            
 
 
-            //mapbox GL
+            //---------- mapbox GL  --------------------------
 
 
-            map.on('style.load', function () {
-                map.addSource("route", {
-                    "type": "geojson",
-                    "data": {
-                        "type": "Feature",
-                        "properties": {},
-                        "geometry": {
-                            "type": "LineString",
-                            "coordinates": [
-                                [-122.48369693756104, 37.83381888486939],
-                                [-122.48348236083984, 37.83317489144141],
-                                [-122.48339653015138, 37.83270036637107],
-                                [-122.48356819152832, 37.832056363179625],
-                                [-122.48404026031496, 37.83114119107971],
-                                [-122.48404026031496, 37.83049717427869],
-                                [-122.48348236083984, 37.829920943955045],
-                                [-122.48356819152832, 37.82954808664175],
-                                [-122.48507022857666, 37.82944639795659],
-                                [-122.48610019683838, 37.82880236636284],
-                                [-122.48695850372314, 37.82931081282506],
-                                [-122.48700141906738, 37.83080223556934],
-                                [-122.48751640319824, 37.83168351665737],
-                                [-122.48803138732912, 37.832158048267786],
-                                [-122.48888969421387, 37.83297152392784],
-                                [-122.48987674713133, 37.83263257682617],
-                                [-122.49043464660643, 37.832937629287755],
-                                [-122.49125003814696, 37.832429207817725],
-                                [-122.49163627624512, 37.832564787218985],
-                                [-122.49223709106445, 37.83337825839438],
-                                [-122.49378204345702, 37.83368330777276]
-                            ]
-                        }
-                    }
-                });
+            _area_polyline = map.on('style.load', function () {
+                map.addSource("boundary", _area_polygon_coord[_area]);
 
                 map.addLayer({
-                    "id": "route",
+                    "id": "boundary",
                     "type": "line",
-                    "source": "route",
+                    "source": "boundary",
                     "layout": {
                         "line-join": "round",
                         "line-cap": "round"
                     },
                     "paint": {
-                        "line-color": "#888",
-                        "line-width": 8
+                        "line-color": "#0000CD",
+                        "line-width": 5
                     }
                 });
 
-
-           // _area_polyline = L.polyline(_area_polygon_coord[_area], { color: '#0000FF', weight: 5, opacity: 0.8 }).addTo(map);
+            });
+           //--------- end mapbox GL -------
 
            
 
@@ -521,19 +513,55 @@ function init_tiling(){
 
 
 
-                        //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
-                         _tile_baseURL = 'http://tile.transparentgov.net/v2/';
-                        // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
+            //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
+            _tile_baseURL = 'http://tile.transparentgov.net/v2/';
+            // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
 
 
-                         var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.png';
-                         var overlay_tile_Attrib = 'Map data &#169; <a href="http://transparentgov.net">transparentgov.net</a> contributors';
-                         tile_MapType = new L.TileLayer(overlay_tile_Url, { minZoom: 3, maxZoom: 22, errorTileUrl:'  ', unloadInvisibleTiles: true, reuseTiles:true, attribution: overlay_tile_Attrib });
-
-                        // ===== above must define errorTileUrl:'  ', must have some character or space in '  ' above. If not define this, missing tile will show a broken image icon on map everywhere, if define this, it just failed to load empty URL, not showing broken image icon
+            var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.png';
+           
 
 
-                         overlay_tile_layer = map.addLayer(tile_MapType);
+            //---------- mapbox GL  --------------------------
+
+
+            var tileset = 'mapbox.streets';
+            var overlay_tile_layer_source = {
+                "type": "raster",
+                
+                //"url": "mapbox://" + tileset
+                "url": overlay_tile_Url
+              
+            }
+
+
+
+
+           // overlay_tile_layer = map.on('style.load', function () {
+                                   map.on('style.load', function () {
+                   // var _tile_source   =   map.addSource("overlay_tile", overlay_tile_layer_source);
+                                             map.addSource("overlay_tile", overlay_tile_layer_source);
+
+                   //overlay_tile_layer  =   map.addLayer({
+                                             map.addLayer({
+                    "id": "overlay_tile",
+                    "type": "raster",
+                    "source": "overlay_tile"
+                    
+                    
+                });
+
+            });
+            //--------- end mapbox GL -------
+
+
+
+
+
+
+                        
+
+
 
 
                          _tile_exist = true;

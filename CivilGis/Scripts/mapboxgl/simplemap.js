@@ -268,7 +268,7 @@ function initialize() {
 
 
 
-    initial_location = set_initial_location($("#areaID").val());
+    
 
 
 
@@ -276,7 +276,7 @@ function initialize() {
     
 
 
-   // add_map_listener_idle();
+    initial_location = set_initial_location($("#areaID").val());
 
 
    
@@ -288,9 +288,14 @@ function initialize() {
 
 
     mapboxgl.accessToken = mapboxgl_accessToken;
-    var map = new mapboxgl.Map({
+    map = new mapboxgl.Map({
         container: 'map-canvas', // container id
-        style: 'mapbox://styles/mapbox/streets-v8', //stylesheet location
+        //style: 'mapbox://styles/mapbox/streets-v8', //stylesheet location
+
+        //style: 'mapbox://styles/mapbox/emerald-v8',
+
+        style: 'mapbox://styles/mapbox/satellite-v8',
+
         center: [initial_location[2], initial_location[1]], //  starting position[-74.50, 40],
         zoom: initial_location[3] // starting zoom
     });
@@ -301,12 +306,14 @@ function initialize() {
 
 
 
+    
 
 
 
+    add_area_boundary($("#areaID").val());
 
-   // add_area_boundary($("#areaID").val());
 
+    // add_map_listener_idle();
 
 
     
@@ -314,7 +321,7 @@ function initialize() {
 
 
     //------tile[1] ---------
-  //  init_tiling();
+    init_tiling();
 
 
 

@@ -1,0 +1,134 @@
+Map {
+  background-color: rgba(0,0,0,0);
+}
+
+
+
+
+#Palo_Alto_Zoning[ZONE_CODE='NA']{
+  line-color:#800080;
+  line-width:0;
+  polygon-opacity:0.8;
+  polygon-fill:#800080;
+}
+
+
+
+#Palo_Alto_Zoning[ZONE_CODE='A']{
+  line-color:#FFEFD5;
+  line-width:0;
+  polygon-opacity:0.8;
+  polygon-fill:#FFEFD5;
+}
+
+
+
+#Palo_Alto_Zoning[ZONE_CODE='C']{
+  line-color:#FFDAB9;
+  line-width:0;
+  polygon-opacity:0.8;
+  polygon-fill:#FFDAB9;
+}
+
+
+
+#Palo_Alto_Zoning[ZONE_CODE='CM']{
+  line-color:#DDA0DD;
+  line-width:0;
+  polygon-opacity:0.8;
+  polygon-fill:#DDA0DD;
+}
+
+
+#Palo_Alto_Zoning[ZONE_CODE='CMR']{
+  line-color:#FF0000;
+  line-width:0;
+  polygon-opacity:0.8;
+  polygon-fill:#FF0000;
+}
+
+
+
+#Palo_Alto_Zoning[ZONE_CODE='CRMR']{
+  line-color:#C0C0C0;
+  line-width:0;
+  polygon-opacity:0.8;
+  polygon-fill:#C0C0C0;
+}
+
+
+
+
+
+
+#Palo_Alto_Zoning[ZONE_CODE='CRR']{
+  line-color:#87CEEB;
+  line-width:0;
+  polygon-opacity:0.8;
+  polygon-fill:#87CEEB;
+}
+
+
+#Palo_Alto_Zoning[ZONE_CODE='CR']{
+  line-color:#8B4513;
+  line-width:0;
+  polygon-opacity:0.8;
+  polygon-fill:#8B4513;
+}
+
+
+
+
+#Palo_Alto_Zoning[ZONE_CODE='MU']{
+  line-color:#FF6347;
+  line-width:0;
+  polygon-opacity:0.8;
+  polygon-fill:#FF6347;
+}
+
+
+#Palo_Alto_Zoning[ZONE_CODE='OS']{
+  line-color:#D2B48C;
+  line-width:0;
+  polygon-opacity:0.8;
+  polygon-fill:#D2B48C;
+}
+
+
+
+#Palo_Alto_Zoning[ZONE_CODE='PF']{
+  line-color:#EE82EE;
+  line-width:0;
+  polygon-opacity:0.8;
+  polygon-fill:#EE82EE;
+}
+
+
+
+#Palo_Alto_Zoning[ZONE_CODE='R2']{
+  line-color:#F5DEB3;
+  line-width:0;
+  polygon-opacity:0.8;
+  polygon-fill:#F5DEB3;
+}
+
+
+
+
+
+#Palo_Alto_Zoning[ZONE_CODE='R1']{
+  line-color:#FFFF00;
+  line-width:0;
+  polygon-opacity:0.8;
+  polygon-fill:#FFFF00;
+}
+
+
+
+
+
+
+
+
+
+
