@@ -510,24 +510,31 @@ function initialize() {
 
 
 
-    // set up the map
-    map = new L.Map('map-canvas');
+    //---------------- init - mapbox ----------------
+
+
+    L.mapbox.accessToken = mapboxgl_accessToken;
+    map = L.mapbox.map('map-canvas', 'mapbox.streets')
+              .setView([initial_location[1], initial_location[2]], initial_location[3]);   // .setView([40, -74.50], 9);
+
+
+    // bug fix, for first time load
+    get_map_bound();
+
+
+    //---------------- end of  init - mapbox -----------
+
+
+
+
+
+
+
+
+
 
 
     add_map_listener_idle();
-
-
-    // create the tile layer with correct attribution
-    var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    var osmAttrib = 'Map data &#169; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-    var osm = new L.TileLayer(osmUrl, { minZoom: 3, maxZoom: 22, attribution: osmAttrib });
-
-    // start the map
-    map.setView(new L.LatLng(initial_location[1], initial_location[2]), initial_location[3]);
-
-
-
-    base_map_tile_layer = map.addLayer(osm);
 
 
 

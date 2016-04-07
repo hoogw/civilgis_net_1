@@ -138,9 +138,9 @@ _highlight_strokeColor = '#000000'; // black
 _highlight_strokeWeight = 8;
 
 _clienttable_mouseover_highlight_fillColor = '#000080';
-_clienttable_mouseover_highlight_fillOpacity = 0.5;
+_clienttable_mouseover_highlight_fillOpacity = 1;
 _clienttable_mouseover_highlight_strokeColor = '#FF0000';
-_clienttable_mouseover_highlight_strokeWeight = 5;
+_clienttable_mouseover_highlight_strokeWeight = 10;
 
 
 
@@ -366,7 +366,7 @@ function add_area_boundary(_area) {
 
 
 
-                var _area_polyline_multi = L.polyline(parentArray[i], { color: '#0000FF', weight: 5, opacity: 0.8 }).addTo(map);
+                var _area_polyline_multi = L.polyline(parentArray[i], { color: '#FF0000', weight: 3, opacity: 0.8 }).addTo(map);
 
 
 
@@ -380,7 +380,7 @@ function add_area_boundary(_area) {
 
 
 
-            _area_polyline = L.polyline(_area_polygon_coord[_area], { color: '#0000FF', weight: 5, opacity: 0.8 }).addTo(map);
+            _area_polyline = L.polyline(_area_polygon_coord[_area], { color: '#FF0000', weight: 3, opacity: 0.8 }).addTo(map);
 
 
 

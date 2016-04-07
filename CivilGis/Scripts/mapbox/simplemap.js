@@ -279,6 +279,8 @@ function initialize() {
               .setView([initial_location[1], initial_location[2]], initial_location[3]);   // .setView([40, -74.50], 9);
 
 
+    // bug fix, for first time load
+    get_map_bound();
    
 
     //---------------- end of  init - mapbox -----------
