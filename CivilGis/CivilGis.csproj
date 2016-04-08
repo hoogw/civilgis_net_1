@@ -734,6 +734,8 @@
     <Content Include="Views\Home\bingmap\San_Francisco.cshtml" />
     <Content Include="Views\Home\bingmap\Chicago.cshtml" />
     <Content Include="Scripts\map_api\leaflet\leaflet-src.map" />
+    <Content Include="Views\Home\bingmap\Palo_Alto.cshtml" />
+    <Content Include="Views\Home\bingmap\Shoreline.cshtml" />
     <None Include="Views\Home\corporate\blue.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -873,7 +875,6 @@
     <Content Include="Views\Home\googlemap\New_York_Manhattan.cshtml" />
     <Content Include="Views\Home\googlemap\Newport_Beach.cshtml" />
     <Content Include="Views\Home\googlemap\Santa_Monica.cshtml" />
-    <Content Include="Views\Map\Index_old_localmap.cshtml" />
     <Content Include="Views\Shared\googlemap\_city_side_panel.cshtml" />
     <Content Include="Views\Shared\googlemap\_county_side_panel.cshtml" />
     <Content Include="Views\Shared\googlemap\_Los_Angeles_side_panel.cshtml" />
@@ -1100,6 +1101,32 @@
     <Content Include="Views\Shared\mapboxgl\_San_Francisco_side_panel.cshtml" />
     <Content Include="Views\Shared\mapboxgl\_Santa_Monica_side_panel.cshtml" />
     <Content Include="Views\Shared\_Index_Map_Layout.cshtml" />
+    <Content Include="Views\Home\googlemap\Palo_Alto.cshtml" />
+    <Content Include="Views\Home\googlemap\Shoreline.cshtml" />
+    <Content Include="Views\Home\leaflet\Palo_Alto.cshtml" />
+    <Content Include="Views\Home\leaflet\Shoreline.cshtml" />
+    <Content Include="Views\Home\mapbox\Palo_Alto.cshtml" />
+    <Content Include="Views\Home\mapbox\Shoreline.cshtml" />
+    <Content Include="Views\Home\mapboxgl\Palo_Alto.cshtml" />
+    <Content Include="Views\Home\mapboxgl\Shoreline.cshtml" />
+    <Content Include="Views\Home\mapquest\Palo_Alto.cshtml" />
+    <Content Include="Views\Home\mapquest\Shoreline.cshtml" />
+    <Content Include="Views\Home\openlayers\Palo_Alto.cshtml" />
+    <Content Include="Views\Home\openlayers\Shoreline.cshtml" />
+    <Content Include="Views\Shared\bingmap\_Palo_Alto_side_panel.cshtml" />
+    <Content Include="Views\Shared\bingmap\_Shoreline_side_panel.cshtml" />
+    <Content Include="Views\Shared\googlemap\_Palo_Alto_side_panel.cshtml" />
+    <Content Include="Views\Shared\googlemap\_Shoreline_side_panel.cshtml" />
+    <Content Include="Views\Shared\leaflet\_Palo_Alto_side_panel.cshtml" />
+    <Content Include="Views\Shared\leaflet\_Shoreline_side_panel.cshtml" />
+    <Content Include="Views\Shared\mapbox\_Palo_Alto_side_panel.cshtml" />
+    <Content Include="Views\Shared\mapbox\_Shoreline_side_panel.cshtml" />
+    <Content Include="Views\Shared\mapboxgl\_Palo_Alto_side_panel.cshtml" />
+    <Content Include="Views\Shared\mapboxgl\_Shoreline_side_panel.cshtml" />
+    <Content Include="Views\Shared\mapquest\_Palo_Alto_side_panel.cshtml" />
+    <Content Include="Views\Shared\mapquest\_Shoreline_side_panel.cshtml" />
+    <Content Include="Views\Shared\openlayers\_Palo_Alto_side_panel.cshtml" />
+    <Content Include="Views\Shared\openlayers\_Shoreline_side_panel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

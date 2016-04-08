@@ -2,7 +2,7 @@ var mapboxgl_accessToken = 'pk.eyJ1IjoiaG9vZ3ciLCJhIjoiYjdlZTA1Y2YyOGM4NjFmOWI2M
 
 
 
-
+var mapbox_geocoderControl;
 var leaflet_open_street_map_max_zoom_level = 19;
 var base_map_tile_layer;
 var overlay_tile_layer;
@@ -635,20 +635,37 @@ function add_map_listener_idle() {
 
 function geocoding() {
 
-    // --------  search address ------- geocoding -----------
-    new L.Control.GeoSearch({
+    // -------- Leaflet  search address ------- geocoding -----------
+
+    //new L.Control.GeoSearch({
 
 
-        provider: new L.GeoSearch.Provider.Esri(),
+    //    provider: new L.GeoSearch.Provider.Esri(),
 
-        // google and open streetmap is ok, but result zoom level is too high for open street map. 
-        //provider: new L.GeoSearch.Provider.Google(),
-        //provider: new L.GeoSearch.Provider.OpenStreetMap(),
+    //    // google and open streetmap is ok, but result zoom level is too high for open street map. 
+    //    //provider: new L.GeoSearch.Provider.Google(),
+    //    //provider: new L.GeoSearch.Provider.OpenStreetMap(),
 
-        retainZoomLevel: false
-    }).addTo(map);
+    //    retainZoomLevel: false
+    //}).addTo(map);
 
     // ---------- End of search address ------- geocoding -----------
+
+
+
+
+
+    // -------------- Mapbox geocoder control -----------------
+    // Initialize the geocoder control and add it to the map.
+    var mapbox_geocoderControl = L.mapbox.geocoderControl('mapbox.places', {
+        autocomplete: true
+    });
+    mapbox_geocoderControl.addTo(map);
+
+
+
+
+    // --------------End of  Mapbox geocoder control -----------------
 
 
 

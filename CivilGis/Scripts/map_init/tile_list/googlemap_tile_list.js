@@ -1,5 +1,16 @@
 ﻿_tile_list = [
 
+    "Palo_Alto_Addresses",
+    "Palo_Alto_Building",
+    "Palo_Alto_Parcels",
+    "Palo_Alto_Right_of_way",
+    "Palo_Alto_Streets",
+    "Palo_Alto_Zoning",
+
+
+
+
+
 
     "Shoreline_Address_Central",
     "Shoreline_Buildings",
@@ -12,7 +23,9 @@
     "Shoreline_Pavement_Condition",
     "Shoreline_Sidewalk",
     "Shoreline_Street",
+    "Shoreline_Street_Light",
     "Shoreline_Tax_Parcel_Central",
+    "Shoreline_Traffic_Pave_Striping",
     "Shoreline_Zoning",
    
 

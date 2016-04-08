@@ -1,0 +1,138 @@
+﻿
+
+
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Transparent Gov </a>
+    </div>
+
+
+    <!-- Navigation -->
+    <!-- /.navbar-top-links -->
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+                
+                
+                
+                <li class="sidebar-search">
+                    <div class="input-group custom-search-form">
+                        <input type="text" id="addr_txt" class="form-control" placeholder="exp:1966 Harbor Blvd">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" id="search_addr">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <!-- /input-group -->
+                </li>
+
+
+
+                <li>
+                    <a href="/home/mapbox/@ViewBag.Area"> @ViewBag.Area &nbsp;&nbsp;&nbsp;<img src="~/images/logo/mapbox-logo.png" alt="" /> </a>
+                </li>
+
+
+
+                <li>
+                    <a href="/mapbox/classifycheckboxbuttonmap/Palo_Alto/Zoning">
+
+                        Zoning [check box button]
+                    </a>
+
+                </li>
+
+
+                <li>
+                    <a href="/mapbox/classifyradiobuttonmap/Palo_Alto/Zoning">
+
+                        Zoning [radio button]
+                    </a>
+
+                </li>
+                <li>
+                    <a href="/mapbox/scrollerclienttablemap/Palo_Alto/PAN_Areas">
+                        PAN Areas
+
+                    </a>
+
+                </li>
+                <li>
+                    <a href="/mapbox/scrollerfulltablemap/Palo_Alto/Addresses">
+
+                        Addresses
+                    </a>
+
+                </li>
+                <li>
+                    <a href="/mapbox/scrollerfulltablemap/Palo_Alto/Parcels">
+
+                        Parcels
+                    </a>
+
+                </li>
+                <li>
+                    <a href="/mapbox/scrollerclienttablemap/Palo_Alto/Building">
+                        Building
+
+                    </a>
+
+                </li>
+                <li>
+                    <a href="/mapbox/scrollerfulltablemap/Palo_Alto/Streets">
+
+                        Streets
+                    </a>
+
+                </li>
+
+                <li>
+                    <a href="/mapbox/justtiles/Palo_Alto/Right_of_way">
+
+                        Right of way
+                    </a>
+
+                </li>
+
+
+
+
+
+
+
+
+
+
+            </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+    <!-- /.navbar-static-side -->
+</nav>
+
+
+<!-- Page Content -->
+<div id="page-wrapper">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <ol class="breadcrumb">
+                <li><a href="/map/mapbox/">Transparent Gov</a></li>
+
+                <li><a href="/home/mapbox/@ViewBag.Area">@ViewBag.Area</a></li>
+                <li><a href="@ViewBag.Subject">@ViewBag.Subject</a></li>
+            </ol>
+
+
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
