@@ -320,7 +320,9 @@ function init_classification_buttons_checkbox(_area, _subject) {
 
     }); // when done
 
-    // color_tiles_switch button
+
+
+    // ----------- color_tiles_switch button --------------
     // init on off switch button  
     $("[name='color_tiles_switch']").bootstrapSwitch();
 
@@ -338,7 +340,7 @@ function init_classification_buttons_checkbox(_area, _subject) {
         }
     });
 
-
+    // ----------End of  color_tiles_switch button          --------------
 
 
 

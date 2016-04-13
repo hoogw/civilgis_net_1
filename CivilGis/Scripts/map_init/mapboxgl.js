@@ -691,3 +691,35 @@ function geocoding() {
 }
 
 //----------------End of leaflet basic simple map function  ------------------------
+
+
+function tile_switch_button() {
+
+
+
+    // ----------- color_tiles_switch button --------------
+    // init on off switch button  
+    $("[name='color_tiles_switch']").bootstrapSwitch();
+
+    $('input[name="color_tiles_switch"]').on('switchChange.bootstrapSwitch', function (event, state) {
+        // console.log(this); // DOM element
+        //console.log(event); // jQuery event
+        // console.log(state); // true | false
+        if (state) {
+
+            add_tiles();
+        }
+        else {
+
+            remove_tiles();
+        }
+    });
+
+    // ----------End of  color_tiles_switch button          --------------
+
+
+
+
+
+
+}
