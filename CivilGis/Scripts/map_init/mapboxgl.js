@@ -4,251 +4,30 @@ var mapboxgl_accessToken = 'pk.eyJ1IjoiaG9vZ3ciLCJhIjoiYjdlZTA1Y2YyOGM4NjFmOWI2M
 
 
 
-var leaflet_open_street_map_max_zoom_level = 19;
-var base_map_tile_layer;
-var overlay_tile_layer;
-var lasttime_overlay_tile_layer;
-var geojson_default_style;
-var geojson_classification_style;
-var geojson_mouseover_highlight_style;
-var geojson_clienttable_mouseover_highlight_style;
-var geojson_Marker_style_Options;
-var _current_markers_cluster;
-var _last_markers_cluster;
-var _click_polygon_style;
-var _click_line_style;
-var _mouseover_polygon_style;
-var _mouseover_line_style;
-var geojson_classification_mouseover_highlight_style;
 
 
-
-var _tile_exist = false;
-var _tile_list;
-
-var _addr_info;
-var search_address_marker;
-var flyto_marker;
-var geocoder;
 
 
 var map;
-//var markersArray = [];
-var apiURI;
-var infowindow;
-var base_url;
-var point_icon_url;
+
+
 var initial_location = [];
-
-var bounds;
-var southWest;
-var northEast;
-var SWlong;
-var SWlat;
-var NElong;
-var NElat;
-var listener_center_changed;
-var listener_zoom_changed;
-var listener_dragend;
-var listener_idle;
-
-var _geojson_object;
-var _geojson_obj_array;
-var _array_feature;
-var _dt_columns = [];
-var _dt_columns_count;
 var _area_db = [];
+var source_layer = [];
+
+
+
+
+
 var _flyto_zoomlevel;
-
-var _lat;
-var _long;
-var _geoFID;
-var _dt_columns = [];
-var _column = {};
-var _geometry_type;
-var _geometry_coord;
-var _column_count;
-
-var _mouseover_polygon;
-var _mouseover_line;
-var _mouseover_point;
-var _mouseover_coord;
-
-var _click_polygon;
-var _click_line;
-var _click_point;
-var _click_coord;
-var _area_polygon;
-var _area_polygon_coord = [];
-var _area_polyline;
-var _area_polyline_multi;
-
-
-var _highlight_marker;
-
-// ----cluster [3]----
-var markerClusterer;
-var infobox;
-var boxText;
-var _cluster_in_use = false;
-//------------end cluster [3] ------------
-
-
-
-
 var _multi_polyline;
-var _tile_baseURL;
+var _area_polyline
+
 var _areaID;
 var _subjectID;
-var tile_MapType;
-var _current_geojson_layer = null;
-var _last_geojson_layer = null;
 
 
 
-//--------------classification-------------------------
-
-var _designation = [];
-var _code_column_name = '';
-
-var _current_classifycheckbox_class;
-var _designation_key;
-var _designation_parentArray;
-//---------------------------------
-
-
-
-// ---------  map click event [0-4] ---------------- cluster map conflict with map click event, so do not use with cluster.------------
-
-var listener_click;
-var listener_rightclick;
-var _mapclick_in_use = false;
-
-
-
-//-----------------------------------------
-
-
-// --------default feature style -----------
-_default_fillOpacity = 0;
-_default_strokeColor = '#0000FF'; //blue
-_default_strokeWeight = 2;
-
-
-_highlight_fillOpacity = 0;
-_highlight_strokeColor = '#000000'; // black
-_highlight_strokeWeight = 8;
-
-_clienttable_mouseover_highlight_fillColor = '#000080';
-_clienttable_mouseover_highlight_fillOpacity = 0.5;
-_clienttable_mouseover_highlight_strokeColor = '#FF0000';
-_clienttable_mouseover_highlight_strokeWeight = 5;
-
-
-
-_classfiy_fillOpacity = 0;
-_classfiy_strokeColor = '#0000FF'; //blue
-_classfiy_strokeWeight = 0.2;
-
-
-//---------------------------------
-
-
-geojson_default_style = {
-
-    "color": _default_strokeColor,
-    "weight": _default_strokeWeight,
-    "fillOpacity": _default_fillOpacity
-};
-
-
-geojson_classification_style = {
-
-    "color": '#0000FF',
-    "weight": 0.2,
-    "fillOpacity": 0
-};
-
-
-
-
-geojson_mouseover_highlight_style = {
-
-    "color": _highlight_strokeColor,
-    "weight": _highlight_strokeWeight,
-    "fillOpacity": _highlight_fillOpacity
-};
-
-
-geojson_clienttable_mouseover_highlight_style = {
-
-    "color": _clienttable_mouseover_highlight_strokeColor,
-    "weight": _clienttable_mouseover_highlight_strokeWeight,
-    "fillColor": _clienttable_mouseover_highlight_fillColor,
-    "fillOpacity": _clienttable_mouseover_highlight_fillOpacity
-};
-
-
-geojson_Marker_style_Options = {
-
-    radius: 3,
-    fillColor: "#ff7800",
-    color: "#000",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.8
-
-
-};
-
-_click_polygon_style = {
-    
-    color: '#FF0000',
-    opacity: 0.8,
-    weight: 12,
-    fillColor: '#FF0000',
-    fillOpacity: 0.01
-};
-
-
-_click_line_style = {
-
-    color: '#FF0000',
-    opacity: 0.8,
-    weight: 12,
-    fillColor: '#FF0000',
-    fillOpacity: 0.01
-};
-
-_mouseover_polygon_style = {
-    
-    color: '#F7D358',
-    opacity: 0.8,
-    weight: 12,
-    fillColor: '#FF0000',
-    fillOpacity: 0.01
-};
-
-
-_mouseover_line_style = {
-
-    color: '#F7D358',
-    opacity: 0.8,
-    weight: 12,
-    fillColor: '#FF0000',
-    fillOpacity: 0.01
-};
-
-
-
-geojson_classification_mouseover_highlight_style = {
-
-    Weight: 2,
-    Color: '#000000',
-    fillColor: '#000000',
-    fillOpacity: 1
-
-};
 
 
 
@@ -393,239 +172,169 @@ function add_area_boundary(_area) {
 
 
 
-
-
-    /*
-    
-                                    For 2 dimenional Arrays:
-    
-                                    for(var i = 0; i < parentArray.length; i++){
-                                        for(var j = 0; j < parentArray[i].length; j++){
-    
-                                            console.log(parentArray[i][j]);
-                                        }
-                                    }
-                                    For arrays with an unknown number of dimensions you have to use recursion:
-    
-                                    function printArray(arr){
-                                        for(var i = 0; i < arr.length; i++){
-                                            if(arr[i] instanceof Array){
-                                                printArray(arr[i]);
-                                            }else{
-                                                console.log(arr[i]);
-                                            }
-                                        }
-                                    }
-    
-                                    or
-    
-                                    var printArray = function(arr) {
-                                        if ( typeof(arr) == "object") {
-                                            for (var i = 0; i < arr.length; i++) {
-                                                printArray(arr[i]);
-                                            }
-                                        }
-                                        else document.write(arr);
-                                    }
-    
-                                    printArray(parentArray);
-    
-    
-    
-    */
-
-
-
 }// function add_area_boundary
 
 
 
-function init_tiling(){
-    
-    // --------------------- dynamic load javascript file  ---------------------------
-
-
-    
-    var _tile_list_js = "/Scripts/map_init/tile_list/googlemap_tile_list.js";
-
-    $.when(
-             $.getScript(_tile_list_js)
-     /*
-    $.getScript( "/mypath/myscript1.js" ),
-    $.getScript( "/mypath/myscript2.js" ),
-    $.getScript( "/mypath/myscript3.js" ),
-    */
-
-    ).done(function () {
-
-        var  _tile_name = _areaID + "_" + _subjectID;
-        var _i = _tile_list.indexOf(_tile_name);
-        //alert(_tile_name);
-        if (_i >= 0) {
 
 
 
 
+//--------------------------  vectore tile section ------------------------------------
 
-            //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
-            _tile_baseURL = 'http://tile.transparentgov.net/v2/';
-            // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
+function add_vector_line(_area, _subject ) {
 
 
-            var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.png';
+    //alert(_area + _subject);
+
+      map.on('style.load', function () {
+
+
+          map.addSource('city', {
+
+              type: 'vector',
+           // url: 'mapbox://mapbox.mapbox-terrain-v2'
+
+
+              // city_address
+              //url: 'mapbox://hoogw.0pywwk0d'
            
-
-
-            //---------- mapbox GL  --------------------------
-
-
-            var tileset = 'mapbox.streets';
-            var overlay_tile_layer_source = {
-                "type": "raster",
-                
-                //"url": "mapbox://" + tileset
-                "url": overlay_tile_Url
-              
-            }
-
-
-
-
-           // overlay_tile_layer = map.on('style.load', function () {
-                                   map.on('style.load', function () {
-                   // var _tile_source   =   map.addSource("overlay_tile", overlay_tile_layer_source);
-                                             map.addSource("overlay_tile", overlay_tile_layer_source);
-
-                   //overlay_tile_layer  =   map.addLayer({
-                                             map.addLayer({
-                    "id": "overlay_tile",
-                    "type": "raster",
-                    "source": "overlay_tile"
-                    
-                    
-                });
+            
+            "tiles": [
+                         'http://localhost:10/tileserver/tileserver.php?/index.json?/city/{z}/{x}/{y}.pbf'
+                         
+                     ],
+            "maxzoom": 23
+          
 
             });
-            //--------- end mapbox GL -------
 
 
 
 
-
-
-                        
-
-
-
-
-                         _tile_exist = true;
-
-                     }// if
-
-
-    }); // when done
-
-
-}// init tile
-
-
-
-function add_tiles(){
-    
-   
-
-    
-   
-        tile_MapType.bringToFront();
         
-  
-}
 
-function remove_tiles() {
 
 
-    tile_MapType.bringToBack();
+         
+      
 
 
-}
+          map.addLayer({
+              'id': 'city_zoning',
+              'type': 'fill',
+              "source": "city",
 
+              "source-layer": "city_zoning",
+              'paint': {
+                  'fill-color': 'rgba(218,165,32, 0)',
+                  'fill-outline-color': '#FFFAFA'
+              }
+          });
 
-//------------- leaflet basic simple map function -----------------------------
 
-function get_map_bound() {
+          map.addLayer({
+              'id': 'city_parcels',
+              'type': 'fill',
+              "source": "city",
 
-    //document.getElementById("title_info").innerHTML = "MAP BOUNDS [SouthWest, NorthEast] "+ map.getBounds();
-    // get current map bounds as URL parameters. 
+              "source-layer": "city_parcels",
+              'paint': {
+                  'fill-color': 'rgba(200, 100, 240, 0)',
+                  'fill-outline-color': 'rgba(200, 100, 240, 1)'
+              }
+          });
 
+          map.addLayer({
+              "id": "city_streets",
+              "type": "line",
+              "source": "city",
 
+              "source-layer": "city_streets",
 
+              "layout": {
+                  "line-join": "round",
+                  "line-cap": "round"
+              },
+              "paint": {
+                  "line-color": "#ff69b4",
+                  "line-width": 3
+              }
+          });
 
 
+       
+          map.addLayer({
+              "id": "city_address",
+              "type": "circle",
+              "source": "city",
 
-    bounds = map.getBounds();
-    southWest = bounds.getSouthWest();
-    northEast = bounds.getNorthEast();
-    SWlong = southWest.lng;
-    SWlat = southWest.lat;
-    NElong = northEast.lng;
-    NElat = northEast.lat;
+              "source-layer": "city_address",
 
-    //alert(SWlong);
+              "paint": {
+                  "circle-color": 'rgba(0,255,0,1)',
+                  "circle-radius": 3,
+                  "circle-blur": 0
+              },
+          });
 
-    // http://localhost:10/civilgis/api/load/general_landuse/SWlong/SWlat/NElong/NElat/   This is sample URI
-    //var _url = base_url + 'api/loadall/' + $("#areaID").val() + '/' + $("#subjectID").val() + '/' + SWlong + '/' + SWlat + '/' + NElong + '/' + NElat + '/';
-    var _url = "/api/geojson/feature/" + initial_location[0] + '/' + $("#subjectID").val() + "/" + SWlong + "/" + SWlat + "/" + NElong + "/" + NElat + "/";
 
-    document.getElementById("ajaxload").style.display = "block";
-    ajax_GeoJSON(map, _url, false);
 
 
 
+    }); // map.on('style.load')
 
-}
 
 
-function get_click_latlng(_click_event_lat, _click_event_lng) {
+    // ===========   mouse over event, show feature detail property in info-table ===============
+      map.on('mousemove', function (e) {
+          var features = map.queryRenderedFeatures(e.point);
 
 
-    if (_mapclick_in_use) {
+          //  hand to pointer hand if there is features 
+          map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
 
 
-        // --- current use 2X2 grid boundary (as click event latlong is on center point), you can use 3x3 grid or adjust house length to make larger/smaller select area. 
-        var _square_house_length = 0.0004; // average is 0.0003-0.0004
+          var instand_info_table = "";
+          
+          for (var i = 0; i < features.length; i++) {
 
 
-        SWlong = _click_event_lng - _square_house_length;
-        SWlat = _click_event_lat - _square_house_length;
-        NElong = _click_event_lng + _square_house_length;
-        NElat = _click_event_lat + _square_house_length;
 
 
+              var element = features[i];
+              
 
 
-        var _url_click_event = "/api/geojson/feature/" + $("#areaID").val() + '/' + $("#subjectID").val() + "/" + SWlong + "/" + SWlat + "/" + NElong + "/" + NElat + "/";
+             
 
-        document.getElementById("ajaxload").style.display = "block";
-        ajax_GeoJSON(map, _url_click_event, true);
+             
+              var instant_info = "<br/><div><span>" + element.layer.id + "<ul>";
 
+              for (var _key in element.properties) {
+                  var _value = String(element.properties[_key]);
+                  instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _key + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
 
+              }// for
 
-    }
 
+              instant_info = instant_info + "</ul> </span></div>";
 
 
+              instand_info_table = instand_info_table + instant_info;
 
-}
+          }//for
 
 
+          // update bottom <div>
+          document.getElementById("info-table").innerHTML = instand_info_table;
+         
 
-function back_full_extend() {
+      });
+    // =========== End =====  mouse over event, show feature detail property in info-table ===============
 
-    map.setView(new L.LatLng(initial_location[1], initial_location[2]), initial_location[3]);
-}
 
 
-function add_map_listener_idle() {
 
 
 
@@ -633,93 +342,61 @@ function add_map_listener_idle() {
 
 
 
-    listener_idle = map.on('moveend', function (e) {
-        //alert(e.latlng);
-        get_map_bound();
 
 
-    });
+                    // -------------------- click event open a popup at the location of the feature -----------------------------
 
+                      map.on('click', function (e) {
+                          var features = map.queryRenderedFeatures(e.point);
+                          if (!features.length) {
+                              return;
+                          }
 
 
+                          var _popup_html = "<div style='width:180px; height:120px;text-align: center; overflow-x:scroll; overflow-y:scroll; overflow:auto;'><table >";
 
+                          for (var j = 0; j < features.length; j++) {
 
+                              var element = features[j];
 
+                              var _popup_html_section = "<tr><td ><span style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + element.layer.id + "&nbsp;</font></span></td><td>" + " " + "</td></tr>";
 
+                              for (var _key in element.properties) {
+                                  var _value = String(element.properties[_key]);
+                  
+                                  _popup_html_section = _popup_html_section + "<tr><td ><span style=\"float:left; list-style: none;font-size:10px\">" + _key + "</span></td><td><span style=\"float:left; list-style: none;font-size:8px\">" + _value + "</span></td></tr>";
 
+                              }// for
 
-    // ---------  map click event [1] ------ search for a single feature where clicked ------------
-    listener_click = map.on('click', function (click_event_location) {
+                              _popup_html = _popup_html + _popup_html_section;
 
-        // alert(click_event_location.latlng.lat);
-        get_click_latlng(click_event_location.latlng.lat, click_event_location.latlng.lng);
-    });
+                          }//for
 
+                          _popup_html = _popup_html + "</table></div>";
 
-    listener_rightclick = map.on('rightclick', function () {
+                          var popup = new mapboxgl.Popup()
+                              .setLngLat(map.unproject(e.point))
+                              .setHTML(_popup_html)
+                              .addTo(map);
 
-        back_full_extend();
-    });
+                      });
 
-    //--------------------------End  map right click event ---------- back to full extend ----------------------
 
+                    // --------------------End -------------- click event open a popup at the location of the feature -----------------------------
 
 
 
-}
 
 
-function geocoding() {
 
-    // --------  search address ------- geocoding -----------
-    new L.Control.GeoSearch({
 
 
-        provider: new L.GeoSearch.Provider.Esri(),
 
-        // google and open streetmap is ok, but result zoom level is too high for open street map. 
-        //provider: new L.GeoSearch.Provider.Google(),
-        //provider: new L.GeoSearch.Provider.OpenStreetMap(),
 
-        retainZoomLevel: false
-    }).addTo(map);
+}// function
 
-    // ---------- End of search address ------- geocoding -----------
 
 
 
-}
 
-//----------------End of leaflet basic simple map function  ------------------------
-
-
-function tile_switch_button() {
-
-
-
-    // ----------- color_tiles_switch button --------------
-    // init on off switch button  
-    $("[name='color_tiles_switch']").bootstrapSwitch();
-
-    $('input[name="color_tiles_switch"]').on('switchChange.bootstrapSwitch', function (event, state) {
-        // console.log(this); // DOM element
-        //console.log(event); // jQuery event
-        // console.log(state); // true | false
-        if (state) {
-
-            add_tiles();
-        }
-        else {
-
-            remove_tiles();
-        }
-    });
-
-    // ----------End of  color_tiles_switch button          --------------
-
-
-
-
-
-
-}
+//--------------------------  vectore tile section ------------------------------------
