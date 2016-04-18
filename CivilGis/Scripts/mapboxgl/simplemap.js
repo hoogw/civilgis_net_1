@@ -21,6 +21,9 @@ function initialize() {
 
         style: 'mapbox://styles/mapbox/satellite-v8',
 
+        //style: 'mapbox://styles/hoogw/cin2d9c6u007aafncyn8nmu36',
+
+
         center: [initial_location[2], initial_location[1]], //  starting position[-74.50, 40],
         zoom: initial_location[3] // starting zoom
     });
@@ -40,7 +43,7 @@ function initialize() {
 
 
     
-    add_vector_line($("#areaID").val(), $("#subjectID").val());
+    init_vector_style($("#areaID").val(), $("#subjectID").val());
 
 
 }// initialize
