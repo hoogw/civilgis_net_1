@@ -15,9 +15,9 @@ var map;
 var initial_location = [];
 var _area_db = [];
 var source_layer = [];
-
-
-
+var geocoder;
+var _source_layer_group_id;
+var _tileserver_url;
 
 
 var _flyto_zoomlevel;
@@ -177,11 +177,366 @@ function add_area_boundary(_area) {
 
 
 
+function geocoder() {
+
+    //--- geocoding ---------------
+    // map.addControl(new mapboxgl.Geocoder());
+
+
+    geocoder = new mapboxgl.Geocoder({
+        container: 'geocoder-container' // Optional. Specify a unique container for the control to be added to.
+    });
+
+    map.addControl(geocoder);
+
+    // After the map style has loaded on the page, add a source layer and default
+    // styling for a single point.
+    map.on('load', function () {
+        map.addSource('single-point', {
+            "type": "geojson",
+            "data": {
+                "type": "FeatureCollection",
+                "features": []
+            }
+        });
+
+        map.addLayer({
+            "id": "point",
+            "source": "single-point",
+            "type": "circle",
+            "paint": {
+                "circle-radius": 10,
+                "circle-color": "#007cbf"
+            }
+        });
+
+        // Listen for the `geocoder.input` event that is triggered when a user
+        // makes a selection and add a marker that matches the result.
+        geocoder.on('result', function (ev) {
+            map.getSource('single-point').setData(ev.result.geometry);
+        });
+    });
+
+
+}
+
+
+
+
+
 
 
 
 
 //--------------------------  vectore tile section ------------------------------------
+
+
+
+
+function init_checkbox_menu_color(_area, _subject) {
+
+    // --------------------- dynamic load javascript file based on area and ---------------------------
+
+
+    //var _vector_style_js = base_url + "public/js/map_init/source_layer/" + _area + ".js";
+    var _vector_style_js = "/Scripts/map_init/source_layer/" + _area + ".js";
+
+    $.when(
+             $.getScript(_vector_style_js)
+     /*
+    $.getScript( "/mypath/myscript1.js" ),
+    $.getScript( "/mypath/myscript2.js" ),
+    $.getScript( "/mypath/myscript3.js" ),
+    */
+
+    ).done(function () {
+
+
+
+        // ----------- add checkbox menu -----------
+        _source_layer_group_id = _area + '_' + _subject;
+
+
+        for (var property in source_layer[_source_layer_group_id]) {
+            if (source_layer[_source_layer_group_id].hasOwnProperty(property)) {
+
+
+
+                //var _checkbox_span = '  <span class="button-checkbox"> <button type="button" class="btn" data-color="primary" id="' + property + '">' + property + '</button><input type="checkbox" class="hidden" checked /> </span> ';
+
+
+                var _checkbox_span = '  <span class="button-checkbox"> <button type="button" class="btn" data-color="'+
+                                           source_layer[_source_layer_group_id][property]['feature_color']   + '" id="' + property + '">' + property + '</button><input type="checkbox" class="hidden" checked /> </span> ';
+                
+
+
+                $("#checkbox_menu").append(_checkbox_span);
+
+
+
+
+
+            }//if
+        }//for
+        // ----------- End of add checkbox menu -----------
+
+
+
+        $('.button-checkbox').each(function () {
+
+            // Settings
+            var $widget = $(this),
+                $button = $widget.find('button'),
+                $checkbox = $widget.find('input:checkbox'),
+                color = $button.data('color'),
+                settings = {
+                    on: {
+                        icon: 'glyphicon glyphicon-check'
+                    },
+                    off: {
+                        icon: 'glyphicon glyphicon-unchecked'
+                    }
+                };
+
+
+
+            // Event Handlers
+            $button.on('click', function (e) {
+                $checkbox.prop('checked', !$checkbox.is(':checked'));
+                $checkbox.triggerHandler('change');
+                updateDisplay();
+
+
+
+                //--------------------------- turn off the layer ---  when click checkbox button -----------------
+                //alert(this.id);
+
+                // e.preventDefault();
+                //  e.stopPropagation();
+                var visibility = map.getLayoutProperty(this.id, 'visibility');
+
+                if (visibility === 'visible') {
+                    map.setLayoutProperty(this.id, 'visibility', 'none');
+                    // this.className = '';
+                } else {
+                    // this.className = 'active';
+                    map.setLayoutProperty(this.id, 'visibility', 'visible');
+                };
+
+
+                //----------------------- End of -- turn off the layer ---  when click checkbox button -----------------
+
+            });
+
+
+
+
+            $checkbox.on('change', function () {
+                updateDisplay();
+            });
+
+
+            // Actions
+            function updateDisplay() {
+                var isChecked = $checkbox.is(':checked');
+
+                // Set the button's state
+                $button.data('state', (isChecked) ? "on" : "off");
+
+                // Set the button's icon
+                $button.find('.state-icon')
+                    .removeClass()
+                    .addClass('state-icon ' + settings[$button.data('state')].icon);
+
+                // Update the button's color
+                if (isChecked) {
+                    $button
+                        .removeClass('btn-default')
+                        .addClass('btn-' + color + ' active');
+                }
+                else {
+                    $button
+                        .removeClass('btn-' + color + ' active')
+                        .addClass('btn-default');
+                }
+            }
+
+            // Initialization
+            function init_checkbox() {
+
+                updateDisplay();
+
+                // Inject the icon if applicable
+                if ($button.find('.state-icon').length == 0) {
+                    $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i>&nbsp;');
+                }
+            }
+
+
+
+
+            init_checkbox();
+        });
+
+
+
+
+
+    });//done
+
+}
+
+
+
+function init_checkbox_menu_simple(_area, _subject) {
+
+    // --------------------- dynamic load javascript file based on area and ---------------------------
+
+
+    //var _vector_style_js = base_url + "public/js/map_init/source_layer/" + _area + ".js";
+    var _vector_style_js = "/Scripts/map_init/source_layer/" + _area + ".js";
+
+    $.when(
+             $.getScript(_vector_style_js)
+     /*
+    $.getScript( "/mypath/myscript1.js" ),
+    $.getScript( "/mypath/myscript2.js" ),
+    $.getScript( "/mypath/myscript3.js" ),
+    */
+
+    ).done(function () {
+
+
+
+        // ----------- add checkbox menu -----------
+        _source_layer_group_id = _area + '_' + _subject;
+
+
+        for (var property in source_layer[_source_layer_group_id]) {
+            if (source_layer[_source_layer_group_id].hasOwnProperty(property)) {
+
+
+
+                var _checkbox_span = '  <span class="button-checkbox"> <button type="button" class="btn" data-color="primary" id="'+ property + '">' + property + '</button><input type="checkbox" class="hidden" checked /> </span> ';
+
+
+                $("#checkbox_menu").append(_checkbox_span);
+
+
+
+
+
+            }//if
+        }//for
+        // ----------- End of add checkbox menu -----------
+
+
+
+        $('.button-checkbox').each(function () {
+
+            // Settings
+            var $widget = $(this),
+                $button = $widget.find('button'),
+                $checkbox = $widget.find('input:checkbox'),
+                color = $button.data('color'),
+                settings = {
+                    on: {
+                        icon: 'glyphicon glyphicon-check'
+                    },
+                    off: {
+                        icon: 'glyphicon glyphicon-unchecked'
+                    }
+                };
+
+
+
+            // Event Handlers
+            $button.on('click', function (e) {
+                $checkbox.prop('checked', !$checkbox.is(':checked'));
+                $checkbox.triggerHandler('change');
+                updateDisplay();
+
+
+
+                //--------------------------- turn off the layer ---  when click checkbox button -----------------
+                //alert(this.id);
+
+               // e.preventDefault();
+              //  e.stopPropagation();
+                var visibility = map.getLayoutProperty(this.id, 'visibility');
+
+                if (visibility === 'visible') {
+                    map.setLayoutProperty(this.id, 'visibility', 'none');
+                   // this.className = '';
+                } else {
+                   // this.className = 'active';
+                    map.setLayoutProperty(this.id, 'visibility', 'visible');
+                };
+            
+
+                //----------------------- End of -- turn off the layer ---  when click checkbox button -----------------
+
+            });
+
+
+
+
+            $checkbox.on('change', function () {
+                updateDisplay();
+            });
+
+
+            // Actions
+            function updateDisplay() {
+                var isChecked = $checkbox.is(':checked');
+
+                // Set the button's state
+                $button.data('state', (isChecked) ? "on" : "off");
+
+                // Set the button's icon
+                $button.find('.state-icon')
+                    .removeClass()
+                    .addClass('state-icon ' + settings[$button.data('state')].icon);
+
+                // Update the button's color
+                if (isChecked) {
+                    $button
+                        .removeClass('btn-default')
+                        .addClass('btn-' + color + ' active');
+                }
+                else {
+                    $button
+                        .removeClass('btn-' + color + ' active')
+                        .addClass('btn-default');
+                }
+            }
+
+            // Initialization
+            function init_checkbox() {
+
+                updateDisplay();
+
+                // Inject the icon if applicable
+                if ($button.find('.state-icon').length == 0) {
+                    $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i>&nbsp;');
+                }
+            }
+
+
+
+
+            init_checkbox();
+        });
+
+
+
+
+
+    });//done
+
+}
+
+
 
 
 function init_vector_style(_area, _subject) {
@@ -205,9 +560,9 @@ function init_vector_style(_area, _subject) {
 
 
       
-        var _source_layer_group_id = _area + '_' + _subject;
+         _source_layer_group_id = _area + '_' + _subject;
 
-        var _tileserver_url = 'http://localhost:10/tileserver/tileserver.php?/index.json?/' + _area + '/{z}/{x}/{y}.pbf';
+         _tileserver_url = 'http://localhost:10/tileserver/tileserver.php?/index.json?/' + _area + '/{z}/{x}/{y}.pbf';
 
 
         map.on('style.load', function () {
@@ -235,7 +590,7 @@ function init_vector_style(_area, _subject) {
 
             //==================================   add layers to map ================
            
-          
+            
 
             for (var property in source_layer[_source_layer_group_id]) {
                 if (source_layer[_source_layer_group_id].hasOwnProperty(property)) {
@@ -251,6 +606,12 @@ function init_vector_style(_area, _subject) {
                                         "source": _area,
 
                                         "source-layer": property,
+
+
+                                         
+                                        "layout": {
+                                            'visibility': 'visible'             // this property must be present in order for checkbox button menu work properly. 
+                                        },
 
                                         "paint": {
                                             "circle-color": source_layer[_source_layer_group_id][property]['circle-color'],
@@ -273,6 +634,7 @@ function init_vector_style(_area, _subject) {
                                                                     "source-layer": property,
 
                                                                     "layout": {
+                                                                        'visibility': 'visible',       // this property must be present in order for checkbox button menu work properly. 
                                                                         "line-join": source_layer[_source_layer_group_id][property]['line-join'],
                                                                         "line-cap": source_layer[_source_layer_group_id][property]['line-cap'],
                                                                     },
@@ -300,6 +662,11 @@ function init_vector_style(_area, _subject) {
                                                                                     "source": _area,
 
                                                                                     "source-layer": property,
+
+                                                                                    "layout": {
+                                                                                        'visibility': 'visible'   // this property must be present in order for checkbox button menu work properly. 
+                                                                                                },
+
                                                                                     'paint': {
                                                                                         'fill-color': source_layer[_source_layer_group_id][property]['fill-color'],
                                                                                         'fill-outline-color': source_layer[_source_layer_group_id][property]['fill-outline-color'],
@@ -314,7 +681,8 @@ function init_vector_style(_area, _subject) {
                                                                             }// else polygon fill
 
 
-
+                    // for testing sample "hide show layer"
+                   // addLayer(property, property);
 
 
 
@@ -447,6 +815,11 @@ function init_vector_style(_area, _subject) {
     }); // when done
 
 }
+
+
+
+
+
 
 
 

@@ -45,24 +45,24 @@ function initialize() {
     add_area_boundary($("#areaID").val());
 
 
-    
 
 
-    init_checkbox_menu_simple($("#areaID").val(), $("#subjectID").val());
 
-     init_vector_style($("#areaID").val(), $("#subjectID").val());
+    init_checkbox_menu_color($("#areaID").val(), $("#subjectID").val());
 
-  
-
-
-     
+    init_vector_style($("#areaID").val(), $("#subjectID").val());
 
 
 
 
 
 
-   
+
+
+
+
+
+
 
 }// initialize
 

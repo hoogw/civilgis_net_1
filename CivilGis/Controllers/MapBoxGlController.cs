@@ -77,6 +77,19 @@ namespace CivilGis.Controllers
         }
 
 
+        public ActionResult simplecolormap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
 
         public ActionResult justtiles(string area, string subject)
         {

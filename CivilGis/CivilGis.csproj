@@ -450,6 +450,7 @@
     <Content Include="Scripts\classification\area\Shoreline\Zoning.js" />
     <Content Include="Scripts\classification\area\Shoreline\tile_css_Zoning.css" />
     <Content Include="Scripts\classification\area\tile_css_template.css" />
+    <Content Include="Scripts\classification\vector_layer_checkbox_menu_style.css" />
     <Content Include="Scripts\classification\classification_button_style.css" />
     <Content Include="Scripts\googlemap\classifycheckboxbuttonmap.js" />
     <Content Include="Scripts\googlemap\classifyradiobuttonmap.js" />
@@ -523,6 +524,7 @@
     <Content Include="Scripts\mapboxgl\scrollerfulltablemap.js" />
     <Content Include="Scripts\mapboxgl\scrollerservertablemap.js" />
     <Content Include="Scripts\mapboxgl\simpleclustermap.js" />
+    <Content Include="Scripts\mapboxgl\simplecolormap.js" />
     <Content Include="Scripts\mapboxgl\simplemap.js" />
     <Content Include="Scripts\mapbox\classifycheckboxbuttonmap.js" />
     <Content Include="Scripts\mapbox\classifyradiobuttonmap.js" />
@@ -1128,6 +1130,7 @@
     <Content Include="Views\Shared\mapquest\_Shoreline_side_panel.cshtml" />
     <Content Include="Views\Shared\openlayers\_Palo_Alto_side_panel.cshtml" />
     <Content Include="Views\Shared\openlayers\_Shoreline_side_panel.cshtml" />
+    <Content Include="Views\MapBoxGL\simplecolormap.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
