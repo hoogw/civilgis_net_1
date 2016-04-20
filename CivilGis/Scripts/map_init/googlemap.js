@@ -1,4 +1,8 @@
 
+
+
+var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
+
 var _tile_exist = false;
 var _tile_list;
 
@@ -353,7 +357,7 @@ function init_tiling(){
 
 
             //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
-            _tile_baseURL = 'http://tile.transparentgov.net/v2/';
+           // _tile_baseURL = 'http://tile.transparentgov.net/v2/';
             // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
 
 

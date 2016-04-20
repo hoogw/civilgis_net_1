@@ -1,3 +1,5 @@
+var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
+
 
 var leaflet_open_street_map_max_zoom_level = 19;
 var base_map_tile_layer;
@@ -91,7 +93,7 @@ var _cluster_in_use = false;
 
 
 var _multi_polyline;
-var _tile_baseURL;
+
 var _areaID;
 var _subjectID;
 var tile_MapType;
@@ -464,7 +466,7 @@ function init_tiling(){
 
 
                         //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
-                         _tile_baseURL = 'http://tile.transparentgov.net/v2/';
+                        // _tile_baseURL = 'http://tile.transparentgov.net/v2/';
                         // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
 
 

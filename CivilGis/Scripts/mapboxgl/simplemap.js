@@ -31,7 +31,7 @@ function initialize() {
 
     map.addControl(new mapboxgl.Navigation());
 
-    add_area_boundary($("#areaID").val());
+    
 
     // add var geocoder
     geocoder();
@@ -79,7 +79,7 @@ function initialize() {
 
 
 
-    
+                add_area_boundary($("#areaID").val());
                 
 
    

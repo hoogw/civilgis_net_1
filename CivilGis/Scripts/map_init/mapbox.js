@@ -1,5 +1,6 @@
 var mapboxgl_accessToken = 'pk.eyJ1IjoiaG9vZ3ciLCJhIjoiYjdlZTA1Y2YyOGM4NjFmOWI2MjY3MmI5NWM3MmUyOWMifQ.gINCV5SXFGTG5wB8ouXxOw';
 
+var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
 
 
 var mapbox_geocoderControl;
@@ -95,7 +96,7 @@ var _cluster_in_use = false;
 
 
 var _multi_polyline;
-var _tile_baseURL;
+
 var _areaID;
 var _subjectID;
 var tile_MapType;
@@ -468,7 +469,7 @@ function init_tiling() {
 
 
             //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
-            _tile_baseURL = 'http://tile.transparentgov.net/v2/';
+            //_tile_baseURL = 'http://tile.transparentgov.net/v2/';
             // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
 
 

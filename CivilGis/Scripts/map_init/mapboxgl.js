@@ -1,7 +1,7 @@
 /// <reference path="source_layer/city.js" />
 var mapboxgl_accessToken = 'pk.eyJ1IjoiaG9vZ3ciLCJhIjoiYjdlZTA1Y2YyOGM4NjFmOWI2MjY3MmI5NWM3MmUyOWMifQ.gINCV5SXFGTG5wB8ouXxOw';
 
-
+var _tileserver_base_url = 'http://166.62.80.50:10/tileserver/tileserver.php?/index.json?/'; // must use this
 
 
 
@@ -519,8 +519,20 @@ function init_vector_style(_area, _subject) {
 
         _source_layer_group_id = _area + '_' + _subject;
 
-        _tileserver_url = 'http://localhost:10/tileserver/tileserver.php?/index.json?/' + _area + '/{z}/{x}/{y}.pbf';
 
+       
+    //_tileserver_base_url = 'http://vectortile.transparentgov.net/'; // NOT work,with error No 'Access-Control-Allow-Origin' header is present on the requested resource
+        _tileserver_base_url = 'http://166.62.80.50:10/tileserver/tileserver.php?/index.json?/'; // must use this
+
+
+
+    // _tileserver_url = 'http://localhost:10/tileserver/tileserver.php?/index.json?/' + _area + '/{z}/{x}/{y}.pbf';
+     //   _tileserver_url = _tileserver_base_url + 'tileserver.php?/index.json?/' + _area + '/{z}/{x}/{y}.pbf';
+
+
+        _tileserver_url = _tileserver_base_url + _area + '/{z}/{x}/{y}.pbf';
+
+      //  alert(_tileserver_url);
 
       //  map.on('style.load', function () {    // if not use style, should NOT use 'style.load' will cause not load vector tile problem, should use 'load' event
             map.on('load', function () {
