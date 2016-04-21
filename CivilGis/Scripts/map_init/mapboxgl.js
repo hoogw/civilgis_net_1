@@ -473,13 +473,13 @@ function init_checkbox_menu_simple(_area, _subject) {
                 // Update the button's color
                 if (isChecked) {
                     $button
-                        .removeClass('btn-default')
-                        .addClass('btn-' + color + ' active');
+                        .removeClass('btn-default  btn-xs')
+                        .addClass('btn-' + color +  ' btn-xs'+ ' active');
                 }
                 else {
                     $button
-                        .removeClass('btn-' + color + ' active')
-                        .addClass('btn-default');
+                        .removeClass('btn-' + color + ' btn-xs' + ' active')
+                        .addClass('btn-default  btn-xs');
                 }
             }
 
@@ -522,9 +522,7 @@ function init_vector_style(_area, _subject) {
 
        
     //_tileserver_base_url = 'http://vectortile.transparentgov.net/'; // NOT work,with error No 'Access-Control-Allow-Origin' header is present on the requested resource
-        _tileserver_base_url = 'http://166.62.80.50:10/tileserver/tileserver.php?/index.json?/'; // must use this
-
-
+     //   _tileserver_base_url = 'http://166.62.80.50:10/tileserver/tileserver.php?/index.json?/'; // must use this
 
     // _tileserver_url = 'http://localhost:10/tileserver/tileserver.php?/index.json?/' + _area + '/{z}/{x}/{y}.pbf';
      //   _tileserver_url = _tileserver_base_url + 'tileserver.php?/index.json?/' + _area + '/{z}/{x}/{y}.pbf';
@@ -686,22 +684,25 @@ function init_vector_style(_area, _subject) {
 
 
 
+                // filter only display our feature, not base map feature.
+
+                if (element.layer.id in source_layer[_source_layer_group_id]) {
+
+                            var instant_info = "<br/><div><span>" + element.layer.id + "<ul>";
+
+                            for (var _key in element.properties) {
+                                var _value = String(element.properties[_key]);
+                                instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _key + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+
+                            }// for
 
 
-
-                var instant_info = "<br/><div><span>" + element.layer.id + "<ul>";
-
-                for (var _key in element.properties) {
-                    var _value = String(element.properties[_key]);
-                    instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _key + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
-
-                }// for
+                            instant_info = instant_info + "</ul> </span></div>";
 
 
-                instant_info = instant_info + "</ul> </span></div>";
+                            instand_info_table = instand_info_table + instant_info;
+                }// if filter
 
-
-                instand_info_table = instand_info_table + instant_info;
 
             }//for
 
@@ -732,6 +733,7 @@ function init_vector_style(_area, _subject) {
                 return;
             }
 
+            var _not_popup = false;
 
             var _popup_html = "<div style='width:180px; height:120px;text-align: center; overflow-x:scroll; overflow-y:scroll; overflow:auto;'><table >";
 
@@ -739,27 +741,40 @@ function init_vector_style(_area, _subject) {
 
                 var element = features[j];
 
-                var _popup_html_section = "<tr><td ><span style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + element.layer.id + "&nbsp;</font></span></td><td>" + " " + "</td></tr>";
 
-                for (var _key in element.properties) {
-                    var _value = String(element.properties[_key]);
+                // filter only display our feature, not base map feature.
 
-                    _popup_html_section = _popup_html_section + "<tr><td ><span style=\"float:left; list-style: none;font-size:10px\">" + _key + "</span></td><td><span style=\"float:left; list-style: none;font-size:8px\">" + _value + "</span></td></tr>";
+                if (element.layer.id in source_layer[_source_layer_group_id]) {
 
-                }// for
+                    _not_popup = true;
 
-                _popup_html = _popup_html + _popup_html_section;
+                    var _popup_html_section = "<tr><td ><span style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + element.layer.id + "&nbsp;</font></span></td><td>" + " " + "</td></tr>";
+
+                    for (var _key in element.properties) {
+                        var _value = String(element.properties[_key]);
+
+                        _popup_html_section = _popup_html_section + "<tr><td ><span style=\"float:left; list-style: none;font-size:10px\">" + _key + "</span></td><td><span style=\"float:left; list-style: none;font-size:8px\">" + _value + "</span></td></tr>";
+
+                    }// for
+
+                    _popup_html = _popup_html + _popup_html_section;
+
+                }//if filter
 
             }//for
 
             _popup_html = _popup_html + "</table></div>";
 
-            var popup = new mapboxgl.Popup()
-                .setLngLat(map.unproject(e.point))
-                .setHTML(_popup_html)
-                .addTo(map);
 
-        });
+            if (_not_popup) {
+                                var popup = new mapboxgl.Popup()
+                                    .setLngLat(map.unproject(e.point))
+                                    .setHTML(_popup_html)
+                                    .addTo(map);
+
+            }//if 
+
+        }); // map on click
 
 
         // --------------------End -------------- click event open a popup at the location of the feature -----------------------------
@@ -784,12 +799,6 @@ function init_vector_style(_area, _subject) {
 
 
 //############### NOT IN USE ###############
-
-
-
-
-
-
 
 function init_vector_style_withloadscript(_area, _subject) {
 

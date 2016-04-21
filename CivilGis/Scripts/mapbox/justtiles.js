@@ -37,13 +37,7 @@ function initialize() {
     //---------------- init - mapbox ----------------
 
 
-    L.mapbox.accessToken = mapboxgl_accessToken;
-    map = L.mapbox.map('map-canvas', 'mapbox.streets')
-              .setView([initial_location[1], initial_location[2]], initial_location[3]);   // .setView([40, -74.50], 9);
-
-
-    // bug fix, for first time load
-    //get_map_bound();
+    init_base_map();
 
 
     //---------------- end of  init - mapbox -----------

@@ -15,11 +15,11 @@ function initialize() {
     mapboxgl.accessToken = mapboxgl_accessToken;
     map = new mapboxgl.Map({
         container: 'map-canvas', // container id
-        //style: 'mapbox://styles/mapbox/streets-v8', //stylesheet location
+        style: 'mapbox://styles/mapbox/streets-v8', //stylesheet location
 
         //style: 'mapbox://styles/mapbox/emerald-v8',
 
-        style: 'mapbox://styles/mapbox/satellite-v8',
+       // style: 'mapbox://styles/mapbox/satellite-v8',
 
         //style: 'mapbox://styles/hoogw/cin2d9c6u007aafncyn8nmu36',
 

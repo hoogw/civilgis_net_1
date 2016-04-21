@@ -3,6 +3,9 @@ var mapboxgl_accessToken = 'pk.eyJ1IjoiaG9vZ3ciLCJhIjoiYjdlZTA1Y2YyOGM4NjFmOWI2M
 var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
 
 
+var base_layers;
+
+
 var mapbox_geocoderControl;
 var leaflet_open_street_map_max_zoom_level = 19;
 var base_map_tile_layer;
@@ -480,7 +483,18 @@ function init_tiling() {
             // ===== above must define errorTileUrl:'  ', must have some character or space in '  ' above. If not define this, missing tile will show a broken image icon on map everywhere, if define this, it just failed to load empty URL, not showing broken image icon
 
 
+            
+
+            
+
             overlay_tile_layer = map.addLayer(tile_MapType);
+            
+
+            // -----------bug fix, by add multiple basemap layer, must set zindex to a big number such as 99, otherwise, multiple base map layer will make this tile invisable. zIndex start from 1, is the lowest level at the bottom. 
+            tile_MapType.setZIndex(99);
+            //tile_MapType.bringToFront();
+            //--------------end bug fix------------------------------------------
+
 
 
             _tile_exist = true;
@@ -500,8 +514,8 @@ function add_tiles() {
 
 
 
-
-    tile_MapType.bringToFront();
+    tile_MapType.setZIndex(99);
+   // tile_MapType.bringToFront();
 
 
 }
@@ -515,7 +529,7 @@ function remove_tiles() {
 }
 
 
-//------------- leaflet basic simple map function -----------------------------
+//-------------  basic simple map function -----------------------------
 
 function get_map_bound() {
 
@@ -672,7 +686,37 @@ function geocoding() {
 
 }
 
-//----------------End of leaflet basic simple map function  ------------------------
+
+function init_base_map() {
+
+    L.mapbox.accessToken = mapboxgl_accessToken;
+    map = L.mapbox.map('map-canvas', null)
+              .setView([initial_location[1], initial_location[2]], initial_location[3]);   // .setView([40, -74.50], 9);
+
+
+    base_layers = {
+        Satellite: L.mapbox.tileLayer('mapbox.satellite'),
+        Streets: L.mapbox.tileLayer('mapbox.streets'),
+        Light: L.mapbox.tileLayer('mapbox.light'),
+        Dark: L.mapbox.tileLayer('mapbox.dark'),
+        Streets_Basic: L.mapbox.tileLayer('mapbox.streets-basic'),
+
+        Emerald: L.mapbox.tileLayer('mapbox.emerald'),
+        Outdoors: L.mapbox.tileLayer('mapbox.outdoors'),
+        High_Contrast: L.mapbox.tileLayer('mapbox.high-contrast'),
+        Pencil: L.mapbox.tileLayer('mapbox.pencil'),
+        Comic: L.mapbox.tileLayer('mapbox.comic'),
+        Wheatpaste: L.mapbox.tileLayer('mapbox.wheatpaste')
+
+    };
+
+    base_layers.Satellite.addTo(map);
+    L.control.layers(base_layers).addTo(map);
+
+
+}
+
+//----------------End of  basic simple map function  ------------------------
 
 
 function tile_switch_button() {

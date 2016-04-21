@@ -32,24 +32,16 @@ function initialize() {
 
 
 
-    // set up the map
-    map = new L.Map('map-canvas');
+    init_base_map();
 
 
+    
+   
 
 
-    // create the tile layer with correct attribution
-    var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    var osmAttrib = 'Map data &#169; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-    var osm = new L.TileLayer(osmUrl, { minZoom: 3, maxZoom: 22, attribution: osmAttrib });
-
-    // start the map
     map.setView(new L.LatLng(initial_location[1], initial_location[2]), initial_location[3]);
 
-
-
-    base_map_tile_layer = map.addLayer(osm);
-
+   
 
 
     add_area_boundary($("#areaID").val());

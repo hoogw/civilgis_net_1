@@ -1,4 +1,10 @@
+var heremap_app_id = "J5aP2hv9dOa9Us8e6OPn";
+var heremap_app_code = "oXTkvCJfsVdMTkD56CBy0g";
+
 var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
+
+var base_layers;
+var baseMaps;
 
 
 var leaflet_open_street_map_max_zoom_level = 19;
@@ -478,6 +484,7 @@ function init_tiling(){
 
 
                          overlay_tile_layer = map.addLayer(tile_MapType);
+                         tile_MapType.setZIndex(99);
 
 
                          _tile_exist = true;
@@ -498,7 +505,8 @@ function add_tiles(){
 
     
    
-        tile_MapType.bringToFront();
+    tile_MapType.setZIndex(99);
+    // tile_MapType.bringToFront();
         
   
 }
@@ -651,6 +659,97 @@ function geocoding() {
 
 
 }
+
+
+
+
+function init_base_map() {
+
+    
+    var OpenStreetMap_Mapnik = L.tileLayer.provider('OpenStreetMap.Mapnik');
+    var OpenStreetMap_BlackAndWhite = L.tileLayer.provider('OpenStreetMap.BlackAndWhite');
+
+    var  OpenTopoMap= L.tileLayer.provider('OpenTopoMap');
+    var  MapQuestOpen_Aerial= L.tileLayer.provider('MapQuestOpen.Aerial');
+    var  MapQuestOpen_OSM= L.tileLayer.provider('MapQuestOpen.OSM');
+    var  Stamen_Toner= L.tileLayer.provider('Stamen.Toner');
+    var  Stamen_Terrain= L.tileLayer.provider('Stamen.Terrain');
+    var  Esri_WorldImagery= L.tileLayer.provider('Esri.WorldImagery');
+    var  Esri_WorldStreetMap= L.tileLayer.provider('Esri.WorldStreetMap');
+    var  Esri_WorldTopoMap= L.tileLayer.provider('Esri.WorldTopoMap');
+    var  Esri_NatGeoWorldMap= L.tileLayer.provider('Esri.NatGeoWorldMap');
+
+
+    var  HERE_hybridDay= L.tileLayer.provider('HERE.hybridDay', {
+        app_id: heremap_app_id,
+        app_code: heremap_app_code
+    });
+
+    var  HERE_normalDay= L.tileLayer.provider('HERE.normalDay', {
+        app_id: heremap_app_id,
+        app_code: heremap_app_code
+    });
+
+    var  HERE_basicMap= L.tileLayer.provider('HERE.basicMap', {
+        app_id: heremap_app_id,
+        app_code: heremap_app_code
+    });
+
+
+    
+
+
+
+
+    var Stamen_Watercolor = L.tileLayer.provider('Stamen.Watercolor');
+
+
+
+
+     baseMaps = {
+        
+         
+
+         "Esri_WorldImagery": Esri_WorldImagery,
+         "Esri_WorldStreetMap":Esri_WorldStreetMap ,
+         "Esri_WorldTopoMap": Esri_WorldTopoMap,
+         "Esri_NatGeoWorldMap":Esri_NatGeoWorldMap ,
+         "OpenStreetMap_Mapnik": OpenStreetMap_Mapnik,
+         "OpenStreetMap_BlackAndWhite": OpenStreetMap_BlackAndWhite,
+
+         "MapQuestOpen_Aerial": MapQuestOpen_Aerial,
+         "MapQuestOpen_OSM":MapQuestOpen_OSM,
+         
+         "HERE_hybridDay": HERE_hybridDay,
+         "HERE_normalDay": HERE_normalDay,
+         "HERE_basicMap": HERE_basicMap,
+         
+
+
+         "OpenTopoMap": OpenTopoMap,
+         "Stamen_Toner":Stamen_Toner,
+         "Stamen_Terrain":Stamen_Terrain ,
+         "Stamen_Watercolor": Stamen_Watercolor
+
+    };
+
+
+    // set up the map
+    map = new L.Map('map-canvas');
+
+
+    // this is first time add base map layer
+    L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
+
+    L.control.layers(baseMaps).addTo(map);
+
+
+}
+
+
+
+
+
 
 //----------------End of leaflet basic simple map function  ------------------------
 
