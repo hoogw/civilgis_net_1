@@ -512,18 +512,7 @@
     <Content Include="Scripts\localmap\localjusttiles.js" />
     <Content Include="Scripts\mapboxgl\classifycheckboxbuttonmap.js" />
     <Content Include="Scripts\mapboxgl\classifyradiobuttonmap.js" />
-    <Content Include="Scripts\mapboxgl\clusterpagedclienttablemap.js" />
-    <Content Include="Scripts\mapboxgl\clusterscrollerclienttablemap.js" />
-    <Content Include="Scripts\mapboxgl\justtiles.js" />
-    <Content Include="Scripts\mapboxgl\maplist_paged.js" />
-    <Content Include="Scripts\mapboxgl\maplist_scroller.js" />
-    <Content Include="Scripts\mapboxgl\pagedclienttablemap.js" />
-    <Content Include="Scripts\mapboxgl\pagedfulltablemap.js" />
-    <Content Include="Scripts\mapboxgl\pagedservertablemap.js" />
-    <Content Include="Scripts\mapboxgl\scrollerclienttablemap.js" />
-    <Content Include="Scripts\mapboxgl\scrollerfulltablemap.js" />
-    <Content Include="Scripts\mapboxgl\scrollerservertablemap.js" />
-    <Content Include="Scripts\mapboxgl\simpleclustermap.js" />
+    <Content Include="Scripts\mapboxgl\renderedfeaturepagedtablemap.js" />
     <Content Include="Scripts\mapboxgl\simplecolormap.js" />
     <Content Include="Scripts\mapboxgl\simplemap.js" />
     <Content Include="Scripts\mapbox\classifycheckboxbuttonmap.js" />
@@ -1084,18 +1073,6 @@
     <Content Include="Views\MapBox\simplemap.cshtml" />
     <Content Include="Views\MapBoxGL\classifycheckboxbuttonmap.cshtml" />
     <Content Include="Views\MapBoxGL\classifyradiobuttonmap.cshtml" />
-    <Content Include="Views\MapBoxGL\clusterpagedclienttablemap.cshtml" />
-    <Content Include="Views\MapBoxGL\clusterscrollerclienttablemap.cshtml" />
-    <Content Include="Views\MapBoxGL\justtiles.cshtml" />
-    <Content Include="Views\MapBoxGL\maplistpaged.cshtml" />
-    <Content Include="Views\MapBoxGL\maplistscroller.cshtml" />
-    <Content Include="Views\MapBoxGL\pagedclienttablemap.cshtml" />
-    <Content Include="Views\MapBoxGL\pagedfulltablemap.cshtml" />
-    <Content Include="Views\MapBoxGL\pagedservertablemap.cshtml" />
-    <Content Include="Views\MapBoxGL\scrollerclienttablemap.cshtml" />
-    <Content Include="Views\MapBoxGL\scrollerfulltablemap.cshtml" />
-    <Content Include="Views\MapBoxGL\scrollerservertablemap.cshtml" />
-    <Content Include="Views\MapBoxGL\simpleclustermap.cshtml" />
     <Content Include="Views\MapBoxGL\simplemap.cshtml" />
     <Content Include="Views\Shared\mapboxgl\_Chicago_side_panel.cshtml" />
     <Content Include="Views\Shared\mapboxgl\_city_side_panel.cshtml" />
@@ -1134,6 +1111,7 @@
     <Content Include="Views\Shared\openlayers\_Palo_Alto_side_panel.cshtml" />
     <Content Include="Views\Shared\openlayers\_Shoreline_side_panel.cshtml" />
     <Content Include="Views\MapBoxGL\simplecolormap.cshtml" />
+    <Content Include="Views\MapBoxGL\renderedfeaturepagedtablemap.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

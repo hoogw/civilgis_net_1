@@ -35,31 +35,7 @@ namespace CivilGis.Controllers
 
 
 
-        //-------------------------------- maplist section -------------------------------- 
-
-        public ActionResult maplistpaged(string area)
-        {
-
-
-
-            ViewBag.Area = area;
-
-
-            return View();
-        }
-
-        public ActionResult maplistscroller(string area)
-        {
-
-
-
-            ViewBag.Area = area;
-
-
-            return View();
-        }
-
-        //-------------------------------- End maplist section -------------------------------- 
+        
 
 
 
@@ -91,72 +67,7 @@ namespace CivilGis.Controllers
 
 
 
-        public ActionResult justtiles(string area, string subject)
-        {
-
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Side_Bar = area;
-
-            ViewBag.Area = area;
-
-
-            return View();
-        }
-
-
-
-        public ActionResult simpleclustermap(string area, string subject)
-        {
-
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Side_Bar = area;
-
-            ViewBag.Area = area;
-
-
-            return View();
-        }
-
-
-        public ActionResult clusterpagedclienttablemap(string area, string subject)
-        {
-
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Side_Bar = area;
-
-            ViewBag.Area = area;
-
-
-            return View();
-        }
-
-
-        public ActionResult clusterscrollerclienttablemap(string area, string subject)
-        {
-
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Side_Bar = area;
-
-            ViewBag.Area = area;
-
-
-            return View();
-        }
-
-
-
-        public ActionResult colormap(string area, string subject)
-        {
-
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Side_Bar = area;
-
-            ViewBag.Area = area;
-
-
-            return View();
-        }
-
+       
 
 
         //----------------------- End simple map section -------------------------------
@@ -166,7 +77,7 @@ namespace CivilGis.Controllers
 
         //----------------------- table map section -------------------------------
 
-        public ActionResult pagedclienttablemap(string area, string subject)
+        public ActionResult renderedfeaturepagedtablemap(string area, string subject)
         {
 
             ViewBag.Subject = subject; // for api call 
@@ -181,7 +92,7 @@ namespace CivilGis.Controllers
 
 
 
-        public ActionResult scrollerclienttablemap(string area, string subject)
+        public ActionResult renderedfeaturescrollertablemap(string area, string subject)
         {
 
             ViewBag.Subject = subject; // for api call 
@@ -194,7 +105,7 @@ namespace CivilGis.Controllers
         }
 
 
-        public ActionResult pagedservertablemap(string area, string subject)
+        public ActionResult sourcefeaturepagedtablemap(string area, string subject)
         {
 
             ViewBag.Subject = subject; // for api call 
@@ -209,7 +120,7 @@ namespace CivilGis.Controllers
 
 
 
-        public ActionResult scrollerservertablemap(string area, string subject)
+        public ActionResult sourcefeaturescrollertablemap(string area, string subject)
         {
 
             ViewBag.Subject = subject; // for api call 

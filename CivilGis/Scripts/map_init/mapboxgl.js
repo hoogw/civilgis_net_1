@@ -28,7 +28,8 @@ var _areaID;
 var _subjectID;
 
 
-
+var _rendered_features = [];
+var _source_features = [];
 
 
 
@@ -221,21 +222,7 @@ function add_area_boundary(_area) {
 
 function init_checkbox_menu_color(_area, _subject) {
 
-    // --------------------- dynamic load javascript file based on area and ---------------------------
-
-
-    //var _vector_style_js = base_url + "public/js/map_init/source_layer/" + _area + ".js";
-    var _vector_style_js = "/Scripts/map_init/source_layer/" + _area + ".js";
-
-    $.when(
-             $.getScript(_vector_style_js)
-     /*
-    $.getScript( "/mypath/myscript1.js" ),
-    $.getScript( "/mypath/myscript2.js" ),
-    $.getScript( "/mypath/myscript3.js" ),
-    */
-
-    ).done(function () {
+   
 
 
 
@@ -368,7 +355,7 @@ function init_checkbox_menu_color(_area, _subject) {
 
 
 
-    });//done
+   
 
 }
 
@@ -787,7 +774,30 @@ function init_vector_style(_area, _subject) {
 
 
 
+function init_base_map() {
 
+    mapboxgl.accessToken = mapboxgl_accessToken;
+    map = new mapboxgl.Map({
+        container: 'map-canvas', // container id
+        style: 'mapbox://styles/mapbox/streets-v8', //stylesheet location
+
+        //style: 'mapbox://styles/mapbox/emerald-v8',
+
+        // style: 'mapbox://styles/mapbox/satellite-v8',
+
+        //style: 'mapbox://styles/hoogw/cin2d9c6u007aafncyn8nmu36',
+
+
+        center: [initial_location[2], initial_location[1]], //  starting position[-74.50, 40],
+        zoom: initial_location[3] // starting zoom
+    });
+
+
+    map.addControl(new mapboxgl.Navigation());
+
+
+
+}
 
 
 
