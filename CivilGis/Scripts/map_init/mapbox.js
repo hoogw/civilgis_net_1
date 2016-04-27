@@ -4,7 +4,7 @@ var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
 
 
 var base_layers;
-
+var _tile_slider;
 
 var mapbox_geocoderControl;
 var leaflet_open_street_map_max_zoom_level = 19;
@@ -497,6 +497,19 @@ function init_tiling() {
 
 
 
+            //............................ bind opacity to slider ........................
+
+            _tile_slider.noUiSlider.on('set', function (values, handle, unencoded, tap, positions) {
+
+
+                var _slider_handle_value = values[handle];
+                _slider_handle_value = Math.round(_slider_handle_value) / 100;
+
+                tile_MapType.setOpacity(_slider_handle_value);
+
+            });
+            //................End ....... bind opacity to slider ........................
+
             _tile_exist = true;
 
         }// if
@@ -745,6 +758,29 @@ function tile_switch_button() {
 
 
 
+
+
+
+}
+
+
+
+
+
+function tile_slider() {
+
+
+    _tile_slider = document.getElementById('tile_slider');
+
+    noUiSlider.create(_tile_slider, {
+        start: [100],
+        connect: 'lower',
+        //  tooltips: true,
+        range: {
+            'min': 0,
+            'max': 100
+        }
+    });
 
 
 

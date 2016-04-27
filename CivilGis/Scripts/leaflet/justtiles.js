@@ -4,7 +4,7 @@
 
 function just_add_tiles() {
 
-
+    tile_slider();
     init_tiling();
     tile_switch_button();
 
