@@ -322,25 +322,6 @@ function init_classification_buttons_checkbox(_area, _subject) {
 
 
 
-    // ----------- color_tiles_switch button --------------
-    // init on off switch button  
-    $("[name='color_tiles_switch']").bootstrapSwitch();
-
-    $('input[name="color_tiles_switch"]').on('switchChange.bootstrapSwitch', function (event, state) {
-        // console.log(this); // DOM element
-        //console.log(event); // jQuery event
-        // console.log(state); // true | false
-        if (state) {
-
-            add_tiles();
-        }
-        else {
-
-            remove_tiles();
-        }
-    });
-
-    // ----------End of  color_tiles_switch button          --------------
 
 
 
@@ -759,6 +740,11 @@ function initialize() {
 
             // load classification button [1]
              init_classification_buttons_checkbox($("#areaID").val(), $("#subjectID").val());
+
+
+             tile_slider();
+             tile_switch_button();
+
 
 
             

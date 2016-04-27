@@ -512,8 +512,11 @@
     <Content Include="Scripts\localmap\localjusttiles.js" />
     <Content Include="Scripts\mapboxgl\classifycheckboxbuttonmap.js" />
     <Content Include="Scripts\mapboxgl\classifyradiobuttonmap.js" />
-    <Content Include="Scripts\mapboxgl\renderedfeaturepagedtablemap.js" />
+    <Content Include="Scripts\mapboxgl\multilayerrenderedfeaturepagedtablemap.js" />
+    <Content Include="Scripts\mapboxgl\multilayersimplecolormap.js" />
     <Content Include="Scripts\mapboxgl\simplecolormap.js" />
+    <Content Include="Scripts\mapboxgl\multilayersimplemap.js" />
+    <Content Include="Scripts\mapboxgl\singlelayersimplemap.js" />
     <Content Include="Scripts\mapboxgl\simplemap.js" />
     <Content Include="Scripts\mapbox\classifycheckboxbuttonmap.js" />
     <Content Include="Scripts\mapbox\classifyradiobuttonmap.js" />
@@ -667,6 +670,14 @@
     <Content Include="Scripts\sb-admin-2.js" />
     <Content Include="Scripts\scrolling.js" />
     <Content Include="Scripts\smarttablejs.js" />
+    <Content Include="Scripts\ui\bootstrap-switch\bootstrap-switch.css" />
+    <Content Include="Scripts\ui\bootstrap-switch\bootstrap-switch.js" />
+    <Content Include="Scripts\ui\noUiSlider.8.5.1\nouislider.css" />
+    <Content Include="Scripts\ui\noUiSlider.8.5.1\nouislider.js" />
+    <Content Include="Scripts\ui\noUiSlider.8.5.1\nouislider.min.css" />
+    <Content Include="Scripts\ui\noUiSlider.8.5.1\nouislider.min.js" />
+    <Content Include="Scripts\ui\noUiSlider.8.5.1\nouislider.pips.css" />
+    <Content Include="Scripts\ui\noUiSlider.8.5.1\nouislider.tooltips.css" />
     <Content Include="Views\GoogleMap\_ViewStart.cshtml" />
     <Content Include="Views\GoogleMap\classifycheckboxbuttonmap.cshtml" />
     <Content Include="Views\GoogleMap\classifyradiobuttonmap.cshtml" />
@@ -1111,7 +1122,10 @@
     <Content Include="Views\Shared\openlayers\_Palo_Alto_side_panel.cshtml" />
     <Content Include="Views\Shared\openlayers\_Shoreline_side_panel.cshtml" />
     <Content Include="Views\MapBoxGL\simplecolormap.cshtml" />
-    <Content Include="Views\MapBoxGL\renderedfeaturepagedtablemap.cshtml" />
+    <Content Include="Views\MapBoxGL\multilayerrenderedfeaturepagedtablemap.cshtml" />
+    <Content Include="Views\MapBoxGL\multilayersimplemap.cshtml" />
+    <Content Include="Views\MapBoxGL\multilayersimplecolormap.cshtml" />
+    <Content Include="Views\MapBoxGL\singlelayersimplemap.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -15,9 +15,10 @@
 <link href="~/Scripts/classification/classification_button_style.css" rel="stylesheet" />
 
 
-<script src="~/Scripts/bootstrap-switch.js"></script>
-<link href="~/Content/bootstrap-switch.css" rel="stylesheet" />
-
+<link href="~/Scripts/ui/bootstrap-switch/bootstrap-switch.css" rel="stylesheet" />
+<script src="~/Scripts/ui/bootstrap-switch/bootstrap-switch.js"></script>
+<script src="~/Scripts/ui/noUiSlider.8.5.1/nouislider.min.js"></script>
+<link href="~/Scripts/ui/noUiSlider.8.5.1/nouislider.min.css" rel="stylesheet" />
 
 
 
@@ -66,16 +67,35 @@
 
                     <div id="legend" class="alert alert-warning"></div>
 
+                    
+
+
 
                                         <!-- checkbox button -->
 
 
                                         <div id="classification_section" class="well">
-                                            <!--	<div class="btn-group" data-toggle="buttons">        btn-group cause not space between button -->
+                                           
+                                            <div class="row">
+
+                                                <div class="col-lg-1">
+                                                    <input type="checkbox" name="color_tiles_switch" checked>
+                                                </div>
+
+                                                <div class="col-lg-2" name="tile_slider" id="tile_slider">
+
+                                                </div>
+
+                                            </div>
+                                            
+                                            <br />
+
+                                            
                                             <div id="classification_buttons" data-toggle="buttons">
 
 
-                                                <input type="checkbox" name="color_tiles_switch" checked>
+                                                
+
                                                 <!-- test
                                                          <label id="label_1" class="btn btn-blue">
                                                                  <input id="checkbox_1" type="checkbox"> KKKKKKKKKKKK

@@ -67,7 +67,51 @@ namespace CivilGis.Controllers
 
 
 
+
+
+        public ActionResult multilayersimplemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+        public ActionResult multilayersimplecolormap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+        public ActionResult singlelayersimplemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
        
+
+
+
 
 
         //----------------------- End simple map section -------------------------------
@@ -77,7 +121,7 @@ namespace CivilGis.Controllers
 
         //----------------------- table map section -------------------------------
 
-        public ActionResult renderedfeaturepagedtablemap(string area, string subject)
+        public ActionResult multilayerrenderedfeaturepagedtablemap(string area, string subject)
         {
 
             ViewBag.Subject = subject; // for api call 
@@ -92,7 +136,7 @@ namespace CivilGis.Controllers
 
 
 
-        public ActionResult renderedfeaturescrollertablemap(string area, string subject)
+        public ActionResult multilayerrenderedfeaturescrollertablemap(string area, string subject)
         {
 
             ViewBag.Subject = subject; // for api call 
@@ -105,36 +149,7 @@ namespace CivilGis.Controllers
         }
 
 
-        public ActionResult sourcefeaturepagedtablemap(string area, string subject)
-        {
-
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Side_Bar = area;
-
-            ViewBag.Area = area;
-
-
-            return View();
-        }
-
-
-
-
-        public ActionResult sourcefeaturescrollertablemap(string area, string subject)
-        {
-
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Side_Bar = area;
-
-            ViewBag.Area = area;
-
-
-            return View();
-        }
-
-
-
-        public ActionResult pagedfulltablemap(string area, string subject)
+        public ActionResult multilayersourcefeaturepagedtablemap(string area, string subject)
         {
 
             ViewBag.Subject = subject; // for api call 
@@ -149,7 +164,7 @@ namespace CivilGis.Controllers
 
 
 
-        public ActionResult scrollerfulltablemap(string area, string subject)
+        public ActionResult multilayersourcefeaturescrollertablemap(string area, string subject)
         {
 
             ViewBag.Subject = subject; // for api call 
@@ -160,6 +175,137 @@ namespace CivilGis.Controllers
 
             return View();
         }
+
+
+
+        public ActionResult multilayerpagedfulltablemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+
+        public ActionResult multilayerscrollerfulltablemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+        // .................... single layer ................
+        public ActionResult singlelayerrenderedfeaturepagedtablemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+
+        public ActionResult singlelayerrenderedfeaturescrollertablemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+        public ActionResult singlelayersourcefeaturepagedtablemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+
+        public ActionResult singlelayersourcefeaturescrollertablemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+        public ActionResult singlelayerpagedfulltablemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+
+        public ActionResult singlelayerscrollerfulltablemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
