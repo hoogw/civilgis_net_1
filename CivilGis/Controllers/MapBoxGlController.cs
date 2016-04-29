@@ -40,78 +40,126 @@ namespace CivilGis.Controllers
 
 
         //----------------------- simple map section -------------------------------
-        public ActionResult simplemap(string area, string subject)
-        {
 
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Side_Bar = area;
-
-            ViewBag.Area = area;
+                                        //................(1) Not highlight feature .......................     
 
 
-            return View();
-        }
+                                    public ActionResult simplemap(string area, string subject)
+                                    {
+
+                                        ViewBag.Subject = subject; // for api call 
+                                        ViewBag.Side_Bar = area;
+
+                                        ViewBag.Area = area;
 
 
-        public ActionResult simplecolormap(string area, string subject)
-        {
-
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Side_Bar = area;
-
-            ViewBag.Area = area;
+                                        return View();
+                                    }
 
 
-            return View();
-        }
+                                    public ActionResult simplecolormap(string area, string subject)
+                                    {
+
+                                        ViewBag.Subject = subject; // for api call 
+                                        ViewBag.Side_Bar = area;
+
+                                        ViewBag.Area = area;
 
 
-
-
-
-        public ActionResult multilayersimplemap(string area, string subject)
-        {
-
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Side_Bar = area;
-
-            ViewBag.Area = area;
-
-
-            return View();
-        }
-
-
-        public ActionResult multilayersimplecolormap(string area, string subject)
-        {
-
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Side_Bar = area;
-
-            ViewBag.Area = area;
-
-
-            return View();
-        }
-
-
-        public ActionResult singlelayersimplemap(string area, string subject)
-        {
-
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Side_Bar = area;
-
-            ViewBag.Area = area;
-
-
-            return View();
-        }
-
-
-       
+                                        return View();
+                                    }
 
 
 
+
+
+                                    public ActionResult multilayersimplemap(string area, string subject)
+                                    {
+
+                                        ViewBag.Subject = subject; // for api call 
+                                        ViewBag.Side_Bar = area;
+
+                                        ViewBag.Area = area;
+
+
+                                        return View();
+                                    }
+
+
+                                    public ActionResult multilayersimplecolormap(string area, string subject)
+                                    {
+
+                                        ViewBag.Subject = subject; // for api call 
+                                        ViewBag.Side_Bar = area;
+
+                                        ViewBag.Area = area;
+
+
+                                        return View();
+                                    }
+
+
+                                    //................End ........... Not highlight feature .......................    
+
+
+
+                                        //....................(2) with highlight feature ..........................
+
+                                        public ActionResult singlelayersimplehighlightgeojsonmap(string area, string subject)
+                                                        {
+
+                                                            ViewBag.Subject = subject; // for api call 
+                                                            ViewBag.Side_Bar = area;
+
+                                                            ViewBag.Area = area;
+
+
+                                                            return View();
+                                                        }
+
+
+                                                        public ActionResult singlelayersimplehighlightlayermap(string area, string subject)
+                                                        {
+
+                                                            ViewBag.Subject = subject; // for api call 
+                                                            ViewBag.Side_Bar = area;
+
+                                                            ViewBag.Area = area;
+
+
+                                                            return View();
+                                                        }
+
+
+
+                                                                public ActionResult multilayersimplecolorhighlightlayermap(string area, string subject)
+                                                                {
+
+                                                                    ViewBag.Subject = subject; // for api call 
+                                                                    ViewBag.Side_Bar = area;
+
+                                                                    ViewBag.Area = area;
+
+
+                                                                    return View();
+                                                                }
+
+
+                                                                public ActionResult multilayersimplehighlightlayermap(string area, string subject)
+                                                                {
+
+                                                                    ViewBag.Subject = subject; // for api call 
+                                                                    ViewBag.Side_Bar = area;
+
+                                                                    ViewBag.Area = area;
+
+
+                                                                    return View();
+                                                                }
+
+
+
+                                                             //....................End ............... with highlight feature ..........................
 
 
         //----------------------- End simple map section -------------------------------

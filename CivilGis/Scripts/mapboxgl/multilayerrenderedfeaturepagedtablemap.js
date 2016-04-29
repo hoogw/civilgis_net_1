@@ -372,7 +372,7 @@ function initialize() {
 
         init_checkbox_menu_simple($("#areaID").val(), $("#subjectID").val());
 
-        init_vector_style($("#areaID").val(), $("#subjectID").val());
+        init_vector_multilayer($("#areaID").val(), $("#subjectID").val());
 
         rendered_feature_property_table($("#areaID").val(), $("#subjectID").val());
 

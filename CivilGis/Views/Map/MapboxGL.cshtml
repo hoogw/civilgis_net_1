@@ -249,30 +249,30 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Zoning Land Use</a>
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Muilti-layers map</a>
                                         </h4>
                                     </div>
                                     <div id="collapseOne" class="panel-collapse collapse in">
                                         <div class="panel-body">
 
-
-                                            <button type="button" class="btn btn-xs btn-outline btn-primary" onclick="location.href = '/mapboxgl/classifycheckboxbuttonmap/Santa_Monica/Zoning'">Santa Monica Zoning [check box button]</button>
-
-                                            &nbsp;&nbsp;
-                                            <button type="button" class="btn btn-xs btn-outline btn-primary" onclick="location.href = '/mapboxgl/classifyradiobuttonmap/Santa_Monica/Zoning'">Santa Monica Zoning [radio button]</button>
-
-
+                                            <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/mapboxgl/simplecolormap/city/overview'">Simple Color map</button>
                                             &nbsp;&nbsp;
 
-                                            <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/mapboxgl/classifycheckboxbuttonmap/Palo_Alto/Zoning'">Palo Alto Zoning - check box</button>
-
-                                            &nbsp;&nbsp;
-                                            <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/mapboxgl/classifyradiobuttonmap/Palo_Alto/Zoning'">Palo Alto Zoning - radio</button>
+                                            <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/mapboxgl/simplemap/city/overview'"> Simple map</button>
                                             &nbsp;&nbsp;
 
-                                            <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/mapboxgl/classifycheckboxbuttonmap/Shoreline/Zoning'">Shoreline General Land Use - check box</button>
+                                            <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/mapboxgl/multilayersimplecolormap/city/overview'">Muilti-layers Simple Color map</button>
                                             &nbsp;&nbsp;
-                                            <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/mapboxgl/classifyradiobuttonmap/Shoreline/Zoning'">Shoreline General Land Use - radio</button>
+
+                                            <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/mapboxgl/multilayersimplemap/city/overview'">Muilti-layers Simple map</button>
+                                            &nbsp;&nbsp;
+
+                                            <br/>
+
+                                            <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/mapboxgl/multilayersimplecolorhighlightlayermap/city/overview'">Muilti-layers Simple Color highlightlayer map</button>
+                                            &nbsp;&nbsp;
+
+                                            <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/mapboxgl/multilayersimplehighlightlayermap/city/overview'">Muilti-layers Simple highlightlayer map</button>
                                             &nbsp;&nbsp;
 
 
@@ -283,23 +283,30 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Parcels</a>
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Single-layers map</a>
                                         </h4>
                                     </div>
                                     <div id="collapseTwo" class="panel-collapse collapse">
                                         <div class="panel-body">
 
-                                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/mapboxgl/scrollerfulltablemap/Palo_Alto/Parcels'">Palo Alto Parcels</button>
+                                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/mapboxgl/singlelayersimplehighlightgeojsonmap/city/streets'">Single layer simple highlight-GEOJSON map - line</button>
                                             &nbsp;&nbsp;
 
-                                            <button type="button" class="btn btn-xs btn-outline btn-primary" onclick="location.href = '/mapboxgl/scrollerfulltablemap/Newport_Beach/Parcels'">Newport Beach Parcels </button>
-                                            &nbsp;&nbsp;
-                                            <button type="button" class="btn btn-xs btn-outline btn-primary" onclick="location.href = '/mapboxgl/scrollerfulltablemap/Shoreline/Tax_Parcel_Central'">Shoreline Parcels </button>
+                                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/mapboxgl/singlelayersimplehighlightgeojsonmap/city/parcels'">Single layer simple highlight-GEOJSON map - polygon</button>
                                             &nbsp;&nbsp;
 
-                                            <button type="button" class="btn btn-xs btn-outline btn-primary" onclick="location.href = '/mapboxgl/scrollerfulltablemap/New_York_Manhattan/Zoning'">New York City Manhattan Parcels </button>
+                                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/mapboxgl/singlelayersimplehighlightgeojsonmap/city/address'">Single layer simple highlight-GEOJSON map - point</button>
+                                            &nbsp;&nbsp;
 
+                                            <br />
 
+                                            <button type="button" class="btn btn-xs btn-outline btn-primary" onclick="location.href = '/mapboxgl/singlelayersimplehighlightlayermap/city/streets'">Single layer simple highlight-LAYER map - line </button>
+                                            &nbsp;&nbsp;
+                                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/mapboxgl/singlelayersimplehighlightlayermap/city/parcels'">Single layer simple highlight-LAYER map - polygon</button>
+                                            &nbsp;&nbsp;
+
+                                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/mapboxgl/singlelayersimplehighlightlayermap/city/address'">Single layer simple highlight-LAYER map - point</button>
+                                            &nbsp;&nbsp;
 
                                         </div>
                                     </div>
@@ -307,26 +314,16 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Address And Streets</a>
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Multi-layer map with attribute table</a>
                                         </h4>
                                     </div>
                                     <div id="collapseThree" class="panel-collapse collapse">
                                         <div class="panel-body">
 
 
-                                            <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/mapboxgl/scrollerfulltablemap/Newport_Beach/Address'"> Address </button>
-                                            &nbsp;&nbsp;
-
-
-
-                                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/mapboxgl/clusterscrollerclienttablemap/Palo_Alto/Addresses'">Cluster Address</button>
-                                            &nbsp;&nbsp;
-
-                                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/mapboxgl/scrollerfulltablemap/Shoreline/Street'"> Shoreline Street</button>
-                                            &nbsp;&nbsp;
-                                            <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/mapboxgl/simpleclustermap/Shoreline/Street_Light'">Shoreline StreetLight</button>
-
-                                            &nbsp;&nbsp;
+                                            <button type="button" class="btn btn-xs btn-outline btn-info">...</button>
+                                            <button type="button" class="btn btn-xs btn-outline btn-info">...</button>
+                                            <button type="button" class="btn btn-xs btn-outline btn-info">...</button>
 
 
                                         </div>
@@ -337,7 +334,7 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Others</a>
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Multi-layer map with attribute table</a>
                                         </h4>
                                     </div>
                                     <div id="collapseFour" class="panel-collapse collapse">
@@ -346,13 +343,9 @@
                                            
 
 
-                                            <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/mapboxgl/simplecolormap/city/overview'">Color overview map</button>
-                                            &nbsp;&nbsp;
-                                            
-                                            <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/mapboxgl/simplemap/city/overview'">Simple overview map</button>
-                                            &nbsp;&nbsp;
-
-
+                                           
+                                            <button type="button" class="btn btn-xs btn-outline btn-info">...</button>
+                                            <button type="button" class="btn btn-xs btn-outline btn-info">...</button>
                                             <button type="button" class="btn btn-xs btn-outline btn-info">...</button>
 
                                         </div>

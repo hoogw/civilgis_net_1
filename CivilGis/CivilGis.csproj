@@ -513,10 +513,13 @@
     <Content Include="Scripts\mapboxgl\classifycheckboxbuttonmap.js" />
     <Content Include="Scripts\mapboxgl\classifyradiobuttonmap.js" />
     <Content Include="Scripts\mapboxgl\multilayerrenderedfeaturepagedtablemap.js" />
+    <Content Include="Scripts\mapboxgl\multilayersimplecolorhighlightlayermap.js" />
     <Content Include="Scripts\mapboxgl\multilayersimplecolormap.js" />
+    <Content Include="Scripts\mapboxgl\multilayersimplehighlightlayermap.js" />
     <Content Include="Scripts\mapboxgl\simplecolormap.js" />
     <Content Include="Scripts\mapboxgl\multilayersimplemap.js" />
-    <Content Include="Scripts\mapboxgl\singlelayersimplemap.js" />
+    <Content Include="Scripts\mapboxgl\singlelayersimplehighlightlayermap.js" />
+    <Content Include="Scripts\mapboxgl\singlelayersimplehighlightgeojsonmap.js" />
     <Content Include="Scripts\mapboxgl\simplemap.js" />
     <Content Include="Scripts\mapbox\classifycheckboxbuttonmap.js" />
     <Content Include="Scripts\mapbox\classifyradiobuttonmap.js" />
@@ -574,6 +577,8 @@
     <Content Include="Scripts\map_api\leaflet_providers\css\gh-fork-ribbon.css" />
     <Content Include="Scripts\map_api\leaflet_providers\css\gh-fork-ribbon.ie.css" />
     <Content Include="Scripts\map_api\leaflet_providers\leaflet-providers.js" />
+    <Content Include="Scripts\map_api\leaflet_slider\leaflet-slider.css" />
+    <Content Include="Scripts\map_api\leaflet_slider\leaflet-slider.js" />
     <Content Include="Scripts\map_init\bingmap.js" />
     <Content Include="Scripts\map_init\heremap.js" />
     <Content Include="Scripts\map_init\mapboxgl.js" />
@@ -1125,7 +1130,10 @@
     <Content Include="Views\MapBoxGL\multilayerrenderedfeaturepagedtablemap.cshtml" />
     <Content Include="Views\MapBoxGL\multilayersimplemap.cshtml" />
     <Content Include="Views\MapBoxGL\multilayersimplecolormap.cshtml" />
-    <Content Include="Views\MapBoxGL\singlelayersimplemap.cshtml" />
+    <Content Include="Views\MapBoxGL\singlelayersimplehighlightlayermap.cshtml" />
+    <Content Include="Views\MapBoxGL\singlelayersimplehighlightgeojsonmap.cshtml" />
+    <Content Include="Views\MapBoxGL\multilayersimplehighlightlayermap.cshtml" />
+    <Content Include="Views\MapBoxGL\multilayersimplecolorhighlightlayermap.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

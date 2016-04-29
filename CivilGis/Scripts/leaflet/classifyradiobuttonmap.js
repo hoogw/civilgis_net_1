@@ -859,8 +859,8 @@ function initialize() {
     // load classification button [1]
     init_classification_buttons_radio($("#areaID").val(), $("#subjectID").val());
 
-    tile_slider();
-    tile_switch_button();
+   // tile_slider();
+   // tile_switch_button();
 
 }// initialize
 

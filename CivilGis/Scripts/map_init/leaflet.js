@@ -7,6 +7,8 @@ var base_layers;
 var baseMaps;
 
 var _tile_slider;
+var _slider_control;
+var _slidercontrol_handle_value;
 
 var leaflet_open_street_map_max_zoom_level = 19;
 var base_map_tile_layer;
@@ -491,17 +493,37 @@ function init_tiling(){
 
             //............................ bind opacity to slider ........................
 
-                         _tile_slider.noUiSlider.on('set', function (values, handle, unencoded, tap, positions) {
+                         //_tile_slider.noUiSlider.on('set', function (values, handle, unencoded, tap, positions) {
 
 
-                             var _slider_handle_value = values[handle];
-                             _slider_handle_value = Math.round(_slider_handle_value) / 100;
+                         //    var _slider_handle_value = values[handle];
+                         //    _slider_handle_value = Math.round(_slider_handle_value) / 100;
 
-                             tile_MapType.setOpacity(_slider_handle_value);
+                         //    tile_MapType.setOpacity(_slider_handle_value);
 
-                         });
+                         //});
+
+
             //................End ....... bind opacity to slider ........................
 
+
+            //................. leaflet slider contral ............................
+
+                         _slider_control = L.control.slider(function (value) {
+
+
+                             
+                                                                            _slidercontrol_handle_value = Math.round(value) / 100;
+                                                                            tile_MapType.setOpacity(_slidercontrol_handle_value);
+
+                                                                               },
+
+                                 { id: _slider_control, position: 'bottomright',width:'400px', orientation: 'vertical', logo: 'O', min: 0, max: 100, value: 100, collapsed: false, step: 10 });
+
+                         map.addControl(_slider_control);
+
+
+            //................End....................... leaflet slider contral ............................
 
 
 
@@ -822,6 +844,7 @@ function tile_slider() {
             'max': 100
         }
     });
+
 
 
 

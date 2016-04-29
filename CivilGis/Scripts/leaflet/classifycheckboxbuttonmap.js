@@ -880,8 +880,8 @@ function initialize() {
     init_classification_buttons_checkbox($("#areaID").val(), $("#subjectID").val());
 
 
-    tile_slider();
-    tile_switch_button();
+   // tile_slider();
+   // tile_switch_button();
 
 
 }// initialize
