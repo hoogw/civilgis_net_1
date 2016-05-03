@@ -36,6 +36,12 @@ var source_layer_id_highlight = [];
 var highlight_geojson_source = null;
 var highlight_geojson_layer = null;
 
+var _dt_columns_count = [];
+
+
+
+
+
 
 function set_initial_location(_area) {
 
@@ -537,7 +543,7 @@ function init_vector_multilayer(_area, _subject) {
       //  alert(_tileserver_url);
 
       //  map.on('style.load', function () {    // if not use style, should NOT use 'style.load' will cause not load vector tile problem, should use 'load' event
-            map.on('load', function () {
+    _map_on_load =  map.on('load', function () {
 
             map.addSource(_area, {
 
@@ -672,7 +678,8 @@ function init_vector_multilayer(_area, _subject) {
 
 
 
-        }); // map.on('style.load')
+
+        }); // map.on('load')
 
 
 
@@ -816,7 +823,367 @@ function init_vector_multilayer(_area, _subject) {
 
 
 
+
+
+      
+      //  return _map_on_load;
+
+
+
+
+       
 }
+
+// no highlight
+function multilayer_vector_property(_area, _subject) {
+
+
+    // alert('add vector tile');
+
+
+
+    _source_layer_group_id = _area + '_' + _subject;
+
+
+
+    //.................  object to array for id and id_highlight .......................
+
+
+    source_layer_id = Object.keys(source_layer[_source_layer_group_id]);
+
+
+    for (var j = 0; j < source_layer_id.length; j++) {
+        source_layer_id_highlight.push(source_layer_id[j] + '_highlight');
+
+    }
+
+    //.................  End .............object to array for id and id_highlight .......................
+
+
+
+
+    //_tileserver_base_url = 'http://vectortile.transparentgov.net/'; // NOT work,with error No 'Access-Control-Allow-Origin' header is present on the requested resource
+    //   _tileserver_base_url = 'http://166.62.80.50:10/tileserver/tileserver.php?/index.json?/'; // must use this
+
+    // _tileserver_url = 'http://localhost:10/tileserver/tileserver.php?/index.json?/' + _area + '/{z}/{x}/{y}.pbf';
+    //   _tileserver_url = _tileserver_base_url + 'tileserver.php?/index.json?/' + _area + '/{z}/{x}/{y}.pbf';
+
+
+    _tileserver_url = _tileserver_base_url + _area + '/{z}/{x}/{y}.pbf';
+
+    //  alert(_tileserver_url);
+
+   
+
+
+   
+
+
+
+
+
+
+    map.on('load', function () {
+
+        map.addSource(_area, {
+
+            type: 'vector',
+
+            //url: 'mapbox://hoogw.0pywwk0d'
+
+
+            "tiles": [
+                        // 'http://localhost:10/tileserver/tileserver.php?/index.json?/city/{z}/{x}/{y}.pbf'
+
+                        _tileserver_url
+            ],
+            "maxzoom": 22
+
+
+        });
+
+
+
+
+        //==================================   add layers to map ================
+
+
+
+        for (var property in source_layer[_source_layer_group_id]) {
+            if (source_layer[_source_layer_group_id].hasOwnProperty(property)) {
+
+                var _highlight_id = property + '_highlight';
+
+                //alert(property);
+
+                if (source_layer[_source_layer_group_id][property]['type'] === 'circle') {
+
+                    map.addLayer({
+                        "id": property,
+                        "type": 'circle',
+                        "source": _area,
+
+                        "source-layer": property,
+
+
+
+                        "layout": {
+                            'visibility': 'visible'             // this property must be present in order for checkbox button menu work properly. 
+                        },
+
+                        "paint": {
+                            "circle-color": source_layer[_source_layer_group_id][property]['circle-color'],
+                            "circle-radius": parseInt(source_layer[_source_layer_group_id][property]['circle-radius']),
+                            "circle-blur": parseInt(source_layer[_source_layer_group_id][property]['circle-blur'])
+                        },
+                    });
+
+
+
+
+
+                }//if point, circle
+
+                else if (source_layer[_source_layer_group_id][property]['type'] === 'line') {
+
+                    map.addLayer({
+                        "id": property,
+                        "type": "line",
+                        "source": _area,
+
+                        "source-layer": property,
+
+                        "layout": {
+                            'visibility': 'visible',       // this property must be present in order for checkbox button menu work properly. 
+                            "line-join": source_layer[_source_layer_group_id][property]['line-join'],
+                            "line-cap": source_layer[_source_layer_group_id][property]['line-cap'],
+                        },
+                        "paint": {
+
+                            "line-color": source_layer[_source_layer_group_id][property]['line-color'],
+                            "line-width": parseInt(source_layer[_source_layer_group_id][property]['line-width'])
+                        }
+                    });
+
+
+
+
+
+
+                }//else line
+
+
+                else if (source_layer[_source_layer_group_id][property]['type'] === 'fill') {
+
+
+                    map.addLayer({
+                        'id': property,
+                        'type': 'fill',
+                        "source": _area,
+
+                        "source-layer": property,
+
+                        "layout": {
+                            'visibility': 'visible'   // this property must be present in order for checkbox button menu work properly. 
+                        },
+
+                        'paint': {
+                            'fill-color': source_layer[_source_layer_group_id][property]['fill-color'],
+                            'fill-outline-color': source_layer[_source_layer_group_id][property]['fill-outline-color']
+                            // "fill-opacity": 0
+                        }
+                    });
+
+
+
+
+
+
+
+
+                }// else polygon fill
+
+
+                // for testing sample "hide show layer"
+                // addLayer(property, property);
+
+
+
+            }//if 
+        }// for 
+
+
+        //============End ==========================   add layers to map =========================================
+
+
+
+
+
+       
+
+      
+
+
+
+
+
+
+
+    }); // map.on('load')
+
+
+
+
+   
+
+
+
+    // ===========   mouse over event, show feature detail property in info-table ===============
+    map.on('mousemove', function (e) {
+        var features = map.queryRenderedFeatures(e.point, { layers: source_layer_id });
+        // var features_hightlight  = map.queryRenderedFeatures(e.point, { layers: source_layer_id_highlight });
+
+        //  hand to pointer hand if there is features 
+        map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+
+
+        var instand_info_table = "";
+
+        for (var i = 0; i < features.length; i++) {
+
+
+
+            var element = features[i];
+
+
+
+            // filter only display our feature, not base map feature.
+
+            if (element.layer.id in source_layer[_source_layer_group_id]) {
+
+                var instant_info = "<br/><div><span>" + element.layer.id + "<ul>";
+
+                for (var _key in element.properties) {
+                    var _value = String(element.properties[_key]);
+                    instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _key + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+
+                }// for
+
+
+                instant_info = instant_info + "</ul> </span></div>";
+
+
+                instand_info_table = instand_info_table + instant_info;
+            }// if filter
+
+
+
+
+
+
+
+
+
+        }//for feature length
+
+
+        // update bottom <div>
+        document.getElementById("info-table").innerHTML = instand_info_table;
+
+
+
+
+
+
+
+
+
+
+
+
+
+    });
+    // =========== End =====  mouse over event, show feature detail property in info-table ===============
+
+
+
+
+
+
+
+
+
+
+
+
+    // -------------------- click event open a popup at the location of the feature -----------------------------
+
+    map.on('click', function (e) {
+        //var features = map.queryRenderedFeatures(e.point);
+        var features = map.queryRenderedFeatures(e.point, { layers: source_layer_id });
+
+
+        if (!features.length) {
+            return;
+        }
+
+        var _not_popup = false;
+
+        var _popup_html = "<div style='width:180px; height:120px;text-align: center; overflow-x:scroll; overflow-y:scroll; overflow:auto;'><table >";
+
+        for (var j = 0; j < features.length; j++) {
+
+            var element = features[j];
+
+
+            // filter only display our feature, not base map feature.
+
+            if (element.layer.id in source_layer[_source_layer_group_id]) {
+
+                _not_popup = true;
+
+                var _popup_html_section = "<tr><td ><span style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + element.layer.id + "&nbsp;</font></span></td><td>" + " " + "</td></tr>";
+
+                for (var _key in element.properties) {
+                    var _value = String(element.properties[_key]);
+
+                    _popup_html_section = _popup_html_section + "<tr><td ><span style=\"float:left; list-style: none;font-size:10px\">" + _key + "</span></td><td><span style=\"float:left; list-style: none;font-size:8px\">" + _value + "</span></td></tr>";
+
+                }// for
+
+                _popup_html = _popup_html + _popup_html_section;
+
+            }//if filter
+
+        }//for
+
+        _popup_html = _popup_html + "</table></div>";
+
+
+        if (_not_popup) {
+            var popup = new mapboxgl.Popup()
+                .setLngLat(map.unproject(e.point))
+                .setHTML(_popup_html)
+                .addTo(map);
+
+        }//if 
+
+    }); // map on click
+
+
+    // --------------------End -------------- click event open a popup at the location of the feature -----------------------------
+
+
+
+
+
+
+   
+
+
+}
+
+
 
 
 function init_vector_muiltilayer_highlight_layer(_area, _subject) {

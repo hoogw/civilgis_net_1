@@ -3,21 +3,26 @@
 
 
 
-function feed_datatables(_geojson_obj){
+function populate_property_tables(_layer_name, _features_array) {
     
-    
+   // alert(_features_array.length);
+  //alert(_layer_name);
 
-     
-       //_geojson_obj_array = _geojson_object.features;
-       _geojson_obj_array = _geojson_obj["features"];
+
+
+    var _table_div_id = '#'+ _layer_name.replace('_', '') + 'tbldiv';
+    var _table_id = '#' + _layer_name.replace('_', '') + 'tbl';
       
       
       // get the key [column name]
-      var _properties =  _geojson_obj_array[0].properties;
+    var _properties = _features_array[0].properties;
       
+
+    
       
       var tableHeaders="";
-      $("#tableDiv").empty();
+      //$("#tableDiv").empty();
+      $(_table_div_id).empty();
      
     /* 
      var _column_def = [
@@ -27,7 +32,7 @@ function feed_datatables(_geojson_obj){
                                                 { data: 'properties.CFCC' }
                                             ];
     */
-     _dt_columns_count = 0;
+      _dt_columns_count[_table_id] = 0;
      var _column_def = [];
      var _column0 = {};
      /*
@@ -46,8 +51,7 @@ function feed_datatables(_geojson_obj){
       
       Object.keys(_properties).forEach(function(k) 
                         {
-                            //alert(k);
-                            //_dt_columns.push(k);
+                            
                             
                             tableHeaders += "<th>" + k + "</th>";
                             
@@ -56,17 +60,17 @@ function feed_datatables(_geojson_obj){
                             _column0['data'] = 'properties.' + k;
 
           //---------- hide last 2 column geoFID, geoFeatureType---------
-                            if ((k === 'GeoFeatureID') || (k === 'GeoFeatureType')) {
+                            //if ((k === 'GeoFeatureID') || (k === 'GeoFeatureType')) {
 
-                                _column0['visible'] = false;
+                            //    _column0['visible'] = false;
 
-                            }
+                            //}
           //--------------------------------------------------------
 
 
                             _column_def.push(_column0);   
                                
-                             _dt_columns_count = _dt_columns_count +1;  
+                            _dt_columns_count[_table_id] = _dt_columns_count[_table_id] + 1;
                                
                             
                         }); // object key
@@ -78,7 +82,10 @@ function feed_datatables(_geojson_obj){
          _column_def.push(_column0); 
          */
          
-         $("#tableDiv").append('<table id="tabledata" class="display nowrap" cellspacing="0" width="100%"><thead><tr>' + tableHeaders + '</tr></thead><tfoot><tr>'+ tableHeaders + '</tr></tfoot></table>');
+    //  alert(_table_div_id);
+
+
+      $(_table_div_id).append('<table id="' + _layer_name.replace('_', '') + 'tbl' + '" class="display nowrap" cellspacing="0" width="100%"><thead><tr>' + tableHeaders + '</tr></thead><tfoot><tr>' + tableHeaders + '</tr></tfoot></table>');
       //$("#tableDiv").append('<table id="tabledata" class="display" cellspacing="0" width="100%"><thead><tr>' + tableHeaders + '</tr></thead></table>');
       //$("#tableDiv").find("table thead tr").append(tableHeaders); 
       
@@ -86,10 +93,11 @@ function feed_datatables(_geojson_obj){
       
       
            //  datatable
-          $('#tabledata').DataTable({
+          //$('#tabledata').DataTable({
+          $(_table_id).DataTable({
                                    // must put destroy:true, to destroy last time old datatable initialization, before put new initialization
                                    destroy: true,
-                                   data: _geojson_obj_array,
+                                   data: _features_array,
                                    
                                    
                                    columns: _column_def,
@@ -97,8 +105,8 @@ function feed_datatables(_geojson_obj){
                                     
                                     "pagingType": "full_numbers",    
                                     
-                                    // resize the datatables height here scrollY:150
-                                    scrollY: 200,
+                                    // resize the datatables height here scrollY:150,   
+                                    scrollY: 160,
                                     scrollX: true
                                     
                                     
@@ -109,10 +117,11 @@ function feed_datatables(_geojson_obj){
                             
                             
                            
-                            // ajax click row event show corespoinding data.feature[] on google map 
-                  var table = $('#tabledata').DataTable();
+    //  mouseover row event show corespoinding data.feature[] on map 
+                 var table = $(_table_id).DataTable();
                             
-                        $('#tabledata tbody').on('mouseover', 'td', function () 
+                 //$('#tabledata tbody').on('mouseover', 'td', function () 
+                 $(_table_id+' tbody').on('mouseover', 'td', function ()
                         {
 
                             
@@ -122,47 +131,140 @@ function feed_datatables(_geojson_obj){
                                                                                      
                                            var rowIdx =  table.cell(this).index().row;
                                                                                      
-                                           var _geo_ID = table.cell(rowIdx, _dt_columns_count-1 ).data();           
+                                           var _u_ID = table.cell(rowIdx, _dt_columns_count[_table_id] - 1).data();
                                                                     
                                             
                                             
 
 
-                            // -----------leaflet --------------
+                            // -----------Mapbox GL  --------------
                                            
                                                 
-
+                     
 
                             
-                                           _current_geojson_layer.eachLayer(
-                                                function (featureInstanceLayer) {
+                     //.............................................................. highlight add geojson layer ..............................................................
 
-                                                    var click_row_geofeatureID = featureInstanceLayer.feature.properties.GeoFeatureID;
-                                                    var click_row_geofeaturetype = featureInstanceLayer.feature.properties.GeoFeatureType;
-
-                                                        
-
-                                                        if (click_row_geofeatureID === _geo_ID) {
+                           // loop through all element of the features array, find the one with uid = _u_ID
 
 
-                                                                featureInstanceLayer.setStyle(
-                                                                    geojson_clienttable_mouseover_highlight_style
-                                                                    );
+                                           var features = [];
+                                           var element = null;        
+                                           for (var i = 0; i < _features_array.length; i++) {
+                                                element = _features_array[i];  
+                                               if (element.properties.uid === _u_ID) {
+
+                                                   features.push(element);
+                                                   break;
+                                               } // if
+                                           }// for
+
+                                          
+                                      
+
+                                           var _highlight_features_geojson = {
+                                               "type": "FeatureCollection",
+                                               "features": features
+
+                                           }
 
 
-                                                        
-                                                    }// if
 
-                                                }// function
+                     // remove last time highlight source and layer
+                                           if (highlight_geojson_source) {
 
-                                                );
+                                               map.removeSource("highlight_geojson");
+                                               map.removeLayer('highlight_geojson_layer');
 
-
-                            //------------ end of leaflet ----------------
-
+                                           }//if
 
 
-                                                           
+                     // add current new highlight source
+                                           highlight_geojson_source = map.addSource("highlight_geojson", {
+                                               "type": "geojson",
+                                               "data": _highlight_features_geojson
+
+                                           });
+
+
+
+
+                     // add current new highlight layer
+                                           if (source_layer['all_layers'][_layer_name]['type'] === 'circle') {
+
+                                               highlight_geojson_layer = map.addLayer({
+                                                   'id': 'highlight_geojson_layer',
+                                                   'type': 'circle',
+                                                   'source': 'highlight_geojson',
+
+                                                   "layout": {
+                                                       'visibility': 'visible'             // this property must be present in order for checkbox button menu work properly. 
+                                                   },
+
+                                                   "paint": {
+                                                       "circle-color": source_layer['all_layers'][_layer_name]['circle-color-highlight'],
+                                                       "circle-radius": parseInt(source_layer['all_layers'][_layer_name]['circle-radius-highlight']),
+                                                       "circle-blur": parseInt(source_layer['all_layers'][_layer_name]['circle-blur'])
+                                                   }
+                                               });
+
+
+
+
+
+                                           }//if point, circle
+
+                                           else if (source_layer['all_layers'][_layer_name]['type'] === 'line') {
+
+
+                                               highlight_geojson_layer = map.addLayer({
+                                                   'id': 'highlight_geojson_layer',
+                                                   'type': 'line',
+                                                   'source': 'highlight_geojson',
+                                                   'layout': {},
+                                                   'paint': {
+
+                                                       "line-color": source_layer['all_layers'][_layer_name]['line-color'],
+                                                       "line-width": parseInt(source_layer['all_layers'][_layer_name]['line-width-highlight'])
+
+
+                                                   }
+                                               });
+
+
+
+                                           }//else line
+
+
+                                           else if (source_layer['all_layers'][_layer_name]['type'] === 'fill') {
+
+
+                                               highlight_geojson_layer = map.addLayer({
+                                                   'id': 'highlight_geojson_layer',
+                                                   'type': 'fill',
+                                                   'source': 'highlight_geojson',
+                                                   'layout': {},
+                                                   'paint': {
+                                                       'fill-color': source_layer['all_layers'][_layer_name]['fill-color-highlight']
+
+                                                   }
+                                               });
+
+
+
+
+                                           }// else polygon fill
+
+
+
+                     //...............ENd ........................................... highlight add geojson layer .................
+                    
+
+                     //------------ end of Mapbox GL ----------------
+
+
+
+                                                          
                             
                                            table.columns().every( function (cllmnIndex) 
                                                 {                                 
@@ -179,26 +281,42 @@ function feed_datatables(_geojson_obj){
                                                    
                                                 // update bottom <div>
                                              document.getElementById("info-table").innerHTML = instant_info;   
-                                                                   
-                                   } ); // click cell event    
-                            
-                            
-                         $('#tabledata tbody').on('mouseout', 'td', function () 
-                                   {
-                                       
-                                        // remove all high light yellow the feature polygon on google map
-                                       // Remove custom styles.
-                                        //map.data.revertStyle();
-                             _current_geojson_layer.setStyle(geojson_default_style);
+                                         
                                         
+
+
+
+                                   } ); // mouse over   
+                            
+
+                           
+
+                            
+                 //$('#tabledata tbody').on('mouseout', 'td', function ()
+                 $(_table_id + ' tbody').on('mouseout', 'td', function ()
+                 {
+
+
+                                       
+                     // remove last time highlight source and layer
+                     //if (highlight_geojson_source) {
+
+                     //    map.removeSource("highlight_geojson");
+                     //    map.removeLayer('highlight_geojson_layer');
+
+                     //}//if
+
+
+
+
                                         // empty bottom <div>
                                          document.getElementById("info-table").innerHTML = "";
-                            } ); 
+                            } ); // mouse out
                            
                          
                   
     
-    
+ 
     
 }
 
@@ -211,115 +329,147 @@ function feed_datatables(_geojson_obj){
 
 
 
-function rendered_feature_property_table(_area, _subject) {
+function property_tab(_area, _subject) {
 
 
+    
 
-    // ----------- rendered feature table -----------
-    _source_layer_group_id = _area + '_' + _subject;
+       
+        _source_layer_group_id = _area + '_' + _subject;
 
 
 
 
-                                   // ..................   build tabs  .....................
-                                var _isFirstElement = true;
-                                var _tab_nav_li = '';
-                                var _tab_content_div = '';
-                                var _property_id = '';
+        // ..................   build tabs  .....................
+        var _isFirstElement = true;
+        var _tab_nav_li = '';
+        var _tab_content_div = '';
+        var _tab_content_id = '';
 
-                                    for (var property in source_layer[_source_layer_group_id]) {
-                                        if (source_layer[_source_layer_group_id].hasOwnProperty(property)) {
+        for (var property in source_layer[_source_layer_group_id]) {
+            if (source_layer[_source_layer_group_id].hasOwnProperty(property)) {
 
-                                            _property_id = property.replace('_','');
+                _tab_content_id = property.replace('_', '');
 
-                                            if (_isFirstElement) {
+                if (_isFirstElement) {
 
-                                                _tab_nav_li = '<li class="active"> <a href="#' + _property_id + '" data-toggle="tab">' + property + '</a></li>';
+                    _tab_nav_li = '<li class="active"> <a href="#' + _tab_content_id + '" data-toggle="tab">' + property + '</a></li>';
 
-                                                _tab_content_div = '<div class="tab-pane fade in active" id="' + _property_id+ '">';
+                    //_tab_content_div = '<div class="tab-pane fade in active" id="' + _tab_content_id + '"> <h4> ' + property + '</h4><div id="' + _tab_content_id + 'tbldiv"> </div>   </div>';
+                    _tab_content_div = '<div class="tab-pane fade in active" id="' + _tab_content_id + '"><div id="' + _tab_content_id + 'tbldiv"> </div>   </div>';
 
-                                                _isFirstElement = false;
-                                            }
-                                            else {
-                                                _tab_nav_li = '<li> <a href="#' + _property_id + '" data-toggle="tab">' + property + '</a></li>';
+                    _isFirstElement = false;
+                }
+                else {
+                    _tab_nav_li = '<li> <a href="#' + _tab_content_id + '" data-toggle="tab">' + property + '</a></li>';
 
 
-                                                _tab_content_div = '<div class="tab-pane fade" id="' + _property_id + '">';
-                                            }
+                    // must put "active" otherwise, datatable layout will be shrinked.
+                    //_tab_content_div = '<div class="tab-pane fade active" id="' + _tab_content_id + '"> <h4> ' + property + '</h4><div id="' + _tab_content_id + 'tbldiv"> </div>   </div>';
+                    _tab_content_div = '<div class="tab-pane fade active" id="' + _tab_content_id + '"><div id="' + _tab_content_id + 'tbldiv"> </div>   </div>';
+                }
 
 
 
 
-                                            $("#feature_property_tab_navigation").append(_tab_nav_li);
+                $("#feature_property_tab_navigation").append(_tab_nav_li);
 
 
-                                            $("#feature_property_tab_content").append(_tab_content_div);
+                $("#feature_property_tab_content").append(_tab_content_div);
 
 
 
-                                        }//if
-                                    }//for
+            }//if
+        }//for
 
-                                    // .................End ........   build tabs  .....................    
+        // .................End ........   build tabs  .....................    
 
 
-
-
-
-
-
-
-                                        // ..................... populate tables under tabs .................................
-
-
-
-                                    for (var property in source_layer[_source_layer_group_id]) {
-                                        if (source_layer[_source_layer_group_id].hasOwnProperty(property)) {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        }//if
-                                    }//for
-
-
-
-
-                                        // .....................End ............. populate tables under tabs .................................
-
-
-
-
-
-
-
-
-    // ----------- End rendered feature table -----------
 
 
 }
 
 
 
+
+function binding_property_table() {
+
+    
+    // only first time load map data need this event. 
+     //map.on('render', function () {
+
+     //    _rendered_features = map.queryRenderedFeatures({ layers: ['city_address'] });
+
+     //   //  alert(_rendered_features.length);
+
+     //    if (_rendered_features.length > 0) {
+     //        populate_property_tables('city_address', _rendered_features);
+
+     //    }
+     //});
+
+         
+
+
+       
+    map.on('moveend', function () {
+
+
+
+        for (var property in source_layer[_source_layer_group_id]) {
+            if (source_layer[_source_layer_group_id].hasOwnProperty(property)) {
+
+
+                
+
+
+                //_rendered_features = map.queryRenderedFeatures({ layers: ['city_address'] });
+                _rendered_features = map.queryRenderedFeatures({ layers: [property] });
+
+                //  alert(_rendered_features.length);
+
+                if (_rendered_features.length > 0) {
+                    //populate_property_tables('city_address', _rendered_features);
+                    populate_property_tables(property, _rendered_features);
+
+                }//if 
+
+
+
+
+
+            }//if
+        }//for
+
+       
+
+
+
+
+
+    }); // moveend
+
+
+
+
+
+
+
+    // this is first time and one time trigger moveend event to load property table data. this temperary fix
+    setTimeout(function () {
+
+
+       map.fire('moveend');
+
+      //  map.off('render');
+
+
+    }, 2000);
+    
+    
+   
+
+}
 
 
 
@@ -371,11 +521,21 @@ function initialize() {
 
 
         init_checkbox_menu_simple($("#areaID").val(), $("#subjectID").val());
+        property_tab($("#areaID").val(), $("#subjectID").val());
 
-        init_vector_multilayer($("#areaID").val(), $("#subjectID").val());
+        
+     
+        multilayer_vector_property($("#areaID").val(), $("#subjectID").val());
 
-        rendered_feature_property_table($("#areaID").val(), $("#subjectID").val());
+        
 
+        binding_property_table();
+
+
+        
+
+
+        
 
 
     });//done
@@ -392,6 +552,9 @@ function initialize() {
     add_area_boundary($("#areaID").val());
 
 
+   
+
+    
 
 
 
