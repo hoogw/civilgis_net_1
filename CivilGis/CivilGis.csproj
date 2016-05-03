@@ -512,6 +512,7 @@
     <Content Include="Scripts\localmap\localjusttiles.js" />
     <Content Include="Scripts\mapboxgl\classifycheckboxbuttonmap.js" />
     <Content Include="Scripts\mapboxgl\classifyradiobuttonmap.js" />
+    <Content Include="Scripts\mapboxgl\multilayersourcefeaturepagedtablemap.js" />
     <Content Include="Scripts\mapboxgl\multilayerrenderedfeaturepagedtablemap.js" />
     <Content Include="Scripts\mapboxgl\multilayersimplecolorhighlightlayermap.js" />
     <Content Include="Scripts\mapboxgl\multilayersimplecolormap.js" />
@@ -1134,6 +1135,7 @@
     <Content Include="Views\MapBoxGL\singlelayersimplehighlightgeojsonmap.cshtml" />
     <Content Include="Views\MapBoxGL\multilayersimplehighlightlayermap.cshtml" />
     <Content Include="Views\MapBoxGL\multilayersimplecolorhighlightlayermap.cshtml" />
+    <Content Include="Views\MapBoxGL\multilayersourcefeaturepagedtablemap.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

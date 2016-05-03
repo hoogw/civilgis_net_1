@@ -60,7 +60,7 @@ function initialize() {
 
         
 
-        rendered_feature_binding_property_table();
+        source_feature_binding_property_table($("#areaID").val());
 
 
         
