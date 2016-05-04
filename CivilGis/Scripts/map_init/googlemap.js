@@ -125,9 +125,18 @@ _highlight_strokeWeight = 8;
 _classfiy_fillOpacity = 0;
 _classfiy_strokeColor = 'yellow';
 _classfiy_strokeWeight = 0.2;
-
-
 //---------------------------------
+
+
+
+
+//   *******   google opacity slider control ***************
+var opacityDiv;
+var opacityKnobDiv;
+var opacityCtrlKnob;
+var initialOpacity = 100;
+var OPACITY_MAX_PIXELS = 57; // Width of opacity control image
+//****************************************************
 
 
 
@@ -333,7 +342,7 @@ function add_area_boundary(_area) {
 }// function add_area_boundary
 
 
-
+// ----------- tiling ----------------------
 function init_tiling(){
     
     // --------------------- dynamic load javascript file  ---------------------------
@@ -344,11 +353,7 @@ function init_tiling(){
 
     $.when(
              $.getScript(_tile_list_js)
-     /*
-    $.getScript( "/mypath/myscript1.js" ),
-    $.getScript( "/mypath/myscript2.js" ),
-    $.getScript( "/mypath/myscript3.js" ),
-    */
+    
 
     ).done(function () {
 
@@ -383,29 +388,24 @@ function init_tiling(){
 
 
 
-
-            //............................ bind opacity to slider ........................
-            
-                _tile_slider.noUiSlider.on('set', function (values, handle, unencoded, tap, positions) {
-
-
-                var _slider_handle_value = values[handle];
-                _slider_handle_value = Math.round(_slider_handle_value) / 100;
-
-                tile_MapType.setOpacity(_slider_handle_value);
-
-            });
-            //................End ....... bind opacity to slider ........................
-
-
-
-
-
             _tile_exist = true;
 
            
+            // Add opacity control and set initial value , this must be here after tile_MapType initialized and finished loading tiles, otherwise, tile_MapType will show un-defined.
+            createOpacityControl(map, initialOpacity);
 
-        }// if
+
+        }// if tile exist
+
+        else {
+            // tile does not exist, should hide the opacity slider control div.
+
+
+            $("#opacityDiv").hide();
+            $("#opacityKnobDiv").hide();
+
+
+        }
 
 
     }); // when done
@@ -440,6 +440,90 @@ function remove_tiles() {
             //map.overlayMapTypes.removeAt(0);
     }
 }
+
+//--------------------End of tiling --------------------------------------
+
+
+
+//   ******  google map tile opacity slider control ****************
+
+
+function createOpacityControl(map, opacity) {
+
+
+    //  main div to hold the control.
+    opacityDiv = document.getElementById('opacityDiv');
+
+    //  knob
+    opacityKnobDiv = document.getElementById('opacityKnobDiv');
+
+
+    opacityCtrlKnob = new ExtDraggableObject(opacityKnobDiv, {
+        restrictY: true,
+        container: opacityDiv
+    });
+
+    google.maps.event.addListener(opacityCtrlKnob, "dragend", function () {
+        setOpacity(opacityCtrlKnob.valueX());
+    });
+
+    google.maps.event.addDomListener(opacityDiv, "click", function (e) {
+        var left = findPosLeft(this);
+        var x = e.pageX - left - 5; // - 5 as we're using a margin of 5px on the div
+        opacityCtrlKnob.setValueX(x);
+        setOpacity(x);
+    });
+
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(opacityDiv);
+
+    // Set initial value
+    var initialValue = OPACITY_MAX_PIXELS / (100 / opacity);
+    opacityCtrlKnob.setValueX(initialValue);
+    setOpacity(initialValue);
+}
+
+function setOpacity(pixelX) {
+    // Range = 0 to OPACITY_MAX_PIXELS
+    var value = (100 / OPACITY_MAX_PIXELS) * pixelX;
+    if (value < 0) value = 0;
+    if (value == 0) {
+
+
+
+        tile_MapType.setOpacity(Math.round(value) / 100);
+
+
+
+    }
+    else {
+
+
+
+        tile_MapType.setOpacity(Math.round(value) / 100);
+
+
+
+    }
+}
+
+function findPosLeft(obj) {
+    var curleft = 0;
+    if (obj.offsetParent) {
+        do {
+            curleft += obj.offsetLeft;
+        } while (obj = obj.offsetParent);
+        return curleft;
+    }
+    return undefined;
+}
+
+
+
+
+// ************** End of google map tile opacity slider control **************************
+
+
+
 
 
 
@@ -774,7 +858,7 @@ function zoomToObject(obj) {
 
 
 
-
+// ############### retired function ############################
 
 function tile_switch_button() {
 
@@ -827,3 +911,86 @@ function tile_slider() {
 
 
 }
+
+
+function init_tiling_old_slider_switch() {
+
+    // --------------------- dynamic load javascript file  ---------------------------
+
+
+
+    var _tile_list_js = "/Scripts/map_init/tile_list/googlemap_tile_list.js";
+
+    $.when(
+             $.getScript(_tile_list_js)
+     /*
+    $.getScript( "/mypath/myscript1.js" ),
+    $.getScript( "/mypath/myscript2.js" ),
+    $.getScript( "/mypath/myscript3.js" ),
+    */
+
+    ).done(function () {
+
+        var _tile_name = _areaID + "_" + _subjectID;
+        var _i = _tile_list.indexOf(_tile_name);
+        //alert(_tile_name);
+        if (_i >= 0) {
+
+
+            //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
+            // _tile_baseURL = 'http://tile.transparentgov.net/v2/';
+            // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
+
+
+
+            tile_MapType = new google.maps.ImageMapType({
+                getTileUrl: function (coord, zoom) {
+
+
+
+                    return _tile_baseURL + _areaID + '_' + _subjectID + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
+
+
+                },
+                tileSize: new google.maps.Size(256, 256),
+                maxZoom: 22,
+                minZoom: 0
+
+            }); // tile_maptype
+
+            map.overlayMapTypes.insertAt(0, tile_MapType);
+
+
+
+
+            //............................ bind opacity to slider ........................
+
+            _tile_slider.noUiSlider.on('set', function (values, handle, unencoded, tap, positions) {
+
+
+                var _slider_handle_value = values[handle];
+                _slider_handle_value = Math.round(_slider_handle_value) / 100;
+
+                tile_MapType.setOpacity(_slider_handle_value);
+
+            });
+            //................End ....... bind opacity to slider ........................
+
+
+
+
+
+            _tile_exist = true;
+
+
+
+
+        }// if tile exist
+
+
+    }); // when done
+
+
+}// init tile
+
+// ############### retired function ############################

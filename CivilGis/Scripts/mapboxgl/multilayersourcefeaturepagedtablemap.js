@@ -50,8 +50,8 @@ function initialize() {
 
 
 
-
-        init_checkbox_menu_simple($("#areaID").val(), $("#subjectID").val());
+        //init_checkbox_menu_simple($("#areaID").val(), $("#subjectID").val());
+        init_checkbox_menu_color($("#areaID").val(), $("#subjectID").val());
         property_tab($("#areaID").val(), $("#subjectID").val());
 
         

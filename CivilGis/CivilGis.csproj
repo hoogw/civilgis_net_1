@@ -457,6 +457,7 @@
     <Content Include="Scripts\googlemap\clusterpagedclienttablemap.js" />
     <Content Include="Scripts\googlemap\clusterscrollerclienttablemap.js" />
     <Content Include="Scripts\googlemap\colormap.js" />
+    <Content Include="Scripts\googlemap\justtiles_old_slider_switch.js" />
     <Content Include="Scripts\googlemap\justtiles.js" />
     <Content Include="Scripts\googlemap\maplist_paged.js" />
     <Content Include="Scripts\googlemap\maplist_scroller.js" />
@@ -553,6 +554,12 @@
     <Content Include="Scripts\mapquest\scrollerservertablemap.js" />
     <Content Include="Scripts\mapquest\simpleclustermap.js" />
     <Content Include="Scripts\mapquest\simplemap.js" />
+    <Content Include="Scripts\map_api\google_map_opacity_slider\CustomTileOverlay.js" />
+    <Content Include="Scripts\map_api\google_map_opacity_slider\ExtDraggableObject.js" />
+    <Content Include="Scripts\map_api\google_map_opacity_slider\opacity-slider2.png" />
+    <Content Include="Scripts\map_api\google_map_opacity_slider\opacity-slider3d14.png" />
+    <Content Include="Scripts\map_api\google_map_opacity_slider\opacity-slider3d6.png" />
+    <Content Include="Scripts\map_api\google_map_opacity_slider\opacity-slider3d7.png" />
     <Content Include="Scripts\map_api\leaflet.markercluster\Notworking_leaflet.markercluster.js" />
     <Content Include="Scripts\map_api\leaflet.markercluster\MarkerCluster.css" />
     <Content Include="Scripts\map_api\leaflet.markercluster\MarkerCluster.Default.css" />
@@ -748,6 +755,7 @@
     <Content Include="Scripts\map_api\leaflet\leaflet-src.map" />
     <Content Include="Views\Home\bingmap\Palo_Alto.cshtml" />
     <Content Include="Views\Home\bingmap\Shoreline.cshtml" />
+    <Content Include="Views\GoogleMap\justtiles_old_slider_switch.cshtml" />
     <None Include="Views\Home\corporate\blue.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

@@ -92,6 +92,19 @@ namespace CivilGis.Controllers
 
 
 
+        public ActionResult justtiles_old_slider_switch(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
         public ActionResult simpleclustermap(string area, string subject)
         {
 

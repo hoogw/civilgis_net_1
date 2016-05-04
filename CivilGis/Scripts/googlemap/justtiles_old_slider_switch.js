@@ -10,21 +10,23 @@
 
 
 
+
+
 function just_add_tiles() {
 
 
-    
-
-   
-
-    init_tiling();
+    // ---- retired section -----------
+    tile_slider();
 
     
+    init_tiling_old_slider_switch();
 
-    
-   
+    tile_switch_button();
 
+    // ---- retired section -----------
      
+
+
     document.getElementById("ajaxload").style.display = "none";
     document.getElementById("title_info").style.display = "none";
     document.getElementById("legend").style.display = "none";
@@ -68,7 +70,12 @@ function initialize() {
          
    
         
-       
+        
+        
+        //---------- marker cluster [1]------------
+       // clustering_point();
+        
+        
         
         
         

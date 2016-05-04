@@ -5,6 +5,9 @@ var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
 
 var base_layers;
 var _tile_slider;
+var _slider_control;
+var _slidercontrol_handle_value;
+
 
 var mapbox_geocoderControl;
 var leaflet_open_street_map_max_zoom_level = 19;
@@ -497,18 +500,23 @@ function init_tiling() {
 
 
 
-            //............................ bind opacity to slider ........................
+            //................. leaflet slider contral ............................
 
-            _tile_slider.noUiSlider.on('set', function (values, handle, unencoded, tap, positions) {
+            _slider_control = L.control.slider(function (value) {
 
 
-                var _slider_handle_value = values[handle];
-                _slider_handle_value = Math.round(_slider_handle_value) / 100;
 
-                tile_MapType.setOpacity(_slider_handle_value);
+                _slidercontrol_handle_value = Math.round(value) / 100;
+                tile_MapType.setOpacity(_slidercontrol_handle_value);
 
-            });
-            //................End ....... bind opacity to slider ........................
+            },
+
+                    { id: _slider_control, position: 'bottomright', width: '400px', orientation: 'vertical', logo: 'O', min: 0, max: 100, value: 100, collapsed: false, step: 10 });
+
+            map.addControl(_slider_control);
+
+
+            //................End....................... leaflet slider contral ............................
 
             _tile_exist = true;
 
@@ -732,6 +740,14 @@ function init_base_map() {
 //----------------End of  basic simple map function  ------------------------
 
 
+
+
+
+
+
+
+// ############# retired ######################
+
 function tile_switch_button() {
 
 
@@ -764,9 +780,6 @@ function tile_switch_button() {
 }
 
 
-
-
-
 function tile_slider() {
 
 
@@ -785,3 +798,83 @@ function tile_slider() {
 
 
 }
+
+
+function init_tiling_old_slider_switch() {
+
+    // --------------------- dynamic load javascript file  ---------------------------
+
+
+
+    var _tile_list_js = "/Scripts/map_init/tile_list/googlemap_tile_list.js";
+
+    $.when(
+             $.getScript(_tile_list_js)
+     /*
+    $.getScript( "/mypath/myscript1.js" ),
+    $.getScript( "/mypath/myscript2.js" ),
+    $.getScript( "/mypath/myscript3.js" ),
+    */
+
+    ).done(function () {
+
+        var _tile_name = _areaID + "_" + _subjectID;
+        var _i = _tile_list.indexOf(_tile_name);
+        //alert(_tile_name);
+        if (_i >= 0) {
+
+
+
+
+
+            //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
+            //_tile_baseURL = 'http://tile.transparentgov.net/v2/';
+            // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
+
+
+            var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.png';
+            var overlay_tile_Attrib = 'Map data &#169; <a href="http://transparentgov.net">transparentgov.net</a> contributors';
+            tile_MapType = new L.TileLayer(overlay_tile_Url, { minZoom: 3, maxZoom: 22, errorTileUrl: '  ', unloadInvisibleTiles: true, reuseTiles: true, attribution: overlay_tile_Attrib });
+
+            // ===== above must define errorTileUrl:'  ', must have some character or space in '  ' above. If not define this, missing tile will show a broken image icon on map everywhere, if define this, it just failed to load empty URL, not showing broken image icon
+
+
+
+
+
+
+            overlay_tile_layer = map.addLayer(tile_MapType);
+
+
+            // -----------bug fix, by add multiple basemap layer, must set zindex to a big number such as 99, otherwise, multiple base map layer will make this tile invisable. zIndex start from 1, is the lowest level at the bottom. 
+            tile_MapType.setZIndex(99);
+            //tile_MapType.bringToFront();
+            //--------------end bug fix------------------------------------------
+
+
+
+            //............................ bind opacity to slider ........................
+
+            _tile_slider.noUiSlider.on('set', function (values, handle, unencoded, tap, positions) {
+
+
+                var _slider_handle_value = values[handle];
+                _slider_handle_value = Math.round(_slider_handle_value) / 100;
+
+                tile_MapType.setOpacity(_slider_handle_value);
+
+            });
+            //................End ....... bind opacity to slider ........................
+
+            _tile_exist = true;
+
+        }// if
+
+
+    }); // when done
+
+
+}// init tile
+
+
+//############### End  ############# retired   #####################
