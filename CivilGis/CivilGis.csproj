@@ -520,6 +520,14 @@
     <Content Include="Scripts\mapboxgl\multilayersimplehighlightlayermap.js" />
     <Content Include="Scripts\mapboxgl\simplecolormap.js" />
     <Content Include="Scripts\mapboxgl\multilayersimplemap.js" />
+    <Content Include="Scripts\mapboxgl\singlelayersourcefeaturescrollertablehighlightgeojsonmap.js" />
+    <Content Include="Scripts\mapboxgl\singlelayersourcefeaturepagedtablehighlightgeojsonmap.js" />
+    <Content Include="Scripts\mapboxgl\singlelayerrenderedfeaturescrollertablehighlightgeojsonmap.js" />
+    <Content Include="Scripts\mapboxgl\singlelayerrenderedfeaturepagedtablehighlightgeojsonmap.js" />
+    <Content Include="Scripts\mapboxgl\singlelayerrenderedfeaturescrollertablehighlightlayermap.js" />
+    <Content Include="Scripts\mapboxgl\singlelayersourcefeaturescrollertablehighlightlayermap.js" />
+    <Content Include="Scripts\mapboxgl\singlelayersourcefeaturepagedtablehighlightlayermap.js" />
+    <Content Include="Scripts\mapboxgl\singlelayerrenderedfeaturepagedtablehighlightlayermap.js" />
     <Content Include="Scripts\mapboxgl\singlelayersimplehighlightlayermap.js" />
     <Content Include="Scripts\mapboxgl\singlelayersimplehighlightgeojsonmap.js" />
     <Content Include="Scripts\mapboxgl\simplemap.js" />
@@ -1144,6 +1152,14 @@
     <Content Include="Views\MapBoxGL\multilayersimplehighlightlayermap.cshtml" />
     <Content Include="Views\MapBoxGL\multilayersimplecolorhighlightlayermap.cshtml" />
     <Content Include="Views\MapBoxGL\multilayersourcefeaturepagedtablemap.cshtml" />
+    <Content Include="Views\MapBoxGL\singlelayerrenderedfeaturepagedtablehighlightlayermap.cshtml" />
+    <Content Include="Views\MapBoxGL\singlelayersourcefeaturepagedtablehighlightlayermap.cshtml" />
+    <Content Include="Views\MapBoxGL\singlelayerrenderedfeaturepagedtablehighlightgeojsonmap.cshtml" />
+    <Content Include="Views\MapBoxGL\singlelayerrenderedfeaturescrollertablehighlightlayermap.cshtml" />
+    <Content Include="Views\MapBoxGL\singlelayersourcefeaturescrollertablehighlightlayermap.cshtml" />
+    <Content Include="Views\MapBoxGL\singlelayerrenderedfeaturescrollertablehighlightgeojsonmap.cshtml" />
+    <Content Include="Views\MapBoxGL\singlelayersourcefeaturepagedtablehighlightgeojsonmap.cshtml" />
+    <Content Include="Views\MapBoxGL\singlelayersourcefeaturescrollertablehighlightgeojsonmap.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

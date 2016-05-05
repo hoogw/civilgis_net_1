@@ -45,9 +45,9 @@ function initialize() {
 
 
 
-        init_checkbox_menu_color($("#areaID").val(), $("#subjectID").val());
+        multilayer_checkbox_menu_color($("#areaID").val(), $("#subjectID").val());
 
-        init_vector_multilayer($("#areaID").val(), $("#subjectID").val());
+        multilayer_vector_property($("#areaID").val(), $("#subjectID").val());
 
 
 

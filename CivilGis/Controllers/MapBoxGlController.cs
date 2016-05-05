@@ -103,9 +103,9 @@ namespace CivilGis.Controllers
 
 
 
-                                        //....................(2) with highlight feature ..........................
+                                                         //....................(2) with highlight feature ..........................
 
-                                        public ActionResult singlelayersimplehighlightgeojsonmap(string area, string subject)
+                                                             public ActionResult singlelayersimplehighlightgeojsonmap(string area, string subject)
                                                         {
 
                                                             ViewBag.Subject = subject; // for api call 
@@ -118,7 +118,7 @@ namespace CivilGis.Controllers
                                                         }
 
 
-                                                        public ActionResult singlelayersimplehighlightlayermap(string area, string subject)
+                                                                public ActionResult singlelayersimplehighlightlayermap(string area, string subject)
                                                         {
 
                                                             ViewBag.Subject = subject; // for api call 
@@ -159,7 +159,32 @@ namespace CivilGis.Controllers
 
 
 
-                                                             //....................End ............... with highlight feature ..........................
+                                                                public ActionResult multilayersimplecolorhighlightgeojsonmap(string area, string subject)
+                                                                {
+
+                                                                    ViewBag.Subject = subject; // for api call 
+                                                                    ViewBag.Side_Bar = area;
+
+                                                                    ViewBag.Area = area;
+
+
+                                                                    return View();
+                                                                }
+
+                                                                public ActionResult multilayersimplehighlightgeojsonmap(string area, string subject)
+                                                                {
+
+                                                                    ViewBag.Subject = subject; // for api call 
+                                                                    ViewBag.Side_Bar = area;
+
+                                                                    ViewBag.Area = area;
+
+
+                                                                    return View();
+                                                                }
+
+
+                                                            //....................End ............... with highlight feature ..........................
 
 
         //----------------------- End simple map section -------------------------------
@@ -167,8 +192,12 @@ namespace CivilGis.Controllers
 
 
 
+
+
         //----------------------- table map section -------------------------------
 
+
+        // .... multi layer rendered
         public ActionResult multilayerrenderedfeaturepagedtablemap(string area, string subject)
         {
 
@@ -181,7 +210,17 @@ namespace CivilGis.Controllers
             return View();
         }
 
+        public ActionResult multilayerrenderedfeaturepagedtablecolormap(string area, string subject)
+        {
 
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
 
 
         public ActionResult multilayerrenderedfeaturescrollertablemap(string area, string subject)
@@ -197,6 +236,23 @@ namespace CivilGis.Controllers
         }
 
 
+        public ActionResult multilayerrenderedfeaturescrollertablecolormap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+        //...........multi layer source
+
+
         public ActionResult multilayersourcefeaturepagedtablemap(string area, string subject)
         {
 
@@ -209,6 +265,17 @@ namespace CivilGis.Controllers
             return View();
         }
 
+        public ActionResult multilayersourcefeaturepagedtablecolormap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
 
 
 
@@ -224,9 +291,34 @@ namespace CivilGis.Controllers
             return View();
         }
 
+        public ActionResult multilayersourcefeaturescrollertablecolormap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
 
 
-        public ActionResult multilayerpagedfulltablemap(string area, string subject)
+            return View();
+        }
+
+
+        // ......... multi layer both 
+
+        public ActionResult multilayerpagedbothtablemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+        public ActionResult multilayerpagedbothtablecolormap(string area, string subject)
         {
 
             ViewBag.Subject = subject; // for api call 
@@ -241,7 +333,7 @@ namespace CivilGis.Controllers
 
 
 
-        public ActionResult multilayerscrollerfulltablemap(string area, string subject)
+        public ActionResult multilayerscrollerbothtablemap(string area, string subject)
         {
 
             ViewBag.Subject = subject; // for api call 
@@ -253,38 +345,7 @@ namespace CivilGis.Controllers
             return View();
         }
 
-
-
-        // .................... single layer ................
-        public ActionResult singlelayerrenderedfeaturepagedtablemap(string area, string subject)
-        {
-
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Side_Bar = area;
-
-            ViewBag.Area = area;
-
-
-            return View();
-        }
-
-
-
-
-        public ActionResult singlelayerrenderedfeaturescrollertablemap(string area, string subject)
-        {
-
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Side_Bar = area;
-
-            ViewBag.Area = area;
-
-
-            return View();
-        }
-
-
-        public ActionResult singlelayersourcefeaturepagedtablemap(string area, string subject)
+        public ActionResult multilayerscrollerbothtablecolormap(string area, string subject)
         {
 
             ViewBag.Subject = subject; // for api call 
@@ -299,36 +360,9 @@ namespace CivilGis.Controllers
 
 
 
-        public ActionResult singlelayersourcefeaturescrollertablemap(string area, string subject)
-        {
 
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Side_Bar = area;
-
-            ViewBag.Area = area;
-
-
-            return View();
-        }
-
-
-
-        public ActionResult singlelayerpagedfulltablemap(string area, string subject)
-        {
-
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Side_Bar = area;
-
-            ViewBag.Area = area;
-
-
-            return View();
-        }
-
-
-
-
-        public ActionResult singlelayerscrollerfulltablemap(string area, string subject)
+        // .................... single layer  highlightlayer ................
+        public ActionResult singlelayerrenderedfeaturepagedtablehighlightlayermap(string area, string subject)
         {
 
             ViewBag.Subject = subject; // for api call 
@@ -343,6 +377,161 @@ namespace CivilGis.Controllers
 
 
 
+        public ActionResult singlelayerrenderedfeaturescrollertablehighlightlayermap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+        public ActionResult singlelayersourcefeaturepagedtablehighlightlayermap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+
+        public ActionResult singlelayersourcefeaturescrollertablehighlightlayermap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+        public ActionResult singlelayerpagedbothtablehighlightlayermap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+
+        public ActionResult singlelayerscrollerbothtablehighlightlayermap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+        // .................... single layer  highlightgeojson ................
+        public ActionResult singlelayerrenderedfeaturepagedtablehighlightgeojsonmap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+
+        public ActionResult singlelayerrenderedfeaturescrollertablehighlightgeojsonmap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+        public ActionResult singlelayersourcefeaturepagedtablehighlightgeojsonmap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+
+        public ActionResult singlelayersourcefeaturescrollertablehighlightgeojsonmap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+        public ActionResult singlelayerpagedbothtablehighlightgeojsonmap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+
+        public ActionResult singlelayerscrollerbothtablehighlightgeojsonmap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
 
 
 

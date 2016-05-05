@@ -45,7 +45,7 @@ function initialize() {
     
                             
 
-                            init_checkbox_menu_simple($("#areaID").val(), $("#subjectID").val());
+                    multilayer_checkbox_menu_simple($("#areaID").val(), $("#subjectID").val());
 
                             init_vector_muiltilayer_highlight_layer($("#areaID").val(), $("#subjectID").val());
 

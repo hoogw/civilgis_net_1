@@ -50,9 +50,9 @@ function initialize() {
 
 
 
-        //init_checkbox_menu_simple($("#areaID").val(), $("#subjectID").val());
-        init_checkbox_menu_color($("#areaID").val(), $("#subjectID").val());
-        property_tab($("#areaID").val(), $("#subjectID").val());
+        //multilayer_checkbox_menu_simple($("#areaID").val(), $("#subjectID").val());
+        multilayer_checkbox_menu_color($("#areaID").val(), $("#subjectID").val());
+        multilayer_property_tab($("#areaID").val(), $("#subjectID").val());
 
         
      
@@ -60,7 +60,7 @@ function initialize() {
 
         
 
-        source_feature_binding_property_table($("#areaID").val());
+        multilayer_source_feature_binding_paged_property_table($("#areaID").val());
 
 
         

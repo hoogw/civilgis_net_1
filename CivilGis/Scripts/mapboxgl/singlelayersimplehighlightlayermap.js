@@ -31,7 +31,7 @@ function initialize() {
     ).done(function () {
 
 
-        init_vector_singlelayer_highlight_layer($("#areaID").val(), $("#subjectID").val());
+        singlelayer_vector_highlight_layer($("#areaID").val(), $("#subjectID").val());
     
     });//done
 

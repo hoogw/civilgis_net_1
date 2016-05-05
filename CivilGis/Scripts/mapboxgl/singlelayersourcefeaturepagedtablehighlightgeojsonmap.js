@@ -32,6 +32,10 @@ function initialize() {
 
 
         singlelayer_vector_highlight_geojson($("#areaID").val(), $("#subjectID").val());
+
+
+        singlelayer_source_feature_binding_paged_highlight_geojson_property_table($("#areaID").val(), $("#areaID").val() + "_" + $("#subjectID").val())
+        
     
     });//done
 
