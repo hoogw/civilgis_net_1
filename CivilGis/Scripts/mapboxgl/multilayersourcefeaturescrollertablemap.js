@@ -50,21 +50,17 @@ function initialize() {
 
 
 
-
-        multilayer_checkbox_menu_color($("#areaID").val(), $("#subjectID").val());
         //multilayer_checkbox_menu_simple($("#areaID").val(), $("#subjectID").val());
-
+        multilayer_checkbox_menu_color($("#areaID").val(), $("#subjectID").val());
         multilayer_property_tab($("#areaID").val(), $("#subjectID").val());
 
         
      
         multilayer_vector_property($("#areaID").val(), $("#subjectID").val());
 
-        //retired 
-        //init_vector_multilayer($("#areaID").val(), $("#subjectID").val());
         
 
-        multilayer_rendered_feature_binding_paged_property_table();
+        multilayer_source_feature_binding_scroller_property_table($("#areaID").val());
 
 
         

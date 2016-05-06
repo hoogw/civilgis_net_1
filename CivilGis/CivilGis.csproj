@@ -513,6 +513,10 @@
     <Content Include="Scripts\localmap\localjusttiles.js" />
     <Content Include="Scripts\mapboxgl\classifycheckboxbuttonmap.js" />
     <Content Include="Scripts\mapboxgl\classifyradiobuttonmap.js" />
+    <Content Include="Scripts\mapboxgl\multilayerrenderedfeaturescrollertablemap.js" />
+    <Content Include="Scripts\mapboxgl\multilayersimplecolorhighlightgeojsonmap.js" />
+    <Content Include="Scripts\mapboxgl\multilayersimplehighlightgeojsonmap.js" />
+    <Content Include="Scripts\mapboxgl\multilayersourcefeaturescrollertablemap.js" />
     <Content Include="Scripts\mapboxgl\multilayersourcefeaturepagedtablemap.js" />
     <Content Include="Scripts\mapboxgl\multilayerrenderedfeaturepagedtablemap.js" />
     <Content Include="Scripts\mapboxgl\multilayersimplecolorhighlightlayermap.js" />
@@ -1160,6 +1164,10 @@
     <Content Include="Views\MapBoxGL\singlelayerrenderedfeaturescrollertablehighlightgeojsonmap.cshtml" />
     <Content Include="Views\MapBoxGL\singlelayersourcefeaturepagedtablehighlightgeojsonmap.cshtml" />
     <Content Include="Views\MapBoxGL\singlelayersourcefeaturescrollertablehighlightgeojsonmap.cshtml" />
+    <Content Include="Views\MapBoxGL\multilayerrenderedfeaturescrollertablemap.cshtml" />
+    <Content Include="Views\MapBoxGL\multilayersourcefeaturescrollertablemap.cshtml" />
+    <Content Include="Views\MapBoxGL\multilayersimplecolorhighlightgeojsonmap.cshtml" />
+    <Content Include="Views\MapBoxGL\multilayersimplehighlightgeojsonmap.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -60,11 +60,9 @@ function initialize() {
      
         multilayer_vector_property($("#areaID").val(), $("#subjectID").val());
 
-        //retired 
-        //init_vector_multilayer($("#areaID").val(), $("#subjectID").val());
         
 
-        multilayer_rendered_feature_binding_paged_property_table();
+        multilayer_rendered_feature_binding_scroller_property_table();
 
 
         
