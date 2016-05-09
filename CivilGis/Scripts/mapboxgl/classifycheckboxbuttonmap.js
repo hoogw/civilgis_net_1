@@ -146,8 +146,8 @@ function single_classify_polygon_vector(_area, _subject) {
 
     // ===========   mouse over event, show feature detail property in info-table ===============
     map.on('mousemove', function (e) {
-        var features = map.queryRenderedFeatures(e.point, { layers: source_layer_id });
-        // var features_hightlight  = map.queryRenderedFeatures(e.point, { layers: source_layer_id_highlight });
+        var features = map.queryRenderedFeatures(e.point);
+       
 
         //  hand to pointer hand if there is features 
         map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
@@ -165,10 +165,42 @@ function single_classify_polygon_vector(_area, _subject) {
 
             // filter only display our feature, not base map feature.
 
-            if (element.layer.id in source_layer[_source_layer_group_id]) {
+            if (element.layer.id.startsWith('layer_')) {
 
 
-                var instant_info = "<br/><div><span>" + element.layer.id + "<ul>";
+                // find the description
+                        var _classification_code = element.layer.id.substring(6);
+                        var _classification_description = "";
+                        var _classification_color = "";
+
+                        _designation_key = _area + "_" + _subject;
+                        _designation_parentArray = _designation[_designation_key];
+
+                        var parentArray = _designation_parentArray;
+
+                        // -----------  Start  for loop classify layers ---------------------
+                        for (var i = 0; i < parentArray.length; i++) {
+
+
+                            
+
+                            if (parentArray[i]['code'] === _classification_code) {
+
+                                _classification_description = parentArray[i]['description'];
+                                _classification_color = parentArray[i]['color'];
+                                break;
+                            }
+
+                        }//for
+
+
+                // End of find the description
+
+
+
+
+
+                        var instant_info = "<br/><div><span>" + _classification_code + " - " + _classification_description + "<ul>";
 
                 for (var _key in element.properties) {
                     var _value = String(element.properties[_key]);
@@ -227,10 +259,8 @@ function single_classify_polygon_vector(_area, _subject) {
     // -------------------- click event open a popup at the location of the feature -----------------------------
 
     map.on('click', function (e) {
-        //var features = map.queryRenderedFeatures(e.point);
-        var features = map.queryRenderedFeatures(e.point, { layers: source_layer_id });
-
-
+        var features = map.queryRenderedFeatures(e.point);
+       
         if (!features.length) {
             return;
         }
@@ -246,11 +276,44 @@ function single_classify_polygon_vector(_area, _subject) {
 
             // filter only display our feature, not base map feature.
 
-            if (element.layer.id in source_layer[_source_layer_group_id]) {
+            if (element.layer.id.startsWith('layer_')) {
+
+
+
+                // ========== find the description ===========
+                var _classification_code = element.layer.id.substring(6);
+                var _classification_description = "";
+                var _classification_color = "";
+
+                _designation_key = _area + "_" + _subject;
+                _designation_parentArray = _designation[_designation_key];
+
+                var parentArray = _designation_parentArray;
+
+                // -----------  Start  for loop classify layers ---------------------
+                for (var i = 0; i < parentArray.length; i++) {
+
+
+
+
+                    if (parentArray[i]['code'] === _classification_code) {
+
+                        _classification_description = parentArray[i]['description'];
+                        _classification_color = parentArray[i]['color'];
+                        break;
+                    }
+
+                }//for
+
+
+                // =========== End of find the description ==============
+
+
+
 
                 _not_popup = true;
 
-                var _popup_html_section = "<tr><td ><span style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + element.layer.id + "&nbsp;</font></span></td><td>" + " " + "</td></tr>";
+                var _popup_html_section = "<tr><td ><span style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _classification_code + " - " + _classification_description + "&nbsp;</font></span></td><td>" + " " + "</td></tr>";
 
                 for (var _key in element.properties) {
                     var _value = String(element.properties[_key]);
