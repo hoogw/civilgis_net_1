@@ -511,8 +511,9 @@
     <Content Include="Scripts\localmap\localclassifycheckboxbuttonmap.js" />
     <Content Include="Scripts\localmap\localclusterpagedclienttablemap.js" />
     <Content Include="Scripts\localmap\localjusttiles.js" />
+    <Content Include="Scripts\mapboxgl\_____classifycheckboxbuttonmap - Copy.js" />
     <Content Include="Scripts\mapboxgl\classifycheckboxbuttonmap.js" />
-    <Content Include="Scripts\mapboxgl\classifyradiobuttonmap.js" />
+    <Content Include="Scripts\mapboxgl\_____classifyradiobuttonmap.js" />
     <Content Include="Scripts\mapboxgl\multilayerrenderedfeaturescrollertablemap.js" />
     <Content Include="Scripts\mapboxgl\multilayersimplecolorhighlightgeojsonmap.js" />
     <Content Include="Scripts\mapboxgl\multilayersimplehighlightgeojsonmap.js" />
@@ -1109,7 +1110,7 @@
     <Content Include="Views\MapBox\simpleclustermap.cshtml" />
     <Content Include="Views\MapBox\simplemap.cshtml" />
     <Content Include="Views\MapBoxGL\classifycheckboxbuttonmap.cshtml" />
-    <Content Include="Views\MapBoxGL\classifyradiobuttonmap.cshtml" />
+    <Content Include="Views\MapBoxGL\_______classifyradiobuttonmap.cshtml" />
     <Content Include="Views\MapBoxGL\simplemap.cshtml" />
     <Content Include="Views\Shared\mapboxgl\_Chicago_side_panel.cshtml" />
     <Content Include="Views\Shared\mapboxgl\_city_side_panel.cshtml" />

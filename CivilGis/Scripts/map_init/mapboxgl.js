@@ -47,6 +47,15 @@ var _feature_uid;
 
 
 
+//----------- classification --------without this will failed load script for classification ------------ 
+var _code_column_name;
+var _designation = {};
+var _designation_key;
+var _designation_parentArray;
+//----------- End  classification -------
+
+
+
 
 function set_initial_location(_area) {
 
