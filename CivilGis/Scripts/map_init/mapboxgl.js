@@ -57,6 +57,19 @@ var _classify_highlight_fillcolor = 'black';
 var _classify_highlight_filloutlinecolor = 'white';
 var _classify_highlight_fillopacity = 0.8;
 
+var _overlay_circle_radius = 3;
+var _overlay_circle_blur = 0;
+var _overlay_circle_color = 'black';
+var _overlay_line_color = 'black';
+var _overlay_line_width = 3;
+var _overlay_fill_color = 'rgba(0, 0, 0, 0)';
+var _overlay_fill_outline_color = 'rgba(0, 0, 0, 0.9)';
+
+
+var _1overlay_layer_ID;
+var _1overlay_layer;
+var _2overlay_layer_ID;
+var _2overlay_layer;
 //----------- End  classification -------
 
 

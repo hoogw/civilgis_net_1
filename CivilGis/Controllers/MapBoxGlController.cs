@@ -554,27 +554,27 @@ namespace CivilGis.Controllers
         //----------------------- classification map section -------------------------------
 
 
-        public ActionResult classifypolygonmap(string area, string subject)
+        public ActionResult classifypolygon2overlay(string area, string subject, string overlay1, string overlay2)
         {
 
             ViewBag.Subject = subject; // for api call 
             ViewBag.Side_Bar = area;
 
             ViewBag.Area = area;
-
+            ViewBag.Overlay1 = overlay1;
+            ViewBag.Overlay2 = overlay2;
 
             return View();
         }
 
-
-        public ActionResult classifypolygonoverlay(string area, string subject)
+        public ActionResult classifypolygon1overlay(string area, string subject, string overlay1)
         {
 
             ViewBag.Subject = subject; // for api call 
             ViewBag.Side_Bar = area;
 
             ViewBag.Area = area;
-
+            ViewBag.Overlay1 = overlay1;
 
             return View();
         }

@@ -511,7 +511,9 @@
     <Content Include="Scripts\localmap\localclassifycheckboxbuttonmap.js" />
     <Content Include="Scripts\localmap\localclusterpagedclienttablemap.js" />
     <Content Include="Scripts\localmap\localjusttiles.js" />
+    <Content Include="Scripts\mapboxgl\classifypolygon2overlay.js" />
     <Content Include="Scripts\mapboxgl\classifypolygonsimple.js" />
+    <Content Include="Scripts\mapboxgl\classifypolygon1overlay.js" />
     <Content Include="Scripts\mapboxgl\classifypolygonswitch.js" />
     <Content Include="Scripts\mapboxgl\_____classifyradiobuttonmap.js" />
     <Content Include="Scripts\mapboxgl\multilayerrenderedfeaturescrollertablemap.js" />
@@ -1170,6 +1172,8 @@
     <Content Include="Views\MapBoxGL\multilayersimplecolorhighlightgeojsonmap.cshtml" />
     <Content Include="Views\MapBoxGL\multilayersimplehighlightgeojsonmap.cshtml" />
     <Content Include="Views\MapBoxGL\classifypolygonsimple.cshtml" />
+    <Content Include="Views\MapBoxGL\classifypolygon1overlay.cshtml" />
+    <Content Include="Views\MapBoxGL\classifypolygon2overlay.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

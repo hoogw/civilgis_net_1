@@ -96,6 +96,20 @@ namespace CivilGis
            );
 
             routes.MapRoute(
+              name: "mapboxgl_overlay1",
+              url: "mapboxgl/{action}/{area}/{subject}/{overlay1}/",
+              defaults: new { controller = "MapBoxGl", action = "index" }
+          );
+
+
+            routes.MapRoute(
+              name: "mapboxgl_overlay2",
+              url: "mapboxgl/{action}/{area}/{subject}/{overlay1}/{overlay2}/",
+              defaults: new { controller = "MapBoxGl", action = "index" }
+          );
+
+
+            routes.MapRoute(
                 name: "mapbox",
                 url: "mapbox/{action}/{area}/{subject}/",
                 defaults: new { controller = "MapBox", action = "index" }
