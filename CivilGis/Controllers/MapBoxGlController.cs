@@ -552,7 +552,9 @@ namespace CivilGis.Controllers
 
 
         //----------------------- classification map section -------------------------------
-        public ActionResult classifycheckboxbuttonmap(string area, string subject)
+
+
+        public ActionResult classifypolygonmap(string area, string subject)
         {
 
             ViewBag.Subject = subject; // for api call 
@@ -565,7 +567,7 @@ namespace CivilGis.Controllers
         }
 
 
-        public ActionResult classifyradiobuttonmap(string area, string subject)
+        public ActionResult classifypolygonoverlay(string area, string subject)
         {
 
             ViewBag.Subject = subject; // for api call 
@@ -578,6 +580,57 @@ namespace CivilGis.Controllers
         }
 
 
+        public ActionResult classifypolygonswitch(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+
+        public ActionResult classifypolygonsimple(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+        public ActionResult classifylinemap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
+
+
+        public ActionResult classifypointmap(string area, string subject)
+        {
+
+            ViewBag.Subject = subject; // for api call 
+            ViewBag.Side_Bar = area;
+
+            ViewBag.Area = area;
+
+
+            return View();
+        }
 
 
         //-----------------------end  classification map section -------------------------------

@@ -52,6 +52,11 @@ var _code_column_name;
 var _designation = {};
 var _designation_key;
 var _designation_parentArray;
+
+var _classify_highlight_fillcolor = 'black';
+var _classify_highlight_filloutlinecolor = 'white';
+var _classify_highlight_fillopacity = 0.8;
+
 //----------- End  classification -------
 
 

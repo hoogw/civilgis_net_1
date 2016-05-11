@@ -3,13 +3,19 @@
  special char '&' is not allowed in code, must replace by '-'. For example I&R should be I-R here, however in database, it could have I&R.
  Other similar case do the same process.
  '&' fail the button and all button after. so in database, should not use '&', instead use '-' replace it. 
+
+
+ Do not define var _designation[] here, must define first in the common file var..... here is give some value
  
  */
 
-_code_column_name ='ZONE_CODE';
 
 
-_designation['city_zoning']=[
+
+ _code_column_name ='ZONE_CODE';
+
+
+ _designation['city_zoning']=[
     
     {'code':'R1','description':"Single Family Residential", 'color':"yellow"}, 
     {'code':'R2-MD','description':"Multiple Family Residential (Medium Density)", 'color':"coral"},

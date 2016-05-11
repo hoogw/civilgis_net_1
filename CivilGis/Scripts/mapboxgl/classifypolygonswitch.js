@@ -84,6 +84,11 @@ function single_classify_polygon_vector(_area, _subject) {
 
 
 
+       
+
+
+
+
 
         // -----------  Start  for loop classify layers ---------------------
         for (var i = 0; i < parentArray.length; i++) {
@@ -128,6 +133,37 @@ function single_classify_polygon_vector(_area, _subject) {
 
 
         // ----------- End of for loop classify layers -----------
+
+
+
+
+        //------------ mouse over checkbox button highlight layer
+
+                    map.addLayer({
+                        'id': '_classify_highlight_layer',
+                        'type': 'fill',
+                        "source": _area,
+
+                        "source-layer": _source_layer,
+
+                        "layout": {
+                            'visibility': 'visible'   // this property must be present in order for checkbox button menu work properly. 
+                        },
+
+                        'paint': {
+                            'fill-color': _classify_highlight_fillcolor,
+                            'fill-outline-color': _classify_highlight_filloutlinecolor,
+                            'fill-opacity': _classify_highlight_fillopacity
+                        },
+
+                        "filter": ["==", _code_column_name, ""]
+
+                    });
+
+
+
+        //------------ mouse over checkbox button highlight layer
+
 
 
 
@@ -380,6 +416,15 @@ function single_classify_checkbox_button_color(_area, _subject) {
                         var parentArray = _designation_parentArray;
 
 
+
+    //.............. first button, for color on/off switch ........................
+
+                        var _first_checkbox_span = '<span class="button-checkbox"> <button type="button" class="btn" data-color="primary" id="_color_onoff_button">COLOR</button> <input type="checkbox" class="hidden" checked /> </span>';
+                                                
+                        $("#checkbox_menu").append(_first_checkbox_span);
+                                            
+
+
       
 
 
@@ -399,8 +444,9 @@ function single_classify_checkbox_button_color(_area, _subject) {
                             _checkbox_Value = _code + " - " + _description;
 
            
+                            // class=" btn-xs"  for extra small button
 
-                            var _checkbox_span = '  <span class="button-checkbox"> <button type="button" class="btn" data-color="' +
+                            var _checkbox_span = '  <span class="button-checkbox"> <button type="button" class="btn btn-xs" data-color="' +
                                                        _color + '" id="' + _layerID + '">' + _checkbox_Value + '</button><input type="checkbox" class="hidden" checked /> </span> ';
 
 
@@ -435,7 +481,11 @@ function single_classify_checkbox_button_color(_area, _subject) {
 
 
 
+
+
         // Event Handlers
+
+        //--------------------------- toggle on/off the layer ---  when click checkbox button -----------------
         $button.on('click', function (e) {
             $checkbox.prop('checked', !$checkbox.is(':checked'));
             $checkbox.triggerHandler('change');
@@ -443,32 +493,192 @@ function single_classify_checkbox_button_color(_area, _subject) {
 
 
 
-            //--------------------------- turn off the layer ---  when click checkbox button -----------------
-            alert(this.id);
+            
+           // alert(this.id);
 
             // e.preventDefault();
             //  e.stopPropagation();
+            if (this.id === '_color_onoff_button') {
 
 
-            //var visibility = map.getLayoutProperty(this.id, 'visibility');
+                if ($checkbox.is(':checked')) {
 
-            //if (visibility === 'visible') {
-            //    map.setLayoutProperty(this.id, 'visibility', 'none');
-            //    // this.className = '';
-            //} else {
-            //    // this.className = 'active';
-            //    map.setLayoutProperty(this.id, 'visibility', 'visible');
-            //};
+                   // alert('turn On color');
 
 
-            //----------------------- End of -- turn off the layer ---  when click checkbox button -----------------
+                    // -------- check all button-------show all layer_....----------------
+                    $('.button-checkbox').each(function () {
 
-        });
+                        // Settings
+                        var $widget = $(this),
+                            $button = $widget.find('button'),
+                            $checkbox = $widget.find('input:checkbox'),
+                            color = $button.data('color');
+
+                       // alert($button.prop('id'));
+                        if ($button.prop('id').startsWith("layer_")) {
+
+
+                            map.setLayoutProperty($button.prop('id'), 'visibility', 'visible');
+
+
+                            // Set checkbox, checked= true
+
+                            $checkbox.prop('checked', true);
+
+                            // Set the button's state
+                            $button.data('state', "on");
+
+                            // Set the button's icon
+                            $button.find('.state-icon')
+                                .removeClass()
+                                .addClass('state-icon ' + settings[$button.data('state')].icon);
+
+                            // Update the button's color
+                           
+                                $button
+                                    .removeClass('btn-default')
+                                    .addClass('btn-' + color + ' active');
+                           
+
+
+                        }//if
+                        
+
+                    }); //each
+                    // --------End of ---------------- check all button-----------show all layer_....------------
+
+
+
+
+                  
+
+
+
+
+
+                } //if
+                else {
+
+                    //alert('turn OFF color');
+
+
+
+
+                    // ---------------- uncheck ----- all button  --------hide all layer_....---------
+                    $('.button-checkbox').each(function () {
+
+                        // Settings
+                        var $widget = $(this),
+                            $button = $widget.find('button'),
+                            $checkbox = $widget.find('input:checkbox'),
+                            color = $button.data('color');
+
+                        // alert($button1.prop('id'));
+                        if ($button.prop('id').startsWith("layer_")) {
+
+                            map.setLayoutProperty($button.prop('id'), 'visibility', 'none');
+
+
+                            // Set checkbox, checked= false 
+
+                            $checkbox.prop('checked', false);
+
+
+                            // Set the button's state
+                            $button.data('state', "off");
+
+                            // Set the button's icon
+                            $button.find('.state-icon')
+                                .removeClass()
+                                .addClass('state-icon ' + settings[$button.data('state')].icon);
+
+                            // Update the button's color
+
+                            $button
+                                    .removeClass('btn-' + color + ' active')
+                                     .addClass('btn-default');
+
+
+
+                        }//if
+
+
+                    }); //each
+
+                    // ------------End of ---- uncheck ----- all button  ----------hide all layer_....-------
+
+                    
+
+
+
+                    
+
+                }
+
+
+            }
+            else {
+                        var visibility = map.getLayoutProperty(this.id, 'visibility');
+
+                        if (visibility === 'visible') {
+                            map.setLayoutProperty(this.id, 'visibility', 'none');
+                            // this.className = '';
+                        } else {
+                           //  this.className = 'active';
+                            map.setLayoutProperty(this.id, 'visibility', 'visible');
+                        };
+
+
+                       
+            }//else 
+
+
+
+        }); // button on click
+        //----------------------- End of -- toggle on/off ---  when click checkbox button -----------------
+
+       
+
+
+
+
+
+
+        //--------------------------- mouse over turn on highlight layer----------------
+
+        //$button.on('mouseover', function (e) {
+           
+        //    map.setFilter("_classify_highlight_layer", ["==", _code_column_name, this.id.substring(6)]);
+
+        //}); // button on mouseover
+
+        //    //----------------------- End of -- mouse over turn on highlight layer -----------------
+
+       
+
+        ////--------------------------- mouse out turn off highlight layer----------------
+
+        //$button.on('mouseout', function (e) {
+
+        //    map.setFilter("_classify_highlight_layer", ["==", _code_column_name, ""]);
+
+           
+           
+        //}); // button on mouseout
+
+            //----------------------- End of -- mouse out turn off highlight layer -----------------
+
+        
+
+
 
 
 
 
         $checkbox.on('change', function () {
+
+            //alert('change');
             updateDisplay();
         });
 
@@ -534,7 +744,7 @@ function initialize() {
 
     initial_location = set_initial_location($("#areaID").val());
 
-
+   
 
     //---------------- init - mapboxGL  ----------------
 
@@ -576,7 +786,7 @@ function initialize() {
 
     ).done(function () {
 
-
+       
         
         single_classify_polygon_vector($("#areaID").val(), $("#subjectID").val());
 

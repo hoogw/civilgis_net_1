@@ -7,10 +7,10 @@
 
  */
 
-_code_column_name ='GP_CODE';
+var _code_column_name ='GP_CODE';
 
 
-_designation['city_general_land_use']=[
+var  _designation['city_general_land_use']=[
     
     {'code':'LDR','description':"Low Density Residential", 'color':"yellow"}, 
     {'code':'MDR','description':"Medium Density Residential", 'color':"coral"},

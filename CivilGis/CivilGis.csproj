@@ -511,8 +511,8 @@
     <Content Include="Scripts\localmap\localclassifycheckboxbuttonmap.js" />
     <Content Include="Scripts\localmap\localclusterpagedclienttablemap.js" />
     <Content Include="Scripts\localmap\localjusttiles.js" />
-    <Content Include="Scripts\mapboxgl\_____classifycheckboxbuttonmap - Copy.js" />
-    <Content Include="Scripts\mapboxgl\classifycheckboxbuttonmap.js" />
+    <Content Include="Scripts\mapboxgl\classifypolygonsimple.js" />
+    <Content Include="Scripts\mapboxgl\classifypolygonswitch.js" />
     <Content Include="Scripts\mapboxgl\_____classifyradiobuttonmap.js" />
     <Content Include="Scripts\mapboxgl\multilayerrenderedfeaturescrollertablemap.js" />
     <Content Include="Scripts\mapboxgl\multilayersimplecolorhighlightgeojsonmap.js" />
@@ -1109,7 +1109,7 @@
     <Content Include="Views\MapBox\scrollerservertablemap.cshtml" />
     <Content Include="Views\MapBox\simpleclustermap.cshtml" />
     <Content Include="Views\MapBox\simplemap.cshtml" />
-    <Content Include="Views\MapBoxGL\classifycheckboxbuttonmap.cshtml" />
+    <Content Include="Views\MapBoxGL\classifypolygonswitch.cshtml" />
     <Content Include="Views\MapBoxGL\_______classifyradiobuttonmap.cshtml" />
     <Content Include="Views\MapBoxGL\simplemap.cshtml" />
     <Content Include="Views\Shared\mapboxgl\_Chicago_side_panel.cshtml" />
@@ -1169,6 +1169,7 @@
     <Content Include="Views\MapBoxGL\multilayersourcefeaturescrollertablemap.cshtml" />
     <Content Include="Views\MapBoxGL\multilayersimplecolorhighlightgeojsonmap.cshtml" />
     <Content Include="Views\MapBoxGL\multilayersimplehighlightgeojsonmap.cshtml" />
+    <Content Include="Views\MapBoxGL\classifypolygonsimple.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
