@@ -515,7 +515,6 @@
     <Content Include="Scripts\mapboxgl\classifypolygonsimple.js" />
     <Content Include="Scripts\mapboxgl\classifypolygon1overlay.js" />
     <Content Include="Scripts\mapboxgl\classifypolygonswitch.js" />
-    <Content Include="Scripts\mapboxgl\_____classifyradiobuttonmap.js" />
     <Content Include="Scripts\mapboxgl\multilayerrenderedfeaturescrollertablemap.js" />
     <Content Include="Scripts\mapboxgl\multilayersimplecolorhighlightgeojsonmap.js" />
     <Content Include="Scripts\mapboxgl\multilayersimplehighlightgeojsonmap.js" />

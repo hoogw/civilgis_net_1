@@ -299,13 +299,15 @@ function classify_polygon_vector_2overlay(_area, _subject, _1overlay, _2overlay)
         map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
 
 
-        var instand_info_table = "";
+        $("#info-table").empty();
 
-        for (var i = 0; i < features.length; i++) {
+        // DO not use i because inner loop already use i, here must use different letter, otherwise will conflict 
+        for (var x = 0; x < features.length; x++) {
 
 
 
-            var element = features[i];
+            var element = features[x];
+
 
 
 
@@ -346,41 +348,36 @@ function classify_polygon_vector_2overlay(_area, _subject, _1overlay, _2overlay)
 
 
 
-                        var instant_info = "<br/><div><span>" + _classification_code + " - " + _classification_description + "<ul>";
+                        $("#info-table").append("<br/><div><span>" + _classification_code + " - " + _classification_description + "<ul>");
 
                 for (var _key in element.properties) {
                     var _value = String(element.properties[_key]);
-                    instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _key + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+                    $("#info-table").append("<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _key + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>");
 
                 }// for
 
 
 
-                instant_info = instant_info + "</ul> </span></div>";
-
-
-                instand_info_table = instand_info_table + instant_info;
+                $("#info-table").append("</ul> </span></div><br/>");
 
 
             }// if filter
-            else if (element.layer.id.startsWith('overlay1_')) {
+            else if (element.layer.id.startsWith('overlay')) {
 
 
                 //.............. .......... info-table ..............
 
-                var instant_info = "<br/><div><span>" + element.layer.id.substring(9) + "<ul>";
+                $("#info-table").append("<br/><div><span>" + element.layer.id.substring(9) + "<ul>");
 
-                for (var _key in element.properties) {
-                    var _value = String(element.properties[_key]);
-                    instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _key + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+
+                for (var _key1 in element.properties) {
+                    var _value1 = String(element.properties[_key1]);
+                    $("#info-table").append("<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _key1 + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value1 + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>");
 
                 }// for
 
 
-                instant_info = instant_info + "</ul> </span></div>";
-
-
-                instand_info_table = instand_info_table + instant_info;
+                $("#info-table").append("</ul></span></div><br/>");
 
                 //.............. End ........... info-table ..............
 
@@ -392,22 +389,7 @@ function classify_polygon_vector_2overlay(_area, _subject, _1overlay, _2overlay)
 
 
 
-        }//for feature length
-
-
-
-        // update bottom <div>
-        document.getElementById("info-table").innerHTML = instand_info_table;
-
-
-
-
-
-
-
-
-
-
+        }//for x feature length
 
 
 
@@ -495,16 +477,16 @@ function classify_polygon_vector_2overlay(_area, _subject, _1overlay, _2overlay)
 
             }//if filter
 
-            else if (element.layer.id.startsWith('overlay1_')) {
+            else if (element.layer.id.startsWith('overlay')) {
             
 
 
                 var _popup_html_section = "<tr><td ><span style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + element.layer.id.substring(9) + "&nbsp;</font></span></td><td>" + " " + "</td></tr>";
 
-                for (var _key in element.properties) {
-                    var _value = String(element.properties[_key]);
+                for (var _key1 in element.properties) {
+                    var _value1 = String(element.properties[_key1]);
 
-                    _popup_html_section = _popup_html_section + "<tr><td ><span style=\"float:left; list-style: none;font-size:10px\">" + _key + "</span></td><td><span style=\"float:left; list-style: none;font-size:8px\">" + _value + "</span></td></tr>";
+                    _popup_html_section = _popup_html_section + "<tr><td ><span style=\"float:left; list-style: none;font-size:10px\">" + _key1 + "</span></td><td><span style=\"float:left; list-style: none;font-size:8px\">" + _value1 + "</span></td></tr>";
 
                 }// for
 
@@ -580,12 +562,19 @@ function classify_checkbox_button_color_2overlay(_area, _subject, _1overlay, _2o
                        
                                             
 
-                        var _1overlay_checkbox_span = '<span class="button-checkbox"> <button type="button" class="btn" data-color="white" id="' + _1overlay_layer_ID + '">' + _1overlay + '</button> <input type="checkbox" class="hidden" checked /> </span>';
+                        var _1overlay_checkbox_span = '<span class="button-checkbox"> <button type="button" class="btn" data-color="primary" id="' + _1overlay_layer_ID + '">' + _1overlay + '</button> <input type="checkbox" class="hidden" checked /> </span>';
 
                         $("#checkbox_menu").append(_1overlay_checkbox_span);
       
 
-                        var _switchbutton_checkbox_span = '<span class="button-checkbox"> <button type="button" class="btn" data-color="black" id="_color_onoff_button">COLOR</button> <input type="checkbox" class="hidden" checked /> </span>';
+
+                        var _2overlay_checkbox_span = '<span class="button-checkbox"> <button type="button" class="btn" data-color="primary" id="' + _2overlay_layer_ID + '">' + _2overlay + '</button> <input type="checkbox" class="hidden" checked /> </span>';
+
+                        $("#checkbox_menu").append(_2overlay_checkbox_span);
+
+
+
+                        var _switchbutton_checkbox_span = '<span class="button-checkbox"> <button type="button" class="btn" data-color="primary" id="_color_onoff_button">' + _subject + '</button> <input type="checkbox" class="hidden" checked /> </span>';
 
                         $("#checkbox_menu").append(_switchbutton_checkbox_span);
 

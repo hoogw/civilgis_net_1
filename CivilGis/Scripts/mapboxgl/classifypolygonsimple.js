@@ -191,11 +191,11 @@ function single_classify_polygon_vector(_area, _subject) {
 
         var instand_info_table = "";
 
-        for (var i = 0; i < features.length; i++) {
+        for (var x = 0; x < features.length; x++) {
 
 
 
-            var element = features[i];
+            var element = features[x];
 
 
 

@@ -191,11 +191,11 @@ function single_classify_polygon_vector(_area, _subject) {
 
         var instand_info_table = "";
 
-        for (var i = 0; i < features.length; i++) {
+        for (var x = 0; x < features.length; x++) {
 
 
 
-            var element = features[i];
+            var element = features[x];
 
 
 
@@ -419,7 +419,7 @@ function single_classify_checkbox_button_color(_area, _subject) {
 
     //.............. first button, for color on/off switch ........................
 
-                        var _first_checkbox_span = '<span class="button-checkbox"> <button type="button" class="btn" data-color="primary" id="_color_onoff_button">COLOR</button> <input type="checkbox" class="hidden" checked /> </span>';
+                        var _first_checkbox_span = '<span class="button-checkbox"> <button type="button" class="btn" data-color="primary" id="_color_onoff_button">' + _subject + '</button> <input type="checkbox" class="hidden" checked /> </span>';
                                                 
                         $("#checkbox_menu").append(_first_checkbox_span);
                                             
