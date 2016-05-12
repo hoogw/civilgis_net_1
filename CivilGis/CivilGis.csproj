@@ -1111,7 +1111,6 @@
     <Content Include="Views\MapBox\simpleclustermap.cshtml" />
     <Content Include="Views\MapBox\simplemap.cshtml" />
     <Content Include="Views\MapBoxGL\classifypolygonswitch.cshtml" />
-    <Content Include="Views\MapBoxGL\_______classifyradiobuttonmap.cshtml" />
     <Content Include="Views\MapBoxGL\simplemap.cshtml" />
     <Content Include="Views\Shared\mapboxgl\_Chicago_side_panel.cshtml" />
     <Content Include="Views\Shared\mapboxgl\_city_side_panel.cshtml" />
