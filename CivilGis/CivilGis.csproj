@@ -603,6 +603,7 @@
     <Content Include="Scripts\map_api\leaflet_slider\leaflet-slider.js" />
     <Content Include="Scripts\map_init\bingmap.js" />
     <Content Include="Scripts\map_init\heremap.js" />
+    <Content Include="Scripts\map_init\mapboxgl_without_common_Funtion.js" />
     <Content Include="Scripts\map_init\mapboxgl.js" />
     <Content Include="Scripts\map_init\mapquest.js" />
     <Content Include="Scripts\map_init\mapbox.js" />
