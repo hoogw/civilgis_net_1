@@ -2,6 +2,8 @@ var heremap_app_id = "J5aP2hv9dOa9Us8e6OPn";
 var heremap_app_code = "oXTkvCJfsVdMTkD56CBy0g";
 
 var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
+var _tile_baseURL_localhost = 'http://localhost:8888/v2/';
+
 
 var base_layers;
 var baseMaps;
@@ -27,7 +29,7 @@ var _mouseover_polygon_style;
 var _mouseover_line_style;
 var geojson_classification_mouseover_highlight_style;
 
-
+var utfgrid_tile_layer;
 
 var _tile_exist = false;
 var _tile_list;
@@ -478,6 +480,9 @@ function init_tiling(){
                         // _tile_baseURL = 'http://tile.transparentgov.net/v2/';
                         // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
 
+                        // local testing only
+                          _tile_baseURL = _tile_baseURL_localhost;
+
 
                          var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.png';
                          var overlay_tile_Attrib = 'Map data &#169; <a href="http://transparentgov.net">transparentgov.net</a> contributors';
@@ -491,20 +496,78 @@ function init_tiling(){
 
 
 
-            //............................ bind opacity to slider ........................
 
-                         //_tile_slider.noUiSlider.on('set', function (values, handle, unencoded, tap, positions) {
+            //===================add ========== UTFgrid =================================
+
+                         var utfGrid_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.grid.json?callback={cb}';
+                        // var utfGrid_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.grid.json';
+
+                         var utfGrid = new L.UtfGrid(utfGrid_tile_Url,  {
+                            // useJsonP: false
+                         });
+                         
+
+                         utfGrid.on('click', function (e) {
+                             if (e.data) {
 
 
-                         //    var _slider_handle_value = values[handle];
-                         //    _slider_handle_value = Math.round(_slider_handle_value) / 100;
+                                 var _utfgrid_info = "<ul>";
+                                 var _object = e.data;
 
-                         //    tile_MapType.setOpacity(_slider_handle_value);
+                                 for (var _property in _object) {
+                                     if (_object.hasOwnProperty(_property)) {
 
-                         //});
+                                         _utfgrid_info = _utfgrid_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + String(_object[_property]) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+
+                                     }
+                                 }
+
+                                 _utfgrid_info = _utfgrid_info + "</ul>";
+                                 document.getElementById('utfgrid_info').innerHTML = _utfgrid_info;
 
 
-            //................End ....... bind opacity to slider ........................
+                                 
+                             } else {
+                                // document.getElementById('utfgrid_info').innerHTML = 'click: nothing';
+                             }
+                         });
+
+
+                         utfGrid.on('mouseover', function (e) {
+                             if (e.data) {
+                                 
+
+                                 var _utfgrid_info = "<ul>";
+                                 var _object = e.data;
+
+                                 for (var _property in _object) {
+                                     if (_object.hasOwnProperty(_property)) {
+                                         
+                                         _utfgrid_info = _utfgrid_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + String(_object[_property]) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+                                        
+                                     }
+                                 }
+
+                                 _utfgrid_info = _utfgrid_info + "</ul>";
+                                 document.getElementById('utfgrid_info').innerHTML = _utfgrid_info;
+
+                             } else {
+                                // document.getElementById('utfgrid_info').innerHTML = 'hover: nothing';
+                             }
+                            
+                         });
+
+
+                         utfGrid.on('mouseout', function (e) {
+                             document.getElementById('utfgrid_info').innerHTML = '';
+                         });
+
+                         utfgrid_tile_layer = map.addLayer(utfGrid);
+
+
+            //==================== End ========== UTFgrid =================================
+
+            
 
 
             //................. leaflet slider contral ............................
@@ -537,6 +600,10 @@ function init_tiling(){
 
 
 }// init tile
+
+
+
+
 
 
 
@@ -798,6 +865,100 @@ function init_base_map() {
 
 
 // ############# retired ######################
+
+
+
+function init_tiling_without_UTFGrid() {
+
+    // --------------------- dynamic load javascript file  ---------------------------
+
+
+
+    var _tile_list_js = "/Scripts/map_init/tile_list/googlemap_tile_list.js";
+
+    $.when(
+             $.getScript(_tile_list_js)
+     /*
+    $.getScript( "/mypath/myscript1.js" ),
+    $.getScript( "/mypath/myscript2.js" ),
+    $.getScript( "/mypath/myscript3.js" ),
+    */
+
+    ).done(function () {
+
+        var _tile_name = _areaID + "_" + _subjectID;
+        var _i = _tile_list.indexOf(_tile_name);
+        //alert(_tile_name);
+        if (_i >= 0) {
+
+
+
+
+
+            //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
+            // _tile_baseURL = 'http://tile.transparentgov.net/v2/';
+            // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
+
+
+            var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.png';
+            var overlay_tile_Attrib = 'Map data &#169; <a href="http://transparentgov.net">transparentgov.net</a> contributors';
+            tile_MapType = new L.TileLayer(overlay_tile_Url, { minZoom: 3, maxZoom: 22, errorTileUrl: '  ', unloadInvisibleTiles: true, reuseTiles: true, attribution: overlay_tile_Attrib });
+
+            // ===== above must define errorTileUrl:'  ', must have some character or space in '  ' above. If not define this, missing tile will show a broken image icon on map everywhere, if define this, it just failed to load empty URL, not showing broken image icon
+
+
+            overlay_tile_layer = map.addLayer(tile_MapType);
+            tile_MapType.setZIndex(99);
+
+
+
+            //............................ bind opacity to slider ........................
+
+            //_tile_slider.noUiSlider.on('set', function (values, handle, unencoded, tap, positions) {
+
+
+            //    var _slider_handle_value = values[handle];
+            //    _slider_handle_value = Math.round(_slider_handle_value) / 100;
+
+            //    tile_MapType.setOpacity(_slider_handle_value);
+
+            //});
+
+
+            //................End ....... bind opacity to slider ........................
+
+
+            //................. leaflet slider contral ............................
+
+            _slider_control = L.control.slider(function (value) {
+
+
+
+                _slidercontrol_handle_value = Math.round(value) / 100;
+                tile_MapType.setOpacity(_slidercontrol_handle_value);
+
+            },
+
+                    { id: _slider_control, position: 'bottomright', width: '400px', orientation: 'vertical', logo: 'O', min: 0, max: 100, value: 100, collapsed: false, step: 10 });
+
+            map.addControl(_slider_control);
+
+
+            //................End....................... leaflet slider contral ............................
+
+
+
+
+            _tile_exist = true;
+
+        }// if
+
+
+    }); // when done
+
+
+}// init tile
+
 
 function tile_switch_button() {
 

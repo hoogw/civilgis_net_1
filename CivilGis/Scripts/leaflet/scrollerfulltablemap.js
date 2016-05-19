@@ -346,7 +346,8 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
                         // update bottom <div>
                         document.getElementById("info-table").innerHTML = instant_info;
-
+                        // hide 'utfgrid_info' <div>
+                        $('#utfgrid_info').hide();
 
 
                     });// layer.on mouseover
@@ -448,6 +449,13 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
             }// if
             //-------------------- end remove last geojson ------------------------------
+
+
+
+            // show 'utfgrid_info' <div>
+            $('#utfgrid_info').show();
+            // empty bottom <div>
+            document.getElementById("info-table").innerHTML = "";
 
 
             document.getElementById("ajaxload").style.display = "none";
