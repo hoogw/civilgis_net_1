@@ -153,6 +153,12 @@ namespace CivilGis
             );
 
 
+            routes.MapRoute(
+                name: "leafletmvtmap",
+                url: "leafletmvt/{action}/{area}/{subject}/",
+                defaults: new { controller = "Leafletmvt", action = "index" }
+            );
+
 
 
             routes.MapRoute(

@@ -149,6 +149,23 @@ namespace CivilGis.Controllers
 
 
 
+        public ActionResult leafletmvt(string area)
+        {
+
+
+
+            ViewBag.Area = area;
+
+            _view_path = "~/Views/Home/leafletmvt/" + area + ".cshtml";
+
+
+            return View(_view_path);
+        }
+
+
+
+
+
         public ActionResult openlayers(string area)
         {
 
