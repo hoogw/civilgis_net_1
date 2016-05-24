@@ -19,35 +19,35 @@ Map {
 #City_Zoning[ZONE_CODE='R1']{
   line-color:#FFFF00;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#FFFF00;
 }
 
 #City_Zoning[ZONE_CODE='R2-MD']{
   line-color:#FF7F50;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#FF7F50;
 }
 
 #City_Zoning[ZONE_CODE='R2-HD']{
   line-color:#D2691E;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#D2691E;
 }
 
 #City_Zoning[ZONE_CODE='R3']{
   line-color:#A52A2A;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#A52A2A;
 }
 
 #City_Zoning[ZONE_CODE='AP']{
   line-color:#FFF8DC;
-  line-width:0;
-  polygon-opacity:0.5;
+  line-width:1;
+  polygon-opacity: 0.9;
   polygon-fill:#FFF8DC;
 }
 
@@ -55,7 +55,7 @@ Map {
 #City_Zoning[ZONE_CODE='CL']{
   line-color:#800080;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#800080;
 }
 
@@ -63,7 +63,7 @@ Map {
 #City_Zoning[ZONE_CODE='C1-S']{
   line-color:#DDA0DD;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#DDA0DD;
 }
 
@@ -71,14 +71,14 @@ Map {
 #City_Zoning[ZONE_CODE='C1']{
   line-color:#FF0000;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#FF0000;
 }
 
 #City_Zoning[ZONE_CODE='C2']{
   line-color:#FF6347;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#FF6347;
 }
 
@@ -87,7 +87,7 @@ Map {
 #City_Zoning[ZONE_CODE='TC']{
   line-color:#EE82EE;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#EE82EE;
 }
 
@@ -95,7 +95,7 @@ Map {
 #City_Zoning[ZONE_CODE='PDR-LD']{
   line-color:#FFEFD5;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#FFEFD5;
 }
 
@@ -103,7 +103,7 @@ Map {
 #City_Zoning[ZONE_CODE='PDR-MD']{
   line-color:#FFDAB9;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#FFDAB9;
 }
 
@@ -111,7 +111,7 @@ Map {
 #City_Zoning[ZONE_CODE='PDR-HD']{
   line-color:#8B4513;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#8B4513;
 }
 
@@ -119,20 +119,20 @@ Map {
 #City_Zoning[ZONE_CODE='PDC']{
   line-color:#FFA500;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#FFA500;
 }
 #City_Zoning[ZONE_CODE='PDI']{
   line-color:#87CEEB;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#87CEEB;
 }
 
 #City_Zoning[ZONE_CODE='I-R']{
   line-color:#008000;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#008000;
 }
 
@@ -140,7 +140,7 @@ Map {
 #City_Zoning[ZONE_CODE='MG']{
   line-color:#0000FF;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#0000FF;
 }
 
@@ -148,6 +148,6 @@ Map {
 #City_Zoning[ZONE_CODE='MP']{
   line-color:#8A2BE2;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#8A2BE2;
 }
