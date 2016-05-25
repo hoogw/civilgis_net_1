@@ -39,7 +39,8 @@ var utfgrid_layer;
 var utfgrid_source;
 var _view;
 var mapElement;
-
+var _area_boundaryline_vectorSource;
+var _area_boundaryline_layer;
 
 
 
@@ -351,13 +352,10 @@ function add_area_boundary(_area) {
 
 
     _multi_polyline = 'No';
-    var _js_url = "/Scripts/area_boundary/leaflet/" + _area + ".js";
+    var _js_url = "/Scripts/area_boundary/openlayers/" + _area + ".js";
 
 
 
-
-
-    // NOTE:  Polyline use path: no S, while  polygon, use paths:   have S,   if you missing S will fail drawing
 
 
     $.when(
@@ -374,25 +372,25 @@ function add_area_boundary(_area) {
 
 
 
-        //if(_area_polygon_coord[_area][0] instanceof Array)
+
+       
         if (_multi_polyline == 'Yes') {
             // for multi line
 
 
+            _area_polyline_multi = new ol.Feature({ geometry: new ol.geom.MultiLineString(_area_polygon_coord[_area]) });
 
-            var parentArray = _area_polygon_coord[_area];
+            // must have this transform, otherwise, no line showup.
+            _area_polyline_multi.getGeometry().transform('EPSG:4326', 'EPSG:3857');
+
+            
 
 
-            for (var i = 0; i < parentArray.length; i++) {
+            _area_boundaryline_vectorSource = new ol.source.Vector({
+                features: [_area_polyline_multi]
+            });
 
-
-
-
-                var _area_polyline_multi = L.polyline(parentArray[i], { color: '#0000FF', weight: 5, opacity: 0.8 }).addTo(map);
-
-                   
-
-            }// outer for
+           
 
 
 
@@ -401,60 +399,74 @@ function add_area_boundary(_area) {
 
            
 
+            _area_polyline = new ol.Feature({ geometry : new ol.geom.LineString(_area_polygon_coord[_area]) });
+                                               
 
-            _area_polyline = L.polyline(_area_polygon_coord[_area], { color: '#0000FF', weight: 5, opacity: 0.8 }).addTo(map);
+            // must have this transform, otherwise, no line showup.
+            _area_polyline.getGeometry().transform('EPSG:4326', 'EPSG:3857');
 
            
+
+            _area_boundaryline_vectorSource = new ol.source.Vector({
+                features: [_area_polyline]
+            });
+
+
+           
+
+           
+
+            // ---------- another way,    but need transform('EPSG:4326', 'EPSG:3857');-------------------
+            //_area_polyline = new ol.layer.Vector({
+            //    source: new ol.source.Vector({
+            //        features: [new ol.Feature({
+            //            geometry: new ol.geom.LineString(_area_polygon_coord[_area]),
+            //            name: '_area_polyline'
+            //        })]
+            //    }),
+            //});
+
+            //map.addLayer(_area_polyline);
+            // ---------- another way,    but need transform('EPSG:4326', 'EPSG:3857');-------------------
+
+
+
 
            
         }//else
 
 
+
+        _area_boundaryline_layer = new ol.layer.Vector({
+
+            source: _area_boundaryline_vectorSource,
+
+            style: new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: 'rgba(255, 255, 255, 0.2)'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: '#ffcc33',
+                    width: 8
+                }),
+
+                image: new ol.style.Circle({
+                    radius: 7,
+                    fill: new ol.style.Fill({
+                        color: '#ffcc33'
+                    })
+                })//image
+
+            })//style
+        })// vector
+
+
+
+        map.addLayer(_area_boundaryline_layer);
+
+
+
     }); // when done
-
-
-
-
-
-
-    /*
-    
-                                    For 2 dimenional Arrays:
-    
-                                    for(var i = 0; i < parentArray.length; i++){
-                                        for(var j = 0; j < parentArray[i].length; j++){
-    
-                                            console.log(parentArray[i][j]);
-                                        }
-                                    }
-                                    For arrays with an unknown number of dimensions you have to use recursion:
-    
-                                    function printArray(arr){
-                                        for(var i = 0; i < arr.length; i++){
-                                            if(arr[i] instanceof Array){
-                                                printArray(arr[i]);
-                                            }else{
-                                                console.log(arr[i]);
-                                            }
-                                        }
-                                    }
-    
-                                    or
-    
-                                    var printArray = function(arr) {
-                                        if ( typeof(arr) == "object") {
-                                            for (var i = 0; i < arr.length; i++) {
-                                                printArray(arr[i]);
-                                            }
-                                        }
-                                        else document.write(arr);
-                                    }
-    
-                                    printArray(parentArray);
-    
-    
-    
-    */
 
 
 
@@ -462,183 +474,10 @@ function add_area_boundary(_area) {
 
 
 
-function init_tiling(){
-    
-    // --------------------- dynamic load javascript file  ---------------------------
 
 
-    
-    var _tile_list_js = "/Scripts/map_init/tile_list/googlemap_tile_list.js";
 
-    $.when(
-             $.getScript(_tile_list_js)
-     /*
-    $.getScript( "/mypath/myscript1.js" ),
-    $.getScript( "/mypath/myscript2.js" ),
-    $.getScript( "/mypath/myscript3.js" ),
-    */
 
-    ).done(function () {
-
-        var  _tile_name = _areaID + "_" + _subjectID;
-        var _i = _tile_list.indexOf(_tile_name);
-        //alert(_tile_name);
-        if (_i >= 0) {
-
-
-
-
-
-                        //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
-                        // _tile_baseURL = 'http://tile.transparentgov.net/v2/';
-                        // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
-
-                        // local testing only
-                          _tile_baseURL = _tile_baseURL_localhost;
-
-
-                         var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.png';
-                         var overlay_tile_Attrib = 'Map data &#169; <a href="http://transparentgov.net">transparentgov.net</a> contributors';
-                         tile_MapType = new L.TileLayer(overlay_tile_Url, { minZoom: 3, maxZoom: 22, errorTileUrl:'  ', unloadInvisibleTiles: true, reuseTiles:true, attribution: overlay_tile_Attrib });
-
-                        // ===== above must define errorTileUrl:'  ', must have some character or space in '  ' above. If not define this, missing tile will show a broken image icon on map everywhere, if define this, it just failed to load empty URL, not showing broken image icon
-
-
-                         overlay_tile_layer = map.addLayer(tile_MapType);
-                         tile_MapType.setZIndex(99);
-
-
-
-
-            //===================add ========== UTFgrid =================================
-
-                         var utfGrid_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.grid.json?callback={cb}';
-                        // var utfGrid_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.grid.json';
-
-                         var utfGrid = new L.UtfGrid(utfGrid_tile_Url,  {
-                            // useJsonP: false
-                         });
-                         
-
-                         utfGrid.on('click', function (e) {
-                             if (e.data) {
-
-
-                                 var _utfgrid_info = "<ul>";
-                                 var _object = e.data;
-
-                                 for (var _property in _object) {
-                                     if (_object.hasOwnProperty(_property)) {
-
-                                         _utfgrid_info = _utfgrid_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + String(_object[_property]) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
-
-                                     }
-                                 }
-
-                                 _utfgrid_info = _utfgrid_info + "</ul>";
-                                 document.getElementById('utfgrid_info').innerHTML = _utfgrid_info;
-
-
-                                 
-                             } else {
-                                // document.getElementById('utfgrid_info').innerHTML = 'click: nothing';
-                             }
-                         });
-
-
-                         utfGrid.on('mouseover', function (e) {
-                             if (e.data) {
-                                 
-
-                                 var _utfgrid_info = "<ul>";
-                                 var _object = e.data;
-
-                                 for (var _property in _object) {
-                                     if (_object.hasOwnProperty(_property)) {
-                                         
-                                         _utfgrid_info = _utfgrid_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + String(_object[_property]) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
-                                        
-                                     }
-                                 }
-
-                                 _utfgrid_info = _utfgrid_info + "</ul>";
-                                 document.getElementById('utfgrid_info').innerHTML = _utfgrid_info;
-
-                             } else {
-                                // document.getElementById('utfgrid_info').innerHTML = 'hover: nothing';
-                             }
-                            
-                         });
-
-
-                         utfGrid.on('mouseout', function (e) {
-                             document.getElementById('utfgrid_info').innerHTML = '';
-                         });
-
-                         utfgrid_tile_layer = map.addLayer(utfGrid);
-
-
-            //==================== End ========== UTFgrid =================================
-
-            
-
-
-            //................. leaflet slider contral ............................
-
-                         _slider_control = L.control.slider(function (value) {
-
-
-                             
-                                                                            _slidercontrol_handle_value = Math.round(value) / 100;
-                                                                            tile_MapType.setOpacity(_slidercontrol_handle_value);
-
-                                                                               },
-
-                                 { id: _slider_control, position: 'bottomright',width:'400px', orientation: 'vertical', logo: 'O', min: 0, max: 100, value: 100, collapsed: false, step: 10 });
-
-                         map.addControl(_slider_control);
-
-
-            //................End....................... leaflet slider contral ............................
-
-
-
-
-                         _tile_exist = true;
-
-                     }// if
-
-
-    }); // when done
-
-
-}// init tile
-
-
-
-
-
-
-
-function add_tiles(){
-    
-   
-
-    
-   
-    tile_MapType.setZIndex(99);
-    // tile_MapType.bringToFront();
-        
-  
-}
-
-function remove_tiles() {
-
-
-    tile_MapType.bringToBack();
-
-
-}
 
 
 //------------- basic simple map function -----------------------------
@@ -784,7 +623,7 @@ function geocoding() {
 
 
 
-function init_base_map() {
+function init_base_map_tiling() {
 
 
     // local testing only
@@ -1343,14 +1182,14 @@ function init_base_map() {
     
 
 
-
+     add_area_boundary($("#areaID").val());
     
 
 
     
 
 
-}
+}// init_base_map_tiling
 
 
 

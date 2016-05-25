@@ -363,6 +363,7 @@
     <Content Include="Scripts\area_boundary\New_York_Manhattan.js" />
     <Content Include="Scripts\area_boundary\New_York_Queens.js" />
     <Content Include="Scripts\area_boundary\New_York_Staten_Island.js" />
+    <Content Include="Scripts\area_boundary\openlayers\Santa_Monica.js" />
     <Content Include="Scripts\area_boundary\Orlando.js" />
     <Content Include="Scripts\area_boundary\Palo_Alto.js" />
     <Content Include="Scripts\area_boundary\Philadelphia.js" />

@@ -2,19 +2,6 @@
 
 
 
-function just_add_tiles() {
-
-   
-    init_tiling();
-  
-
-    document.getElementById("ajaxload").style.display = "none";
-    document.getElementById("title_info").style.display = "none";
-    document.getElementById("legend").style.display = "none";
-
-
-
-}
 
 
 
@@ -32,24 +19,20 @@ function initialize() {
 
 
 
-    init_base_map();
+    init_base_map_tiling();
 
 
+    document.getElementById("ajaxload").style.display = "none";
+    document.getElementById("title_info").style.display = "none";
+    document.getElementById("legend").style.display = "none";
     
    
 
 
    
 
-   
 
 
-   // add_area_boundary($("#areaID").val());
-
-
-
-
-   // just_add_tiles();
 
 
 
