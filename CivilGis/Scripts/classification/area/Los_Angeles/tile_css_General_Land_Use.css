@@ -13,7 +13,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='HIC']{
   line-color:#00FFFF;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#00FFFF;
 }
 
@@ -21,7 +21,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='NHIC']{
   line-color:#7FFFD4;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#7FFFD4;
 }
 
@@ -30,7 +30,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='LM']{
   line-color:#0000FF;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#0000FF;
 }
 
@@ -38,7 +38,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='HI']{
   line-color:#8A2BE2;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#8A2BE2;
 }
 
@@ -46,7 +46,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='MR']{
   line-color:#A52A2A;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#A52A2A;
 }
 
@@ -55,7 +55,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='LMR']{
   line-color:#D2691E;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#D2691E;
 }
 
@@ -63,7 +63,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='MNMR']{
   line-color:#FF7F50;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#FF7F50;
 }
 
@@ -71,7 +71,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='NOC']{
   line-color:#FFF8DC;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#FFF8DC;
 }
 
@@ -79,7 +79,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='HMR']{
   line-color:#FF00FF;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#FF00FF;
 }
 
@@ -87,7 +87,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='AL']{
   line-color:#008000;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#008000;
 }
 
@@ -96,7 +96,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='CC']{
   line-color:#FF69B4;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#FF69B4;
 }
 
@@ -105,7 +105,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='LI']{
   line-color:#4B0082;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#4B0082;
 }
 
@@ -114,7 +114,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='AN']{
   line-color:#00FF00;
   line-width:1;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#00FF00;
 }
 
@@ -123,7 +123,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='AA']{
   line-color:#00FF00;
   line-width:1;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#00FF00;
 }
 
@@ -132,7 +132,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='PF']{
   line-color:#ADD8E6;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#ADD8E6;
 }
 
@@ -141,7 +141,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='OS']{
   line-color:#808000;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#808000;
 }
 
@@ -150,7 +150,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='GC']{
   line-color:#FFA500;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#FFA500;
 }
 
@@ -159,7 +159,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='RCC']{
   line-color:#800080;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#800080;
 }
 
@@ -168,7 +168,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='VHR']{
   line-color:#FFEFD5;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#FFEFD5;
 }
 
@@ -177,7 +177,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='VLR']{
   line-color:#FFDAB9;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#FFDAB9;
 }
 
@@ -186,7 +186,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='HOLC']{
   line-color:#DDA0DD;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#DDA0DD;
 }
 
@@ -194,7 +194,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='LC']{
   line-color:#FF0000;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#FF0000;
 }
 
@@ -203,7 +203,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='HM']{
   line-color:#C0C0C0;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#C0C0C0;
 }
 
@@ -211,7 +211,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='HI']{
  line-color:#C0C0C0;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#C0C0C0;
 }
 
@@ -220,7 +220,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='LM']{
   line-color:#87CEEB;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#87CEEB;
 }
 
@@ -228,7 +228,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='HR']{
   line-color:#8B4513;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#8B4513;
 }
 
@@ -238,7 +238,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='RC']{
   line-color:#FF6347;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#FF6347;
 }
 
@@ -246,7 +246,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='HOC']{
   line-color:#D2B48C;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#D2B48C;
 }
 
@@ -255,7 +255,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='NC']{
   line-color:#EE82EE;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#EE82EE;
 }
 
@@ -264,7 +264,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='CM']{
   line-color:#F5DEB3;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#F5DEB3;
 }
 
@@ -272,7 +272,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='CF']{
   line-color:#F5DEB3;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#F5DEB3;
 }
 
@@ -280,7 +280,7 @@ Map {
 #Los_Angeles_General_Land_Use[GPLU_CODE='LR']{
   line-color:#FFFF00;
   line-width:0;
-  polygon-opacity:0.5;
+  polygon-opacity: 0.9;
   polygon-fill:#FFFF00;
 }
 
