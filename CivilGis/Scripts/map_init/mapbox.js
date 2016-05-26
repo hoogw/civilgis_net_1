@@ -477,7 +477,7 @@ function init_tiling() {
 
 
             // local testing only
-            _tile_baseURL = _tile_baseURL_localhost;
+            //_tile_baseURL = _tile_baseURL_localhost;
 
             //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
             //_tile_baseURL = 'http://tile.transparentgov.net/v2/';

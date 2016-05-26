@@ -642,6 +642,9 @@
     <Content Include="Scripts\map_api\leaflet_slider\leaflet-slider.css" />
     <Content Include="Scripts\map_api\leaflet_slider\leaflet-slider.js" />
     <Content Include="Scripts\map_api\Leaflet_utfgrid\leaflet.utfgrid-src.js" />
+    <Content Include="Scripts\map_api\openlayers\ol3_geocoder\ol3-geocoder.css" />
+    <Content Include="Scripts\map_api\openlayers\ol3_geocoder\ol3-geocoder.js" />
+    <Content Include="Scripts\map_api\openlayers\ol3_geocoder\ol3-geocoder.min.css" />
     <Content Include="Scripts\map_api\openlayers\ol3_layerswitcher\ol3-layerswitcher.css" />
     <Content Include="Scripts\map_api\openlayers\ol3_layerswitcher\ol3-layerswitcher.js" />
     <Content Include="Scripts\map_api\openlayers\ol3_layerswitcher\scroll.css" />

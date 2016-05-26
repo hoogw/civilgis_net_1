@@ -1,5 +1,7 @@
 var heremap_app_id = "J5aP2hv9dOa9Us8e6OPn";
 var heremap_app_code = "oXTkvCJfsVdMTkD56CBy0g";
+var mapquest_consumer_key = '7YyEJ1WeTzemrUYPKCuPJVx6a3kdDvlR';
+
 
 var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
 var _tile_baseURL_localhost = 'http://localhost:8888/v2/';
@@ -41,7 +43,8 @@ var _view;
 var mapElement;
 var _area_boundaryline_vectorSource;
 var _area_boundaryline_layer;
-
+var _geojson_vectorSource;
+var _geojson_vectorLayer;
 
 
 
@@ -122,9 +125,9 @@ var _multi_polyline;
 var _areaID;
 var _subjectID;
 var tile_MapType;
-var _current_geojson_layer = null;
-var _last_geojson_layer = null;
-
+var _current_geojson_layer = false;
+var _last_geojson_layer = false;
+var _all_layers;
 
 
 //--------------classification-------------------------
@@ -484,21 +487,20 @@ function add_area_boundary(_area) {
 
 function get_map_bound() {
 
-    //document.getElementById("title_info").innerHTML = "MAP BOUNDS [SouthWest, NorthEast] "+ map.getBounds();
+    
     // get current map bounds as URL parameters. 
 
 
+    bounds = map.getView().calculateExtent(map.getSize());
+    bounds = ol.proj.transformExtent(bounds, 'EPSG:3857', 'EPSG:4326');
 
-
-
-
-    bounds = map.getBounds();
-    southWest = bounds.getSouthWest();
-    northEast = bounds.getNorthEast();
-    SWlong = southWest.lng;
-    SWlat = southWest.lat;
-    NElong = northEast.lng;
-    NElat = northEast.lat;
+    
+    southWest = ol.extent.getBottomLeft(bounds);
+    northEast = ol.extent.getTopRight(bounds);
+    SWlong = southWest[0];
+    SWlat = southWest[1];
+    NElong = northEast[0];
+    NElat = northEast[1];
 
     //alert(SWlong);
 
@@ -582,13 +584,13 @@ function add_map_listener_idle() {
     listener_click = map.on('click', function (click_event_location) {
 
         // alert(click_event_location.latlng.lat);
-        get_click_latlng(click_event_location.latlng.lat, click_event_location.latlng.lng);
+       // get_click_latlng(click_event_location.latlng.lat, click_event_location.latlng.lng);
     });
 
 
     listener_rightclick = map.on('rightclick', function () {
 
-        back_full_extend();
+      //  back_full_extend();
     });
 
     //--------------------------End  map right click event ---------- back to full extend ----------------------
@@ -602,17 +604,19 @@ function add_map_listener_idle() {
 function geocoding() {
 
     // --------  search address ------- geocoding -----------
-    new L.Control.GeoSearch({
+   
+
+     geocoder = new Geocoder('nominatim', {
+         provider: 'osm',     //'mapquest', 'google', 'photon', 'pelias'
+        key: mapquest_consumer_key,
+        lang: 'pt-BR', //en-US, fr-FR
+        placeholder: 'Search for ...',
+        limit: 5,
+        keepOpen: false
+    });
+    map.addControl(geocoder);
 
 
-        provider: new L.GeoSearch.Provider.Esri(),
-
-        // google and open streetmap is ok, but result zoom level is too high for open street map. 
-        //provider: new L.GeoSearch.Provider.Google(),
-        //provider: new L.GeoSearch.Provider.OpenStreetMap(),
-
-        retainZoomLevel: false
-    }).addTo(map);
 
     // ---------- End of search address ------- geocoding -----------
 
@@ -627,7 +631,7 @@ function init_base_map_tiling() {
 
 
     // local testing only
-     _tile_baseURL = _tile_baseURL_localhost;
+    // _tile_baseURL = _tile_baseURL_localhost;
 
 
 
@@ -923,7 +927,7 @@ function init_base_map_tiling() {
 
              
 
-              var displayCountryInfo = function (coordinate) {
+              var displayInfo = function (coordinate) {
                   var viewResolution = /** @type {number} */ (_view.getResolution());
                   
                   utfgrid_source.forDataAtCoordinateAndResolution(coordinate, viewResolution,
@@ -989,7 +993,7 @@ function init_base_map_tiling() {
                       return;
                   }
                   var coordinate = map.getEventCoordinate(evt.originalEvent);
-                  displayCountryInfo(coordinate);
+                  displayInfo(coordinate);
                 
 
               });// pointermove
@@ -998,7 +1002,7 @@ function init_base_map_tiling() {
 
 
               map.on('click', function (evt) {
-                  displayCountryInfo(evt.coordinate);
+                  displayInfo(evt.coordinate);
 
               }); // click
 
@@ -1171,22 +1175,23 @@ function init_base_map_tiling() {
 
 
 
-     });// function done
 
 
 
 
 
-       
+         add_area_boundary($("#areaID").val());
 
-    
-
-
-     add_area_boundary($("#areaID").val());
-    
+         geocoding();
 
 
-    
+
+         add_map_listener_idle();
+
+
+
+     });// function done loading script
+
 
 
 }// init_base_map_tiling
@@ -1201,7 +1206,92 @@ function init_base_map_tiling() {
 
 
 
-// ############# retired ######################
+//=========== geojson style =========================
+var image = new ol.style.Circle({
+    radius: 4,
+    fill: null,
+    stroke: new ol.style.Stroke({ color: 'red', width: 2 })
+});
+
+var styles = {
+    'Point': new ol.style.Style({
+        image: image
+    }),
+    'LineString': new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'green',
+            width: 1
+        })
+    }),
+    'MultiLineString': new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'green',
+            width: 1
+        })
+    }),
+    'MultiPoint': new ol.style.Style({
+        image: image
+    }),
+    'MultiPolygon': new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'yellow',
+            width: 1
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 0, 0.1)'
+        })
+    }),
+    'Polygon': new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'blue',
+            lineDash: [4],
+            width: 1
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(0, 0, 255, 0.1)'
+        })
+    }),
+    'GeometryCollection': new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'magenta',
+            width: 2
+        }),
+        fill: new ol.style.Fill({
+            color: 'magenta'
+        }),
+        image: new ol.style.Circle({
+            radius: 10,
+            fill: null,
+            stroke: new ol.style.Stroke({
+                color: 'magenta'
+            })
+        })
+    }),
+    'Circle': new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'red',
+            width: 2
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(255,0,0,0.2)'
+        })
+    })
+};
+
+var styleFunction = function (feature) {
+    return styles[feature.getGeometry().getType()];
+};
+
+//===========End ========== geojson style =========================
+
+
+
+
+
+
+
+// ############# testing and retired ######################
+
 
 
 

@@ -481,7 +481,7 @@ function init_tiling(){
                         // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
 
                         // local testing only
-                          _tile_baseURL = _tile_baseURL_localhost;
+                        //  _tile_baseURL = _tile_baseURL_localhost;
 
 
                          var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.png';
