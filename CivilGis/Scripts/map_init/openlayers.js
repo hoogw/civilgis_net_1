@@ -577,6 +577,86 @@ function add_map_listener_idle() {
 
 
 
+                                //.................  openlayer map add interaction ..................
+
+                                var select = null;  // ref to currently selected interaction
+
+                                // select interaction working on "singleclick"
+                                var selectSingleClick = new ol.interaction.Select();
+
+                                // select interaction working on "click"
+                                var selectClick = new ol.interaction.Select({
+                                    condition: ol.events.condition.click
+                                });
+
+                                // select interaction working on "pointermove"
+                                var selectPointerMove = new ol.interaction.Select({
+                                    condition: ol.events.condition.pointerMove
+                                });
+
+                                var selectAltClick = new ol.interaction.Select({
+                                    condition: function (mapBrowserEvent) {
+                                        return ol.events.condition.click(mapBrowserEvent) &&
+                                            ol.events.condition.altKeyOnly(mapBrowserEvent);
+                                    }
+                                });
+
+
+                                var _feature_info = "";
+    
+
+                              //...... mouse over event................
+                                select = selectPointerMove;
+                                map.addInteraction(select);
+                                select.on('select', function(e) {
+
+
+        
+                                    _feature_info = "<ul>";
+        
+                                    e.selected.forEach(function (_feature) {
+
+                                                            var _object = _feature.getProperties();
+
+                                                            for (var _property in _object) {
+                                                                if (_object.hasOwnProperty(_property)) {
+
+                                                                    if (_property !== 'geometry') {
+
+                                                                    _feature_info = _feature_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + String(_object[_property]) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+
+                                                                   }// if 
+                                                                }//if
+                                                            }//for
+
+
+                                                                                }); // for each 
+
+
+                                    _feature_info = _feature_info + "</ul>";
+                                    document.getElementById('info-table').innerHTML = _feature_info;
+        
+
+
+                                 }); // select on select
+
+
+
+                                 
+
+
+
+
+                            //.....................End ....... openlayer map add interaction ..................
+
+
+
+
+
+
+
+
+
 
 
 
@@ -598,7 +678,7 @@ function add_map_listener_idle() {
 
 
 
-}
+}// function
 
 
 function geocoding() {

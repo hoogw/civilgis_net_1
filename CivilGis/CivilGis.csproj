@@ -648,6 +648,9 @@
     <Content Include="Scripts\map_api\openlayers\ol3_layerswitcher\ol3-layerswitcher.css" />
     <Content Include="Scripts\map_api\openlayers\ol3_layerswitcher\ol3-layerswitcher.js" />
     <Content Include="Scripts\map_api\openlayers\ol3_layerswitcher\scroll.css" />
+    <Content Include="Scripts\map_api\openlayers\ol3_popup\ol3-popup.css" />
+    <Content Include="Scripts\map_api\openlayers\ol3_popup\ol3-popup.js" />
+    <Content Include="Scripts\map_api\openlayers\ol3_popup\scroll.css" />
     <Content Include="Scripts\map_init\bingmap.js" />
     <Content Include="Scripts\map_init\heremap.js" />
     <Content Include="Scripts\map_init\openlayers.js" />

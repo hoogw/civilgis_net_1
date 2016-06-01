@@ -1,11 +1,11 @@
 ﻿
 
-// ---------- map click event [3]--------add _map_click --------
+
 
 function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
-    // alert(_apiURI);
+   
 
     // Load a GeoJSON from the server 
 
@@ -26,28 +26,11 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-            //--------------------------------------------
-
-
-            //gmap.data.loadGeoJson(_apiURI);
-
-            // Note: data is a string, not a javascript object.
-            //the function addGeoJson needs a javascript object and not a string. so you must convert string to javascript object before feed into addGeoJson
-            // if you use loadGeoJson(url), do not need any formate change, feed URL return string, the loadGeoJson will do with returning string.
-
 
 
              _geojson_object = JSON.parse(data);
 
-
-            //----------------  add new geojson, then remove last geojson --------------------
-
-            // _last_geojson_layer = _current_geojson_layer;
-
             //...................... openlayers ..........................
-
-               
-                         
 
 
                           _geojson_vectorSource = new ol.source.Vector({
@@ -67,107 +50,17 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
                            map.addLayer(_geojson_vectorLayer);
                            _current_geojson_layer = true;
                           
-                 //...................... openlayers ..........................
+
+
+                           $('#utfgrid_info').hide();
+                
+
+
+           
 
 
 
 
-
-
-            
-
-
-
-
-
-
-            //_current_geojson_layer = L.geoJson(_geojson_object, {
-
-
-            //    // for point feature, by default it use marker, but instead of use marker, here change marker to polygon (circle marker) 
-            //    pointToLayer: function (feature, latlng) {
-            //        return L.circleMarker(latlng, geojson_Marker_style_Options);
-            //    },
-
-
-            //    style: geojson_default_style,
-
-            //    onEachFeature: function onEachFeature(feature, layer) {
-
-
-
-            //        //bind click
-            //        layer.on('mouseover', function (e) {
-            //            // e = event
-            //            // console.log(e); 
-
-            //            // You can make your ajax call declaration here
-            //            //$.ajax(... 
-
-
-            //            layer.setStyle(geojson_mouseover_highlight_style);
-
-
-
-            //            var instant_info = "<ul>";
-
-
-            //            for (var _key in layer.feature.properties) {
-            //                var _value = String(layer.feature.properties[_key]);
-            //                instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _key + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
-
-            //            }
-
-
-            //            instant_info = instant_info + "</ul>";
-
-
-            //            // update bottom <div>
-            //            document.getElementById("info-table").innerHTML = instant_info;
-            //            // hide 'utfgrid_info' <div>
-            //            $('#utfgrid_info').hide();
-
-
-            //        });// layer.on mouseover
-
-
-            //        layer.on('mouseout', function (e) {
-
-            //            layer.setStyle(geojson_default_style);
-
-            //            // empty bottom <div>
-            //            document.getElementById("info-table").innerHTML = "";
-            //            //infowindow.close();
-
-            //        });// layer.on mouseout
-
-            //    }// oneach function
-
-            //}).bindPopup(function (layer) {
-
-
-            //    // when user click each feature, it will popup a info window by the feature.
-
-
-            //    var popup = "<table>";
-            //    for (var _key in layer.feature.properties) {
-            //        var _value = String(layer.feature.properties[_key]);
-            //        // popup = popup + "<tr><td>" + _key + "</td><td>" + _value + "</td></tr>";
-
-            //        popup = popup + "<tr><td><span style=\'background-color: #454545;\'><font color=\'white\'>" + _key + "</span>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;" + _value + "</td></tr>";
-
-            //    }
-            //    popup = popup + "</table>";
-
-
-            //    return popup;
-
-
-            //}).addTo(map);
-
-
-            // ---- after add new geojson, now remove last time old geojson -------------
-            // don't use Array.ForEach is about 95% slower than for() in JavaScript.
 
                            if (_last_geojson_layer) {
 
@@ -259,8 +152,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             $('#utfgrid_info').show();
             // empty bottom <div>
             document.getElementById("info-table").innerHTML = "";
-
-
+            
 
             document.getElementById("ajaxload").style.display = "none";
             document.getElementById("title_info").style.display = "inline";
@@ -301,40 +193,14 @@ function initialize() {
 
 
 
-
-
-
-
-
     initial_location = set_initial_location($("#areaID").val());
 
    
     init_base_map_tiling();
     
 
-            //  ***** this add map listenner must be befor map.setView, *******************
-                   // add_map_listener_idle();
-
-   
-                   // map.setView(new L.LatLng(initial_location[1], initial_location[2]), initial_location[3]);
-
-           //  ***** end  **** this add map listenner must be befor map.setView, *******************
-
-
-
-
-           
-
-    
-
-
 
 }// initialize
-
-
-
-
-
 
 
 
@@ -344,12 +210,6 @@ $(document).ready(function () {
 
 
 
-
-
     initialize();
-
-
-
-
 
 }); // document ready function

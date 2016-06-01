@@ -136,126 +136,7 @@ var _mapclick_in_use = false;
 //-----------------------------------------
 
 
-// --------default feature style -----------
-_default_fillOpacity = 0;
-_default_strokeColor = '#0000FF'; //blue
-_default_strokeWeight = 2;
 
-
-_highlight_fillOpacity = 0;
-_highlight_strokeColor = '#000000'; // black
-_highlight_strokeWeight = 8;
-
-_clienttable_mouseover_highlight_fillColor = '#000080';
-_clienttable_mouseover_highlight_fillOpacity = 0.5;
-_clienttable_mouseover_highlight_strokeColor = '#FF0000';
-_clienttable_mouseover_highlight_strokeWeight = 5;
-
-
-
-_classfiy_fillOpacity = 0;
-_classfiy_strokeColor = '#0000FF'; //blue
-_classfiy_strokeWeight = 0.2;
-
-
-//---------------------------------
-
-
-geojson_default_style = {
-
-    "color": _default_strokeColor,
-    "weight": _default_strokeWeight,
-    "fillOpacity": _default_fillOpacity
-};
-
-
-geojson_classification_style = {
-
-    "color": '#0000FF',
-    "weight": 0.2,
-    "fillOpacity": 0
-};
-
-
-
-
-geojson_mouseover_highlight_style = {
-
-    "color": _highlight_strokeColor,
-    "weight": _highlight_strokeWeight,
-    "fillOpacity": _highlight_fillOpacity
-};
-
-
-geojson_clienttable_mouseover_highlight_style = {
-
-    "color": _clienttable_mouseover_highlight_strokeColor,
-    "weight": _clienttable_mouseover_highlight_strokeWeight,
-    "fillColor": _clienttable_mouseover_highlight_fillColor,
-    "fillOpacity": _clienttable_mouseover_highlight_fillOpacity
-};
-
-
-geojson_Marker_style_Options = {
-
-    radius: 3,
-    fillColor: "#ff7800",
-    color: "#000",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.8
-
-
-};
-
-_click_polygon_style = {
-    
-    color: '#FF0000',
-    opacity: 0.8,
-    weight: 12,
-    fillColor: '#FF0000',
-    fillOpacity: 0.01
-};
-
-
-_click_line_style = {
-
-    color: '#FF0000',
-    opacity: 0.8,
-    weight: 12,
-    fillColor: '#FF0000',
-    fillOpacity: 0.01
-};
-
-_mouseover_polygon_style = {
-    
-    color: '#F7D358',
-    opacity: 0.8,
-    weight: 12,
-    fillColor: '#FF0000',
-    fillOpacity: 0.01
-};
-
-
-_mouseover_line_style = {
-
-    color: '#F7D358',
-    opacity: 0.8,
-    weight: 12,
-    fillColor: '#FF0000',
-    fillOpacity: 0.01
-};
-
-
-
-geojson_classification_mouseover_highlight_style = {
-
-    Weight: 2,
-    Color: '#000000',
-    fillColor: '#000000',
-    fillOpacity: 1
-
-};
 
 
 
@@ -500,10 +381,13 @@ function init_tiling(){
             //===================add ========== UTFgrid =================================
 
                          var utfGrid_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.grid.json?callback={cb}';
-                        // var utfGrid_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.grid.json';
+                         //var utfGrid_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.grid.json?';
 
+                        // var utfGrid = new L.UtfGrid(utfGrid_tile_Url);
                          var utfGrid = new L.UtfGrid(utfGrid_tile_Url,  {
-                            // useJsonP: false
+                             maxRequests: 50,    // default is 4,  only send 4 request per time, then wait requesttimeout(default 1 min) to send another 4 grid request, should set to more than 20
+                             requestTimeout:500  // default is 1 min, most of request not found is less than 500 ms, 
+                              //useJsonP: false
                          });
                          
 
@@ -636,7 +520,7 @@ function get_map_bound() {
     // get current map bounds as URL parameters. 
 
 
-
+    //alert(map.getZoom());
 
 
 
@@ -860,6 +744,129 @@ function init_base_map() {
 
 
 //----------------End of leaflet basic simple map function  ------------------------
+
+
+
+// --------default feature style -----------
+_default_fillOpacity = 0;
+_default_strokeColor = '#0000FF'; //blue
+_default_strokeWeight = 2;
+
+
+_highlight_fillOpacity = 0;
+_highlight_strokeColor = '#000000'; // black
+_highlight_strokeWeight = 8;
+
+_clienttable_mouseover_highlight_fillColor = '#000080';
+_clienttable_mouseover_highlight_fillOpacity = 0.5;
+_clienttable_mouseover_highlight_strokeColor = '#FF0000';
+_clienttable_mouseover_highlight_strokeWeight = 5;
+
+
+
+_classfiy_fillOpacity = 0;
+_classfiy_strokeColor = '#0000FF'; //blue
+_classfiy_strokeWeight = 0.2;
+
+
+//---------------------------------
+
+
+geojson_default_style = {
+
+    "color": _default_strokeColor,
+    "weight": _default_strokeWeight,
+    "fillOpacity": _default_fillOpacity
+};
+
+
+geojson_classification_style = {
+
+    "color": '#0000FF',
+    "weight": 0.2,
+    "fillOpacity": 0
+};
+
+
+
+
+geojson_mouseover_highlight_style = {
+
+    "color": _highlight_strokeColor,
+    "weight": _highlight_strokeWeight,
+    "fillOpacity": _highlight_fillOpacity
+};
+
+
+geojson_clienttable_mouseover_highlight_style = {
+
+    "color": _clienttable_mouseover_highlight_strokeColor,
+    "weight": _clienttable_mouseover_highlight_strokeWeight,
+    "fillColor": _clienttable_mouseover_highlight_fillColor,
+    "fillOpacity": _clienttable_mouseover_highlight_fillOpacity
+};
+
+
+geojson_Marker_style_Options = {
+
+    radius: 3,
+    fillColor: "#ff7800",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+
+
+};
+
+_click_polygon_style = {
+
+    color: '#FF0000',
+    opacity: 0.8,
+    weight: 12,
+    fillColor: '#FF0000',
+    fillOpacity: 0.01
+};
+
+
+_click_line_style = {
+
+    color: '#FF0000',
+    opacity: 0.8,
+    weight: 12,
+    fillColor: '#FF0000',
+    fillOpacity: 0.01
+};
+
+_mouseover_polygon_style = {
+
+    color: '#F7D358',
+    opacity: 0.8,
+    weight: 12,
+    fillColor: '#FF0000',
+    fillOpacity: 0.01
+};
+
+
+_mouseover_line_style = {
+
+    color: '#F7D358',
+    opacity: 0.8,
+    weight: 12,
+    fillColor: '#FF0000',
+    fillOpacity: 0.01
+};
+
+
+
+geojson_classification_mouseover_highlight_style = {
+
+    Weight: 2,
+    Color: '#000000',
+    fillColor: '#000000',
+    fillOpacity: 1
+
+};
 
 
 
