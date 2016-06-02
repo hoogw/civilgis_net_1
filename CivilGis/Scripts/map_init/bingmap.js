@@ -1,4 +1,5 @@
-var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
+//var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
+var _tile_baseURL = 'http://tile.transparentgov.net/v2/';
 
 
 var _tile_exist = false;

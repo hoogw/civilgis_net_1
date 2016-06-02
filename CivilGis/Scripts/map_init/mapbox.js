@@ -1,6 +1,7 @@
 var mapboxgl_accessToken = 'pk.eyJ1IjoiaG9vZ3ciLCJhIjoiYjdlZTA1Y2YyOGM4NjFmOWI2MjY3MmI5NWM3MmUyOWMifQ.gINCV5SXFGTG5wB8ouXxOw';
 
-var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
+//var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
+var _tile_baseURL = 'http://tile.transparentgov.net/v2/';
 var _tile_baseURL_localhost = 'http://localhost:8888/v2/';
 
 var base_layers;

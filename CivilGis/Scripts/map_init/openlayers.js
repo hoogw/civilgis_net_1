@@ -3,7 +3,8 @@ var heremap_app_code = "oXTkvCJfsVdMTkD56CBy0g";
 var mapquest_consumer_key = '7YyEJ1WeTzemrUYPKCuPJVx6a3kdDvlR';
 
 
-var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
+//var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
+var _tile_baseURL = 'http://tile.transparentgov.net/v2/';
 var _tile_baseURL_localhost = 'http://localhost:8888/v2/';
 
 
@@ -45,6 +46,8 @@ var _area_boundaryline_vectorSource;
 var _area_boundaryline_layer;
 var _geojson_vectorSource;
 var _geojson_vectorLayer;
+var popup;
+
 
 
 
@@ -580,6 +583,8 @@ function add_map_listener_idle() {
                                 //.................  openlayer map add interaction ..................
 
                                 var select = null;  // ref to currently selected interaction
+                                var select1 = null;
+
 
                                 // select interaction working on "singleclick"
                                 var selectSingleClick = new ol.interaction.Select();
@@ -605,44 +610,115 @@ function add_map_listener_idle() {
                                 var _feature_info = "";
     
 
-                              //...... mouse over event................
-                                select = selectPointerMove;
-                                map.addInteraction(select);
-                                select.on('select', function(e) {
+
+                                              //...... mouse over event................
+                                                select = selectPointerMove;
+                                                map.addInteraction(select);
+                                                select.on('select', function(e) {
 
 
         
-                                    _feature_info = "<ul>";
+                                                    _feature_info = "<ul>";
         
-                                    e.selected.forEach(function (_feature) {
+                                                    e.selected.forEach(function (_feature) {
 
-                                                            var _object = _feature.getProperties();
+                                                                            var _object = _feature.getProperties();
 
-                                                            for (var _property in _object) {
-                                                                if (_object.hasOwnProperty(_property)) {
+                                                                            for (var _property in _object) {
+                                                                                if (_object.hasOwnProperty(_property)) {
 
-                                                                    if (_property !== 'geometry') {
+                                                                                    if (_property !== 'geometry') {
 
-                                                                    _feature_info = _feature_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + String(_object[_property]) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+                                                                                    _feature_info = _feature_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + String(_object[_property]) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
 
-                                                                   }// if 
-                                                                }//if
-                                                            }//for
-
-
-                                                                                }); // for each 
+                                                                                   }// if 
+                                                                                }//if
+                                                                            }//for
 
 
-                                    _feature_info = _feature_info + "</ul>";
-                                    document.getElementById('info-table').innerHTML = _feature_info;
+                                                                                                }); // for each 
+
+
+                                                    _feature_info = _feature_info + "</ul>";
+                                                    document.getElementById('info-table').innerHTML = _feature_info;
         
 
 
-                                 }); // select on select
-
-
+                                                 }); // select on select
+ 
+                                                 //......End.............. mouse over event................
 
                                  
+
+                                              
+
+                                                //...... mouse click event................
+
+
+                                                   
+                                                popup = new ol.Overlay.Popup();
+                                                map.addOverlay(popup);
+                                               
+
+                                                map.on('singleclick', function (evt) {
+                                                    var content = '<p>If the popup content is quite long then by default it will scroll vertically.</p>';
+                                                    content += '<p>This behaviour together with the minimum width and maximum height can be changed by overriding the rules for the CSS class <code>.ol-popup-content</code> defined in <code>src/ol3-popup.css</code>.</p>';
+                                                    content += '<hr />';
+                                                    content += '<p><em>This text is here to demonstrate the content scrolling due to there being too much content to display :-)</em></p>';
+
+
+
+
+
+
+
+
+                                                    popup.show(evt.coordinate, content);
+                                                });
+
+                                               
+                                                //select1 = selectPointerMove;
+                                                //map.addInteraction(select1);
+                                                //select1.on('select', function (e) {
+
+                                                   
+
+                                                //    _feature_info = "<ul>";
+
+                                                //    e.selected.forEach(function (_feature) {
+
+                                                //        var _object = _feature.getProperties();
+
+                                                //        for (var _property in _object) {
+                                                //            if (_object.hasOwnProperty(_property)) {
+
+                                                //                if (_property !== 'geometry') {
+
+                                                //                    _feature_info = _feature_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + String(_object[_property]) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+
+                                                //                }// if 
+                                                //            }//if
+                                                //        }//for
+
+
+                                                //    }); // for each 
+
+
+                                                //    _feature_info = _feature_info + "</ul>";
+                                                //    //document.getElementById('info-table').innerHTML = _feature_info;
+
+                                                //    popup.show(e.coordinate, _feature_info);
+
+                                                //}); // select on select
+
+
+                                                
+
+                                               //......End.............. mouse click event................
+
+
+
+
 
 
 
