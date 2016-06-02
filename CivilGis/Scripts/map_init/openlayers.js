@@ -488,6 +488,8 @@ function tile_opacity_slider(_layer_group_title) {
 
 
             var all_layer_groups = map.getLayers();
+            //var all_layer_groups = map.getLayerGroup();
+
 
             var layer_group;
 
