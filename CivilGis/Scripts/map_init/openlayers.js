@@ -47,8 +47,7 @@ var _area_boundaryline_layer;
 var _geojson_vectorSource;
 var _geojson_vectorLayer;
 var popup;
-
-
+var _raster_tile_layer;
 
 
 var _tile_exist = false;
@@ -479,7 +478,63 @@ function add_area_boundary(_area) {
 }// function add_area_boundary
 
 
+function tile_opacity_slider(_layer_group_title) {
 
+   
+    $('#ex1').slider({
+        formatter: function (value) {
+
+
+
+
+            var all_layer_groups = map.getLayers();
+
+            var layer_group;
+
+            for (i = 0, n = all_layer_groups.getLength() ; i < n; i++) {
+
+                layer_group = all_layer_groups.item(i);
+
+
+
+                if (layer_group.get('title') == _layer_group_title) {
+
+                   
+
+                            if (layer_group.getLayers) {
+                                var _inner_layers = layer_group.getLayers().getArray();
+
+                                _raster_tile_layer = _inner_layers[0];  // 0 = tile raster image layer,   1 = utfgrid 
+                            }// if
+                    break;
+                }//if
+            }//for
+
+            if (_raster_tile_layer) {
+                // Do with layer
+
+               // alert(_raster_tile_layer.get('title'));
+
+                _raster_tile_layer.setOpacity(value/100)
+
+            }
+
+
+
+            
+
+
+
+
+
+            return  value + '%';
+        }
+    });
+
+
+
+
+}
 
 
 
@@ -660,56 +715,54 @@ function add_map_listener_idle() {
                                                 map.addOverlay(popup);
                                                
 
-                                                map.on('singleclick', function (evt) {
-                                                    var content = '<p>If the popup content is quite long then by default it will scroll vertically.</p>';
-                                                    content += '<p>This behaviour together with the minimum width and maximum height can be changed by overriding the rules for the CSS class <code>.ol-popup-content</code> defined in <code>src/ol3-popup.css</code>.</p>';
-                                                    content += '<hr />';
-                                                    content += '<p><em>This text is here to demonstrate the content scrolling due to there being too much content to display :-)</em></p>';
-
-
-
-
-
-
-
-
-                                                    popup.show(evt.coordinate, content);
-                                                });
-
                                                
-                                                //select1 = selectPointerMove;
-                                                //map.addInteraction(select1);
-                                                //select1.on('select', function (e) {
+                                                select1 = selectClick;
+                                                map.addInteraction(select1);
+                                                select1.on('select', function (e) {
 
                                                    
-
-                                                //    _feature_info = "<ul>";
-
-                                                //    e.selected.forEach(function (_feature) {
-
-                                                //        var _object = _feature.getProperties();
-
-                                                //        for (var _property in _object) {
-                                                //            if (_object.hasOwnProperty(_property)) {
-
-                                                //                if (_property !== 'geometry') {
-
-                                                //                    _feature_info = _feature_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + String(_object[_property]) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
-
-                                                //                }// if 
-                                                //            }//if
-                                                //        }//for
+                                                   
+                                                    _feature_info = "<table>";
+                                                    var _show_popup = false;
 
 
-                                                //    }); // for each 
+                                                    e.selected.forEach(function (_feature) {
+
+                                                        var _object = _feature.getProperties();
+
+                                                      
 
 
-                                                //    _feature_info = _feature_info + "</ul>";
-                                                //    //document.getElementById('info-table').innerHTML = _feature_info;
+                                                        for (var _property in _object) {
+                                                            if (_object.hasOwnProperty(_property)) {
 
-                                                //    popup.show(e.coordinate, _feature_info);
+                                                                if (_property !== 'geometry') {
 
-                                                //}); // select on select
+                                                                    
+                                                                    //_feature_info = _feature_info + "<tr><td><span style=\'background-color: #454545;\'><font color=\'white\'>" + _property + "</span>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;" + String(_object[_property]) + "</td></tr>";
+                                                                    _feature_info = _feature_info + "<tr><td><span style=\'background-color: #454545;\'><font color=\'white\'>" + _property + "</span></td><td>" + String(_object[_property]) + "</td></tr>";
+
+                                                                    _show_popup = true;
+
+                                                                }// if 
+                                                            }//if
+                                                        }//for
+
+
+                                                    }); // for each 
+
+
+                                                    _feature_info = _feature_info + "</table>";
+                                                    
+                                                    // alert(e.mapBrowserEvent.coordinate);
+
+                                                    if (_show_popup){
+                                                        popup.show(e.mapBrowserEvent.coordinate, _feature_info);
+                                                    }
+
+
+
+                                                }); // select on select
 
 
                                                 
@@ -792,7 +845,7 @@ function init_base_map_tiling() {
 
 
      mapElement = document.getElementById('map-canvas');
-    var _tile_name = _areaID + "_" + _subjectID;
+     _tile_name = _areaID + "_" + _subjectID;
     var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.png';
 
 
@@ -1340,7 +1393,7 @@ function init_base_map_tiling() {
 
          geocoding();
 
-
+         tile_opacity_slider(_tile_name);
 
          add_map_listener_idle();
 

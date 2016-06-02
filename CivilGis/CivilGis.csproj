@@ -608,6 +608,8 @@
     <Content Include="Scripts\mapquest\scrollerservertablemap.js" />
     <Content Include="Scripts\mapquest\simpleclustermap.js" />
     <Content Include="Scripts\mapquest\simplemap.js" />
+    <Content Include="Scripts\map_api\bootstrap_slider\bootstrap-slider.css" />
+    <Content Include="Scripts\map_api\bootstrap_slider\bootstrap-slider.js" />
     <Content Include="Scripts\map_api\google_map_opacity_slider\CustomTileOverlay.js" />
     <Content Include="Scripts\map_api\google_map_opacity_slider\ExtDraggableObject.js" />
     <Content Include="Scripts\map_api\google_map_opacity_slider\opacity-slider2.png" />

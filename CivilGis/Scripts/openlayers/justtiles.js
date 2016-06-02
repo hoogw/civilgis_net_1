@@ -36,7 +36,7 @@ function init_base_map_tiling_forjusttile() {
 
     ).done(function () {
 
-        var _tile_name = _areaID + "_" + _subjectID;
+        var  _tile_name = _areaID + "_" + _subjectID;
         var _i = _tile_list.indexOf(_tile_name);
 
         _view = new ol.View({
@@ -556,6 +556,7 @@ function init_base_map_tiling_forjusttile() {
 
         geocoding();
 
+        tile_opacity_slider(_tile_name);
 
 
     });// function done loading script
