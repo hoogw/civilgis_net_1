@@ -619,7 +619,7 @@ function get_click_latlng(_click_event_lat, _click_event_lng) {
 
 function back_full_extend() {
 
-    map.setView(new L.LatLng(initial_location[1], initial_location[2]), initial_location[3]);
+    map.setView(_view);
 }
 
 
@@ -798,7 +798,7 @@ function add_map_listener_idle() {
 
 
     // ---------  map click event [1] ------ search for a single feature where clicked ------------
-    listener_click = map.on('click', function (click_event_location) {
+  listener_click = map.on('singleclick', function (click_event_location) {
 
 
         //'EPSG:4326' = lat long (geographic coordinate)    'EPSG:3857' = feet unit (projected coordinate)
@@ -812,9 +812,9 @@ function add_map_listener_idle() {
     });
 
 
-    listener_rightclick = map.on('rightclick', function () {
+  listener_rightclick = map.on('dblclick', function () {
 
-      //  back_full_extend();
+        back_full_extend();
     });
 
     //--------------------------End  map right click event ---------- back to full extend ----------------------
@@ -860,7 +860,7 @@ function init_base_map_tiling() {
 
 
      mapElement = document.getElementById('map-canvas');
-     _tile_name = _areaID + "_" + _subjectID;
+     //_tile_name = _areaID + "_" + _subjectID;
     var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.png';
 
 

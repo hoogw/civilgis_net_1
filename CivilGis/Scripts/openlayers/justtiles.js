@@ -8,7 +8,7 @@ function init_base_map_tiling_forjusttile() {
 
 
     mapElement = document.getElementById('map-canvas');
-    var _tile_name = _areaID + "_" + _subjectID;
+    //var _tile_name = _areaID + "_" + _subjectID;
     var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.png';
 
 
