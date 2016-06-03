@@ -48,6 +48,11 @@ var _geojson_vectorSource;
 var _geojson_vectorLayer;
 var popup;
 var _raster_tile_layer;
+//var highlightStyleCache;
+var _highlight_featureOverlay;
+var _current_highlight = null;
+//var feature;
+
 
 
 var _tile_exist = false;
@@ -553,7 +558,7 @@ function get_map_bound() {
 
     bounds = map.getView().calculateExtent(map.getSize());
     bounds = ol.proj.transformExtent(bounds, 'EPSG:3857', 'EPSG:4326');
-
+    //bounds = ol.proj.toLonLat(bounds);
     
     southWest = ol.extent.getBottomLeft(bounds);
     northEast = ol.extent.getTopRight(bounds);
@@ -586,6 +591,7 @@ function get_click_latlng(_click_event_lat, _click_event_lng) {
         // --- current use 2X2 grid boundary (as click event latlong is on center point), you can use 3x3 grid or adjust house length to make larger/smaller select area. 
         var _square_house_length = 0.0004; // average is 0.0003-0.0004
 
+        
 
         SWlong = _click_event_lng - _square_house_length;
         SWlat = _click_event_lat - _square_house_length;
@@ -794,8 +800,15 @@ function add_map_listener_idle() {
     // ---------  map click event [1] ------ search for a single feature where clicked ------------
     listener_click = map.on('click', function (click_event_location) {
 
-        // alert(click_event_location.latlng.lat);
-       // get_click_latlng(click_event_location.latlng.lat, click_event_location.latlng.lng);
+
+        //'EPSG:4326' = lat long (geographic coordinate)    'EPSG:3857' = feet unit (projected coordinate)
+       // alert(click_event_location.coordinate[0]);
+       // alert(ol.proj.transform(click_event_location.coordinate, 'EPSG:4326', 'EPSG:3857')[0]);
+        // alert(ol.proj.toLonLat(click_event_location.coordinate, 'EPSG:3857')[0]);
+
+        var _event_lat = ol.proj.toLonLat(click_event_location.coordinate, 'EPSG:3857')[1];
+        var _event_lng = ol.proj.toLonLat(click_event_location.coordinate, 'EPSG:3857')[0];
+        get_click_latlng(_event_lat, _event_lng);
     });
 
 
@@ -1417,7 +1430,46 @@ function init_base_map_tiling() {
 
 
 
-//=========== geojson style =========================
+//............. openlayer highlight style ...................
+
+
+var _clienttable_mouseover_row_highlight_feature_style = new ol.style.Style({
+
+    stroke: new ol.style.Stroke({
+        color: '#f00',
+        width: 9
+    }),
+
+    fill: new ol.style.Fill({
+        color: 'rgba(255,0,0,0.5)'
+    }),
+
+
+    image: new ol.style.Circle({
+        fill: new ol.style.Fill({
+            color: 'rgba(255,0,0,1)'
+        }),
+        stroke: new ol.style.Stroke({
+            color: '#f00',
+            width: 3
+        }),
+        radius: 7
+    }),
+
+})// new style
+
+
+
+
+
+//............END...... openlayer highlight  style ...................
+
+
+
+
+
+
+// =========== openlayer  geojson style =========================
 var image = new ol.style.Circle({
     radius: 4,
     fill: null,
@@ -1493,7 +1545,7 @@ var styleFunction = function (feature) {
     return styles[feature.getGeometry().getType()];
 };
 
-//===========End ========== geojson style =========================
+//===========End =========openlayer = geojson style =========================
 
 
 

@@ -47,7 +47,9 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
                           });
 
 
-                           map.addLayer(_geojson_vectorLayer);
+                          map.addLayer(_geojson_vectorLayer);
+
+                         
                            _current_geojson_layer = true;
                           
 
