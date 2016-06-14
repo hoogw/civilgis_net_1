@@ -48,10 +48,22 @@ var _geojson_vectorSource;
 var _geojson_vectorLayer;
 var popup;
 var _raster_tile_layer;
-//var highlightStyleCache;
+
 var _highlight_featureOverlay;
+var _servertable_highlight_featureOverlay;
 var _current_highlight = null;
-//var feature;
+var _servertable_current_highlight = null;
+
+
+
+var _highlight_servertable_polygon;
+var _highlight_servertable_line;
+var _highlight_servertable_point;
+
+var _highlight_servertable_feature;
+var _highlight_servertable_vectorSource;
+var _highlight_servertable_vectorLayer;
+
 
 
 
@@ -1458,6 +1470,32 @@ var _clienttable_mouseover_row_highlight_feature_style = new ol.style.Style({
 
 })// new style
 
+
+
+var _servertable_mouseover_row_highlight_feature_style = new ol.style.Style({
+
+    stroke: new ol.style.Stroke({
+        color: '#f00',
+        width: 9
+    }),
+
+    fill: new ol.style.Fill({
+        color: 'rgba(255,0,0,0.5)'
+    }),
+
+
+    image: new ol.style.Circle({
+        fill: new ol.style.Fill({
+            color: 'rgba(255,0,0,1)'
+        }),
+        stroke: new ol.style.Stroke({
+            color: '#f00',
+            width: 3
+        }),
+        radius: 7
+    }),
+
+})// new style
 
 
 

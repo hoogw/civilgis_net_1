@@ -1,8 +1,8 @@
 /// <reference path="source_layer/city.js" />
 var mapboxgl_accessToken = 'pk.eyJ1IjoiaG9vZ3ciLCJhIjoiYjdlZTA1Y2YyOGM4NjFmOWI2MjY3MmI5NWM3MmUyOWMifQ.gINCV5SXFGTG5wB8ouXxOw';
 
-//var _tileserver_base_url = 'http://166.62.80.50:10/tileserver/tileserver.php?/index.json?/'; // must use this
-var _tileserver_base_url = 'http://tilevector.transparentgov.net/tileserver/tileserver.php?/index.json?/'; // must use this
+var _tileserver_base_url = 'http://166.62.80.50:10/tileserver/tileserver.php?/index.json?/'; // must use this
+//var _tileserver_base_url = 'http://tilevector.transparentgov.net/tileserver/tileserver.php?/index.json?/'; // must use this
 
 
 
