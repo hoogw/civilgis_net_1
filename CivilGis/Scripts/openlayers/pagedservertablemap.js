@@ -516,7 +516,7 @@ function initialize() {
 
     init_base_map_tiling();
 
-
+    
 
 }// initialize
 
@@ -661,6 +661,22 @@ function datatablesX() {
         table.columns(_column_count - 2).visible(false);
 
 
+
+
+
+
+        //+++++++++++++++++ openlayer  highlight+++++++++++++++
+
+        
+        //+++++++++++++ end highlight openlayer ++++++++++++++
+
+
+
+
+
+
+
+
         // ajax click row event fly to on map 
         $('#tabledataX tbody').on('click', 'tr', function () {
 
@@ -748,6 +764,31 @@ function datatablesX() {
 
             // ---------------when click draw polygon line marker on map (red) -------------------
 
+            
+            var _servertable_click_highlight;
+            var _servertable_click_feature;
+            var _servertable_click_highlightStyleCache = {};
+
+
+            if (_servertable_click_highlight_featureOverlay) {
+
+                //alert('remove last click highlight layer');
+               
+                _servertable_click_highlight_featureOverlay.getSource().clear();
+            }
+
+
+
+            _servertable_click_highlight_featureOverlay = new ol.layer.Vector({
+                source: new ol.source.Vector(),
+                map: map,
+                style: _servertable_click_row_highlight_feature_style
+
+
+            });
+
+
+
 
 
 
@@ -767,29 +808,39 @@ function datatablesX() {
 
 
                     var _latlng = [];
-                    _latlng.push(_new_lat);
                     _latlng.push(_new_long);
+                    _latlng.push(_new_lat);
+                    
                     _click_coord.push(_latlng);
 
 
                 }// for
 
 
-                // Construct the polygon.
+                _highlight_click_servertable_polygon = new ol.geom.Polygon([_click_coord]);
 
-                if (_click_polygon)  //if is not null then clear last polygon
-                {
-                    map.removeLayer(_click_polygon);
+                _highlight_click_servertable_polygon.transform('EPSG:4326', 'EPSG:3857');
 
-                }
+                // Create feature with polygon.
+                _highlight_click_servertable_feature = new ol.Feature(_highlight_click_servertable_polygon);
 
 
-                _click_polygon = L.polygon(_click_coord, _click_polygon_style).addTo(map);
+
+               _servertable_click_highlight_featureOverlay.getSource().addFeature(_highlight_click_servertable_feature);
+                 
+                   
+              
 
 
                 // zoom the map to the polygon
-                // map.fitBounds(_click_polygon.getBounds());
-                map.fitBounds(_click_polygon.getBounds(), { maxZoom: leaflet_open_street_map_max_zoom_level });
+               
+                //var extent = _highlight_click_servertable_polygon.getExtent();
+                //map.getView().fit(extent, map.getSize());
+
+                map.getView().fit(_highlight_click_servertable_polygon, map.getSize());
+
+
+
 
 
             }// polygon
@@ -804,40 +855,89 @@ function datatablesX() {
                     var _new_lat = _geometry_coord[i][1];
                     var _new_long = _geometry_coord[i][0];
                     var _latlng = [];
-                    _latlng.push(_new_lat);
+
                     _latlng.push(_new_long);
+                    _latlng.push(_new_lat);
+                    
                     _click_coord.push(_latlng);
 
                 }// for
 
-                // Construct the polygon.
+                
 
-                if (_click_line)  //if is not null then clear last polygon
-                {
-                    map.removeLayer(_click_line);
+                _highlight_click_servertable_line = new ol.geom.LineString(_click_coord);
 
-                }
+                _highlight_click_servertable_line.transform('EPSG:4326', 'EPSG:3857');
 
 
-                _click_line = L.polygon(_mouseover_coord, _click_line_style).addTo(map);
+             
+
+                // Create feature with polygon.
+                _highlight_click_servertable_feature = new ol.Feature(_highlight_click_servertable_line);
+
+
+
+
+                _servertable_click_highlight_featureOverlay.getSource().addFeature(_highlight_click_servertable_feature);
+
+
+
+
 
                 // zoom the map to the polygon
-                map.fitBounds(_click_line.getBounds(), { maxZoom: leaflet_open_street_map_max_zoom_level });
+               // alert(_highlight_click_servertable_line.getExtent());
+                map.getView().fit(_highlight_click_servertable_line, map.getSize());
 
 
             }// linestring
             else if (_geometry_type === 'Point') {
 
+                var _new_lat = _geometry_coord[1];
+                var _new_long = _geometry_coord[0];
+                var _latlng = [];
 
-                if (_click_point)  //if marker is not null then clear last marker
-                {
-                    map.removeLayer(_click_point);
+                _latlng.push(_new_long);
+                _latlng.push(_new_lat);
 
-                }
-                // add new marker 
-                _click_point = L.marker([_geometry_coord[1], _geometry_coord[0]]).addTo(map);
+                _click_coord = _latlng;
 
-                map.setView([_geometry_coord[1], _geometry_coord[0]], leaflet_open_street_map_max_zoom_level, { animate: true });
+
+                //_click_coord = ol.proj.transform(_click_coord, 'EPSG:4326', 'EPSG:3857');
+
+                
+
+
+               // _highlight_click_servertable_point = new ol.geom.Circle(_click_coord);
+                _highlight_click_servertable_point = new ol.geom.Point(_click_coord);
+
+
+
+                _highlight_click_servertable_point.transform('EPSG:4326', 'EPSG:3857');
+
+
+
+
+
+                // Create feature with polygon.
+                _highlight_click_servertable_feature = new ol.Feature(_highlight_click_servertable_point);
+
+
+
+
+
+                _servertable_click_highlight_featureOverlay.getSource().addFeature(_highlight_click_servertable_feature);
+               
+
+
+                // zoom the map to the polygon
+              
+                // alert(_highlight_click_servertable_point.getExtent());
+                // fit() zoom too much, not use.
+                //map.getView().fit(_highlight_click_servertable_point.getExtent(), map.getSize());  
+
+                map.getView().setCenter(ol.proj.transform(_click_coord, 'EPSG:4326', 'EPSG:3857'));
+                map.getView().setZoom(20);
+
 
             }// point
 
@@ -953,6 +1053,14 @@ function datatablesX() {
             var _servertable_feature;
             var _servertable_highlightStyleCache = {};
 
+
+            if (_servertable_highlight_featureOverlay) {
+
+                // remove last time mouse over highlight feature
+                _servertable_highlight_featureOverlay.getSource().clear();
+            }
+
+
             _servertable_highlight_featureOverlay = new ol.layer.Vector({
                 source: new ol.source.Vector(),
                 map: map,
@@ -1011,31 +1119,10 @@ function datatablesX() {
 
                
 
-                if (_highlight_servertable_feature !== _servertable_highlight) {
-
-
-                    if (_servertable_highlight) {
-
-                        
-                        _servertable_highlight_featureOverlay.getSource().removeFeature(_servertable_highlight);
-
-                    }
-
-
-                    if (_highlight_servertable_feature) {
-                        _servertable_highlight_featureOverlay.getSource().addFeature(_highlight_servertable_feature);
-                    }
-                    _servertable_highlight = _highlight_servertable_feature;
-                    
-                    _servertable_current_highlight = _servertable_highlight;
-                }//if
-
-
-
-
-
-
-
+             
+                  _servertable_highlight_featureOverlay.getSource().addFeature(_highlight_servertable_feature);
+               
+                  
 
 
 
@@ -1087,27 +1174,9 @@ function datatablesX() {
 
 
 
-                if (_highlight_servertable_feature !== _servertable_highlight) {
-
-
-                    if (_servertable_highlight) {
-
-
-                        _servertable_highlight_featureOverlay.getSource().removeFeature(_servertable_highlight);
-
-                    }
-
-
-                    if (_highlight_servertable_feature) {
-                        _servertable_highlight_featureOverlay.getSource().addFeature(_highlight_servertable_feature);
-                    }
-                    _servertable_highlight = _highlight_servertable_feature;
-
-                    _servertable_current_highlight = _servertable_highlight;
-                }//if
-
-
-
+                
+             _servertable_highlight_featureOverlay.getSource().addFeature(_highlight_servertable_feature);
+                   
 
 
 
@@ -1127,28 +1196,24 @@ function datatablesX() {
                 _latlng.push(_new_long);
                 _latlng.push(_new_lat);
 
-                _mouseover_coord.push(_latlng);
-
-                alert(_mouseover_coord);
-
-                _mouseover_coord = ol.proj.transform(_mouseover_coord, 'EPSG:4326', 'EPSG:3857');
-
-                alert(_mouseover_coord);
 
 
-               _highlight_servertable_point = new ol.geom.Circle(_mouseover_coord);
-                //_highlight_servertable_point = new ol.geom.Point(_mouseover_coord);
+                // wrong:   _mouseover_coord.push(_latlng);   circle([[lng,lat]]) wrong, should be circle([lng,lat])
+                _mouseover_coord = _latlng;
+
+                //_mouseover_coord = ol.proj.transform(_mouseover_coord, 'EPSG:4326', 'EPSG:3857');
 
                
 
-                // _highlight_servertable_point.transform('EPSG:4326', 'EPSG:3857');
+                // circle style does not working, so use point
+               //_highlight_servertable_point = new ol.geom.Circle(_mouseover_coord);
+                _highlight_servertable_point = new ol.geom.Point(_mouseover_coord);
+
+               
+
+                 _highlight_servertable_point.transform('EPSG:4326', 'EPSG:3857');
 
 
-
-                // alert(_highlight_servertable_point.getCenter());
-                 //alert(_highlight_servertable_point.getRadius());
-                //alert(_highlight_servertable_point.getCoordinates());
-                //alert(_highlight_servertable_point.getFirstCoordinate());
 
 
 
@@ -1158,30 +1223,9 @@ function datatablesX() {
                
 
 
-                if (_highlight_servertable_feature !== _servertable_highlight) {
-
-
-                    if (_servertable_highlight) {
-
-
-                        _servertable_highlight_featureOverlay.getSource().removeFeature(_servertable_highlight);
-
-                    }
-
-
-                    if (_highlight_servertable_feature) {
+                
                         _servertable_highlight_featureOverlay.getSource().addFeature(_highlight_servertable_feature);
-                    }
-                    _servertable_highlight = _highlight_servertable_feature;
-
-                    _servertable_current_highlight = _servertable_highlight;
-                }//if
-
-
-
-
-
-
+                   
 
             }// point
 
@@ -1199,31 +1243,11 @@ function datatablesX() {
 
             // remove all high light feature 
 
-            if (_servertable_current_highlight) {
-                _servertable_highlight_featureOverlay.getSource().removeFeature(_servertable_current_highlight);
+            if (_servertable_highlight_featureOverlay) {
+                
+                _servertable_highlight_featureOverlay.getSource().clear();
             }
 
-
-
-
-
-            //if (_mouseover_polygon)  //if is not null then clear last polygon
-            //{
-            //    map.removeLayer(_mouseover_polygon);
-
-            //}
-
-            //if (_mouseover_line)  //if is not null then clear last polygon
-            //{
-            //    map.removeLayer(_mouseover_line);
-
-            //}
-
-            //if (_mouseover_point)  //if is not null then clear last polygon
-            //{
-            //    map.removeLayer(_mouseover_point);
-
-            //}
 
 
 
@@ -1295,6 +1319,7 @@ function datatablesX() {
 
 
 
+
 // datatables paged js
 $(document).ready(function () {
 
@@ -1304,7 +1329,7 @@ $(document).ready(function () {
 
     initialize();
 
-
+    
 
 }); // document ready function
 
