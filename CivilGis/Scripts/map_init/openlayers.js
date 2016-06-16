@@ -46,8 +46,13 @@ var _area_boundaryline_vectorSource;
 var _area_boundaryline_layer;
 var _geojson_vectorSource;
 var _geojson_vectorLayer;
+var _geojson_vectorLayer_pointcluster;
+var last_geojson_vectorLayer;
+var last_geojson_vectorLayer_pointcluster;
 var popup;
 var _raster_tile_layer;
+var clusterSource;
+
 
 var _highlight_featureOverlay;
 var _servertable_highlight_featureOverlay;

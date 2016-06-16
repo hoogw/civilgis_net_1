@@ -1,11 +1,15 @@
 ﻿
 
-// ---------- map click event [3]--------add _map_click --------
-
 function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
-   
+
+
+    // Load a GeoJSON from the server 
+
+
+
+
 
 
 
@@ -20,167 +24,135 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-            //--------------------------------------------
-
-
-            //gmap.data.loadGeoJson(_apiURI);
-
-            // Note: data is a string, not a javascript object.
-            //the function addGeoJson needs a javascript object and not a string. so you must convert string to javascript object before feed into addGeoJson
-            // if you use loadGeoJson(url), do not need any formate change, feed URL return string, the loadGeoJson will do with returning string.
-
 
 
             _geojson_object = JSON.parse(data);
 
-            //-----leaflet marker cluster  [2.1] ------each time before you add new point geojson, need to clear old last time marker clusters.
-            //   markerClusterer.clearMarkers();
+            //...................... openlayers ..........................
 
 
-           
+             last_geojson_vectorLayer = _geojson_vectorLayer;
+             last_geojson_vectorLayer_pointcluster = _geojson_vectorLayer_pointcluster;
 
-            //--------------------------------------------   
 
 
+            _geojson_vectorSource = new ol.source.Vector({
+                features: (new ol.format.GeoJSON()).readFeatures(_geojson_object, { featureProjection: 'EPSG:3857' })
 
 
+            });
 
 
+               //############# openlayer cluster ##############
+                        clusterSource = new ol.source.Cluster({
+                            distance: 60,
+                            source: _geojson_vectorSource
+                        });
+               
 
 
+                         var styleCache = {};
+                         _geojson_vectorLayer_pointcluster = new ol.layer.Vector({
+                            //source: _geojson_vectorSource,
+                            source: clusterSource,
 
 
-            // determine feature is point or not point
-            // var _geojson_feature_geometry_type = _geojson_object['features'][0]['geometry']['type'];
+                            style: function(feature) {
+                                var size = feature.get('features').length;
+                                var style = styleCache[size];
+                                if (!style) {
+                                    style = new ol.style.Style({
+                                        image: new ol.style.Circle({
+                                            radius: 10,
+                                            stroke: new ol.style.Stroke({
+                                                color: '#fff'
+                                            }),
+                                            fill: new ol.style.Fill({
+                                                color: '#3399CC'
+                                            })
+                                        }),
+                                        text: new ol.style.Text({
+                                            text: size.toString(),
+                                            fill: new ol.style.Fill({
+                                                color: '#fff'
+                                            })
+                                        })
+                                    });
+                                    styleCache[size] = style;
+                                }
+                                return style;
+                            }
+                        });
 
 
+                         map.addLayer(_geojson_vectorLayer_pointcluster);
 
 
+            //############# End openlayer cluster ##############
 
 
+                         _geojson_vectorLayer = new ol.layer.Vector({
+                             source: _geojson_vectorSource,
+                             style: styleFunction
+                         });
 
 
+            map.addLayer(_geojson_vectorLayer);
 
 
-            //----------------  add new geojson, then remove last geojson --------------------
+            _current_geojson_layer = true;
 
 
 
+            $('#utfgrid_info').hide();
 
-            _last_geojson_layer = _current_geojson_layer;
 
-            _last_markers_cluster = _current_markers_cluster;
 
 
 
 
-            _current_geojson_layer = L.geoJson(_geojson_object, {
 
 
-                // for point feature, by default it use marker, but instead of use marker, here change marker to polygon (circle marker) 
-                pointToLayer: function (feature, latlng) {
-                    return L.circleMarker(latlng, geojson_Marker_style_Options);
-                },
-
-
-                style: geojson_default_style,
-
-                onEachFeature: function onEachFeature(feature, layer) {
-
-
-
-                    //bind click
-                    layer.on('mouseover', function (e) {
-                        // e = event
-                        // console.log(e); 
-
-                        // You can make your ajax call declaration here
-                        //$.ajax(... 
-
-
-                        layer.setStyle(geojson_mouseover_highlight_style);
-
-
-
-                        var instant_info = "<ul>";
-
-
-                        for (var _key in layer.feature.properties) {
-                            var _value = String(layer.feature.properties[_key]);
-                            instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _key + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
-
-                        }
-
-
-                        instant_info = instant_info + "</ul>";
-
-
-                        // update bottom <div>
-                        document.getElementById("info-table").innerHTML = instant_info;
-                        // hide 'utfgrid_info' <div>
-                        $('#utfgrid_info').hide();
-
-
-                    });// layer.on mouseover
-
-
-                    layer.on('mouseout', function (e) {
-
-                        layer.setStyle(geojson_default_style);
-
-                        // empty bottom <div>
-                        document.getElementById("info-table").innerHTML = "";
-                        //infowindow.close();
-
-                    });// layer.on mouseout
-
-                }// oneach function
-
-            }).bindPopup(function (layer) {
-
-
-                // when user click each feature, it will popup a info window by the feature.
-
-
-                var popup = "<table>";
-                for (var _key in layer.feature.properties) {
-                    var _value = String(layer.feature.properties[_key]);
-                    // popup = popup + "<tr><td>" + _key + "</td><td>" + _value + "</td></tr>";
-
-                    popup = popup + "<tr><td><span style=\'background-color: #454545;\'><font color=\'white\'>" + _key + "</span>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;" + _value + "</td></tr>";
-
-                }
-                popup = popup + "</table>";
-
-
-                return popup;
-
-
-            }).addTo(map);
-        
-            //-------------------- add marker cluster layer too map -------------
-            _current_markers_cluster = L.markerClusterGroup();
-            _current_markers_cluster.addLayer(_current_geojson_layer);
-
-            map.addLayer(_current_markers_cluster);
-
-
-            //----------------------------------------------------------------
-
-
-
-
-
-            // ---- after add new geojson, now remove last time old geojson -------------
-            // don't use Array.ForEach is about 95% slower than for() in JavaScript.
 
             if (_last_geojson_layer) {
 
+
+                ////......................... remove layer .........................
+                
+                //// layers start from 0 = base map, 1 = raster tile, 2 = utfgrid_tile, 3 = last time geojson(cluster),  4 = last time geojson, 5 = current geojson (cluster) 6 = current geojson  / so 3 = array.lenghth - 4
+
+                //_all_layers = map.getLayers().getArray();
+
                
 
-                map.removeLayer(_last_geojson_layer);
+                ////remove last time cluster and last time geosjon 3, and 4 
 
-                map.removeLayer(_last_markers_cluster);
+                //map.removeLayer(_all_layers[_all_layers.length - 4]);
+                //map.removeLayer(_all_layers[_all_layers.length - 3]);
+                ////.........................End  remove layer .........................
+
+
+
+                
+
+                //............... remove source ........................
+
+
+                last_geojson_vectorLayer.getSource().clear();
+                last_geojson_vectorLayer_pointcluster.getSource().clear();
+
+
+
+
+
+
+                //...............End remove source ........................
+
+            }
+            else {
+
+                _last_geojson_layer = true;
+
 
             }// if
 
@@ -219,11 +191,6 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             //-------------------------------------------------------------
 
 
-           
-
-            
-
-
 
 
 
@@ -232,17 +199,38 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
         else {
 
 
-            // ---------- if return number, should remove last time geojson -----------
-            _last_geojson_layer = _current_geojson_layer;
-            _last_markers_cluster = _current_markers_cluster;
 
+
+
+
+
+            // ---------- if return number, should remove last time geojson -----------
 
             if (_last_geojson_layer) {
 
-                map.removeLayer(_last_geojson_layer);
+                ////................. remove layer ................
+                //_all_layers = map.getLayers().getArray();
 
-                map.removeLayer(_last_markers_cluster);
 
+                
+                //// layers start from 0 = base map, 1 = raster tile, 2 = utfgrid_tile, 3 = geojson(cluster)  4 = geojson  
+
+                //map.removeLayer(_all_layers[_all_layers.length - 1]);
+                //map.removeLayer(_all_layers[_all_layers.length - 2]);
+                ////.................End remove layer ................
+
+
+
+
+                //.............. remove source ................
+                _geojson_vectorLayer.getSource().clear();
+                _geojson_vectorLayer_pointcluster.getSource().clear();
+                //..............End remove source ................
+
+
+
+                _last_geojson_layer = false;
+                _current_geojson_layer = false;
 
             }// if
             //-------------------- end remove last geojson ------------------------------
@@ -253,7 +241,6 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             $('#utfgrid_info').show();
             // empty bottom <div>
             document.getElementById("info-table").innerHTML = "";
-
 
 
             document.getElementById("ajaxload").style.display = "none";
@@ -295,46 +282,10 @@ function initialize() {
 
 
 
-
-
-
-
-
     initial_location = set_initial_location($("#areaID").val());
 
 
-
-
-    init_base_map();
-
-
-    //  ***** this add map listenner must be befor map.setView, *******************
-    add_map_listener_idle();
-
-
-    map.setView(new L.LatLng(initial_location[1], initial_location[2]), initial_location[3]);
-
-    //  ***** end  **** this add map listenner must be befor map.setView, *******************
-
-
-
-    add_area_boundary($("#areaID").val());
-
-
-
-   
-
-
-    //------tile[1] ---------
-    init_tiling();
-
-
-
-
-
-
-
-    geocoding();
+    init_base_map_tiling();
 
 
 
@@ -344,21 +295,10 @@ function initialize() {
 
 
 
-
-
-
-
-
 $(document).ready(function () {
 
 
 
-
-
     initialize();
-
-
-
-
 
 }); // document ready function

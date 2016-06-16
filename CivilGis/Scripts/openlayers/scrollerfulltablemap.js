@@ -94,7 +94,7 @@ function feed_datatables(_geojson_obj) {
         columns: _column_def,
 
 
-        //"pagingType": "full_numbers",
+        // "pagingType": "full_numbers",
 
         // resize the datatables height here scrollY:150
         scrollY: 200,
@@ -106,11 +106,27 @@ function feed_datatables(_geojson_obj) {
         scrollCollapse: true,
         scroller: true
 
-        // ------------ scroller section end--------  
+        // ------------ scroller section end-------- 
+
 
 
 
     }); // datatable
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -134,37 +150,64 @@ function feed_datatables(_geojson_obj) {
 
 
 
-        // -----------leaflet --------------
+        // -----------  **************   openlayers    ****************--------------
+        var highlight;
+        var feature;
+        var highlightStyleCache = {};
+
+
+
+        _highlight_featureOverlay = new ol.layer.Vector({
+            source: new ol.source.Vector(),
+            map: map,
+            style: _clienttable_mouseover_row_highlight_feature_style
+
+
+        });
 
 
 
 
 
-        _current_geojson_layer.eachLayer(
-             function (featureInstanceLayer) {
 
-                 var click_row_geofeatureID = featureInstanceLayer.feature.properties.GeoFeatureID;
-                 var click_row_geofeaturetype = featureInstanceLayer.feature.properties.GeoFeatureType;
+        _geojson_vectorSource.forEachFeature(
 
+            function (_each_feature) {
 
 
-                 if (click_row_geofeatureID === _geo_ID) {
+                var click_row_geofeatureID = _each_feature.getProperties().GeoFeatureID;
+
+                if (click_row_geofeatureID === _geo_ID) {
 
 
-                     featureInstanceLayer.setStyle(
-                         geojson_clienttable_mouseover_highlight_style
-                         );
+                    // alert(click_row_geofeatureID);
+
+                    feature = _each_feature;
+
+                    if (feature !== highlight) {
+                        if (highlight) {
+                            _highlight_featureOverlay.getSource().removeFeature(highlight);
+
+                        }
+                        if (feature) {
+                            _highlight_featureOverlay.getSource().addFeature(feature);
+                        }
+                        highlight = feature;
+
+                        _current_highlight = highlight;
+                    }//if
+
+
+                }// if
+
+            });// forEachFeature
 
 
 
-                 }// if
-
-             }// function
-
-             );
 
 
-        //------------ end of leaflet ----------------
+
+        // -----------End   **************   openlayers    ****************--------------
 
 
 
@@ -185,15 +228,16 @@ function feed_datatables(_geojson_obj) {
         // update bottom <div>
         document.getElementById("info-table").innerHTML = instant_info;
 
-    }); // click cell event    
+    }); // mouseover cell event    
 
 
     $('#tabledata tbody').on('mouseout', 'td', function () {
 
-        // remove all high light yellow the feature polygon on google map
-        // Remove custom styles.
-        //map.data.revertStyle();
-        _current_geojson_layer.setStyle(geojson_default_style);
+        // remove all high light feature 
+
+        if (_current_highlight) {
+            _highlight_featureOverlay.getSource().removeFeature(_current_highlight);
+        }
 
         // empty bottom <div>
         document.getElementById("info-table").innerHTML = "";
@@ -210,10 +254,10 @@ function feed_datatables(_geojson_obj) {
 
 
 
-
-
-
 function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
+
+
+
 
     // Load a GeoJSON from the server 
 
@@ -223,19 +267,21 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-
-
     // test url if return a number means too many polygon to show.otherwise add polygon to map.
-
     $.get(_apiURI, function (data) {
 
         if (isNaN(data)) {
 
 
 
+            // ---------   processing data(geoJson) to fill datatables -----------------
+
+
+
 
 
             _geojson_object = JSON.parse(data);
+
 
 
 
@@ -292,25 +338,6 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-            //----------------  add new geojson, then remove last geojson --------------------
-
-
-
-            _last_geojson_layer = _current_geojson_layer;
-
-            _current_geojson_layer = L.geoJson(_geojson_object, {
-
-
-
-                // for point feature, by default it use marker, but instead of use marker, here change marker to polygon (circle marker) 
-                pointToLayer: function (feature, latlng) {
-                    return L.circleMarker(latlng, geojson_Marker_style_Options);
-                },
-
-
-                style: geojson_default_style,
-
-                onEachFeature: function onEachFeature(feature, layer) {
 
 
 
@@ -318,96 +345,66 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-                    //bind click
-                    layer.on('mouseover', function (e) {
-                        // e = event
-                        // console.log(e); 
-
-                        // You can make your ajax call declaration here
-                        //$.ajax(... 
-
-
-                        layer.setStyle(geojson_mouseover_highlight_style);
 
 
 
-                        var instant_info = "<ul>";
 
 
-                        for (var _key in layer.feature.properties) {
-                            var _value = String(layer.feature.properties[_key]);
-                            instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _key + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
 
-                        }
+            //...................... openlayers  add new geojson, then remove last geojson..........................
 
 
-                        instant_info = instant_info + "</ul>";
+            _geojson_vectorSource = new ol.source.Vector({
+                features: (new ol.format.GeoJSON()).readFeatures(_geojson_object, { featureProjection: 'EPSG:3857' })
 
 
-                        // update bottom <div>
-                        document.getElementById("info-table").innerHTML = instant_info;
-                        // hide 'utfgrid_info' <div>
-                        $('#utfgrid_info').hide();
+            });
 
 
-                    });// layer.on mouseover
+
+            _geojson_vectorLayer = new ol.layer.Vector({
+                source: _geojson_vectorSource,
+                style: styleFunction
+            });
 
 
-                    layer.on('mouseout', function (e) {
-
-                        layer.setStyle(geojson_default_style);
-
-                        // empty bottom <div>
-                        document.getElementById("info-table").innerHTML = "";
-                        //infowindow.close();
-
-                    });// layer.on mouseout
-
-                }// oneach function
-
-            }).bindPopup(function (layer) {
+            map.addLayer(_geojson_vectorLayer);
+            _current_geojson_layer = true;
 
 
-                // when user click each feature, it will popup a info window by the feature.
+
+            $('#utfgrid_info').hide();
 
 
-                var popup = "<table>";
-                for (var _key in layer.feature.properties) {
-                    var _value = String(layer.feature.properties[_key]);
-                    // popup = popup + "<tr><td>" + _key + "</td><td>" + _value + "</td></tr>";
-
-                    popup = popup + "<tr><td><span style=\'background-color: #454545;\'><font color=\'white\'>" + _key + "</span>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;" + _value + "</td></tr>";
-
-                }
-                popup = popup + "</table>";
 
 
-                return popup;
 
 
-            }).addTo(map);
 
 
-            // ---- after add new geojson, now remove last time old geojson -------------
-            // don't use Array.ForEach is about 95% slower than for() in JavaScript.
 
             if (_last_geojson_layer) {
 
-                //alert("remove last geojson");
+                // layers start from 0 = base map, 1 = raster tile, 2 = utfgrid_tile, 3 = last time geojson,  4 = current geojson  / so 3 = array.lenghth - 2
 
-                map.removeLayer(_last_geojson_layer);
+                _all_layers = map.getLayers().getArray();
+
+                map.removeLayer(_all_layers[_all_layers.length - 2]);
+
+            }
+            else {
+
+                _last_geojson_layer = true;
+
 
             }// if
 
 
-            //------------------------end add new geojson, then remove last geojson------------------------- ---------------
+            //---------------------------end    openlayers   add new geojson, then remove last geojson------------------------- ---------------
 
 
 
-
-            feed_datatables(_geojson_object);
-
-
+             feed_datatables(_geojson_object);
 
             // hidden the title_info
             document.getElementById("ajaxload").style.display = "none";
@@ -424,6 +421,9 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
+
+
+
             // ------------- map click event [3] -------------------
             if (_map_click_event) {
             }
@@ -436,16 +436,33 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
+
         }
-            // returning number of count, no geojson, clean the datatables
+            // returning number of count
         else {
 
+
+
+
+
+
+
             // ---------- if return number, should remove last time geojson -----------
-            _last_geojson_layer = _current_geojson_layer;
+
             if (_last_geojson_layer) {
 
-                map.removeLayer(_last_geojson_layer);
 
+                _all_layers = map.getLayers().getArray();
+
+
+                // layers start from 0 = base map, 1 = raster tile, 2 = utfgrid_tile, 3 = geojson = array.lenghth - 1
+
+
+                map.removeLayer(_all_layers[_all_layers.length - 1]);
+
+
+                _last_geojson_layer = false;
+                _current_geojson_layer = false;
 
             }// if
             //-------------------- end remove last geojson ------------------------------
@@ -462,8 +479,11 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             document.getElementById("title_info").style.display = "inline";
             document.getElementById("legend").style.display = "inline";
 
+
             // empty bottom data table
             $('#tabledata').dataTable().fnClearTable();
+
+
 
             if (data > 0) {
 
@@ -472,14 +492,13 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
                 document.getElementById('legend').innerHTML = "Found [ " + data + " ] records ZOOM IN for Details ";
 
             } else {
-                // data = 0 nothing found clear datatables
-                // $('#tabledata').dataTable().fnClearTable();
-                //$('#tabledata').dataTable().clear();  // this is api bug, for some reason it failed to clean data.
-                //$('#tabledata').dataTable().clear().draw();
 
                 document.getElementById("title_info").innerHTML = "Nothing found";
                 document.getElementById("legend").innerHTML = "Nothing found";
             }
+
+
+
             // ------------- map click event [4] -------------------
 
             _mapclick_in_use = true;
@@ -487,27 +506,12 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             //-------------------------------------------------------------
 
 
+        }// else return number only
 
-
-        }// if else
-
-
-
-    });// get // promist.then
-
-
-
-
-
+    });// get
 
 
 }// function ajax_GeoJSON
-
-
-
-
-
-
 
 
 
@@ -516,41 +520,11 @@ function initialize() {
 
 
 
-
-
-
     initial_location = set_initial_location($("#areaID").val());
 
 
+    init_base_map_tiling();
 
-
-    init_base_map();
-
-
-    //  ***** this add map listenner must be befor map.setView, *******************
-    add_map_listener_idle();
-
-
-    map.setView(new L.LatLng(initial_location[1], initial_location[2]), initial_location[3]);
-
-    //  ***** end  **** this add map listenner must be befor map.setView, *******************
-
-
-
-    add_area_boundary($("#areaID").val());
-
-
-
-   
-
-
-
-    //------tile[1] ---------
-    init_tiling();
-
-
-
-    geocoding();
 
 
 }// initialize
@@ -682,12 +656,10 @@ function datatablesX() {
             // ------------ scroller section --------     
 
             deferRender: true,
-            // scrollCollapse: true, //only use it on client side, Do not use it on server side, it cause not draw, not send request to server until 25 record after 
+            scrollCollapse: true,
             scroller: true
 
-            // ------------ scroller section end--------  
-
-
+            // ------------ scroller section end-------- 
 
 
 
@@ -702,6 +674,22 @@ function datatablesX() {
         // last 2 columns are "geometry_type" and "coordinate" need to hide, set visible to false. but need to use them later.
         table.columns(_column_count - 1).visible(false);
         table.columns(_column_count - 2).visible(false);
+
+
+
+
+
+
+        //+++++++++++++++++ openlayer  highlight+++++++++++++++
+
+
+        //+++++++++++++ end highlight openlayer ++++++++++++++
+
+
+
+
+
+
 
 
         // ajax click row event fly to on map 
@@ -792,6 +780,31 @@ function datatablesX() {
             // ---------------when click draw polygon line marker on map (red) -------------------
 
 
+            var _servertable_click_highlight;
+            var _servertable_click_feature;
+            var _servertable_click_highlightStyleCache = {};
+
+
+            if (_servertable_click_highlight_featureOverlay) {
+
+                //alert('remove last click highlight layer');
+
+                _servertable_click_highlight_featureOverlay.getSource().clear();
+            }
+
+
+
+            _servertable_click_highlight_featureOverlay = new ol.layer.Vector({
+                source: new ol.source.Vector(),
+                map: map,
+                style: _servertable_click_row_highlight_feature_style
+
+
+            });
+
+
+
+
 
 
             _click_coord = [];
@@ -810,29 +823,39 @@ function datatablesX() {
 
 
                     var _latlng = [];
-                    _latlng.push(_new_lat);
                     _latlng.push(_new_long);
+                    _latlng.push(_new_lat);
+
                     _click_coord.push(_latlng);
 
 
                 }// for
 
 
-                // Construct the polygon.
+                _highlight_click_servertable_polygon = new ol.geom.Polygon([_click_coord]);
 
-                if (_click_polygon)  //if is not null then clear last polygon
-                {
-                    map.removeLayer(_click_polygon);
+                _highlight_click_servertable_polygon.transform('EPSG:4326', 'EPSG:3857');
 
-                }
+                // Create feature with polygon.
+                _highlight_click_servertable_feature = new ol.Feature(_highlight_click_servertable_polygon);
 
 
-                _click_polygon = L.polygon(_click_coord, _click_polygon_style).addTo(map);
+
+                _servertable_click_highlight_featureOverlay.getSource().addFeature(_highlight_click_servertable_feature);
+
+
+
 
 
                 // zoom the map to the polygon
-                // map.fitBounds(_click_polygon.getBounds());
-                map.fitBounds(_click_polygon.getBounds(), { maxZoom: leaflet_open_street_map_max_zoom_level });
+
+                //var extent = _highlight_click_servertable_polygon.getExtent();
+                //map.getView().fit(extent, map.getSize());
+
+                map.getView().fit(_highlight_click_servertable_polygon, map.getSize());
+
+
+
 
 
             }// polygon
@@ -847,40 +870,89 @@ function datatablesX() {
                     var _new_lat = _geometry_coord[i][1];
                     var _new_long = _geometry_coord[i][0];
                     var _latlng = [];
-                    _latlng.push(_new_lat);
+
                     _latlng.push(_new_long);
+                    _latlng.push(_new_lat);
+
                     _click_coord.push(_latlng);
 
                 }// for
 
-                // Construct the polygon.
-
-                if (_click_line)  //if is not null then clear last polygon
-                {
-                    map.removeLayer(_click_line);
-
-                }
 
 
-                _click_line = L.polygon(_mouseover_coord, _click_line_style).addTo(map);
+                _highlight_click_servertable_line = new ol.geom.LineString(_click_coord);
+
+                _highlight_click_servertable_line.transform('EPSG:4326', 'EPSG:3857');
+
+
+
+
+                // Create feature with polygon.
+                _highlight_click_servertable_feature = new ol.Feature(_highlight_click_servertable_line);
+
+
+
+
+                _servertable_click_highlight_featureOverlay.getSource().addFeature(_highlight_click_servertable_feature);
+
+
+
+
 
                 // zoom the map to the polygon
-                map.fitBounds(_click_line.getBounds(), { maxZoom: leaflet_open_street_map_max_zoom_level });
+                // alert(_highlight_click_servertable_line.getExtent());
+                map.getView().fit(_highlight_click_servertable_line, map.getSize());
 
 
             }// linestring
             else if (_geometry_type === 'Point') {
 
+                var _new_lat = _geometry_coord[1];
+                var _new_long = _geometry_coord[0];
+                var _latlng = [];
 
-                if (_click_point)  //if marker is not null then clear last marker
-                {
-                    map.removeLayer(_click_point);
+                _latlng.push(_new_long);
+                _latlng.push(_new_lat);
 
-                }
-                // add new marker 
-                _click_point = L.marker([_geometry_coord[1], _geometry_coord[0]]).addTo(map);
+                _click_coord = _latlng;
 
-                map.setView([_geometry_coord[1], _geometry_coord[0]], leaflet_open_street_map_max_zoom_level, { animate: true });
+
+                //_click_coord = ol.proj.transform(_click_coord, 'EPSG:4326', 'EPSG:3857');
+
+
+
+
+                // _highlight_click_servertable_point = new ol.geom.Circle(_click_coord);
+                _highlight_click_servertable_point = new ol.geom.Point(_click_coord);
+
+
+
+                _highlight_click_servertable_point.transform('EPSG:4326', 'EPSG:3857');
+
+
+
+
+
+                // Create feature with polygon.
+                _highlight_click_servertable_feature = new ol.Feature(_highlight_click_servertable_point);
+
+
+
+
+
+                _servertable_click_highlight_featureOverlay.getSource().addFeature(_highlight_click_servertable_feature);
+
+
+
+                // zoom the map to the polygon
+
+                // alert(_highlight_click_servertable_point.getExtent());
+                // fit() zoom too much, not use.
+                //map.getView().fit(_highlight_click_servertable_point.getExtent(), map.getSize());  
+
+                map.getView().setCenter(ol.proj.transform(_click_coord, 'EPSG:4326', 'EPSG:3857'));
+                map.getView().setZoom(20);
+
 
             }// point
 
@@ -989,10 +1061,45 @@ function datatablesX() {
             // --------------- draw polygon line marker on map (red) -------------------
 
 
+            // -----------  **************   openlayers    ****************--------------
+
+
+            var _servertable_highlight;
+            var _servertable_feature;
+            var _servertable_highlightStyleCache = {};
+
+
+            if (_servertable_highlight_featureOverlay) {
+
+                // remove last time mouse over highlight feature
+                _servertable_highlight_featureOverlay.getSource().clear();
+            }
+
+
+            _servertable_highlight_featureOverlay = new ol.layer.Vector({
+                source: new ol.source.Vector(),
+                map: map,
+                style: _servertable_mouseover_row_highlight_feature_style
+
+
+            });
+
+
+
+
 
             _mouseover_coord = [];
 
             if (_geometry_type === 'Polygon') {
+
+                //var ring = [
+                //  [a[0].lng, a[0].lat], [a[1].lng, a[1].lat],
+                //  [a[2].lng, a[2].lat], [a[0].lng, a[0].lat]
+                //];
+
+                //// A polygon is an array of rings, the first ring is
+                //// the exterior ring, the others are the interior rings.
+                //var polygon = new ol.geom.Polygon([ring]);
 
 
                 // assume each coordinate has only 1 polygon,
@@ -1006,24 +1113,31 @@ function datatablesX() {
 
 
                     var _latlng = [];
-                    _latlng.push(_new_lat);
                     _latlng.push(_new_long);
+                    _latlng.push(_new_lat);
+
                     _mouseover_coord.push(_latlng);
 
 
                 }// for
 
 
-                // Construct the polygon.
-
-                if (_mouseover_polygon)  //if is not null then clear last polygon
-                {
-                    map.removeLayer(_mouseover_polygon);
-
-                }
 
 
-                _mouseover_polygon = L.polygon(_mouseover_coord, _mouseover_polygon_style).addTo(map);
+
+                _highlight_servertable_polygon = new ol.geom.Polygon([_mouseover_coord]);
+
+                _highlight_servertable_polygon.transform('EPSG:4326', 'EPSG:3857');
+
+                // Create feature with polygon.
+                _highlight_servertable_feature = new ol.Feature(_highlight_servertable_polygon);
+
+
+
+
+                _servertable_highlight_featureOverlay.getSource().addFeature(_highlight_servertable_feature);
+
+
 
 
 
@@ -1032,29 +1146,52 @@ function datatablesX() {
 
 
 
-                // assume each coordinate has only 1 polygon,
+
+
+
+
+
+
+                // assume each coordinate has only 1 line,
                 for (i = 0, len = _geometry_coord.length; i < len; ++i) {
 
 
                     var _new_lat = _geometry_coord[i][1];
                     var _new_long = _geometry_coord[i][0];
                     var _latlng = [];
-                    _latlng.push(_new_lat);
+
                     _latlng.push(_new_long);
+                    _latlng.push(_new_lat);
+
                     _mouseover_coord.push(_latlng);
+
+
+
+
 
                 }// for
 
-                // Construct the polygon.
-
-                if (_mouseover_line)  //if is not null then clear last polygon
-                {
-                    map.removeLayer(_mouseover_line);
-
-                }
 
 
-                _mouseover_line = L.polygon(_mouseover_coord, _mouseover_line_style).addTo(map);
+
+
+
+
+                _highlight_servertable_line = new ol.geom.LineString(_mouseover_coord);
+
+                _highlight_servertable_line.transform('EPSG:4326', 'EPSG:3857');
+
+
+                //alert(_highlight_servertable_line.getFirstCoordinate());
+
+                // Create feature with polygon.
+                _highlight_servertable_feature = new ol.Feature(_highlight_servertable_line);
+
+
+
+
+                _servertable_highlight_featureOverlay.getSource().addFeature(_highlight_servertable_feature);
+
 
 
 
@@ -1063,15 +1200,47 @@ function datatablesX() {
             else if (_geometry_type === 'Point') {
 
 
-                if (_mouseover_point)  //if marker is not null then clear last marker
-                {
-                    map.removeLayer(_mouseover_point);
 
-                }
-                // add new marker 
-                //_mouseover_point = L.circle([_geometry_coord[1], _geometry_coord[0]], 80).addTo(map);
 
-                _mouseover_point = L.marker([_geometry_coord[1], _geometry_coord[0]]).addTo(map);
+
+
+                var _new_lat = _geometry_coord[1];
+                var _new_long = _geometry_coord[0];
+                var _latlng = [];
+
+                _latlng.push(_new_long);
+                _latlng.push(_new_lat);
+
+
+
+                // wrong:   _mouseover_coord.push(_latlng);   circle([[lng,lat]]) wrong, should be circle([lng,lat])
+                _mouseover_coord = _latlng;
+
+                //_mouseover_coord = ol.proj.transform(_mouseover_coord, 'EPSG:4326', 'EPSG:3857');
+
+
+
+                // circle style does not working, so use point
+                //_highlight_servertable_point = new ol.geom.Circle(_mouseover_coord);
+                _highlight_servertable_point = new ol.geom.Point(_mouseover_coord);
+
+
+
+                _highlight_servertable_point.transform('EPSG:4326', 'EPSG:3857');
+
+
+
+
+
+                // Create feature with polygon.
+                _highlight_servertable_feature = new ol.Feature(_highlight_servertable_point);
+
+
+
+
+
+                _servertable_highlight_featureOverlay.getSource().addFeature(_highlight_servertable_feature);
+
 
             }// point
 
@@ -1087,30 +1256,19 @@ function datatablesX() {
         $('#tabledataX tbody').on('mouseout', 'tr', function () {
 
 
+            // remove all high light feature 
 
-            if (_mouseover_polygon)  //if is not null then clear last polygon
-            {
-                map.removeLayer(_mouseover_polygon);
+            if (_servertable_highlight_featureOverlay) {
 
+                _servertable_highlight_featureOverlay.getSource().clear();
             }
 
-            if (_mouseover_line)  //if is not null then clear last polygon
-            {
-                map.removeLayer(_mouseover_line);
-
-            }
-
-            if (_mouseover_point)  //if is not null then clear last polygon
-            {
-                map.removeLayer(_mouseover_point);
-
-            }
 
 
 
         });
 
-
+        // -----------End   **************   openlayers    ****************--------------
 
 
 
@@ -1172,6 +1330,7 @@ function datatablesX() {
 
 
 }
+
 
 
 
