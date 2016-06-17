@@ -299,19 +299,6 @@ _mouseover_line_style = {
 
 
 
-geojson_classification_mouseover_highlight_style = {
-
-    Weight: 2,
-    Color: '#000000',
-    fillColor: '#000000',
-    fillOpacity: 1
-
-};
-
-
-
-
-
 
 function set_initial_location(_area) {
 
@@ -1544,6 +1531,35 @@ var _servertable_click_row_highlight_feature_style = new ol.style.Style({
 
 
 
+geojson_classification_mouseover_highlight_style = new ol.style.Style({
+
+    stroke: new ol.style.Stroke({
+        color: 'black',
+        //lineDash: [1],
+        width: 3
+    }),
+
+    fill: new ol.style.Fill({
+        color: 'rgba(255, 255, 255, 0.5)'
+    })
+});
+
+
+
+geojson_classification_coloroff_restore_style = new ol.style.Style({
+    stroke: new ol.style.Stroke({
+        color: 'blue',
+        lineDash: [4],
+        width: 1
+    }),
+    fill: new ol.style.Fill({
+        color: 'rgba(0, 0, 255, 0.1)'
+    })
+});
+
+
+
+
 
 
 //............END...... openlayer highlight  style ...................
@@ -1628,6 +1644,11 @@ var styles = {
 var styleFunction = function (feature) {
     return styles[feature.getGeometry().getType()];
 };
+
+
+
+
+
 
 //===========End =========openlayer = geojson style =========================
 

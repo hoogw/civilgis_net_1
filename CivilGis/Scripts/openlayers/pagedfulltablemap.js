@@ -936,7 +936,7 @@ function datatablesX() {
                 //map.getView().fit(_highlight_click_servertable_point.getExtent(), map.getSize());  
 
                 map.getView().setCenter(ol.proj.transform(_click_coord, 'EPSG:4326', 'EPSG:3857'));
-                map.getView().setZoom(20);
+                map.getView().setZoom(_flyto_zoomlevel);
 
 
             }// point

@@ -124,39 +124,70 @@ function init_classification_buttons_checkbox(_area, _subject) {
                     // if button clicked(check box checked), do nothing. mouse over disable.
                 }
                 else {
+
+
+
                     // loop through all current featurs on map 
                    
 
-                    // -----------leaflet --------------
+                    // ----------- openlayer 3 --------------
+
+
+                  
+
+
+                    _geojson_vectorSource.forEachFeature(function (feature) {
+
+
+                       
+                        
+
+                        var _object = feature.getProperties();
+
+                        for (var _property in _object) {
+                            if (_object.hasOwnProperty(_property)) {
+
+
+                                var _this_code_column = '';
+                                if (_property === _code_column_name) {
+
+                                   
+                                    _this_code_column = String(_object[_property]);
+
+                                    if (_this_code_column === _current_code_mouseover) {
+
+
+                                        feature.setStyle(geojson_classification_mouseover_highlight_style);
+
+
+                                    }// if
+
+
+
+                                }// if 
+
+
+
+
+
+                            }//if
+                        }//for
+
+
+
+                    
+                    }); // foreach Feature
 
 
 
                     
 
-
-                    _current_geojson_layer.eachLayer(
-                         function (featureInstanceLayer) {
-
-                             
-                             var _this_code_column = featureInstanceLayer.feature.properties[_code_column_name];
-
-                             if (_this_code_column == _current_code_mouseover) {
-                                
-
-                                 featureInstanceLayer.setStyle(
-                                     geojson_classification_mouseover_highlight_style
-                                     );
-
-
-
-                             }// if
-
-                         });// function
+                    
 
 
 
 
-                    //------------ end of leaflet ----------------
+                    //------------ end of openlayer 3 ----------------
 
 
 
@@ -184,39 +215,70 @@ function init_classification_buttons_checkbox(_area, _subject) {
                 }
                 else {
 
-                    // loop through all current featurs on map 
+                    
                    
 
 
 
-                    // -----------leaflet --------------
+                    // -----------openlayer restore original layer feature style --------------
+
+
+                    // does not work
+                    //_geojson_vectorLayer.setStyle(styleFunction);
 
 
 
 
 
-                    _current_geojson_layer.eachLayer(
-                         function (featureInstanceLayer) {
-
-                             var _this_code_column = featureInstanceLayer.feature.properties[_code_column_name];
-
-
-                             if (_this_code_column == _current_code_mouseout) {
-                                
-
-                                 featureInstanceLayer.setStyle(
-                                     geojson_classification_style
-                                     );
-
-
-                             }// if
-
-                         });// function
+                    _geojson_vectorSource.forEachFeature(function (feature) {
 
 
 
 
-                    //------------ end of leaflet ----------------
+
+                        var _object = feature.getProperties();
+
+                        for (var _property in _object) {
+                            if (_object.hasOwnProperty(_property)) {
+
+
+                                var _this_code_column = '';
+                                if (_property === _code_column_name) {
+
+
+                                    _this_code_column = String(_object[_property]);
+
+                                    if (_this_code_column === _current_code_mouseout) {
+
+
+                                        feature.setStyle(geojson_classification_coloroff_restore_style);
+
+
+                                    }// if
+
+
+
+                                }// if 
+
+
+
+
+
+                            }//if
+                        }//for
+
+
+
+
+                    }); // foreach Feature
+
+
+                    
+
+
+
+
+                    //------------ end of openlayer restore original layer feature style --------------
 
 
 
@@ -264,36 +326,58 @@ function init_classification_buttons_checkbox(_area, _subject) {
                    
 
 
-                    // -----------leaflet --------------
+                    // ----------- openlayers 3  --------------
+
+
+                    _geojson_vectorSource.forEachFeature(function (feature) {
 
 
 
 
 
-                    _current_geojson_layer.eachLayer(
-                         function (featureInstanceLayer) {
+                        var _object = feature.getProperties();
 
-                             var _this_code_column = featureInstanceLayer.feature.properties[_code_column_name];
-
-
-                             if (_this_code_column == _current_code_click) {
-                                 
-
-                                 featureInstanceLayer.setStyle(
-                                     geojson_classification_style
-                                     );
-
-                                
-
-                             }// if
-
-                         });
+                        for (var _property in _object) {
+                            if (_object.hasOwnProperty(_property)) {
 
 
+                                var _this_code_column = '';
+                                if (_property === _code_column_name) {
+
+
+                                    _this_code_column = String(_object[_property]);
+
+                                    if (_this_code_column === _current_code_click) {
+
+
+                                        feature.setStyle(geojson_classification_coloroff_restore_style);
+
+
+                                    }// if
 
 
 
-                    //------------ end of leaflet ----------------
+                                }// if 
+
+
+
+
+
+                            }//if
+                        }//for
+
+
+
+
+                    }); // foreach Feature
+
+
+                    
+
+
+
+
+                    //------------ end of openlayers 3  ----------------
 
 
 
@@ -329,47 +413,82 @@ function init_classification_buttons_checkbox(_area, _subject) {
 
 
 
-                    // loop through all current featurs on map 
+                    // loop through all current featurs on map, do color, color it.
                     
 
-                    // -----------leaflet --------------
+                    // -----------openlayers 3   --------------
+
+
+
+                    _geojson_vectorSource.forEachFeature(function (feature) {
 
 
 
 
 
-                    _current_geojson_layer.eachLayer(
-                         function (featureInstanceLayer) {
+                        var _object = feature.getProperties();
 
-                             var _this_code_column = featureInstanceLayer.feature.properties[_code_column_name];
-
-
-                             if (_this_code_column == _current_code_click) {
-                                 
-
-                                 featureInstanceLayer.setStyle(
+                        for (var _property in _object) {
+                            if (_object.hasOwnProperty(_property)) {
 
 
-                                         {
-
-                                             weight: 1,
-                                             color: _feature_fill_color,
-                                             fillColor: _feature_fill_color,
-                                             fillOpacity: 0.9
-                                         }
-
-                                     );
+                                var _this_code_column = '';
+                                if (_property === _code_column_name) {
 
 
+                                    _this_code_column = String(_object[_property]);
 
-                             }// if
-
-                         });// function
-
+                                    if (_this_code_column === _current_code_click) {
 
 
+                                        feature.setStyle(
 
-                    //------------ end of leaflet ----------------
+                                            new ol.style.Style({
+
+                                                stroke: new ol.style.Stroke({
+                                                    color: _feature_fill_color,
+                                                    //lineDash: [1],
+                                                    width: 3
+                                                }),
+
+                                                fill: new ol.style.Fill({
+                                                    color: _feature_fill_color
+
+                                                })
+                                            })
+
+
+
+
+                                            );
+
+
+                                    }// if
+
+
+
+                                }// if 
+
+
+
+
+
+                            }//if
+                        }//for
+
+
+
+
+                    }); // foreach Feature
+
+
+
+
+
+                   
+
+
+                    //------------ end of openlayers 3   ----------------
 
 
 
@@ -408,84 +527,39 @@ function init_classification_buttons_checkbox(_area, _subject) {
 }  //function init_classification_buttons
 
 
-function apply_checkbox() {
+
+function remove_anylast_highlight_style_checkbox_button() {
 
     var pArray = _designation_parentArray;
 
-    // -----------  loop  checkbox button ---------------------
+    // -----------  Start  for loop  checkbox button ---------------------
     for (var i = 0; i < pArray.length; i++) {
 
         var _label_selector = '#label_' + pArray[i]['code'];
         var _checkbox_selector = '#checkbox_' + pArray[i]['code'];
 
-        //a class active is added to the label (not the checkbox input) when the button is clicked. 
-        //change both the appearance of the button and the checked property of the checkbox within
-        if ($(_checkbox_selector).is(':checked')) {
-            //$(_label_selector).removeClass('active');
-            //$(_checkbox_selector).removeAttr('checked')
+        var _code_ = pArray[i]['code'];
+        var _description_ = pArray[i]['description'];
+        var _color_ = pArray[i]['color'];
+        var _label_Class_ = 'btn btn-' + _color_ + ' btn-xs';
 
 
-            // get the feature fill color
+        $(_label_selector).removeClass("btn btn-black").addClass(_label_Class_);
+        
 
-            var _feature_fill_color = pArray[i]['color'];
-
-
-
-
-            // loop through all current featurs on map 
-            
-
-
-            // -----------leaflet --------------
+        $("#label_highlight").text("");
 
 
 
-
-
-            _current_geojson_layer.eachLayer(
-                 function (featureInstanceLayer) {
-
-                     var _this_code_column = featureInstanceLayer.feature.properties[_code_column_name];
-
-
-                     if (_this_code_column == pArray[i]['code']) {
-
-
-                         featureInstanceLayer.setStyle(
-
-
-                                 {
-
-                                     weight: 1,
-                                     color: _feature_fill_color,
-                                     fillColor: _feature_fill_color,
-                                     fillOpacity: 0.9
-                                 }
-
-                             );
-
-
-
-                     }// if
-
-                 });// function
-
-
-
-
-            //------------ end of leaflet ----------------
-
-
-
-
-
-
-        }//if
 
     }// outer for
 
 
-}
+
+} // function
+
+
+
 
 
 
@@ -521,10 +595,860 @@ function uncheck_all_checkbox_button() {
 
 
 
+//................... common function ................
+
+
+function init_base_map_tiling_classification() {
+
+
+    // local testing only
+    // _tile_baseURL = _tile_baseURL_localhost;
+
+
+
+    mapElement = document.getElementById('map-canvas');
+    //_tile_name = _areaID + "_" + _subjectID;
+    var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.png';
+
+
+    //var utfGrid_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.grid.json?callback={cb}';
+    //var utfGrid_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.grid.json';
+
+    // leaflet, and mapbox js, use above 2 verison of URL, but in openlayer, must use below URL version, no x,y,z
+    var utfGrid_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '.json';
+
+
+
+    // --------------------- dynamic load javascript file  ---------------------------
+
+
+
+    var _tile_list_js = "/Scripts/map_init/tile_list/googlemap_tile_list.js";
+
+    $.when(
+             $.getScript(_tile_list_js)
+     /*
+    $.getScript( "/mypath/myscript1.js" ),
+    $.getScript( "/mypath/myscript2.js" ),
+    $.getScript( "/mypath/myscript3.js" ),
+    */
+
+    ).done(function () {
+
+        var _tile_name = _areaID + "_" + _subjectID;
+        var _i = _tile_list.indexOf(_tile_name);
+
+        _view = new ol.View({
+            //center: ol.proj.transform([-0.92, 52.96], 'EPSG:4326', 'EPSG:3857'),
+
+            center: ol.proj.transform([initial_location[2], initial_location[1]], 'EPSG:4326', 'EPSG:3857'),
+            zoom: initial_location[3]
+        });
+
+
+
+
+
+
+        if (_i >= 0) {
+
+            // tile exist, add overlay on base map.
+
+
+
+            //............. utf layer and source ...............
+
+            //utfgrid_source = new ol.source.TileUTFGrid({
+            //    tileJSON: {
+            //        "tilejson": "2.1.0",
+            //        "tiles": [overlay_tile_Url],
+            //        "grids": [utfGrid_tile_Url]
+            //    }
+
+            //});
+
+
+            utfgrid_source = new ol.source.TileUTFGrid({
+                url: utfGrid_tile_Url
+                // url: 'http://api.tiles.mapbox.com/v3/mapbox.geography-class.json'
+            });
+
+
+
+
+            utfgrid_layer = new ol.source.XYZ({
+                url: overlay_tile_Url,
+                attribution: "Data copyright transparentgov.net"
+
+            });
+
+
+
+            //.........End .... utf layer and source ...............   
+
+
+
+
+
+            var thunderforestAttributions = [
+                new ol.Attribution({
+                    html: 'Tiles &copy; <a href="http://www.thunderforest.com/">Thunderforest</a>'
+                }),
+                ol.source.OSM.ATTRIBUTION
+            ];
+
+            map = new ol.Map({
+                target: mapElement,
+                layers: [
+                    new ol.layer.Group({
+                        'title': 'Base maps',
+                        layers: [
+
+
+
+
+
+                            new ol.layer.Tile({
+                                title: 'Stamen - Water color',
+                                type: 'base',
+                                visible: false,
+                                source: new ol.source.Stamen({
+                                    layer: 'watercolor'
+                                })
+                            }),
+                            new ol.layer.Tile({
+                                title: 'Stamen - Toner',
+                                type: 'base',
+                                visible: false,
+                                source: new ol.source.Stamen({
+                                    layer: 'toner'
+                                })
+                            }),
+
+
+
+                             new ol.layer.Tile({
+                                 title: 'MapQuest - Hybrid',
+                                 type: 'base',
+                                 visible: false,
+                                 source: new ol.source.MapQuest({
+                                     layer: 'hyb'
+                                 })
+                             }),
+
+                              new ol.layer.Tile({
+                                  title: 'MapQuest - OSM',
+                                  type: 'base',
+                                  visible: false,
+                                  source: new ol.source.MapQuest({
+                                      layer: 'osm'
+                                  })
+                              }),
+                            new ol.layer.Tile({
+                                title: 'MapQuest - Satellite',
+                                type: 'base',
+                                visible: false,
+                                source: new ol.source.MapQuest({
+                                    layer: 'sat'
+                                })
+                            }),
+
+
+                              new ol.layer.Tile({
+                                  title: 'Thunderforest - OpenCycleMap',
+                                  type: 'base',
+                                  visible: false,
+                                  source: new ol.source.OSM({
+                                      url: 'http://{a-c}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png',
+                                      attributions: thunderforestAttributions
+                                  })
+                              }),
+                            new ol.layer.Tile({
+                                title: 'Thunderforest - Outdoors',
+                                type: 'base',
+                                visible: false,
+                                source: new ol.source.OSM({
+                                    url: 'http://{a-c}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png',
+                                    attributions: thunderforestAttributions
+                                })
+                            }),
+                            new ol.layer.Tile({
+                                title: 'Thunderforest - Landscape',
+                                type: 'base',
+                                visible: false,
+                                source: new ol.source.OSM({
+                                    url: 'http://{a-c}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png',
+                                    attributions: thunderforestAttributions
+                                })
+                            }),
+                            new ol.layer.Tile({
+                                title: 'Thunderforest - Transport',
+                                type: 'base',
+                                visible: false,
+                                source: new ol.source.OSM({
+                                    url: 'http://{a-c}.tile.thunderforest.com/transport/{z}/{x}/{y}.png',
+                                    attributions: thunderforestAttributions
+                                })
+                            }),
+                            new ol.layer.Tile({
+                                title: 'Thunderforest - Transport Dark',
+                                type: 'base',
+                                visible: false,
+                                source: new ol.source.OSM({
+                                    url: 'http://{a-c}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png',
+                                    attributions: thunderforestAttributions
+                                })
+                            }),
+
+
+
+
+
+
+                            new ol.layer.Tile({
+                                title: 'OSM',
+                                type: 'base',
+                                visible: true,
+                                source: new ol.source.OSM()
+                            })
+                        ]
+                    }),
+
+
+
+
+                    new ol.layer.Group({
+                        title: _tile_name,
+                        layers: [
+
+                            new ol.layer.Tile({
+                                title: _tile_name + '_tile_layers',
+                                source: utfgrid_layer
+                            }),
+
+
+                            new ol.layer.Tile({
+                                title: _tile_name + '_UTFGrid',
+                                source: utfgrid_source
+                            }),
+
+
+
+
+                        ]
+                    })
+                ],
+
+
+
+
+                view: _view
+            });
+
+
+
+            map.addControl(new ol.control.LayerSwitcher());
+
+
+
+            // ................NOT IN USE...... get utfgrid layers under layer group .................
+
+
+            //var all_layer_groups = map.getLayers();
+
+            //var layer_group;
+
+            //for (i = 0, n = all_layer_groups.getLength() ; i < n; i++) {
+
+            //    layer_group = all_layer_groups.item(i);
+
+
+
+            //    if (layer_group.get('title') == _tile_name) {
+
+            //                if (layer_group.getLayers) {
+            //                    var _inner_layers = layer_group.getLayers().getArray();
+
+            //                    utfgrid_layer = _inner_layers[1];
+            //                }// if
+            //        break;
+            //    }//if
+            //}//for
+
+            //if (utfgrid_layer) {
+            //    // Do with layer
+
+            //  //  alert(utfgrid_layer.get('title'));
+
+
+
+            //}
+
+
+
+            // ...............NOT IN USE................ End ......get utfgrid layers by name
+
+
+
+
+
+
+
+            // .............. utf grid control ..................
+
+
+
+            var displayInfo = function (coordinate) {
+                var viewResolution = /** @type {number} */ (_view.getResolution());
+
+                utfgrid_source.forDataAtCoordinateAndResolution(coordinate, viewResolution,
+                    function (data) {
+
+
+                        // If you want to use the template from the TileJSON,
+                        //  load the mustache.js library separately and call
+                        //  info.innerHTML = Mustache.render(gridSource.getTemplate(), data);
+                        mapElement.style.cursor = data ? 'pointer' : '';
+
+
+                        if (data) {
+
+                            // there is info to display
+
+                            var _utfgrid_info = "<ul>";
+                            var _object = data;
+
+                            for (var _property in _object) {
+                                if (_object.hasOwnProperty(_property)) {
+
+
+
+                                    _utfgrid_info = _utfgrid_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + String(_object[_property]) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+
+                                }
+                            }
+
+
+
+
+                            _utfgrid_info = _utfgrid_info + "</ul>";
+                            document.getElementById('utfgrid_info').innerHTML = _utfgrid_info;
+
+
+
+
+                        }//if
+                        else {
+                            // data === null, no info to display
+
+
+                            document.getElementById('utfgrid_info').innerHTML = '';
+
+                        }
+
+
+
+
+                    });// function
+            }; // display
+
+
+
+
+
+
+
+
+            map.on('pointermove', function (evt) {
+                if (evt.dragging) {
+                    return;
+                }
+                var coordinate = map.getEventCoordinate(evt.originalEvent);
+                displayInfo(coordinate);
+
+
+            });// pointermove
+
+
+
+
+            map.on('click', function (evt) {
+                displayInfo(evt.coordinate);
+
+            }); // click
+
+
+
+
+
+
+
+            // .........End..... utf grid control ..................
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }//if i>0
+
+        else {
+            // no tile exist, no overlay, only base map.
+
+
+
+            var thunderforestAttributions = [
+               new ol.Attribution({
+                   html: 'Tiles &copy; <a href="http://www.thunderforest.com/">Thunderforest</a>'
+               }),
+               ol.source.OSM.ATTRIBUTION
+            ];
+
+            map = new ol.Map({
+                target: mapElement,
+                layers: [
+                    new ol.layer.Group({
+                        'title': 'Base maps',
+                        layers: [
+
+
+
+
+
+                            new ol.layer.Tile({
+                                title: 'Stamen - Water color',
+                                type: 'base',
+                                visible: false,
+                                source: new ol.source.Stamen({
+                                    layer: 'watercolor'
+                                })
+                            }),
+                            new ol.layer.Tile({
+                                title: 'Stamen - Toner',
+                                type: 'base',
+                                visible: false,
+                                source: new ol.source.Stamen({
+                                    layer: 'toner'
+                                })
+                            }),
+
+
+
+                             new ol.layer.Tile({
+                                 title: 'MapQuest - Hybrid',
+                                 type: 'base',
+                                 visible: false,
+                                 source: new ol.source.MapQuest({
+                                     layer: 'hyb'
+                                 })
+                             }),
+
+                              new ol.layer.Tile({
+                                  title: 'MapQuest - OSM',
+                                  type: 'base',
+                                  visible: false,
+                                  source: new ol.source.MapQuest({
+                                      layer: 'osm'
+                                  })
+                              }),
+                            new ol.layer.Tile({
+                                title: 'MapQuest - Satellite',
+                                type: 'base',
+                                visible: false,
+                                source: new ol.source.MapQuest({
+                                    layer: 'sat'
+                                })
+                            }),
+
+
+                              new ol.layer.Tile({
+                                  title: 'Thunderforest - OpenCycleMap',
+                                  type: 'base',
+                                  visible: false,
+                                  source: new ol.source.OSM({
+                                      url: 'http://{a-c}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png',
+                                      attributions: thunderforestAttributions
+                                  })
+                              }),
+                            new ol.layer.Tile({
+                                title: 'Thunderforest - Outdoors',
+                                type: 'base',
+                                visible: false,
+                                source: new ol.source.OSM({
+                                    url: 'http://{a-c}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png',
+                                    attributions: thunderforestAttributions
+                                })
+                            }),
+                            new ol.layer.Tile({
+                                title: 'Thunderforest - Landscape',
+                                type: 'base',
+                                visible: false,
+                                source: new ol.source.OSM({
+                                    url: 'http://{a-c}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png',
+                                    attributions: thunderforestAttributions
+                                })
+                            }),
+                            new ol.layer.Tile({
+                                title: 'Thunderforest - Transport',
+                                type: 'base',
+                                visible: false,
+                                source: new ol.source.OSM({
+                                    url: 'http://{a-c}.tile.thunderforest.com/transport/{z}/{x}/{y}.png',
+                                    attributions: thunderforestAttributions
+                                })
+                            }),
+                            new ol.layer.Tile({
+                                title: 'Thunderforest - Transport Dark',
+                                type: 'base',
+                                visible: false,
+                                source: new ol.source.OSM({
+                                    url: 'http://{a-c}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png',
+                                    attributions: thunderforestAttributions
+                                })
+                            }),
+
+
+
+
+
+
+                            new ol.layer.Tile({
+                                title: 'OSM',
+                                type: 'base',
+                                visible: true,
+                                source: new ol.source.OSM()
+                            })
+                        ]
+                    })
+
+
+
+                ],
+
+
+
+
+                view: _view
+            });
+
+            map.addControl(new ol.control.LayerSwitcher());
+
+        } //else 
+
+
+
+
+
+
+
+
+
+        add_area_boundary($("#areaID").val());
+
+        geocoding();
+
+        tile_opacity_slider(_tile_name);
+
+        add_map_listener_idle_classification();
+
+
+
+    });// function done loading script
+
+
+
+}// init_base_map_tiling
+
+
+
+
+function add_map_listener_idle_classification() {
+
+
+
+
+
+
+
+    listener_idle = map.on('moveend', function (e) {
+        //alert(e.latlng);
+        get_map_bound();
+
+
+    });
+
+
+
+
+
+
+    //.................  openlayer map add interaction ..................
+
+    var select = null;  // ref to currently selected interaction
+    var select1 = null;
+
+
+    // select interaction working on "singleclick"
+    var selectSingleClick = new ol.interaction.Select();
+
+    // select interaction working on "click"
+    var selectClick = new ol.interaction.Select({
+        condition: ol.events.condition.click
+    });
+
+    // select interaction working on "pointermove"
+    var selectPointerMove = new ol.interaction.Select({
+        condition: ol.events.condition.pointerMove
+    });
+
+    var selectAltClick = new ol.interaction.Select({
+        condition: function (mapBrowserEvent) {
+            return ol.events.condition.click(mapBrowserEvent) &&
+                ol.events.condition.altKeyOnly(mapBrowserEvent);
+        }
+    });
+
+
+    var _feature_info = "";
+
+
+
+    //...... mouse over event................
+    select = selectPointerMove;
+    map.addInteraction(select);
+    select.on('select', function (e) {
+
+        
+        var _highlight_button_value = '';
+
+        _feature_info = "<ul>";
+
+        e.selected.forEach(function (_feature) {
+
+            var _object = _feature.getProperties();
+
+            for (var _property in _object) {
+                if (_object.hasOwnProperty(_property)) {
+
+                    if (_property !== 'geometry') {
+
+                        _feature_info = _feature_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + String(_object[_property]) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+
+
+                        if (_property === _code_column_name) {
+
+                            _highlight_button_value = String(_object[_property]);
+
+                        }
+
+
+                    }// if 
+                }//if
+            }//for
+
+
+        }); // for each 
+
+
+        _feature_info = _feature_info + "</ul>";
+        document.getElementById('info-table').innerHTML = _feature_info;
+
+
+
+
+
+
+        
+
+
+
+
+
+        //---------------------- classification ---when -   mouse over  ------ highlight button and bottom big button ---------------------
+
+
+        remove_anylast_highlight_style_checkbox_button();
+        
+
+
+        var _highlight_button = '#label_' + _highlight_button_value;
+
+
+        // **** if that element exist length >0  *******
+        if ($(_highlight_button).length) {
+
+            _current_classifycheckbox_class = $(_highlight_button).attr('class');
+            $(_highlight_button).removeClass(_current_classifycheckbox_class).addClass("btn btn-black");
+
+
+            $("#label_highlight").text($(_highlight_button).text());
+
+
+        }
+
+
+
+
+        //----------------------End  classification ---when -   mouse over  ------ highlight button and bottom big button ---------------------
+
+
+
+
+
+
+
+
+
+    }); // select on select
+
+    //......End.............. mouse over event................
+
+
+
+
+
+    //...... mouse click event................
+
+
+
+    popup = new ol.Overlay.Popup();
+    map.addOverlay(popup);
+
+
+
+    select1 = selectClick;
+    map.addInteraction(select1);
+    select1.on('select', function (e) {
+
+
+
+        _feature_info = "<table>";
+        var _show_popup = false;
+
+
+        e.selected.forEach(function (_feature) {
+
+            var _object = _feature.getProperties();
+
+
+
+
+            for (var _property in _object) {
+                if (_object.hasOwnProperty(_property)) {
+
+                    if (_property !== 'geometry') {
+
+
+                        //_feature_info = _feature_info + "<tr><td><span style=\'background-color: #454545;\'><font color=\'white\'>" + _property + "</span>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;" + String(_object[_property]) + "</td></tr>";
+                        _feature_info = _feature_info + "<tr><td><span style=\'background-color: #454545;\'><font color=\'white\'>" + _property + "</span></td><td>" + String(_object[_property]) + "</td></tr>";
+
+                        _show_popup = true;
+
+                    }// if 
+                }//if
+            }//for
+
+
+        }); // for each 
+
+
+        _feature_info = _feature_info + "</table>";
+
+        // alert(e.mapBrowserEvent.coordinate);
+
+        if (_show_popup) {
+            popup.show(e.mapBrowserEvent.coordinate, _feature_info);
+        }
+
+
+
+    }); // select on select
+
+
+
+
+    //......End.............. mouse click event................
+
+
+
+
+
+
+
+
+    //.....................End ....... openlayer map add interaction ..................
+
+
+
+
+
+
+
+
+
+
+
+
+    // ---------  map click event [1] ------ search for a single feature where clicked ------------
+    listener_click = map.on('singleclick', function (click_event_location) {
+
+
+        //'EPSG:4326' = lat long (geographic coordinate)    'EPSG:3857' = feet unit (projected coordinate)
+        // alert(click_event_location.coordinate[0]);
+        // alert(ol.proj.transform(click_event_location.coordinate, 'EPSG:4326', 'EPSG:3857')[0]);
+        // alert(ol.proj.toLonLat(click_event_location.coordinate, 'EPSG:3857')[0]);
+
+        var _event_lat = ol.proj.toLonLat(click_event_location.coordinate, 'EPSG:3857')[1];
+        var _event_lng = ol.proj.toLonLat(click_event_location.coordinate, 'EPSG:3857')[0];
+        get_click_latlng(_event_lat, _event_lng);
+    });
+
+
+    listener_rightclick = map.on('dblclick', function () {
+
+        back_full_extend();
+    });
+
+    //--------------------------End  map right click event ---------- back to full extend ----------------------
+
+
+
+
+}// function
+
+
+
+
+//..................... End common function ......................
+
+
+
+
+
+
 
 function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
+   
+
+    // Load a GeoJSON from the server 
+
+
+    
+
+
+
+
+    // test url if return a number means too many polygon to show.otherwise add polygon to map.
     $.get(_apiURI, function (data) {
 
         if (isNaN(data)) {
@@ -535,199 +1459,57 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-            //--------------------------------------------
-
-
-            //gmap.data.loadGeoJson(_apiURI);
-
-            // Note: data is a string, not a javascript object.
-            //the function addGeoJson needs a javascript object and not a string. so you must convert string to javascript object before feed into addGeoJson
-            // if you use loadGeoJson(url), do not need any formate change, feed URL return string, the loadGeoJson will do with returning string.
-
 
 
             _geojson_object = JSON.parse(data);
 
+            //...................... openlayers ..........................
 
 
+            _geojson_vectorSource = new ol.source.Vector({
+                features: (new ol.format.GeoJSON()).readFeatures(_geojson_object, { featureProjection: 'EPSG:3857' })
 
-
-
-
-
-
-
-
-            // determine feature is point or not point
-            // var _geojson_feature_geometry_type = _geojson_object['features'][0]['geometry']['type'];
-
-
-
-
-
-
-
-
-
-
-            //----------------  add new geojson, then remove last geojson --------------------
-
-
-
-
-            _last_geojson_layer = _current_geojson_layer;
-
-
-
-
-
-
-            _current_geojson_layer = L.geoJson(_geojson_object, {
-
-
-                // for point feature, by default it use marker, but instead of use marker, here change marker to polygon (circle marker) 
-                pointToLayer: function (feature, latlng) {
-                    return L.circleMarker(latlng, geojson_Marker_style_Options);
-                },
-
-
-                style: geojson_classification_style,
-
-                onEachFeature: function onEachFeature(feature, layer) {
-
-
-
-                    //bind click
-                    layer.on('mouseover', function (e) {
-                        // e = event
-                        // console.log(e); 
-
-                        // You can make your ajax call declaration here
-                        //$.ajax(... 
-
-
-                        layer.setStyle(geojson_mouseover_highlight_style);
-
-
-
-                        var instant_info = "<ul>";
-
-
-                        for (var _key in layer.feature.properties) {
-                            var _value = String(layer.feature.properties[_key]);
-                            instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _key + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
-
-                        }
-
-
-                        instant_info = instant_info + "</ul>";
-
-
-                        // update bottom <div>
-                        document.getElementById("info-table").innerHTML = instant_info;
-                        // hide 'utfgrid_info' <div>
-                        $('#utfgrid_info').hide();
-
-
-                        //---------------------- classification ---when -   mouse over  ------ highlight button and bottom big button ---------------------
+                              
+            });
 
                         
 
-                        var _highlight_button_value = layer.feature.properties[_code_column_name];
+            _geojson_vectorLayer = new ol.layer.Vector({
+                source: _geojson_vectorSource,
+                style: styleFunction
+            });
 
 
-                        var _highlight_button = '#label_' + _highlight_button_value;
+            map.addLayer(_geojson_vectorLayer);
+
+                         
+            _current_geojson_layer = true;
+                          
 
 
-                            // **** if that element exist length >0  *******
-                            if ($(_highlight_button).length) {
-
-                                _current_classifycheckbox_class = $(_highlight_button).attr('class');
-                                $(_highlight_button).removeClass(_current_classifycheckbox_class).addClass("btn btn-black");
+            $('#utfgrid_info').hide();
+                
 
 
-                                $("#label_highlight").text($(_highlight_button).text());
-
-
-                            }
-
-                        
-
-
-                        //----------------------End  classification ---when -   mouse over  ------ highlight button and bottom big button ---------------------
+           
 
 
 
-                    });// layer.on mouseover
 
-
-                    layer.on('mouseout', function (e) {
-
-                        layer.setStyle(geojson_classification_style);
-
-                        // empty bottom <div>
-                        document.getElementById("info-table").innerHTML = "";
-                        //infowindow.close();
-
-
-                        //---------------------- classification ---when -   mouse OUT  ------ highlight button and bottom big button ---------------------
-
-
-                        var _highlight_button_value = layer.feature.properties[_code_column_name];
-
-                        var _highlight_button = '#label_' + _highlight_button_value;
-
-
-                        if ($(_highlight_button).length) {
-
-                            //_current_classifycheckbox_class = $(_highlight_button).attr('class');
-                            $(_highlight_button).removeClass("btn btn-black").addClass(_current_classifycheckbox_class);
-
-
-                            $("#label_highlight").text("");
-
-                        }
-
-
-                        //----------------------End  classification ---when -   mouse OUT  ------ highlight button and bottom big button ---------------------
-
-
-
-                    });// layer.on mouseout
-
-                }// oneach function
-
-            }).bindPopup(function (layer) {
-
-
-                // when user click each feature, it will popup a info window by the feature.
-
-
-                var popup = "<table>";
-                for (var _key in layer.feature.properties) {
-                    var _value = String(layer.feature.properties[_key]);
-                    // popup = popup + "<tr><td>" + _key + "</td><td>" + _value + "</td></tr>";
-
-                    popup = popup + "<tr><td><span style=\'background-color: #454545;\'><font color=\'white\'>" + _key + "</span>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;" + _value + "</td></tr>";
-
-                }
-                popup = popup + "</table>";
-
-
-                return popup;
-
-
-            }).addTo(map);
-
-
-            // ---- after add new geojson, now remove last time old geojson -------------
-            // don't use Array.ForEach is about 95% slower than for() in JavaScript.
 
             if (_last_geojson_layer) {
 
+                // layers start from 0 = base map, 1 = raster tile, 2 = utfgrid_tile, 3 = last time geojson,  4 = current geojson  / so 3 = array.lenghth - 2
+                               
+                _all_layers = map.getLayers().getArray();
 
+                map.removeLayer(_all_layers[_all_layers.length - 2]);
 
-                map.removeLayer(_last_geojson_layer);
+            }
+            else {
+
+                _last_geojson_layer = true;
+
 
             }// if
 
@@ -736,7 +1518,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-
+          
 
             // hidden the title_info
             document.getElementById("ajaxload").style.display = "none";
@@ -766,8 +1548,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             //-------------------------------------------------------------
 
 
-            // everytime load new geojson, need to apply color on those checkbox which is checked------------------------ classification [4] --------------------
-            apply_checkbox();
+
 
 
         }
@@ -775,12 +1556,27 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
         else {
 
 
+
+
+
+
+
             // ---------- if return number, should remove last time geojson -----------
-            _last_geojson_layer = _current_geojson_layer;
+           
             if (_last_geojson_layer) {
 
-                map.removeLayer(_last_geojson_layer);
+                
+                _all_layers = map.getLayers().getArray();
 
+               
+                // layers start from 0 = base map, 1 = raster tile, 2 = utfgrid_tile, 3 = geojson = array.lenghth - 1
+
+
+                map.removeLayer(_all_layers[_all_layers.length - 1]);
+
+
+                _last_geojson_layer = false;
+                _current_geojson_layer = false;
 
             }// if
             //-------------------- end remove last geojson ------------------------------
@@ -791,9 +1587,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             $('#utfgrid_info').show();
             // empty bottom <div>
             document.getElementById("info-table").innerHTML = "";
-
-
-
+            
 
             document.getElementById("ajaxload").style.display = "none";
             document.getElementById("title_info").style.display = "inline";
@@ -818,7 +1612,6 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             _mapclick_in_use = true;
 
             //-------------------------------------------------------------
-
 
 
             // -------------- classification [5] --------------------
@@ -848,39 +1641,11 @@ function initialize() {
 
 
 
+
     initial_location = set_initial_location($("#areaID").val());
 
 
-
-
-    init_base_map();
-
-
-    //  ***** this add map listenner must be befor map.setView, *******************
-    add_map_listener_idle();
-
-
-    map.setView(new L.LatLng(initial_location[1], initial_location[2]), initial_location[3]);
-
-    //  ***** end  **** this add map listenner must be befor map.setView, *******************
-
-
-
-
-
-    add_area_boundary($("#areaID").val());
-
-
-
-
-
-
-
-    //------tile[1] ---------
-    init_tiling();
-
-
-    geocoding();
+    init_base_map_tiling_classification();
 
 
 
