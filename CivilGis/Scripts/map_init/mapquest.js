@@ -137,126 +137,7 @@ var _mapclick_in_use = false;
 //-----------------------------------------
 
 
-// --------default feature style -----------
-_default_fillOpacity = 0;
-_default_strokeColor = '#0000FF'; //blue
-_default_strokeWeight = 2;
 
-
-_highlight_fillOpacity = 0;
-_highlight_strokeColor = '#000000'; // black
-_highlight_strokeWeight = 8;
-
-_clienttable_mouseover_highlight_fillColor = '#000080';
-_clienttable_mouseover_highlight_fillOpacity = 0.5;
-_clienttable_mouseover_highlight_strokeColor = '#FF0000';
-_clienttable_mouseover_highlight_strokeWeight = 5;
-
-
-
-_classfiy_fillOpacity = 0;
-_classfiy_strokeColor = '#0000FF'; //blue
-_classfiy_strokeWeight = 0.2;
-
-
-//---------------------------------
-
-
-geojson_default_style = {
-
-    "color": _default_strokeColor,
-    "weight": _default_strokeWeight,
-    "fillOpacity": _default_fillOpacity
-};
-
-
-geojson_classification_style = {
-
-    "color": '#0000FF',
-    "weight": 0.2,
-    "fillOpacity": 0
-};
-
-
-
-
-geojson_mouseover_highlight_style = {
-
-    "color": _highlight_strokeColor,
-    "weight": _highlight_strokeWeight,
-    "fillOpacity": _highlight_fillOpacity
-};
-
-
-geojson_clienttable_mouseover_highlight_style = {
-
-    "color": _clienttable_mouseover_highlight_strokeColor,
-    "weight": _clienttable_mouseover_highlight_strokeWeight,
-    "fillColor": _clienttable_mouseover_highlight_fillColor,
-    "fillOpacity": _clienttable_mouseover_highlight_fillOpacity
-};
-
-
-geojson_Marker_style_Options = {
-
-    radius: 3,
-    fillColor: "#ff7800",
-    color: "#000",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.8
-
-
-};
-
-_click_polygon_style = {
-    
-    color: '#FF0000',
-    opacity: 0.8,
-    weight: 12,
-    fillColor: '#FF0000',
-    fillOpacity: 0.01
-};
-
-
-_click_line_style = {
-
-    color: '#FF0000',
-    opacity: 0.8,
-    weight: 12,
-    fillColor: '#FF0000',
-    fillOpacity: 0.01
-};
-
-_mouseover_polygon_style = {
-    
-    color: '#F7D358',
-    opacity: 0.8,
-    weight: 12,
-    fillColor: '#FF0000',
-    fillOpacity: 0.01
-};
-
-
-_mouseover_line_style = {
-
-    color: '#F7D358',
-    opacity: 0.8,
-    weight: 12,
-    fillColor: '#FF0000',
-    fillOpacity: 0.01
-};
-
-
-
-geojson_classification_mouseover_highlight_style = {
-
-    Weight: 2,
-    Color: '#000000',
-    fillColor: '#000000',
-    fillOpacity: 1
-
-};
 
 
 
@@ -378,7 +259,7 @@ function add_area_boundary(_area) {
 
                 var _area_polyline_multi = L.polyline(parentArray[i], { color: '#0000FF', weight: 5, opacity: 0.8 }).addTo(map);
 
-                   
+
 
             }// outer for
 
@@ -387,14 +268,14 @@ function add_area_boundary(_area) {
         }
         else {
 
-           
+
 
 
             _area_polyline = L.polyline(_area_polygon_coord[_area], { color: '#0000FF', weight: 5, opacity: 0.8 }).addTo(map);
 
-           
 
-           
+
+
         }//else
 
 
@@ -450,12 +331,12 @@ function add_area_boundary(_area) {
 
 
 
-function init_tiling(){
-    
+function init_tiling() {
+
     // --------------------- dynamic load javascript file  ---------------------------
 
 
-    
+
     var _tile_list_js = "/Scripts/map_init/tile_list/googlemap_tile_list.js";
 
     $.when(
@@ -468,7 +349,7 @@ function init_tiling(){
 
     ).done(function () {
 
-        var  _tile_name = _areaID + "_" + _subjectID;
+        var _tile_name = _areaID + "_" + _subjectID;
         var _i = _tile_list.indexOf(_tile_name);
         //alert(_tile_name);
         if (_i >= 0) {
@@ -477,114 +358,117 @@ function init_tiling(){
 
 
 
-                        //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
-                        // _tile_baseURL = 'http://tile.transparentgov.net/v2/';
-                        // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
+            //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
+            // _tile_baseURL = 'http://tile.transparentgov.net/v2/';
+            // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
 
-                        // local testing only
-                          _tile_baseURL = _tile_baseURL_localhost;
-
-
-                         var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.png';
-                         var overlay_tile_Attrib = 'Map data &#169; <a href="http://transparentgov.net">transparentgov.net</a> contributors';
-                         tile_MapType = new L.TileLayer(overlay_tile_Url, { minZoom: 3, maxZoom: 22, errorTileUrl:'  ', unloadInvisibleTiles: true, reuseTiles:true, attribution: overlay_tile_Attrib });
-
-                        // ===== above must define errorTileUrl:'  ', must have some character or space in '  ' above. If not define this, missing tile will show a broken image icon on map everywhere, if define this, it just failed to load empty URL, not showing broken image icon
+            // local testing only
+            //  _tile_baseURL = _tile_baseURL_localhost;
 
 
-                         overlay_tile_layer = map.addLayer(tile_MapType);
-                         tile_MapType.setZIndex(99);
+            var overlay_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.png';
+            var overlay_tile_Attrib = 'Map data &#169; <a href="http://transparentgov.net">transparentgov.net</a> contributors';
+            tile_MapType = new L.TileLayer(overlay_tile_Url, { minZoom: 3, maxZoom: 22, errorTileUrl: '  ', unloadInvisibleTiles: true, reuseTiles: true, attribution: overlay_tile_Attrib });
+
+            // ===== above must define errorTileUrl:'  ', must have some character or space in '  ' above. If not define this, missing tile will show a broken image icon on map everywhere, if define this, it just failed to load empty URL, not showing broken image icon
+
+
+            overlay_tile_layer = map.addLayer(tile_MapType);
+            tile_MapType.setZIndex(99);
 
 
 
 
             //===================add ========== UTFgrid =================================
 
-                         var utfGrid_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.grid.json?callback={cb}';
-                        // var utfGrid_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.grid.json';
+            var utfGrid_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.grid.json?callback={cb}';
+            //var utfGrid_tile_Url = _tile_baseURL + _areaID + '_' + _subjectID + '/{z}/{x}/{y}.grid.json?';
 
-                         var utfGrid = new L.UtfGrid(utfGrid_tile_Url,  {
-                            // useJsonP: false
-                         });
-                         
-
-                         utfGrid.on('click', function (e) {
-                             if (e.data) {
-
-
-                                 var _utfgrid_info = "<ul>";
-                                 var _object = e.data;
-
-                                 for (var _property in _object) {
-                                     if (_object.hasOwnProperty(_property)) {
-
-                                         _utfgrid_info = _utfgrid_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + String(_object[_property]) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
-
-                                     }
-                                 }
-
-                                 _utfgrid_info = _utfgrid_info + "</ul>";
-                                 document.getElementById('utfgrid_info').innerHTML = _utfgrid_info;
+            // var utfGrid = new L.UtfGrid(utfGrid_tile_Url);
+            var utfGrid = new L.UtfGrid(utfGrid_tile_Url, {
+                maxRequests: 50,    // default is 4,  only send 4 request per time, then wait requesttimeout(default 1 min) to send another 4 grid request, should set to more than 20
+                requestTimeout: 500  // default is 1 min, most of request not found is less than 500 ms, 
+                //useJsonP: false
+            });
 
 
-                                 
-                             } else {
-                                // document.getElementById('utfgrid_info').innerHTML = 'click: nothing';
-                             }
-                         });
+            utfGrid.on('click', function (e) {
+                if (e.data) {
 
 
-                         utfGrid.on('mouseover', function (e) {
-                             if (e.data) {
-                                 
+                    var _utfgrid_info = "<ul>";
+                    var _object = e.data;
 
-                                 var _utfgrid_info = "<ul>";
-                                 var _object = e.data;
+                    for (var _property in _object) {
+                        if (_object.hasOwnProperty(_property)) {
 
-                                 for (var _property in _object) {
-                                     if (_object.hasOwnProperty(_property)) {
-                                         
-                                         _utfgrid_info = _utfgrid_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + String(_object[_property]) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
-                                        
-                                     }
-                                 }
+                            _utfgrid_info = _utfgrid_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + String(_object[_property]) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
 
-                                 _utfgrid_info = _utfgrid_info + "</ul>";
-                                 document.getElementById('utfgrid_info').innerHTML = _utfgrid_info;
+                        }
+                    }
 
-                             } else {
-                                // document.getElementById('utfgrid_info').innerHTML = 'hover: nothing';
-                             }
-                            
-                         });
+                    _utfgrid_info = _utfgrid_info + "</ul>";
+                    document.getElementById('utfgrid_info').innerHTML = _utfgrid_info;
 
 
-                         utfGrid.on('mouseout', function (e) {
-                             document.getElementById('utfgrid_info').innerHTML = '';
-                         });
 
-                         utfgrid_tile_layer = map.addLayer(utfGrid);
+                } else {
+                    // document.getElementById('utfgrid_info').innerHTML = 'click: nothing';
+                }
+            });
+
+
+            utfGrid.on('mouseover', function (e) {
+                if (e.data) {
+
+
+                    var _utfgrid_info = "<ul>";
+                    var _object = e.data;
+
+                    for (var _property in _object) {
+                        if (_object.hasOwnProperty(_property)) {
+
+                            _utfgrid_info = _utfgrid_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + String(_object[_property]) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+
+                        }
+                    }
+
+                    _utfgrid_info = _utfgrid_info + "</ul>";
+                    document.getElementById('utfgrid_info').innerHTML = _utfgrid_info;
+
+                } else {
+                    // document.getElementById('utfgrid_info').innerHTML = 'hover: nothing';
+                }
+
+            });
+
+
+            utfGrid.on('mouseout', function (e) {
+                document.getElementById('utfgrid_info').innerHTML = '';
+            });
+
+            utfgrid_tile_layer = map.addLayer(utfGrid);
 
 
             //==================== End ========== UTFgrid =================================
 
-            
+
 
 
             //................. leaflet slider contral ............................
 
-                         _slider_control = L.control.slider(function (value) {
+            _slider_control = L.control.slider(function (value) {
 
 
-                             
-                                                                            _slidercontrol_handle_value = Math.round(value) / 100;
-                                                                            tile_MapType.setOpacity(_slidercontrol_handle_value);
 
-                                                                               },
+                _slidercontrol_handle_value = Math.round(value) / 100;
+                tile_MapType.setOpacity(_slidercontrol_handle_value);
 
-                                 { id: _slider_control, position: 'bottomright',width:'400px', orientation: 'vertical', logo: 'O', min: 0, max: 100, value: 100, collapsed: false, step: 10 });
+            },
 
-                         map.addControl(_slider_control);
+                    { id: _slider_control, position: 'bottomright', width: '400px', orientation: 'vertical', logo: 'O', min: 0, max: 100, value: 100, collapsed: false, step: 10 });
+
+            map.addControl(_slider_control);
 
 
             //................End....................... leaflet slider contral ............................
@@ -592,9 +476,9 @@ function init_tiling(){
 
 
 
-                         _tile_exist = true;
+            _tile_exist = true;
 
-                     }// if
+        }// if
 
 
     }); // when done
@@ -608,16 +492,16 @@ function init_tiling(){
 
 
 
-function add_tiles(){
-    
-   
+function add_tiles() {
 
-    
-   
+
+
+
+
     tile_MapType.setZIndex(99);
     // tile_MapType.bringToFront();
-        
-  
+
+
 }
 
 function remove_tiles() {
@@ -637,7 +521,7 @@ function get_map_bound() {
     // get current map bounds as URL parameters. 
 
 
-
+    //alert(map.getZoom());
 
 
 
@@ -774,86 +658,46 @@ function geocoding() {
 
 function init_base_map() {
 
-    
-    var OpenStreetMap_Mapnik = L.tileLayer.provider('OpenStreetMap.Mapnik');
-    var OpenStreetMap_BlackAndWhite = L.tileLayer.provider('OpenStreetMap.BlackAndWhite');
-
-    var  OpenTopoMap= L.tileLayer.provider('OpenTopoMap');
-    var  MapQuestOpen_Aerial= L.tileLayer.provider('MapQuestOpen.Aerial');
-    var  MapQuestOpen_OSM= L.tileLayer.provider('MapQuestOpen.OSM');
-    var  Stamen_Toner= L.tileLayer.provider('Stamen.Toner');
-    var  Stamen_Terrain= L.tileLayer.provider('Stamen.Terrain');
-    var  Esri_WorldImagery= L.tileLayer.provider('Esri.WorldImagery');
-    var  Esri_WorldStreetMap= L.tileLayer.provider('Esri.WorldStreetMap');
-    var  Esri_WorldTopoMap= L.tileLayer.provider('Esri.WorldTopoMap');
-    var  Esri_NatGeoWorldMap= L.tileLayer.provider('Esri.NatGeoWorldMap');
-
-
-    var  HERE_hybridDay= L.tileLayer.provider('HERE.hybridDay', {
-        app_id: heremap_app_id,
-        app_code: heremap_app_code
-    });
-
-    var  HERE_normalDay= L.tileLayer.provider('HERE.normalDay', {
-        app_id: heremap_app_id,
-        app_code: heremap_app_code
-    });
-
-    var  HERE_basicMap= L.tileLayer.provider('HERE.basicMap', {
-        app_id: heremap_app_id,
-        app_code: heremap_app_code
-    });
-
 
     
 
 
+    //------------- mapquest ----------------
+    var mapLayer = MQ.mapLayer();
+   
+    map = L.map('map-canvas', {
+        layers: mapLayer
+           // center: [33.65992448007282, -117.91505813598633],
+           // zoom: 13
+        });
+   
+
+    
 
 
-    var Stamen_Watercolor = L.tileLayer.provider('Stamen.Watercolor');
+    L.control.layers({
+        'Map': mapLayer,
+        'Dark': MQ.darkLayer(),
+        'Light': MQ.lightLayer(),
+        'Satellite': MQ.satelliteLayer()
+    }).addTo(map);
 
 
 
 
-     baseMaps = {
-        
-         
 
-         "Esri_WorldImagery": Esri_WorldImagery,
-         "Esri_WorldStreetMap":Esri_WorldStreetMap ,
-         "Esri_WorldTopoMap": Esri_WorldTopoMap,
-         "Esri_NatGeoWorldMap":Esri_NatGeoWorldMap ,
-         "OpenStreetMap_Mapnik": OpenStreetMap_Mapnik,
-         "OpenStreetMap_BlackAndWhite": OpenStreetMap_BlackAndWhite,
-
-         "MapQuestOpen_Aerial": MapQuestOpen_Aerial,
-         "MapQuestOpen_OSM":MapQuestOpen_OSM,
-         
-         "HERE_hybridDay": HERE_hybridDay,
-         "HERE_normalDay": HERE_normalDay,
-         "HERE_basicMap": HERE_basicMap,
-         
+   
 
 
-         "OpenTopoMap": OpenTopoMap,
-         "Stamen_Toner":Stamen_Toner,
-         "Stamen_Terrain":Stamen_Terrain ,
-         "Stamen_Watercolor": Stamen_Watercolor
-
-    };
 
 
-    // set up the map
-    map = new L.Map('map-canvas');
 
 
-    // this is first time add base map layer
-    L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
-    L.control.layers(baseMaps).addTo(map);
+    //-------------End ------- mapquest ----------------
 
 
-}
+}// function
 
 
 
@@ -861,6 +705,129 @@ function init_base_map() {
 
 
 //----------------End of leaflet basic simple map function  ------------------------
+
+
+
+// --------default feature style -----------
+_default_fillOpacity = 0;
+_default_strokeColor = '#0000FF'; //blue
+_default_strokeWeight = 2;
+
+
+_highlight_fillOpacity = 0;
+_highlight_strokeColor = '#000000'; // black
+_highlight_strokeWeight = 8;
+
+_clienttable_mouseover_highlight_fillColor = '#000080';
+_clienttable_mouseover_highlight_fillOpacity = 0.5;
+_clienttable_mouseover_highlight_strokeColor = '#FF0000';
+_clienttable_mouseover_highlight_strokeWeight = 5;
+
+
+
+_classfiy_fillOpacity = 0;
+_classfiy_strokeColor = '#0000FF'; //blue
+_classfiy_strokeWeight = 0.2;
+
+
+//---------------------------------
+
+
+geojson_default_style = {
+
+    "color": _default_strokeColor,
+    "weight": _default_strokeWeight,
+    "fillOpacity": _default_fillOpacity
+};
+
+
+geojson_classification_style = {
+
+    "color": '#0000FF',
+    "weight": 0.2,
+    "fillOpacity": 0
+};
+
+
+
+
+geojson_mouseover_highlight_style = {
+
+    "color": _highlight_strokeColor,
+    "weight": _highlight_strokeWeight,
+    "fillOpacity": _highlight_fillOpacity
+};
+
+
+geojson_clienttable_mouseover_highlight_style = {
+
+    "color": _clienttable_mouseover_highlight_strokeColor,
+    "weight": _clienttable_mouseover_highlight_strokeWeight,
+    "fillColor": _clienttable_mouseover_highlight_fillColor,
+    "fillOpacity": _clienttable_mouseover_highlight_fillOpacity
+};
+
+
+geojson_Marker_style_Options = {
+
+    radius: 3,
+    fillColor: "#ff7800",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+
+
+};
+
+_click_polygon_style = {
+
+    color: '#FF0000',
+    opacity: 0.8,
+    weight: 12,
+    fillColor: '#FF0000',
+    fillOpacity: 0.01
+};
+
+
+_click_line_style = {
+
+    color: '#FF0000',
+    opacity: 0.8,
+    weight: 12,
+    fillColor: '#FF0000',
+    fillOpacity: 0.01
+};
+
+_mouseover_polygon_style = {
+
+    color: '#F7D358',
+    opacity: 0.8,
+    weight: 12,
+    fillColor: '#FF0000',
+    fillOpacity: 0.01
+};
+
+
+_mouseover_line_style = {
+
+    color: '#F7D358',
+    opacity: 0.8,
+    weight: 12,
+    fillColor: '#FF0000',
+    fillOpacity: 0.01
+};
+
+
+
+geojson_classification_mouseover_highlight_style = {
+
+    Weight: 2,
+    Color: '#000000',
+    fillColor: '#000000',
+    fillOpacity: 1
+
+};
 
 
 
@@ -1077,7 +1044,7 @@ function init_tiling_old_slider_switch() {
             //................End ....... bind opacity to slider ........................
 
 
-           
+
 
 
 

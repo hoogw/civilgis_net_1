@@ -281,21 +281,22 @@ function initialize() {
     init_base_map();
     
 
-            //  ***** this add map listenner must be befor map.setView, *******************
-                    add_map_listener_idle();
-
-   
-                    map.setView(new L.LatLng(initial_location[1], initial_location[2]), initial_location[3]);
-
-           //  ***** end  **** this add map listenner must be befor map.setView, *******************
+    //  ***** this add map listenner must be befor map.setView, *******************
+           add_map_listener_idle();
 
 
+    map.setView(new L.LatLng(initial_location[1], initial_location[2]), initial_location[3]);
 
 
-            add_area_boundary($("#areaID").val());
+    //  ***** end  **** this add map listenner must be befor map.setView, *******************
 
 
-    
+
+
+    add_area_boundary($("#areaID").val());
+
+
+
     init_tiling();
 
 

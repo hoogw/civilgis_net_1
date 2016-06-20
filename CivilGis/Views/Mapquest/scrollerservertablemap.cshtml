@@ -1,5 +1,8 @@
-﻿<script src="~/Scripts/map_api/leaflet/leaflet.js"></script>
-<link href="~/Scripts/map_api/leaflet/leaflet.css" rel="stylesheet" />
+﻿<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+
+
+<script src="http://www.mapquestapi.com/sdk/leaflet/v2.s/mq-map.js?key=7YyEJ1WeTzemrUYPKCuPJVx6a3kdDvlR"></script>
 
 <script src="~/Scripts/map_api/leaflet_providers/leaflet-providers.js"></script>
 
@@ -22,8 +25,8 @@
 
 
 
-<script src="~/Scripts/map_init/leaflet.js"></script>
-<script src="~/Scripts/leaflet/scrollerservertablemap.js"></script>
+<script src="~/Scripts/map_init/mapquest.js"></script>
+<script src="~/Scripts/mapquest/scrollerservertablemap.js"></script>
 
 <script src="~/Scripts/map_api/Leaflet_utfgrid/leaflet.utfgrid-src.js"></script>
 
@@ -41,7 +44,7 @@
 <input type="hidden" id="sidebarID" value=@ViewBag.Side_Bar />
 
 @{
-    string _side_panel_path = "~/Views/Shared/leaflet/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
+    string _side_panel_path = "~/Views/Shared/mapquest/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
 
     Html.RenderPartial(_side_panel_path);
 
