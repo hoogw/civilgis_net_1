@@ -13,7 +13,7 @@
 <!-- our js -->
 
 
-<script src="~/Scripts/bingmap/maplist_scroller.js"></script>
+<script src="~/Scripts/googlemap/maplist_scroller.js"></script>
 
 
 <input type="hidden" id="areaID" value=@ViewBag.Area />
@@ -25,7 +25,7 @@
 
 
 @{
-    string _side_panel_path = "~/Views/Shared/bingmap/_" + ViewBag.Area + "_side_panel.cshtml";
+    string _side_panel_path = "~/Views/Shared/googlemap/_" + ViewBag.Area + "_side_panel.cshtml";
 
     Html.RenderPartial(_side_panel_path);
 

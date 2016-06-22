@@ -4,19 +4,19 @@
 
 
 
-<script src="~/Scripts/map_init/bingmap.js"></script>
+<script src="~/Scripts/map_init/googlemap.js"></script>
 
 
 
-<script src="~/Scripts/bingmap/classifyradiobuttonmap.js"></script>
+<script src="~/Scripts/googlemap/classifyradiobuttonmap.js"></script>
 
 
 
 <link href="~/Scripts/classification/classification_button_style.css" rel="stylesheet" />
 
 
-<script src="~/Scripts/bootstrap-switch.js"></script>
-<link href="~/Content/bootstrap-switch.css" rel="stylesheet" />
+
+<script src="~/Scripts/map_api/google_map_opacity_slider/ExtDraggableObject.js"></script>
 
 
   <!-- this hidden value carry the map subject from controller use it in javascript api call-->
@@ -29,7 +29,7 @@
 
 
 @{
-    string _side_panel_path = "~/Views/Shared/bingmap/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
+    string _side_panel_path = "~/Views/Shared/googlemap/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
 
     Html.RenderPartial(_side_panel_path); 
     
@@ -63,16 +63,41 @@
 
                     <div id="legend" class="alert alert-warning"></div>
 
+                    <!-- google opacity slider -->
+                    <div id="opacityDiv" style='margin: 5px; overflow-x: hidden; overflow-y: hidden;  background: url("../../../Scripts/map_api/google_map_opacity_slider/opacity-slider3d14.png") no-repeat; width: 71px; height: 21px; cursor: pointer;'>
+
+                        <div id="opacityKnobDiv" style='padding:0;margin:0;overflow-x:hidden;overflow-y:hidden;background:url("../../../Scripts/map_api/google_map_opacity_slider/opacity-slider3d14.png") no-repeat -71px 0;width:14px;height:21px;'>
+
+
+
+                        </div>
+
+
+                    </div>
+
+                    <!--  End of google opacity slider -->
+
+
 
                                         <!-- checkbox button -->
 
 
                                         <div id="classification_section" class="well">
-                                            <!--	<div class="btn-group" data-toggle="buttons">        btn-group cause not space between button -->
+                                           
+
+                                           
+
+
+
+
+
                                             <div id="classification_buttons" data-toggle="buttons">
 
 
-                                                <input type="checkbox" name="color_tiles_switch" checked>
+                                                
+                                                
+
+
 
                                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                                 <label id="label_high_light_off" class="btn btn-black">

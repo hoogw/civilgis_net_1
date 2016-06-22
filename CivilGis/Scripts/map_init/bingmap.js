@@ -1,9 +1,13 @@
+var bing_map_key = 'oR0CRAm6LNpk1GIgfh83~gvehBkcH0drdDOAuk8puqg~Asl9G0tpwQ9HT55_FWaQ_yyRrJy9i8OIP4XotIGN53jiSPsrXwRGhtC6LusWZlor';
+
+
 //var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
 var _tile_baseURL = 'http://tile.transparentgov.net/v2/';
 
-
 var _tile_exist = false;
 var _tile_list;
+
+var _tile_slider;
 
 var _addr_info;
 var search_address_marker;
@@ -75,12 +79,22 @@ var _cluster_in_use = false;
 
 
 var _multi_polyline;
-
+var _tile_baseURL;
 var _areaID;
 var _subjectID;
 var tile_MapType;
 var _current_geojson_layer = null;
 var _last_geojson_layer = null;
+
+
+//........ Bing map var ............
+var tile_source;
+var tile_layer;
+
+
+//........End Bing map var ............
+
+
 
 
 
@@ -122,9 +136,9 @@ _highlight_strokeWeight = 8;
 _classfiy_fillOpacity = 0;
 _classfiy_strokeColor = 'yellow';
 _classfiy_strokeWeight = 0.2;
-
-
 //---------------------------------
+
+
 
 
 
@@ -204,8 +218,10 @@ function set_initial_location(_area) {
 function add_area_boundary(_area) {
 
 
+    // bing map area boundary share with leaflet 
+
     _multi_polyline = 'No';
-    var _js_url = "/Scripts/area_boundary/googlemap/" + _area + ".js";
+    var _js_url = "/Scripts/area_boundary/leaflet/" + _area + ".js";
 
 
 
@@ -232,29 +248,23 @@ function add_area_boundary(_area) {
         if (_multi_polyline == 'Yes') {
             // for multi line
 
-
-
             var parentArray = _area_polygon_coord[_area];
-
 
             for (var i = 0; i < parentArray.length; i++) {
 
+                var _one_line = parentArray[i];
 
+                var _location_array = [];
+                
+                for (var k = 0; k < _one_line.length; k++) {
 
+                    var _location_latlng = new Microsoft.Maps.Location(_one_line[k][0], _one_line[k][1]);
+                    _location_array.push(_location_latlng);
 
-                var _area_polyline_multi = new google.maps.Polyline({
+                }
 
-                    path: parentArray[i],
-                    geodesic: true,
-                    strokeColor: '#FFA500',
-                    strokeOpacity: 0.8,
-                    strokeWeight: 5
-
-                });
-
-                _area_polyline_multi.setMap(map);
-
-
+                _area_polyline_multi = new Microsoft.Maps.Polyline(_location_array, { strokeColor: '#FFA500', strokeThickness: 5, visible: true });
+                map.entities.push(_area_polyline_multi);
 
 
             }// outer for
@@ -264,73 +274,57 @@ function add_area_boundary(_area) {
         }
         else {
 
-
+            
             // for only one line
-            _area_polyline = new google.maps.Polyline({
+            var _location_array = [];
+            var _one_line = _area_polygon_coord[_area];
 
-                path: _area_polygon_coord[_area],
-                geodesic: true,
-                strokeColor: '#FFA500',
-                strokeOpacity: 0.8,
-                strokeWeight: 5
+            for (var k = 0; k < _one_line.length; k++) {
 
-            });
-            _area_polyline.setMap(map);
+                var _location_latlng = new Microsoft.Maps.Location(_one_line[k][0], _one_line[k][1]);
+                _location_array.push(_location_latlng);
+
+            }
+
+            _area_polyline = new Microsoft.Maps.Polyline(_location_array, { strokeColor: '#FFA500', strokeThickness: 5, visible: true  });
+            map.entities.push(_area_polyline);
+
+            
         }//else
 
 
     }); // when done
 
 
-
-
-
-
-    /*
-    
-                                    For 2 dimenional Arrays:
-    
-                                    for(var i = 0; i < parentArray.length; i++){
-                                        for(var j = 0; j < parentArray[i].length; j++){
-    
-                                            console.log(parentArray[i][j]);
-                                        }
-                                    }
-                                    For arrays with an unknown number of dimensions you have to use recursion:
-    
-                                    function printArray(arr){
-                                        for(var i = 0; i < arr.length; i++){
-                                            if(arr[i] instanceof Array){
-                                                printArray(arr[i]);
-                                            }else{
-                                                console.log(arr[i]);
-                                            }
-                                        }
-                                    }
-    
-                                    or
-    
-                                    var printArray = function(arr) {
-                                        if ( typeof(arr) == "object") {
-                                            for (var i = 0; i < arr.length; i++) {
-                                                printArray(arr[i]);
-                                            }
-                                        }
-                                        else document.write(arr);
-                                    }
-    
-                                    printArray(parentArray);
-    
-    
-    
-    */
-
-
-
 }// function add_area_boundary
 
 
 
+function tile_opacity_slider() {
+
+
+   
+
+    $('#ex1').slider({
+        formatter: function (value) {
+
+            // <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="10" data-slider-value="100" />
+            tile_layer.setOpacity(Math.round(value / 10) / 10);
+
+            return value + '%';
+        } // formatter
+
+    }); // slider
+
+
+
+
+}// function
+
+
+
+
+// ----------- tiling ----------------------
 function init_tiling() {
 
     // --------------------- dynamic load javascript file  ---------------------------
@@ -341,45 +335,67 @@ function init_tiling() {
 
     $.when(
              $.getScript(_tile_list_js)
-     /*
-    $.getScript( "/mypath/myscript1.js" ),
-    $.getScript( "/mypath/myscript2.js" ),
-    $.getScript( "/mypath/myscript3.js" ),
-    */
+
 
     ).done(function () {
 
         var _tile_name = _areaID + "_" + _subjectID;
         var _i = _tile_list.indexOf(_tile_name);
         //alert(_tile_name);
+
+
         if (_i >= 0) {
 
+            // tile exist 
 
             //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
-            //_tile_baseURL = 'http://tile.transparentgov.net/v2/';
+            // _tile_baseURL = 'http://tile.transparentgov.net/v2/';
             // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
 
 
 
-            tile_MapType = new google.maps.ImageMapType({
-                getTileUrl: function (coord, zoom) {
+             tile_source = new Microsoft.Maps.TileSource({
+                 uriConstructor: function (coord) {
 
 
 
-                    return _tile_baseURL + _areaID + '_' + _subjectID + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
+                     return _tile_baseURL + _areaID + '_' + _subjectID + '/' + coord.zoom + '/' + coord.x + '/' + coord.y + '.png';
 
 
-                },
-                tileSize: new google.maps.Size(256, 256),
-                maxZoom: 22,
-                minZoom: 0
+                 },
 
-            }); // tile_maptype
+                minZoom: 0,
+                maxZoom: 22
+               
+             });
+
+
+            tile_layer = new Microsoft.Maps.TileLayer({
+                mercator: tile_source,
+            });
+            map.layers.insert(tile_layer);
+
+
+
 
 
             _tile_exist = true;
 
-        }// if
+            // if tile exist, create slider
+            tile_opacity_slider();
+
+
+        }// if tile exist
+
+        else {
+            // tile does not exist, should hide the opacity slider control div.
+
+
+            // if no tile , hide slider control
+            $('#ex1').hide();
+
+
+        }
 
 
     }); // when done
@@ -391,6 +407,7 @@ function init_tiling() {
 
 function add_tiles() {
 
+    // alert(_tile_exist);
     if (_tile_exist) {
         // ---- if returning total number, not geoJOSN feature, then add tiling layer on top ---------------------------
 
@@ -413,6 +430,12 @@ function remove_tiles() {
         //map.overlayMapTypes.removeAt(0);
     }
 }
+
+//--------------------End of tiling --------------------------------------
+
+
+
+
 
 
 
@@ -513,6 +536,284 @@ function geocodeAddress(geocoder, resultsMap) {
 
 
 
+//------------- Googlemap  basic simple map function -----------------------------
+
+function get_map_bound() {
+
+    //document.getElementById("title_info").innerHTML = "MAP BOUNDS [SouthWest, NorthEast] "+ map.getBounds();
+    // get current map bounds as URL parameters. 
+
+
+
+
+
+    bounds = map.getBounds();
+    southWest = bounds.getSouthWest();
+    northEast = bounds.getNorthEast();
+    SWlong = southWest.lng();
+    SWlat = southWest.lat();
+    NElong = northEast.lng();
+    NElat = northEast.lat();
+
+    // http://localhost:10/civilgis/api/load/general_landuse/SWlong/SWlat/NElong/NElat/   This is sample URI
+    //var _url = base_url + 'api/loadall/' + $("#areaID").val() + '/' + $("#subjectID").val() + '/' + SWlong + '/' + SWlat + '/' + NElong + '/' + NElat + '/';
+    var _url = "/api/geojson/feature/" + initial_location[0] + '/' + $("#subjectID").val() + "/" + SWlong + "/" + SWlat + "/" + NElong + "/" + NElat + "/";
+
+    document.getElementById("ajaxload").style.display = "block";
+    ajax_GeoJSON(map, _url, false);
+
+
+
+}
+
+
+function remove_map_listener() {
+
+    google.maps.event.removeListener(listener_dragend);
+    google.maps.event.removeListener(listener_zoom_changed);
+
+}
+
+// ---------  map click event [2] -------------------------------
+
+function get_click_latlng(_click_event_lat, _click_event_lng) {
+
+
+    if (_mapclick_in_use) {
+
+
+        // --- current use 2X2 grid boundary (as click event latlong is on center point), you can use 3x3 grid or adjust house length to make larger/smaller select area. 
+        var _square_house_length = 0.0004; // average is 0.0003-0.0004
+
+
+        SWlong = _click_event_lng - _square_house_length;
+        SWlat = _click_event_lat - _square_house_length;
+        NElong = _click_event_lng + _square_house_length;
+        NElat = _click_event_lat + _square_house_length;
+
+
+
+
+        var _url_click_event = "/api/geojson/feature/" + $("#areaID").val() + '/' + $("#subjectID").val() + "/" + SWlong + "/" + SWlat + "/" + NElong + "/" + NElat + "/";
+
+        document.getElementById("ajaxload").style.display = "block";
+        ajax_GeoJSON(map, _url_click_event, true);
+
+
+
+    }
+
+
+
+
+}
+
+
+
+function back_full_extend() {
+
+    map.setZoom(initial_location[3]);
+    map.setCenter(new google.maps.LatLng(initial_location[1], initial_location[2]));
+}
+
+
+function add_map_listener_idle() {
+
+    listener_idle = map.addListener('idle', function () {
+
+        get_map_bound();
+
+
+    });
+
+
+
+    // ---------  map click event [1] ------ search for a single feature where clicked ------------
+    listener_click = map.addListener('click', function (click_event_location) {
+
+        // the current popup infowindow should be close if click anywhere on map.
+        if (infowindow) {
+            infowindow.close();
+        }
+
+
+
+
+        get_click_latlng(click_event_location.latLng.lat(), click_event_location.latLng.lng());
+    });
+
+
+    listener_rightclick = map.addListener('rightclick', function () {
+
+        back_full_extend();
+    });
+
+    //--------------------------End  map right click event ---------- back to full extend ----------------------
+
+
+
+}
+//------------------ End map click event [2] -------------------------------
+
+
+
+function add_map_listener() {
+
+    //map.addListener('bounds_changed', function() {  // does not work well
+    listener_dragend = map.addListener('dragend', function () {
+
+        get_map_bound();
+
+
+    });
+
+
+
+
+
+
+    listener_zoom_changed = map.addListener('zoom_changed', function () {
+
+        get_map_bound();
+    });
+
+
+
+}
+
+
+function add_mapdata_listener() {
+
+    // click listener
+    map.data.addListener('click', function (event) {
+        //var myHTML = event.feature.getProperty("NAME_ABV_A");
+
+        // map.data.overrideStyle(event.feature, {fillColor: 'yellow'});
+
+        // info window table style
+        var popup = "<table>";
+        event.feature.forEachProperty(function (_value, _property) {
+            popup = popup + "<tr><td width='50%'>" + _property + "</td><td>" + _value + "</td></tr>";
+        });
+        popup = popup + "</table>";
+
+        infowindow.setContent("<div style='width:200px; height:150px;text-align: center;'>" + popup + "</div>");
+        infowindow.setPosition(event.latLng);
+        infowindow.open(map);
+
+    });    // click listener
+
+
+
+
+
+    // mouse over listener
+    map.data.addListener('mouseover', function (event) {
+        //map.data.revertStyle();                 
+        map.data.overrideStyle(event.feature, {
+            strokeWeight: _highlight_strokeWeight,
+            strokeColor: _highlight_strokeColor,
+            fillOpacity: _highlight_fillOpacity
+            //fillColor:''
+        });
+
+        var instant_info = "<ul>";
+        event.feature.forEachProperty(function (_value, _property) {
+            instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+        });
+        instant_info = instant_info + "</ul>";
+
+
+        // update bottom <div>
+        document.getElementById("info-table").innerHTML = instant_info;
+
+    });
+
+
+    // mouse out listener
+    map.data.addListener('mouseout', function (event) {
+        map.data.revertStyle(event.feature);
+
+        // empty bottom <div>
+        document.getElementById("info-table").innerHTML = "";
+        //infowindow.close();
+
+    });
+
+}
+
+
+//..............Bing Map geo coding ...............
+function selectedSuggestion(suggestionResult) {
+    map.entities.clear();
+    map.setView({ bounds: suggestionResult.bestView });
+    var pushpin = new Microsoft.Maps.Pushpin(suggestionResult.location);
+    map.entities.push(pushpin);
+    //document.getElementById('printoutPanel').innerHTML =
+    //    'Suggestion: ' + suggestionResult.formattedSuggestion +
+    //        '<br> Lat: ' + suggestionResult.location.latitude +
+    //        '<br> Lon: ' + suggestionResult.location.longitude;
+}
+
+function geocoding() {
+
+
+
+    Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', function () {
+        var options = {
+            maxResults: 4,
+            map: map
+        };
+        var manager = new Microsoft.Maps.AutosuggestManager(options);
+        manager.attachAutosuggest('#searchBox', '#searchBoxContainer', selectedSuggestion);
+    });
+
+
+
+}
+//..............Bing Map geo coding ...............
+
+
+
+
+
+function zoomToObject(obj) {
+    var bounds = new google.maps.LatLngBounds();
+    var points = obj.getPath().getArray();
+    for (var n = 0; n < points.length ; n++) {
+        bounds.extend(points[n]);
+    }
+    map.fitBounds(bounds);
+}
+
+
+function init_base_map() {
+
+   
+
+    map = new Microsoft.Maps.Map(document.getElementById('map-canvas'), {
+        credentials: bing_map_key,
+        
+        center: new Microsoft.Maps.Location(initial_location[1], initial_location[2]),
+        mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+        zoom: initial_location[3]
+
+    });
+
+
+
+
+}
+
+
+
+
+//----------------End of Googlemap basic simple map function  ------------------------
+
+
+
+// ############### retired function ############################
+
 function tile_switch_button() {
 
 
@@ -543,3 +844,107 @@ function tile_switch_button() {
 
 
 }
+
+
+
+function tile_slider() {
+
+
+    _tile_slider = document.getElementById('tile_slider');
+
+    noUiSlider.create(_tile_slider, {
+        start: [100],
+        connect: 'lower',
+        //  tooltips: true,
+        range: {
+            'min': 0,
+            'max': 100
+        }
+    });
+
+
+
+}
+
+
+function init_tiling_old_slider_switch() {
+
+    // --------------------- dynamic load javascript file  ---------------------------
+
+
+
+    var _tile_list_js = "/Scripts/map_init/tile_list/googlemap_tile_list.js";
+
+    $.when(
+             $.getScript(_tile_list_js)
+     /*
+    $.getScript( "/mypath/myscript1.js" ),
+    $.getScript( "/mypath/myscript2.js" ),
+    $.getScript( "/mypath/myscript3.js" ),
+    */
+
+    ).done(function () {
+
+        var _tile_name = _areaID + "_" + _subjectID;
+        var _i = _tile_list.indexOf(_tile_name);
+        //alert(_tile_name);
+        if (_i >= 0) {
+
+
+            //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
+            // _tile_baseURL = 'http://tile.transparentgov.net/v2/';
+            // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
+
+
+
+            tile_MapType = new google.maps.ImageMapType({
+                getTileUrl: function (coord, zoom) {
+
+
+
+                    return _tile_baseURL + _areaID + '_' + _subjectID + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
+
+
+                },
+                tileSize: new google.maps.Size(256, 256),
+                maxZoom: 22,
+                minZoom: 0
+
+            }); // tile_maptype
+
+            map.overlayMapTypes.insertAt(0, tile_MapType);
+
+
+
+
+            //............................ bind opacity to slider ........................
+
+            _tile_slider.noUiSlider.on('set', function (values, handle, unencoded, tap, positions) {
+
+
+                var _slider_handle_value = values[handle];
+                _slider_handle_value = Math.round(_slider_handle_value) / 100;
+
+                tile_MapType.setOpacity(_slider_handle_value);
+
+            });
+            //................End ....... bind opacity to slider ........................
+
+
+
+
+
+            _tile_exist = true;
+
+
+
+
+        }// if tile exist
+
+
+    }); // when done
+
+
+}// init tile
+
+// ############### retired function ############################

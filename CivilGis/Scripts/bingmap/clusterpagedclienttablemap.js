@@ -229,9 +229,7 @@ function ajax_GeoJSON(gmap,_apiURI) {
     // Load a GeoJSON from the server 
    
 
-    //------tile[3] ---------
-    add_tiles();
-          
+   
         
             
             
@@ -437,66 +435,7 @@ function ajax_GeoJSON(gmap,_apiURI) {
     
 }// function ajax_GeoJSON
 
-function get_map_bound(){
-    
-      //document.getElementById("title_info").innerHTML = "MAP BOUNDS [SouthWest, NorthEast] "+ map.getBounds();
-              // get current map bounds as URL parameters. 
-                 
-                 
-                 
-                 
-                 
-                 bounds = map.getBounds();
-                 southWest = bounds.getSouthWest();
-                 northEast = bounds.getNorthEast();
-                 SWlong = southWest.lng();
-                 SWlat = southWest.lat();
-                 NElong = northEast.lng();
-                 NElat = northEast.lat();
-                  
-                  // http://localhost:10/civilgis/api/load/general_landuse/SWlong/SWlat/NElong/NElat/   This is sample URI
-                 //var _url = base_url + 'api/loadall/' + $("#areaID").val() + '/' + $("#subjectID").val() + '/' + SWlong + '/' + SWlat + '/' + NElong + '/' + NElat + '/';
-                 var _url = "/api/geojson/feature/" + initial_location[0] + '/' + $("#subjectID").val() + "/" + SWlong + "/" + SWlat + "/" + NElong + "/" + NElat + "/";
-            
-                  document.getElementById("ajaxload").style.display = "block";
-                  ajax_GeoJSON(map,_url);
-    
-    
-    
-}
 
-
-function remove_map_listener(){
-    
-     google.maps.event.removeListener(listener_dragend);
-     google.maps.event.removeListener(listener_zoom_changed);
-    
-}
-
-function add_map_listener(){
-    
-      //map.addListener('bounds_changed', function() {  // does not work well
-          listener_dragend =  map.addListener('dragend', function() {   
-                
-                 get_map_bound();
-                 
-                 
-             });
-         
-         
-         
-             
-         
-         
-         listener_zoom_changed = map.addListener('zoom_changed', function() {   
-              
-               get_map_bound();
-             });
-    
-    
-    
-    
-}
 
 function clustering_point(){
     /*  ----------- marker cluster  [1]--------------
@@ -674,67 +613,6 @@ function clustering_point(){
 }
 
 
-function add_mapdata_listener() {
-
-    // click listener
-    map.data.addListener('click', function (event) {
-        //var myHTML = event.feature.getProperty("NAME_ABV_A");
-
-        // map.data.overrideStyle(event.feature, {fillColor: 'yellow'});
-
-        // info window table style
-        var popup = "<table>";
-        event.feature.forEachProperty(function (_value, _property) {
-            popup = popup + "<tr><td>" + _property + "</td><td>" + _value + "</td></tr>";
-        });
-        popup = popup + "</table>";
-
-        infowindow.setContent("<div style='width:200px; height:150px;text-align: center;'>" + popup + "</div>");
-        infowindow.setPosition(event.latLng);
-        infowindow.open(map);
-
-    });    // click listener
-
-
-
-
-
-    // mouse over listener
-    map.data.addListener('mouseover', function (event) {
-        //map.data.revertStyle();                 
-        map.data.overrideStyle(event.feature, {
-            strokeWeight: _highlight_strokeWeight,
-            //strokeColor: _highlight_strokeColor,
-            fillOpacity: _highlight_fillOpacity
-            //fillColor:''
-        });
-
-        var instant_info = "<ul>";
-        event.feature.forEachProperty(function (_value, _property) {
-            instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
-        });
-        instant_info = instant_info + "</ul>";
-
-
-        // update bottom <div>
-        document.getElementById("info-table").innerHTML = instant_info;
-
-    });
-
-
-    // mouse out listener
-    map.data.addListener('mouseout', function (event) {
-        map.data.revertStyle(event.feature);
-
-        // empty bottom <div>
-        document.getElementById("info-table").innerHTML = "";
-        //infowindow.close();
-
-    });
-
-}
-
-
 
 
 
@@ -774,14 +652,7 @@ function initialize() {
         
         
         
-        // --------  search address
-     geocoder = new google.maps.Geocoder();
-
-     document.getElementById('search_addr').addEventListener('click', function () {
-         geocodeAddress(geocoder, map);
-     });
-
-    // ---------- 
+        geocoding();
         
         
      
