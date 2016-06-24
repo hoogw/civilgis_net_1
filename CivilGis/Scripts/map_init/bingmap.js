@@ -85,6 +85,7 @@ var _subjectID;
 var tile_MapType;
 var _current_geojson_layer = null;
 var _last_geojson_layer = null;
+var _geojson_layer = null;
 
 
 //........ Bing map var ............
@@ -122,20 +123,85 @@ var _mapclick_in_use = false;
 
 
 // --------default feature style -----------
-_default_fillOpacity = 0;
+_default_fillOpacity = 'rgba(0, 0, 0, 0)';
 _default_strokeColor = 'yellow';
 _default_strokeWeight = 1;
-
+_default_color = 'pink'
 
 _highlight_fillOpacity = 0;
 _highlight_strokeColor = '#fff';
 _highlight_strokeWeight = 8;
+_highlight_color = 'yellow'
 
+
+click_highlight_fillOpacity = 0;
+click_highlight_strokeColor = 'red';
+click_highlight_strokeWeight = 12;
+click_highlight_color = 'red'
 
 
 _classfiy_fillOpacity = 0;
 _classfiy_strokeColor = 'yellow';
 _classfiy_strokeWeight = 0.2;
+
+
+var default_geojson_style = {
+    pushpinOptions: {
+        //icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+        color: _default_color,
+        enableHoverStyle: true,
+       // enableClickedStyle: true,
+        visible: true
+
+    },
+    polylineOptions: {
+        strokeColor: _default_strokeColor,
+        strokeThickness: _default_strokeWeight
+    },
+    polygonOptions: {
+        fillColor: _default_fillOpacity,
+        strokeColor: _default_strokeColor,
+        strokeThickness: _default_strokeWeight
+    }
+};
+
+var default_geojson_style_option = {
+    color: _default_color,
+    fillColor: _default_fillOpacity,
+    strokeColor: _default_strokeColor,
+    strokeThickness: _default_strokeWeight
+};
+
+
+
+
+
+
+var highlight_geojson_style = {
+    //icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+    color: _highlight_color,
+    fillColor: _highlight_fillOpacity,
+    strokeColor: _highlight_strokeColor,
+    strokeThickness: _highlight_strokeWeight
+};
+
+
+
+
+
+var click_highlight_geojson_style = {
+    //icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+    color: click_highlight_color,
+    fillColor: click_highlight_fillOpacity,
+    strokeColor: click_highlight_strokeColor,
+    strokeThickness: click_highlight_strokeWeight
+};
+
+
+
+
+var _last_click_highlighted_feature;
+
 //---------------------------------
 
 
@@ -536,24 +602,20 @@ function geocodeAddress(geocoder, resultsMap) {
 
 
 
-//------------- Googlemap  basic simple map function -----------------------------
+//-------------   basic simple map function -----------------------------
 
 function get_map_bound() {
 
-    //document.getElementById("title_info").innerHTML = "MAP BOUNDS [SouthWest, NorthEast] "+ map.getBounds();
+    
     // get current map bounds as URL parameters. 
 
 
-
-
-
     bounds = map.getBounds();
-    southWest = bounds.getSouthWest();
-    northEast = bounds.getNorthEast();
-    SWlong = southWest.lng();
-    SWlat = southWest.lat();
-    NElong = northEast.lng();
-    NElat = northEast.lat();
+   
+    SWlong = bounds.getWest();
+    SWlat = bounds.getSouth();
+    NElong = bounds.getEast();
+    NElat = bounds.getNorth();
 
     // http://localhost:10/civilgis/api/load/general_landuse/SWlong/SWlat/NElong/NElat/   This is sample URI
     //var _url = base_url + 'api/loadall/' + $("#areaID").val() + '/' + $("#subjectID").val() + '/' + SWlong + '/' + SWlat + '/' + NElong + '/' + NElat + '/';
@@ -617,66 +679,19 @@ function back_full_extend() {
 }
 
 
-function add_map_listener_idle() {
-
-    listener_idle = map.addListener('idle', function () {
-
-        get_map_bound();
-
-
-    });
-
-
-
-    // ---------  map click event [1] ------ search for a single feature where clicked ------------
-    listener_click = map.addListener('click', function (click_event_location) {
-
-        // the current popup infowindow should be close if click anywhere on map.
-        if (infowindow) {
-            infowindow.close();
-        }
-
-
-
-
-        get_click_latlng(click_event_location.latLng.lat(), click_event_location.latLng.lng());
-    });
-
-
-    listener_rightclick = map.addListener('rightclick', function () {
-
-        back_full_extend();
-    });
-
-    //--------------------------End  map right click event ---------- back to full extend ----------------------
-
-
-
-}
 //------------------ End map click event [2] -------------------------------
 
 
 
 function add_map_listener() {
 
-    //map.addListener('bounds_changed', function() {  // does not work well
-    listener_dragend = map.addListener('dragend', function () {
+
+    Microsoft.Maps.Events.addHandler(map, 'viewchangeend', function () {
 
         get_map_bound();
 
 
     });
-
-
-
-
-
-
-    listener_zoom_changed = map.addListener('zoom_changed', function () {
-
-        get_map_bound();
-    });
-
 
 
 }
@@ -684,61 +699,168 @@ function add_map_listener() {
 
 function add_mapdata_listener() {
 
-    // click listener
-    map.data.addListener('click', function (event) {
-        //var myHTML = event.feature.getProperty("NAME_ABV_A");
-
-        // map.data.overrideStyle(event.feature, {fillColor: 'yellow'});
-
-        // info window table style
-        var popup = "<table>";
-        event.feature.forEachProperty(function (_value, _property) {
-            popup = popup + "<tr><td width='50%'>" + _property + "</td><td>" + _value + "</td></tr>";
-        });
-        popup = popup + "</table>";
-
-        infowindow.setContent("<div style='width:200px; height:150px;text-align: center;'>" + popup + "</div>");
-        infowindow.setPosition(event.latLng);
-        infowindow.open(map);
-
-    });    // click listener
+    _geojson_layer = new Microsoft.Maps.Layer();
+    map.layers.insert(_geojson_layer);
 
 
 
 
+    
+    Microsoft.Maps.Events.addHandler(_geojson_layer, 'mouseover', function (event) {
 
-    // mouse over listener
-    map.data.addListener('mouseover', function (event) {
-        //map.data.revertStyle();                 
-        map.data.overrideStyle(event.feature, {
-            strokeWeight: _highlight_strokeWeight,
-            strokeColor: _highlight_strokeColor,
-            fillOpacity: _highlight_fillOpacity
-            //fillColor:''
-        });
+
+        _last_mousover_highlighted_feature = event.primitive;
+
+        event.primitive.setOptions(highlight_geojson_style);
+
+        var object = event.primitive.metadata;
+
+
 
         var instant_info = "<ul>";
-        event.feature.forEachProperty(function (_value, _property) {
-            instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
-        });
-        instant_info = instant_info + "</ul>";
 
+        for (var property in object) {
+            if (object.hasOwnProperty(property)) {
+                instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + object[property] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+               // alert(property);
+            }
+        }
+        //alert(instant_info);
+        instant_info = instant_info + "</ul>";
 
         // update bottom <div>
         document.getElementById("info-table").innerHTML = instant_info;
 
+
+        
     });
 
 
-    // mouse out listener
-    map.data.addListener('mouseout', function (event) {
-        map.data.revertStyle(event.feature);
+    Microsoft.Maps.Events.addHandler(_geojson_layer, 'mouseout', function (event) {
+        
+        event.primitive.setOptions(default_geojson_style_option);
+       
+
+        // reserve last time click feature 'click_highlight_style'
+        if (_last_click_highlighted_feature) {
+            _last_click_highlighted_feature.setOptions(click_highlight_geojson_style);
+        }
+
 
         // empty bottom <div>
         document.getElementById("info-table").innerHTML = "";
-        //infowindow.close();
+
 
     });
+
+
+
+    Microsoft.Maps.Events.addHandler(_geojson_layer, 'click', function (event) {
+        
+
+
+       
+
+
+        // instead reset all feature style, only reset last highlighted feature.
+
+        if (_last_click_highlighted_feature) {
+        _last_click_highlighted_feature.setOptions(default_geojson_style_option);
+        }
+
+
+
+        // highlight only this one
+        event.primitive.setOptions(click_highlight_geojson_style);
+
+
+        _last_click_highlighted_feature = event.primitive;
+
+
+
+
+
+
+
+
+
+
+    });
+
+
+
+
+
+
+    //Microsoft.Maps.Events.addHandler(layer, 'rightclick', function () {
+    //    document.getElementById('printoutPanel').innerHTML = 'layer rightclick';
+    //});
+    //Microsoft.Maps.Events.addHandler(layer, 'mouseup', function () {
+    //    document.getElementById('printoutPanel').innerHTML = 'layer mouseup';
+    //});
+    //Microsoft.Maps.Events.addHandler(layer, 'mousedown', function () {
+    //    document.getElementById('printoutPanel').innerHTML = 'layer mousedown';
+    //});
+    
+
+
+
+
+    //// click listener
+    //map.data.addListener('click', function (event) {
+    //    //var myHTML = event.feature.getProperty("NAME_ABV_A");
+
+    //    // map.data.overrideStyle(event.feature, {fillColor: 'yellow'});
+
+    //    // info window table style
+    //    var popup = "<table>";
+    //    event.feature.forEachProperty(function (_value, _property) {
+    //        popup = popup + "<tr><td width='50%'>" + _property + "</td><td>" + _value + "</td></tr>";
+    //    });
+    //    popup = popup + "</table>";
+
+    //    infowindow.setContent("<div style='width:200px; height:150px;text-align: center;'>" + popup + "</div>");
+    //    infowindow.setPosition(event.latLng);
+    //    infowindow.open(map);
+
+    //});    // click listener
+
+
+
+
+
+    //// mouse over listener
+    //map.data.addListener('mouseover', function (event) {
+    //    //map.data.revertStyle();                 
+    //    map.data.overrideStyle(event.feature, {
+    //        strokeWeight: _highlight_strokeWeight,
+    //        strokeColor: _highlight_strokeColor,
+    //        fillOpacity: _highlight_fillOpacity
+    //        //fillColor:''
+    //    });
+
+    //    var instant_info = "<ul>";
+    //    event.feature.forEachProperty(function (_value, _property) {
+    //        instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+    //    });
+    //    instant_info = instant_info + "</ul>";
+
+
+    //    // update bottom <div>
+    //    document.getElementById("info-table").innerHTML = instant_info;
+
+    //});
+
+
+    //// mouse out listener
+    //map.data.addListener('mouseout', function (event) {
+    //    map.data.revertStyle(event.feature);
+
+    //    // empty bottom <div>
+    //    document.getElementById("info-table").innerHTML = "";
+    //    //infowindow.close();
+
+    //});
 
 }
 
@@ -808,7 +930,7 @@ function init_base_map() {
 
 
 
-//----------------End of Googlemap basic simple map function  ------------------------
+//----------------End of  basic simple map function  ------------------------
 
 
 
@@ -844,8 +966,6 @@ function tile_switch_button() {
 
 
 }
-
-
 
 function tile_slider() {
 
