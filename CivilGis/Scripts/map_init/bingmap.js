@@ -71,6 +71,7 @@ var _highlight_marker;
 // ----cluster [3]----
 var markerClusterer;
 var infobox;
+var infoboxTemplate;
 var boxText;
 var _cluster_in_use = false;
 //------------end cluster [3] ------------
@@ -683,7 +684,35 @@ function back_full_extend() {
 
 
 
+function infobox_init() {
+    //============ bing map init infobox  ==============
+
+    //infoboxTemplate = '<div id="infoboxText" style="background-color:White; border-style:solid; border-width:medium; border-color:DarkOrange; min-height:200px; width: 150px; "><b id="infoboxTitle" style="position: absolute; top: 10px; left: 10px; width: 220px; ">{title}</b><a id="infoboxDescription" style="position: absolute; top: 30px; left: 10px; width: 220px; ">{description}</a></div>';
+     //infobox = new Microsoft.Maps.Infobox(map.getCenter(), {
+     //  // htmlContent: infoboxTemplate.replace('{title}', 'myTitle').replace('{description}', 'myDescription'),
+     //   visible: false,
+     //    showCloseButton: true
+     //});
+
+    infobox = new Microsoft.Maps.Infobox();
+
+    infobox.setOptions({
+             visible: false,
+            showCloseButton: true});
+
+    infobox.setMap(map);
+
+
+
+    //============   End  bing map init infobox  ==============
+
+
+}
+
+
 function add_map_listener() {
+
+
 
 
     Microsoft.Maps.Events.addHandler(map, 'viewchangeend', function () {
@@ -693,6 +722,8 @@ function add_map_listener() {
 
     });
 
+
+    infobox_init();
 
 }
 
@@ -755,12 +786,14 @@ function add_mapdata_listener() {
 
 
 
+
+    
+
+
+
+
     Microsoft.Maps.Events.addHandler(_geojson_layer, 'click', function (event) {
         
-
-
-       
-
 
         // instead reset all feature style, only reset last highlighted feature.
 
@@ -779,7 +812,38 @@ function add_mapdata_listener() {
 
 
 
+        //============ bing map init infobox  ==============
 
+        infobox.setLocation(event.location);
+       
+       
+
+        // info window table style
+        var popup = "<table>";
+
+        var object = event.primitive.metadata;
+
+        for (var property in object) {
+            if (object.hasOwnProperty(property)) {
+                
+                popup = popup + "<tr><td width='50%'><p style='color:white;'> " + property + "</p></td><td><p style='color:white;'>" + object[property] + "</p></td></tr>";
+            }
+        }
+        
+        popup = popup + "</table>";
+
+        popup = "<div style='width:200px; height:200px; overflow:auto; text-align: center;border-style:solid; border-width:medium; border-color:white;'>" + popup + "</div>";
+
+       
+        infobox.setHtmlContent(popup);
+
+
+        infobox.setOptions({
+            visible: true,
+            showCloseButton: true
+        });
+        
+        //============   End  bing map init infobox  ==============
 
 
 
@@ -788,79 +852,16 @@ function add_mapdata_listener() {
     });
 
 
-
-
-
-
-    //Microsoft.Maps.Events.addHandler(layer, 'rightclick', function () {
-    //    document.getElementById('printoutPanel').innerHTML = 'layer rightclick';
-    //});
-    //Microsoft.Maps.Events.addHandler(layer, 'mouseup', function () {
-    //    document.getElementById('printoutPanel').innerHTML = 'layer mouseup';
-    //});
-    //Microsoft.Maps.Events.addHandler(layer, 'mousedown', function () {
-    //    document.getElementById('printoutPanel').innerHTML = 'layer mousedown';
-    //});
+    // map rightclick to close infobox
+    Microsoft.Maps.Events.addHandler(map, 'rightclick',
+                                                       function ()
+                                                       {
+                                                           infobox.setOptions({
+                                                               visible: false,
+                                                               showCloseButton: true
+                                                           });
+                                                       });
     
-
-
-
-
-    //// click listener
-    //map.data.addListener('click', function (event) {
-    //    //var myHTML = event.feature.getProperty("NAME_ABV_A");
-
-    //    // map.data.overrideStyle(event.feature, {fillColor: 'yellow'});
-
-    //    // info window table style
-    //    var popup = "<table>";
-    //    event.feature.forEachProperty(function (_value, _property) {
-    //        popup = popup + "<tr><td width='50%'>" + _property + "</td><td>" + _value + "</td></tr>";
-    //    });
-    //    popup = popup + "</table>";
-
-    //    infowindow.setContent("<div style='width:200px; height:150px;text-align: center;'>" + popup + "</div>");
-    //    infowindow.setPosition(event.latLng);
-    //    infowindow.open(map);
-
-    //});    // click listener
-
-
-
-
-
-    //// mouse over listener
-    //map.data.addListener('mouseover', function (event) {
-    //    //map.data.revertStyle();                 
-    //    map.data.overrideStyle(event.feature, {
-    //        strokeWeight: _highlight_strokeWeight,
-    //        strokeColor: _highlight_strokeColor,
-    //        fillOpacity: _highlight_fillOpacity
-    //        //fillColor:''
-    //    });
-
-    //    var instant_info = "<ul>";
-    //    event.feature.forEachProperty(function (_value, _property) {
-    //        instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
-    //    });
-    //    instant_info = instant_info + "</ul>";
-
-
-    //    // update bottom <div>
-    //    document.getElementById("info-table").innerHTML = instant_info;
-
-    //});
-
-
-    //// mouse out listener
-    //map.data.addListener('mouseout', function (event) {
-    //    map.data.revertStyle(event.feature);
-
-    //    // empty bottom <div>
-    //    document.getElementById("info-table").innerHTML = "";
-    //    //infowindow.close();
-
-    //});
 
 }
 
