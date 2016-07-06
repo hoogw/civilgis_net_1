@@ -687,12 +687,7 @@ function back_full_extend() {
 function infobox_init() {
     //============ bing map init infobox  ==============
 
-    //infoboxTemplate = '<div id="infoboxText" style="background-color:White; border-style:solid; border-width:medium; border-color:DarkOrange; min-height:200px; width: 150px; "><b id="infoboxTitle" style="position: absolute; top: 10px; left: 10px; width: 220px; ">{title}</b><a id="infoboxDescription" style="position: absolute; top: 30px; left: 10px; width: 220px; ">{description}</a></div>';
-     //infobox = new Microsoft.Maps.Infobox(map.getCenter(), {
-     //  // htmlContent: infoboxTemplate.replace('{title}', 'myTitle').replace('{description}', 'myDescription'),
-     //   visible: false,
-     //    showCloseButton: true
-     //});
+   
 
     infobox = new Microsoft.Maps.Infobox();
 
@@ -712,7 +707,7 @@ function infobox_init() {
 
 function add_map_listener() {
 
-
+    infobox_init();
 
 
     Microsoft.Maps.Events.addHandler(map, 'viewchangeend', function () {
@@ -723,7 +718,26 @@ function add_map_listener() {
     });
 
 
-    infobox_init();
+    
+
+
+
+    Microsoft.Maps.Events.addHandler(map, 'click',
+                                                       function () {
+                                                           //  single click to get some data
+                                                       });
+
+
+
+
+    Microsoft.Maps.Events.addHandler(map, 'rightclick',
+                                                      function () {
+                                                          infobox.setOptions({
+                                                              visible: false,
+                                                              showCloseButton: true
+                                                          });
+                                                      });
+    
 
 }
 
@@ -812,7 +826,7 @@ function add_mapdata_listener() {
 
 
 
-        //============ bing map init infobox  ==============
+        //============ bing map infobox  ==============
 
         infobox.setLocation(event.location);
        
@@ -843,7 +857,7 @@ function add_mapdata_listener() {
             showCloseButton: true
         });
         
-        //============   End  bing map init infobox  ==============
+        //============   End  bing map infobox  ==============
 
 
 
@@ -852,15 +866,7 @@ function add_mapdata_listener() {
     });
 
 
-    // map rightclick to close infobox
-    Microsoft.Maps.Events.addHandler(map, 'rightclick',
-                                                       function ()
-                                                       {
-                                                           infobox.setOptions({
-                                                               visible: false,
-                                                               showCloseButton: true
-                                                           });
-                                                       });
+    
     
 
 }
