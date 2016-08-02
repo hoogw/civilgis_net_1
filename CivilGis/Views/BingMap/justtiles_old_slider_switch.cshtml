@@ -1,12 +1,13 @@
-﻿<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+﻿<script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?branch=release&callback=initialize' async defer></script>
 
 
 
 
 
-<script src="~/Scripts/map_init/googlemap.js"></script>
 
-<script src="~/Scripts/googlemap/justtiles_old_slider_switch.js"></script>
+<script src="~/Scripts/map_init/bingmap.js"></script>
+
+<script src="~/Scripts/bingmap/justtiles_old_slider_switch.js"></script>
 
 
 
@@ -27,7 +28,7 @@
 
 
 @{
-    string _side_panel_path = "~/Views/Shared/googlemap/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
+    string _side_panel_path = "~/Views/Shared/bingmap/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
 
     Html.RenderPartial(_side_panel_path); 
     
@@ -58,21 +59,10 @@
 
                     <div id="map-canvas" style="position: relative;-webkit-border-radius: 0 0 3px 3px;-moz-border-radius: 0 0 3px 3px;border-radius: 0 0 3px 3px;padding: 15px;background: #FCFCFC;height: 800px;"></div>
 
-                    <div id="legend" class="alert alert-warning"></div>
-
-                    <div class="well">
-                        <div class="row">
-
-                            <div class="col-lg-1">
-                                <input type="checkbox" name="color_tiles_switch" checked>
-                            </div>
-
-                            <div class="col-lg-2" name="tile_slider" id="tile_slider">
-
-                            </div>
-
-                        </div>
-                     </div>
+                    <div id='searchBoxContainer'>
+                        Search:<input type='text' id='searchBox' /> &nbsp; &nbsp; &nbsp;
+                        Opacity:<input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="10" data-slider-value="100" style="float:right;" />
+                    </div>
 
 
                         <div id="info-table">

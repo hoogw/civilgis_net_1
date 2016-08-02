@@ -1,8 +1,10 @@
 var bing_map_key = 'oR0CRAm6LNpk1GIgfh83~gvehBkcH0drdDOAuk8puqg~Asl9G0tpwQ9HT55_FWaQ_yyRrJy9i8OIP4XotIGN53jiSPsrXwRGhtC6LusWZlor';
 
 
-//var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
-var _tile_baseURL = 'http://tile.transparentgov.net/v2/';
+// there is bug if use tile.transparentgov.net/v2/, when map type changed. some tile blocked. no access control allow origin 
+var _tile_baseURL = 'http://166.62.80.50:8887/v2/';
+//var _tile_baseURL = 'http://tile.transparentgov.net/v2/';
+
 
 var _tile_exist = false;
 var _tile_list;
@@ -92,6 +94,7 @@ var _geojson_layer = null;
 //........ Bing map var ............
 var tile_source;
 var tile_layer;
+var clusterLayer;
 
 
 //........End Bing map var ............
@@ -723,8 +726,24 @@ function add_map_listener() {
 
 
     Microsoft.Maps.Events.addHandler(map, 'click',
-                                                       function () {
+                                                       function (click_event_location) {
                                                            //  single click to get some data
+
+
+                                                           // the current popup infowindow should be close if click anywhere on map.
+                                                           infobox.setOptions({
+                                                               visible: false,
+                                                               showCloseButton: true
+                                                           });
+      
+
+                                                           
+
+                                                           get_click_latlng(click_event_location.location.latitude, click_event_location.location.longitude);
+                                                     
+
+
+
                                                        });
 
 
@@ -930,6 +949,8 @@ function init_base_map() {
     });
 
 
+
+  
 
 
 }
