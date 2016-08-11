@@ -3,516 +3,7 @@
 
 
 
-function feed_datatables(_geojson_obj){
-    
-    
 
-     
-       //_geojson_obj_array = _geojson_object.features;
-       _geojson_obj_array = _geojson_obj["features"];
-      
-      
-      // get the key [column name]
-      var _properties =  _geojson_obj_array[0].properties;
-      
-      
-      var tableHeaders="";
-      $("#tableDiv").empty();
-     
-    /* 
-     var _column_def = [
-                                                { data : 'properties.LANDNAME' },
-                                                { data: 'properties.ID' },
-                                                { data: 'properties.COUNTY' },
-                                                { data: 'properties.CFCC' }
-                                            ];
-    */
-     _dt_columns_count = 0;
-     var _column_def = [];
-     var _column0 = {};
-     /*
-      _column0['data'] = 'properties.LANDNAME';
-      _column_def.push(_column0);
-      _column0 = {};
-      _column0['data'] = 'properties.ID';
-      _column_def.push(_column0);
-      _column0 = {};
-      _column0['data'] = 'properties.COUNTY';
-      _column_def.push(_column0);
-      _column0 = {};
-      _column0['data'] = 'properties.CFCC';
-      _column_def.push(_column0);
-     */
-      
-      Object.keys(_properties).forEach(function(k) 
-                        {
-                            //alert(k);
-                            //_dt_columns.push(k);
-                            
-                            tableHeaders += "<th>" + k + "</th>";
-                            
-                            // build column.data def
-                            _column0 = {};
-                            _column0['data'] = 'properties.' + k;
-
-          //---------- hide last 2 column geoFID, geoFeatureType---------
-                            if ((k === 'GeoFeatureID') || (k === 'GeoFeatureType')) {
-
-                                _column0['visible'] = false;
-
-                            }
-          //--------------------------------------------------------
-
-
-                            _column_def.push(_column0);   
-                               
-                             _dt_columns_count = _dt_columns_count +1;  
-                               
-                            
-                        }); // object key
-          
-         /* define last column as geo feaure ID
-         tableHeaders += "<th> Geo.Feature.ID</th>";   
-         _column0 = {};
-         _column0['data'] = '_id.$id';
-         _column_def.push(_column0); 
-         */
-         
-         $("#tableDiv").append('<table id="tabledata" class="display nowrap" cellspacing="0" width="100%"><thead><tr>' + tableHeaders + '</tr></thead><tfoot><tr>'+ tableHeaders + '</tr></tfoot></table>');
-      //$("#tableDiv").append('<table id="tabledata" class="display" cellspacing="0" width="100%"><thead><tr>' + tableHeaders + '</tr></thead></table>');
-      //$("#tableDiv").find("table thead tr").append(tableHeaders); 
-      
-                         
-      
-      
-           //  datatable
-          $('#tabledata').DataTable({
-                                   // must put destroy:true, to destroy last time old datatable initialization, before put new initialization
-                                   destroy: true,
-                                   data: _geojson_obj_array,
-                                   
-                                   
-                                   columns: _column_def,
-                                    
-                                    
-                                    "pagingType": "full_numbers",    
-                                    
-                                    // resize the datatables height here scrollY:150
-                                    scrollY: 200,
-                                    scrollX: true
-                                    
-                                    
-                                                    
-                            }); // datatable
-                            
-                            
-                            
-                            
-                           
-                            // ajax click row event show corespoinding data.feature[] on google map 
-                  var table = $('#tabledata').DataTable();
-                            
-                        $('#tabledata tbody').on('mouseover', 'td', function () 
-                        {
-
-                            
-                                           var instant_info = "<ul>";
-                                                                                    
-                                           var colIdx = table.cell(this).index().column;
-                                                                                     
-                                           var rowIdx =  table.cell(this).index().row;
-                                                                                     
-                                           var _geo_ID = table.cell(rowIdx, _dt_columns_count-1 ).data();           
-                                                                    
-                                            // high light yellow the feature polygon on google map
-                                            
-                                            //var _Data_Feature =  map.data.getFeatureById(_geo_ID);
-                                            map.data.forEach( function(_feature)
-                                            {
-
-                                                // GeoFeatureID define at ajax_geoJSON() 
-                                                //alert(_feature.getProperty('GeoFeatureID'));
-                                                //alert(_feature.getProperty('GeoFeatureType'));
-
-                                                
-                                                if (_feature.getProperty('GeoFeatureID') === _geo_ID)
-                                                {
-                                                    
-                                                    
-                                                    
-                                                            if(_feature.getProperty('GeoFeatureType') === 'Point')
-                                                            {
-                                                                    
-                                                                
-                                                              // if (_feature instanceof google.maps.Data.Point) {
-                                                                        if(_highlight_marker)
-                                                                        {
-                                                                               _highlight_marker.setMap(null);
-                                                                           }
-                                                                       // alert(_feature.getGeometry());
-                                                                      var _feature_geometry = _feature.getGeometry();
-                                                                      var _latlng = _feature_geometry.get();
-                                                                        _highlight_marker = new google.maps.Marker({
-                                                                           map: map,
-                                                                           position: _latlng,
-                                                                           // icon: iconBase + 'custome_icon.png'
-                                                                            //label: ' ', 
-                                                                            // must set zIndex to bring this marker to front, on top of other markers.other wise, it will hide behind.
-                                                                           zIndex: google.maps.Marker.MAX_ZINDEX + 1
-
-                                                                        }); // marker
-
-                                                                        
-                                                                        _highlight_marker.setIcon('http://maps.google.com/mapfiles/ms/icons/grn-pushpin.png');
-                                                               //  }//if feature
-                                                                    
-                                                                      
-                                                            
-                                                               
-
-                                                            }
-                                                            else{
-                                                                    map.data.revertStyle();
-                                                                    map.data.overrideStyle(_feature, {
-                                                                                           strokeWeight: 5,
-                                                                                           strokeColor: 'blue',
-                                                                                           fillOpacity: 0
-                                                                                           
-                                                                                       });// overrideStyle
-
-                                                                   }//else
-                                                }//map foreach
-                                                
-                                                /*
-                                                        var _a="";
-                                                       _feature.forEachProperty(function(_value, _property){
-                                                            _a = _a +_property + ':' + _value + '   ';
-                                                            
-                                                            });// forEachProperty
-                                                 */
-
-                                            });// map.data.foreach
-                                            
-                                                           
-                            
-                                           table.columns().every( function (cllmnIndex) 
-                                                {                                 
-                                                   // alert(table.cell(rowIdx, cllmnIndex ).data());
-                                                            
-                                                  var _property = table.column(cllmnIndex).header();
-                                                  var _value = table.cell(rowIdx, cllmnIndex ).data();
-                                                    
-                                                  instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;"+ $(_property).html() + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+ "</li>";
-
-                                                  instant_info = instant_info + "</ul>";
-                                                                                      
-                                                } );// loop through each column for that specific row
-                                                   
-                                                // update bottom <div>
-                                             document.getElementById("info-table").innerHTML = instant_info;   
-                                                                   
-                                   } ); // click cell event    
-                            
-                            
-                         $('#tabledata tbody').on('mouseout', 'td', function () 
-                                   {
-                                       
-                                        // remove all high light yellow the feature polygon on google map
-                                       // Remove custom styles.
-                                        map.data.revertStyle();
-                                        
-                                        
-                                        // empty bottom <div>
-                                         document.getElementById("info-table").innerHTML = "";
-                            } ); 
-                           
-                         
-                  
-    
-    
-    
-}
-
-
-
-
-
-
-
-
-function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
-    
-    // Load a GeoJSON from the server 
-   
-            
-            
-            
-                            
-                            
-            
-            
-            
-               
-            
-            // test url if return a number means too many polygon to show.otherwise add polygon to map.
-           
-            $.get(_apiURI, function(data){
-           
-                        if(isNaN(data)){
-                             
-                        
-                          
-                           
-
-                            _geojson_object = JSON.parse(data);
-
-
-                            //-------------    php format add each _id:{"$id": "55e8c24e382f9fe337f0d8fe"}  to properties before draw on map. -------------
-                            //-------------asp.net format add each  {"_id" : "55c532cf21167708171b02a2"}  to properties before draw on map. -------------
-
-                                         var _features_array = _geojson_object['features'];
-
-                                         var _id_obj;
-                                         var _id_obj_id;
-                                         var _propty_obj;
-
-                                         _features_array.forEach( function (eachFeatueItem)
-                                             {
-                                                  
-                                             
-                                             /*
-                                               // --- php format ------
-                                               
-                                                  _id_obj = eachFeatueItem['_id'];
-                                                  _id_obj_id = _id_obj['$id'];
-                                                 _propty_obj = eachFeatueItem['properties'];
-                                                 var _geo_type = eachFeatueItem['geometry'];
-                                                 
-                                                 _propty_obj['GeoFeatureType']=_geo_type['type'];
-                                                 _propty_obj['GeoFeatureID'] = _id_obj_id;
-
-
-
-                                           
-                                                 // ---end  php format ------
-                                              */
-
-
-                                             // ------ asp.net format -----------
-                                             var _geo_type = eachFeatueItem['geometry'];
-
-
-
-                                             _propty_obj = eachFeatueItem['properties'];
-
-                                             _propty_obj['GeoFeatureType'] = _geo_type['type'];
-                                             _propty_obj['GeoFeatureID'] = eachFeatueItem['_id'];
-
-
-                                             });// features_array_foreach
-
-                                         _geojson_object['features'] = {};
-                                         _geojson_object['features'] = _features_array;
-                                        //---------------------------------------------------------------
-
-
-
-                            //----------------  add new geojson, then remove last geojson --------------------
-
-                                         map.data.setStyle({
-                                             fillOpacity: _default_fillOpacity,
-                                             strokeColor: _default_strokeColor,
-                                             strokeWeight: _default_strokeWeight
-
-                                         });
-                                         _last_geojson_layer = _current_geojson_layer;
-
-                                         _current_geojson_layer = map.data.addGeoJson(_geojson_object);
-
-                            // ---- after add new geojson, now remove last time old geojson -------------
-                            // don't use Array.ForEach is about 95% slower than for() in JavaScript.
-
-                                         if (_last_geojson_layer) {
-
-                                             for (var l = 0, len = _last_geojson_layer.length; l < len; l++) {
-
-                                                 gmap.data.remove(_last_geojson_layer[l]);
-
-                                             }// for
-                                         }// if
-
-
-                            //------------------------end add new geojson, then remove last geojson------------------------- ---------------
-
-
-
-                           
-                          // feed_datatables(_geojson_object);
-                           
-                           
-                           
-                           // hidden the title_info
-                            document.getElementById("ajaxload").style.display = "none";
-                            document.getElementById("title_info").style.display = "none";
-                            document.getElementById("legend").style.display = "none";
-
-
-                            // do not use this, because it have place holder for blank
-                            //document.getElementById("title_info").style.visibility = "hidden";
-
-
-                            document.getElementById("title_info").innerHTML = "";
-                            document.getElementById("legend").innerHTML = "";
-                            
-                           
-                            
-                            // ------------- map click event [3] -------------------
-                            if (_map_click_event) {
-                            }
-                            else {
-                                _mapclick_in_use = false;
-                            }
-
-                            //-------------------------------------------------------------
-                            
-                            
-                          
-                           
-                        }
-                             // returning number of count, no geojson, clean the datatables
-                        else{ 
-                            
-                            // ---------- if return number, should remove last time geojson -----------
-                            _last_geojson_layer = _current_geojson_layer;
-                            if (_last_geojson_layer) {
-
-                                for (var l = 0, len = _last_geojson_layer.length; l < len; l++) {
-
-                                    gmap.data.remove(_last_geojson_layer[l]);
-
-                                }// for
-                            }// if
-                            //-------------------- end remove last geojson ------------------------------
-                            
-                            
-                            document.getElementById("ajaxload").style.display = "none";
-                            document.getElementById("title_info").style.display = "inline";
-                            document.getElementById("legend").style.display = "inline";
-                            
-                            // empty bottom data table
-                            $('#tabledata').dataTable().fnClearTable();
-                            
-                            if (data > 0) {
-                                    
-                                            document.getElementById("title_info").innerHTML = "Found [ " + data + " ] records ZOOM IN for Details  ";
-
-                                         document.getElementById('legend').innerHTML = "Found [ " + data + " ] records ZOOM IN for Details ";
-
-                                     } else {
-                                             // data = 0 nothing found clear datatables
-                                            // $('#tabledata').dataTable().fnClearTable();
-                                             //$('#tabledata').dataTable().clear();  // this is api bug, for some reason it failed to clean data.
-                                             //$('#tabledata').dataTable().clear().draw();
-                                             
-                                            document.getElementById("title_info").innerHTML = "Nothing found";
-                                            document.getElementById("legend").innerHTML = "Nothing found";
-                                }
-                            // ------------- map click event [4] -------------------
-
-                            _mapclick_in_use = true;
-
-                            //-------------------------------------------------------------
-
-
-
-
-                        }// if else
-
-
-
-                     });// get // promist.then
-    
-                 
-                
-                
-                
-                
-                
-}// function ajax_GeoJSON
-
-
-
-
-
-
-function initialize() {
-    
-       
-          
-            
-            initial_location = set_initial_location($("#areaID").val());
-            
-            
-        var mapOptions = {
-                            
-                             //center: new google.maps.LatLng(33.65992448007282, -117.91505813598633),
-                             center: new google.maps.LatLng(initial_location[1], initial_location[2]),
-                             //mapTypeId: google.maps.MapTypeId.ROADMAP
-                             mapTypeId: google.maps.MapTypeId.HYBRID
-                           };
-        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        map.setZoom(initial_location[3]);
-        
-
-        add_area_boundary($("#areaID").val());
-        
-        
-         //------tile[1] ---------
-        init_tiling();
-        
-        
-        geocoding();
-        
-        
-        
-        //  this is add-on polygon.getBounds()  calculate the extend and bound of polygon for zoom to extend later.
-google.maps.Polygon.prototype.getBounds = function() {
-    var bounds = new google.maps.LatLngBounds();
-    var paths = this.getPaths();
-    var path;        
-    for (var i = 0; i < paths.getLength(); i++) {
-        path = paths.getAt(i);
-        for (var ii = 0; ii < path.getLength(); ii++) {
-            bounds.extend(path.getAt(ii));
-        }
-    }
-    return bounds;
-}// google
-        
-        
-        
-        
-        
-        
-        infowindow = new google.maps.InfoWindow();
-        
-            // must stay to close info window if user click out side polygon 
-         google.maps.event.addListener(map,'click',function() {
-             infowindow.close();
-              document.getElementById("info-table").innerHTML = "";
-         });
-     
-         
-          map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('legend'));
-     
- 
-     
-          add_mapdata_listener();
-          add_map_listener_idle();
-    
-   
-        
-    }// initialize
     
     
 function datatablesX(){
@@ -767,9 +258,8 @@ function datatablesX(){
 
                                                  var  _new_lat = _geometry_coord[0][i][1];
                                                  var  _new_long = _geometry_coord[0][i][0];
-                                                  var _latlng = {};
-                                                        _latlng["lat"]=_new_lat; 
-                                                        _latlng["lng"]=_new_long; 
+                                                 var _latlng = new Microsoft.Maps.Location(_new_lat, _new_long);
+                                                        
                                                         _click_coord.push(_latlng);
 
                    
@@ -781,25 +271,32 @@ function datatablesX(){
                                       
                                       if(_click_polygon)  //if is not null then clear last polygon
                                             {
-                                                _click_polygon.setMap(null);
-
+                                                
+                                                map.entities.remove(_click_polygon);
                                       }
 
                                       
 
 
-                                        _click_polygon = new google.maps.Polygon({
-                                          paths: _click_coord,
+                                      _click_polygon = new Microsoft.Maps.Polygon(_click_coord,
+
+
+                                          {
+                                          
                                           strokeColor: '#FF0000',
-                                          strokeOpacity: 0.8,
-                                          strokeWeight: 12,
-                                          fillColor: '#FF0000',
-                                          fillOpacity: 0.01
+                                          
+                                          strokeThickness: 12,
+                                              //fillColor: '#FF0000'
+
+                                          fillColor: new Microsoft.Maps.Color(0.1, 0, 0, 0)
+                                         
+
+
                                         });
 
                                        
-
-                                        _click_polygon.setMap(map);
+                                        map.entities.push(_click_polygon);
+                                       
                                       
                                       // zoom to bound
                                       
@@ -827,10 +324,9 @@ function datatablesX(){
                                           
                                           var  _new_lat = _geometry_coord[i][1];
                                           var  _new_long = _geometry_coord[i][0];
-                                          var _latlng = {};
-                                                _latlng["lat"]=_new_lat; 
-                                                _latlng["lng"]=_new_long; 
-                                           _click_coord.push(_latlng);   
+                                          var _latlng = new Microsoft.Maps.Location(_new_lat, _new_long);
+
+                                          _click_coord.push(_latlng);
                                            
                                         }// for
                                         
@@ -844,37 +340,27 @@ function datatablesX(){
                                       
                                       if(_click_line)  //if is not null then clear last polygon
                                             {
-                                                _click_line.setMap(null);
+                                          
+                                          map.entities.remove(_click_line);
 
                                              }
                                        
                                              
-                                        _click_line = new google.maps.Polyline({
-                                          path: _click_coord,
-                                          //geodesic: true,
+                                      _click_line = new Microsoft.Maps.Polyline(_click_coord,
+                                          {
                                           strokeColor: '#FF0000',
-                                          strokeOpacity: 0.8,
-                                          strokeWeight: 12
+                                          
+                                          strokeThickness: 12
                                           
                                         });
                                         
-                                        _click_line.setMap(map);
-                                      
+                                       
+                                        map.entities.push(_click_line);
                                       
                                       
                                        zoomToObject(_click_line);
                                      
-                                     /*          
-                                      var bounds = new google.maps.LatLngBounds();
-                                      
-                                      //can't do polyline.getPath()[i] because it's a MVCArray
-                                        _click_linestring.getPath().forEach(function(e){
-                                            bounds.extend(e);
-                                        })         
-                                        map.fitBounds(bounds);
-                                      
-                                      alert(bounds);
-                                      */
+                                    
                                       
                                       
                                       
@@ -884,29 +370,33 @@ function datatablesX(){
                                       
                                        if(_click_point)  //if marker is not null then clear last marker
                                             {
-                                                _click_point.setMap(null);
+                                          
+                                           map.entities.remove(_click_point);
 
-                                             }
-                                     // add new marker 
-                                             _click_point = new google.maps.Marker({
-                                                map: map,
-                                                
-                                                position: {lat: _geometry_coord[1], lng: _geometry_coord[0]},
-                                                // icon: iconBase + 'custome_icon.png'
-                                                 //label: ' ', 
-                                                 // must set zIndex to bring this marker to front, on top of other markers.other wise, it will hide behind.
-                                                zIndex: google.maps.Marker.MAX_ZINDEX + 1
+                                       }
+
+                                      
+                                     // add new marker (pushpin)
+                                       _click_point = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(_geometry_coord[1],_geometry_coord[0]),{
+                                               
+                                           icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+
                                              });
 
-                                            _click_point.setIcon('http://maps.google.com/mapfiles/ms/icons/ltblu-pushpin.png');
-                                      
-                                      var _center = new google.maps.LatLng(_geometry_coord[1], _geometry_coord[0]);
                                            
-                                            //map.setCenter(_center);
-                                             map.panTo(_center);
-                                             
-                                            map.setZoom(_flyto_zoomlevel);
+                                       map.entities.push(_click_point);
+                                    
                                       
+
+
+                                            map.setView({
+                                                center: new Microsoft.Maps.Location(_geometry_coord[1], _geometry_coord[0]),
+
+                                                zoom: 17
+
+                                            });
+
+
                                       
                                       
                                   }
@@ -1047,10 +537,10 @@ function datatablesX(){
 
                                         var _new_lat = _geometry_coord[0][i][1];
                                         var _new_long = _geometry_coord[0][i][0];
-                                        var _latlng = {};
-                                        _latlng["lat"] = _new_lat;
-                                        _latlng["lng"] = _new_long;
+                                        var _latlng = new Microsoft.Maps.Location(_new_lat, _new_long);
+
                                         _mouseover_coord.push(_latlng);
+
 
 
 
@@ -1061,25 +551,33 @@ function datatablesX(){
 
                                     if (_mouseover_polygon)  //if is not null then clear last polygon
                                     {
-                                        _mouseover_polygon.setMap(null);
-
+                                        map.entities.remove(_mouseover_polygon);
                                     }
 
 
 
 
-                                    _mouseover_polygon = new google.maps.Polygon({
-                                        paths: _mouseover_coord,
-                                        strokeColor: '#F7D358',
-                                        strokeOpacity: 0.8,
-                                        strokeWeight: 12,
-                                        fillColor: '#FF0000',
-                                        fillOpacity: 0.01
-                                    });
+                                    _mouseover_polygon = new Microsoft.Maps.Polygon(_mouseover_coord,
+
+
+                                        {
+
+                                            strokeColor: '#8A2BE2',
+                                           
+                                            strokeThickness: 12,
+
+                                            fillColor: new Microsoft.Maps.Color(0.5, 255, 140, 0)
+                                            
+
+
+                                        });
+
+
+                                    map.entities.push(_mouseover_polygon);
 
 
 
-                                    _mouseover_polygon.setMap(map);
+
 
                                     
 
@@ -1103,9 +601,8 @@ function datatablesX(){
 
                                         var _new_lat = _geometry_coord[i][1];
                                         var _new_long = _geometry_coord[i][0];
-                                        var _latlng = {};
-                                        _latlng["lat"] = _new_lat;
-                                        _latlng["lng"] = _new_long;
+                                        var _latlng = new Microsoft.Maps.Location(_new_lat, _new_long);
+
                                         _mouseover_coord.push(_latlng);
 
                                     }// for
@@ -1120,22 +617,23 @@ function datatablesX(){
 
                                     if (_mouseover_line)  //if is not null then clear last polygon
                                     {
-                                        _mouseover_line.setMap(null);
-
+                                        
+                                        map.entities.remove(_mouseover_line);
                                     }
 
 
-                                    _mouseover_line = new google.maps.Polyline({
-                                        path: _mouseover_coord,
-                                        //geodesic: true,
+                                    _mouseover_line = new Microsoft.Maps.Polyline(
+                                        _mouseover_coord,
+                                        {
+                                       
                                         strokeColor: '#F7D358',
-                                        strokeOpacity: 0.8,
-                                        strokeWeight: 12
+                                        
+                                        strokeThickness: 12
 
                                     });
 
-                                    _mouseover_line.setMap(map);
-
+                                    
+                                    map.entities.push(_mouseover_line);
 
 
 
@@ -1145,21 +643,22 @@ function datatablesX(){
 
                                     if (_mouseover_point)  //if marker is not null then clear last marker
                                     {
-                                        _mouseover_point.setMap(null);
+                                        
+                                        map.entities.remove(_mouseover_point);
 
                                     }
                                     // add new marker 
-                                    _mouseover_point = new google.maps.Marker({
-                                        map: map,
 
-                                        position: { lat: _geometry_coord[1], lng: _geometry_coord[0] },
-                                        // icon: iconBase + 'custome_icon.png'
+                                    
+                                    var base64Image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAcCAYAAACUJBTQAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wQbECUudScMXAAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAACGUlEQVRIx+3Wy2sTURTH8e/NTDIzaZMxadMWhyBUSheiiyo+QPpHuHIhdOfSP8GlbkXEhTv/gNau3LgRurEIUqlWU2ubh7evPEg6NjOZJHNdlIgLo11YRcj5A84Hfpx7zxFKKcUJlw7gOM6JAVLKIwTg4avbfxy4c/UJABH+Qg2QAfKfI98f48vc/CCuATJA/iEilFKq3/q98XTk2I0W5qp916/41SHhOM6xoIW5KlLK/t/K6oNbwlAdknELYSZpxTMkxrO4XoCUUv0O6gHlYkjHWxF+yyWTsKit57CGbbTMGSJWepTh05PIRof3mxLNjNP0Pdp+i9ziIyGl7BtFD1hdOqRdei5ijW2shkSvS8LAJTM2gh4JiWzvFNksFdAsA3s0Ram4TrtZJxnXCLwKWSF+CvWAt89czmffiEQ0gGYZzSuTX3tNx60Q1Pcxwyb67JUL7Jb38VsdojETz2ux8W6JqG6iJaOoGLTr98WP0fWAsZgQ849v8mnZYeriLNinwAup722RsW12cysYiRT62voGwymbbsQgMZREcMD1yzN4nkctrNEV4HbrTKeFKNeOJlFKiXtwV2ganJvKkF8rsvxiEd8P0FSTiXQa2wxJxEz2yl/QA2Mc2Qihq7NdqdE5rJAc2ufsZBbTiIIGXWXTVeCIa0glMQwh8vl7hMDHD5+Zmb7E16ZPtVrFilnsFLY42CngTDhEohbfALpF/s+4JwbyAAAAAElFTkSuQmCC';
+
+                                    _mouseover_point = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(_geometry_coord[1],_geometry_coord[0]),{
+                                        icon: base64Image
+                                       // color: 'green'
 
                                     });
-
-                                    _mouseover_point.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png')
-
-                                   
+                                       
+                                    map.entities.push(_mouseover_point);
 
                                 }
                                 else if (_geometry_type === 'No_Geometry') {
@@ -1182,19 +681,21 @@ function datatablesX(){
 
                                 if (_mouseover_point)  //if marker is not null then clear last marker
                                 {
-                                    _mouseover_point.setMap(null);
+                                   
+                                    map.entities.remove(_mouseover_point);
 
                                 }
 
                                 if (_mouseover_line)  //if is not null then clear last polygon
                                 {
-                                    _mouseover_line.setMap(null);
+                                   
+                                    map.entities.remove(_mouseover_line);
 
                                 }
 
                                 if (_mouseover_polygon)  //if is not null then clear last polygon
                                 {
-                                    _mouseover_polygon.setMap(null);
+                                    map.entities.remove(_mouseover_polygon);
 
                                 }
 
@@ -1265,7 +766,248 @@ function datatablesX(){
     }
     
     
-    
+
+
+
+function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
+
+    // Load a GeoJSON from the server 
+
+
+    // test url if return a number means too many polygon to show.otherwise add polygon to map.
+    $.get(_apiURI, function (data) {
+
+        if (isNaN(data)) {
+
+
+
+            // ---------   processing data(geoJson) to fill datatables -----------------
+
+
+            // ************ bing map geojson loader pushpin(point) bug fix************
+
+            // raw geojson string has "_id":  as point(works fine with polygon/line), bing map will fail display pushpin( marker/icon ), only display first one, hidden the rest.
+            // Fix by replace all "_id" to "id", you must have "id" field, if no 'id' field, failed show pushpin. 
+
+
+            var data_fix_id = data.replace(/_id/g, 'id');
+
+
+
+            // ************  End bing map geojson loader point bug fix ************
+
+
+            // 'data' is string of geojson,  _geojson_object is javascript object, bing map accept both format  
+            var _geojson_object = JSON.parse(data_fix_id);
+
+
+            //-------------    php format add each _id:{"$id": "55e8c24e382f9fe337f0d8fe"}  to properties before draw on map. -------------
+            //-------------asp.net format add each  {"_id" : "55c532cf21167708171b02a2"}  to properties before draw on map. -------------
+
+            var _features_array = _geojson_object['features'];
+
+            var _id_obj;
+            var _id_obj_id;
+            var _propty_obj;
+
+            _features_array.forEach(function (eachFeatueItem) {
+
+
+                /*
+                  // --- php format ------
+                  
+                     _id_obj = eachFeatueItem['_id'];
+                     _id_obj_id = _id_obj['$id'];
+                    _propty_obj = eachFeatueItem['properties'];
+                    var _geo_type = eachFeatueItem['geometry'];
+                    
+                    _propty_obj['GeoFeatureType']=_geo_type['type'];
+                    _propty_obj['GeoFeatureID'] = _id_obj_id;
+
+
+
+              
+                    // ---end  php format ------
+                 */
+
+
+                // ------ asp.net format -----------
+                var _geo_type = eachFeatueItem['geometry'];
+
+
+
+                _propty_obj = eachFeatueItem['properties'];
+
+                _propty_obj['GeoFeatureType'] = _geo_type['type'];
+
+                // for bing map only, because above replace _id with id
+                //_propty_obj['GeoFeatureID'] = eachFeatueItem['_id'];
+                _propty_obj['GeoFeatureID'] = eachFeatueItem['id'];
+
+            });// features_array_foreach
+
+            _geojson_object['features'] = {};
+            _geojson_object['features'] = _features_array;
+            //---------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+            //----------------Bing map  add new geojson, then remove last geojson --------------------
+
+
+            _geojson_layer.clear();
+
+
+
+
+
+            Microsoft.Maps.loadModule('Microsoft.Maps.GeoJson', function () {
+
+
+                // 'data' is string of geojson,  _geojson_object is javascript object, bing map accept both format, google only accept javascript object format, no string.
+                // featureCollection is array of shapes(Pushpin, Polyline, Polygon)
+                featureCollection = Microsoft.Maps.GeoJson.read(_geojson_object, default_geojson_style);
+                //featureCollection = Microsoft.Maps.GeoJson.read(data_fix_id, default_geojson_style);
+                //featureCollection = Microsoft.Maps.GeoJson.read(data_fix_id);
+
+                _geojson_layer.add(featureCollection);
+
+
+
+
+
+            }); // loadmodule
+
+            //------------------------Bing map  end add new geojson, then remove last geojson------------------------- ---------------
+
+
+
+
+           // feed_datatables(_geojson_object);
+
+
+
+
+            // hidden the title_info
+            document.getElementById("ajaxload").style.display = "none";
+            document.getElementById("title_info").style.display = "none";
+            // document.getElementById("legend").style.display = "none";
+
+
+            // do not use this, because it have place holder for blank
+            //document.getElementById("title_info").style.visibility = "hidden";
+
+
+            document.getElementById("title_info").innerHTML = "";
+            // document.getElementById("legend").innerHTML = "";
+
+            // ------------- map click event [3] -------------------
+            if (_map_click_event) {
+            }
+            else {
+                _mapclick_in_use = false;
+            }
+
+            //-------------------------------------------------------------
+
+
+
+
+
+        }
+            // returning number of count
+        else {
+
+
+            // ---------- if return number, should remove last time geojson -----------
+
+
+
+            _geojson_layer.clear();
+
+
+            //-------------------- end remove last geojson ------------------------------
+
+
+
+            //---------------marker cluster  [2.3]-------------------
+            //  need to clear old last time marker clusters.
+            // markerClusterer.clearMarkers();
+
+
+            document.getElementById("ajaxload").style.display = "none";
+            document.getElementById("title_info").style.display = "inline";
+            //  document.getElementById("legend").style.display = "inline";
+
+            if (data > 0) {
+
+                document.getElementById("title_info").innerHTML = "Found [ " + data + " ] records ZOOM IN for Details  ";
+
+                // document.getElementById('legend').innerHTML = "Found [ " + data + " ] records ZOOM IN for Details ";
+
+            } else {
+
+                document.getElementById("title_info").innerHTML = "Nothing found";
+                //   document.getElementById("legend").innerHTML = "Nothing found";
+            }
+
+
+
+            // ------------- map click event [4] -------------------
+
+            _mapclick_in_use = true;
+
+            //-------------------------------------------------------------
+
+
+        }// else return number only
+
+    });// get
+
+
+}// function ajax_GeoJSON
+
+
+function initialize() {
+
+
+    // load data for upper entire datatable
+    datatablesX();
+
+
+
+    initial_location = set_initial_location($("#areaID").val());
+
+
+
+
+    init_base_map();
+
+    add_area_boundary($("#areaID").val());
+
+
+    geocoding();
+
+    init_tiling();
+
+    //bing map layer data event
+    add_mapdata_listener();
+
+    add_map_listener();
+
+
+    // first time load geojson
+    get_map_bound();
+
+
+}// initialize
+
     
 
 
@@ -1275,12 +1017,10 @@ function datatablesX(){
         
 
 
-     // load data for upper entire datatable
-     datatablesX();
-
+     
 
        //  load data for google map and lower datatable 
-          google.maps.event.addDomListener(window, 'load', initialize);
+        //  google.maps.event.addDomListener(window, 'load', initialize);
 
     
     

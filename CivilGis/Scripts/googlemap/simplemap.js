@@ -271,7 +271,7 @@ $(document).ready(function () {
 
 
        //  load data for google map and lower datatable 
-          google.maps.event.addDomListener(window, 'load', initialize);
+        //  google.maps.event.addDomListener(window, 'load', initialize);
 
     
     

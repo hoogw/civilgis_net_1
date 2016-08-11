@@ -1270,12 +1270,10 @@ function datatablesX(){
 
 
        //  load data for google map and lower datatable 
-          google.maps.event.addDomListener(window, 'load', initialize);
+        //  google.maps.event.addDomListener(window, 'load', initialize);
 
     
     
-        // load data for upper entire datatable
-        //  datatablesX();
     
 
     }); // document ready function

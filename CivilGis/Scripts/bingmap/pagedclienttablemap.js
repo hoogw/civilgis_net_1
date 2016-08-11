@@ -138,62 +138,36 @@ function feed_datatables(_geojson_obj){
                                            var length = array_shapes.length;
                                            var element = null;
 
-                                           
+                                          // alert(length);
 
                                            for (var x = 0; x < length; x++) {
                                                element = array_shapes[x];
 
+                                             
                                                var _meta = element.metadata;
 
-                                               alert(_meta['GeoFeatureID']);
+                                               //alert(_meta['GeoFeatureID']);
+                                               
                                                 
                                                if (element.metadata['GeoFeatureID'] === _geo_ID)
                                                 {
                                                     
-                                                    
+                                                  
                                                     
                                                    if(element.metadata['GeoFeatureType'] === 'Point')
                                                             {
                                                                     
                                                                 
-                                                              //// if (_feature instanceof google.maps.Data.Point) {
-                                                              //          if(_highlight_marker)
-                                                              //          {
-                                                              //                 _highlight_marker.setMap(null);
-                                                              //             }
-                                                              //         // alert(_feature.getGeometry());
-                                                              //        var _feature_geometry = _feature.getGeometry();
-                                                              //        var _latlng = _feature_geometry.get();
-                                                              //          _highlight_marker = new google.maps.Marker({
-                                                              //             map: map,
-                                                              //             position: _latlng,
-                                                              //             // icon: iconBase + 'custome_icon.png'
-                                                              //              //label: ' ', 
-                                                              //              // must set zIndex to bring this marker to front, on top of other markers.other wise, it will hide behind.
-                                                              //             zIndex: google.maps.Marker.MAX_ZINDEX + 1
-
-                                                              //          }); // marker
-
-                                                                        
-                                                              //          _highlight_marker.setIcon('http://maps.google.com/mapfiles/ms/icons/grn-pushpin.png');
-                                                              // //  }//if feature
-                                                                    
-                                                                      
+                                                            // alert(element.metadata['GeoFeatureID']);
+                                                             element.setOptions(highlight_pushpin_option);
                                                             
                                                                
 
                                                             }
                                                             else { // if not point, highlight shape or line,
 
-
-                                                       alert(element.metadata['GeoFeatureType']);
-                                                                    //map.data.revertStyle();
-                                                                    //map.data.overrideStyle(_feature, {
-                                                                    //                       strokeWeight: 5,
-                                                                    //                       strokeColor: 'blue',
-                                                                    //                       fillOpacity: 0
-                                                                                           
-                                                                    //                   });// overrideStyle
+                                                       element.setOptions(click_highlight_geojson_style);
+                                                       
 
                                                                    }//else
                                                 }// if _geo_ID
@@ -230,9 +204,61 @@ function feed_datatables(_geojson_obj){
                          $('#tabledata tbody').on('mouseout', 'td', function () 
                                    {
                                        
-                                        // remove all high light yellow the feature polygon on google map
+                                        // remove all high light feature 
                                        // Remove custom styles.
-                                       // map.data.revertStyle();
+                                       
+
+
+                             var instant_info = "<ul>";
+
+                             var colIdx = table.cell(this).index().column;
+
+                             var rowIdx = table.cell(this).index().row;
+
+                             var _geo_ID = table.cell(rowIdx, _dt_columns_count - 1).data();
+
+
+
+                             var array_shapes = _geojson_layer.getPrimitives();
+                             var length = array_shapes.length;
+                             var element = null;
+
+                             // alert(length);
+
+                             for (var x = 0; x < length; x++) {
+                                 element = array_shapes[x];
+
+
+                                 var _meta = element.metadata;
+
+                                 //alert(_meta['GeoFeatureID']);
+
+
+                                 if (element.metadata['GeoFeatureID'] === _geo_ID) {
+
+
+
+                                     if (element.metadata['GeoFeatureType'] === 'Point') {
+
+
+                                         // alert(element.metadata['GeoFeatureID']);
+                                         element.setOptions(default_pushpin_option);
+
+
+
+                                     }
+                                     else { // if not point, remove highlight shape or line,
+
+                                         element.setOptions(default_geojson_style_option);
+
+
+                                     }//else
+                                 }// if _geo_ID
+
+
+
+                             }// for loop array_shapes
+
                                         
                                         
                                         // empty bottom <div>
@@ -285,6 +311,61 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             var _geojson_object = JSON.parse(data_fix_id);
 
 
+            //-------------    php format add each _id:{"$id": "55e8c24e382f9fe337f0d8fe"}  to properties before draw on map. -------------
+            //-------------asp.net format add each  {"_id" : "55c532cf21167708171b02a2"}  to properties before draw on map. -------------
+
+            var _features_array = _geojson_object['features'];
+
+            var _id_obj;
+            var _id_obj_id;
+            var _propty_obj;
+
+            _features_array.forEach(function (eachFeatueItem) {
+
+
+                /*
+                  // --- php format ------
+                  
+                     _id_obj = eachFeatueItem['_id'];
+                     _id_obj_id = _id_obj['$id'];
+                    _propty_obj = eachFeatueItem['properties'];
+                    var _geo_type = eachFeatueItem['geometry'];
+                    
+                    _propty_obj['GeoFeatureType']=_geo_type['type'];
+                    _propty_obj['GeoFeatureID'] = _id_obj_id;
+
+
+
+              
+                    // ---end  php format ------
+                 */
+
+
+                // ------ asp.net format -----------
+                var _geo_type = eachFeatueItem['geometry'];
+
+
+
+                _propty_obj = eachFeatueItem['properties'];
+
+                _propty_obj['GeoFeatureType'] = _geo_type['type'];
+
+                // for bing map only, because above replace _id with id
+                //_propty_obj['GeoFeatureID'] = eachFeatueItem['_id'];
+                _propty_obj['GeoFeatureID'] = eachFeatueItem['id'];
+
+            });// features_array_foreach
+
+            _geojson_object['features'] = {};
+            _geojson_object['features'] = _features_array;
+            //---------------------------------------------------------------
+
+
+
+
+
+
+
 
 
             //----------------Bing map  add new geojson, then remove last geojson --------------------
@@ -301,8 +382,8 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
                 // 'data' is string of geojson,  _geojson_object is javascript object, bing map accept both format, google only accept javascript object format, no string.
                 // featureCollection is array of shapes(Pushpin, Polyline, Polygon)
-                //featureCollection = Microsoft.Maps.GeoJson.read(_geojson_object, default_geojson_style);
-                featureCollection = Microsoft.Maps.GeoJson.read(data_fix_id, default_geojson_style);
+                featureCollection = Microsoft.Maps.GeoJson.read(_geojson_object, default_geojson_style);
+                //featureCollection = Microsoft.Maps.GeoJson.read(data_fix_id, default_geojson_style);
                 //featureCollection = Microsoft.Maps.GeoJson.read(data_fix_id);
 
                 _geojson_layer.add(featureCollection);

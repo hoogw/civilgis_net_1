@@ -130,18 +130,19 @@ var _mapclick_in_use = false;
 _default_fillOpacity = 'rgba(0, 0, 0, 0)';
 _default_strokeColor = 'yellow';
 _default_strokeWeight = 1;
-_default_color = 'pink'
+_default_color = 'pink';
+_highlight_pushpin_color = 'blue';
 
 _highlight_fillOpacity = 0;
 _highlight_strokeColor = '#fff';
 _highlight_strokeWeight = 8;
-_highlight_color = 'yellow'
+_highlight_color = 'yellow';
 
 
 click_highlight_fillOpacity = 0;
 click_highlight_strokeColor = 'red';
 click_highlight_strokeWeight = 12;
-click_highlight_color = 'red'
+click_highlight_color = 'red';
 
 
 _classfiy_fillOpacity = 0;
@@ -177,6 +178,31 @@ var default_geojson_style_option = {
 };
 
 
+var highlight_pushpin_option = {
+   
+        //icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+         color: _highlight_pushpin_color,
+        enableHoverStyle: true,
+        // enableClickedStyle: true,
+        visible: true
+
+  
+
+};
+
+
+
+var default_pushpin_option = {
+
+    //icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+    color: _default_color,
+    enableHoverStyle: true,
+    // enableClickedStyle: true,
+    visible: true
+
+
+
+};
 
 
 
@@ -926,12 +952,19 @@ function geocoding() {
 
 
 function zoomToObject(obj) {
-    var bounds = new google.maps.LatLngBounds();
-    var points = obj.getPath().getArray();
-    for (var n = 0; n < points.length ; n++) {
-        bounds.extend(points[n]);
-    }
-    map.fitBounds(bounds);
+
+    var location_array = obj.getLocations();
+    //alert(location_array[0]);
+
+    map.setView({
+        center: new Microsoft.Maps.Location(location_array[0].latitude, location_array[0].longitude),
+
+        zoom: 17
+
+    });
+
+
+
 }
 
 

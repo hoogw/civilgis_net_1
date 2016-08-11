@@ -1,8 +1,8 @@
+var google_map_api_key = 'AIzaSyCeIFVL6oxxXNT7NToJjfU4J9TV2J8m4vE';
 
 
-
-//var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
-var _tile_baseURL = 'http://tile.transparentgov.net/v2/';
+var _tile_baseURL = 'http://166.62.80.50:8887/v2/';
+//var _tile_baseURL = 'http://tile.transparentgov.net/v2/';
 
 var _tile_exist = false;
 var _tile_list;
