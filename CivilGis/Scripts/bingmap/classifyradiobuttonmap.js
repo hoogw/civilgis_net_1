@@ -3,6 +3,63 @@
 
 //-------------------------- Classification button section -------------------------------------------
 
+
+function set_feature_style_option_for_all(_this_feature_style_option) {
+
+
+    var array_shapes = _geojson_layer.getPrimitives();
+
+    var length = array_shapes.length;
+    var element = null;
+
+
+
+    for (var x = 0; x < length; x++) {
+        element = array_shapes[x];
+
+
+            element.setOptions(_this_feature_style_option);
+
+
+    }// for loop array_shapes
+
+
+}// function
+
+function set_feature_style_option(_this_column_name, _this_code, _this_feature_style_option) {
+
+
+    var array_shapes = _geojson_layer.getPrimitives();
+
+    var length = array_shapes.length;
+    var element = null;
+
+
+
+    for (var x = 0; x < length; x++) {
+        element = array_shapes[x];
+
+
+
+        if (element.metadata[_this_column_name] === _this_code) {
+
+
+
+            element.setOptions(_this_feature_style_option);
+
+
+        }// if 
+
+    }// for loop array_shapes
+
+
+}// function
+
+
+
+
+
+
 function init_classification_buttons_radio(_area, _subject) {
 
 
@@ -125,21 +182,18 @@ function init_classification_buttons_radio(_area, _subject) {
                 }
                 else {
                     // loop through all current featurs on map 
-                    map.data.forEach(function (_feature) {
-
-                        if (_feature.getProperty(_code_column_name) == _current_code_mouseover) {
-
-                            //map.data.revertStyle();
-                            map.data.overrideStyle(_feature, {
-                                strokeWeight: 1,
-                                strokeColor: 'white',
-                                fillColor: 'white',
-                                fillOpacity: 0.7
-                            });// overrideStyle
 
 
-                        }//if
-                    });// map.data.foreach
+                    var checkboxbutton_highlight_style_option = {
+                        //icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+                        color: 'white',
+                        fillColor: new Microsoft.Maps.Color(0.6, 255, 255, 255),
+                        //fillColor: 'white',
+                        strokeColor: 'white',
+                        strokeThickness: 3
+                    };
+
+                    set_feature_style_option(_code_column_name, _current_code_mouseover, checkboxbutton_highlight_style_option);
 
 
 
@@ -168,15 +222,12 @@ function init_classification_buttons_radio(_area, _subject) {
                 else {
 
                     // loop through all current featurs on map 
-                    map.data.forEach(function (_feature) {
 
-                        if (_feature.getProperty(_code_column_name) == _current_code_mouseout) {
 
-                            map.data.revertStyle(_feature);
-                            
 
-                        }//if
-                    });// map.data.foreach
+
+                    set_feature_style_option(_code_column_name, _current_code_mouseout, default_geojson_style_option);
+
 
 
                 }// else
@@ -213,19 +264,7 @@ function init_classification_buttons_radio(_area, _subject) {
 
                 if ($(_checkbox_current_selector).is(':checked')) {
                     //alert(" Un do it ");
-                    /*
-                                                                                                     // loop through all current featurs on map, un do color, revert to origianl, remove color
-                                                                                                        map.data.forEach( function(_feature)
-                                                                                                        {
-
-                                                                                                                    if (_feature.getProperty(_code_column_name) == _current_code_click)
-                                                                                                                    {
-
-                                                                                                                        map.data.revertStyle(_feature);
-                                                                                                                        
-                                                                                                                        }//if
-                                                                                                         });// map.data.foreach
-                                                                                                 */
+                    
                    
                 } // if end un do it
 
@@ -236,8 +275,9 @@ function init_classification_buttons_radio(_area, _subject) {
 
 
                     //---------------radio button click, should turn other color off --------------
+                    set_feature_style_option_for_all(default_geojson_style_option);
 
-                    map.data.revertStyle();
+
 
 
 
@@ -260,38 +300,28 @@ function init_classification_buttons_radio(_area, _subject) {
 
 
                     // loop through all current featurs on map 
-                    map.data.forEach(function (_feature) {
-
-                        if (_feature.getProperty(_code_column_name) == _current_code_click) {
-
-                            //map.data.revertStyle();
-                            map.data.overrideStyle(_feature, {
-
-                                strokeWeight: 1,
-                                strokeColor: _feature_fill_color,
-                                fillColor: _feature_fill_color,
-                                fillOpacity: 0.7
-                            });// overrideStyle
 
 
-                        }//if
-                    });// map.data.foreach
+                    var radiobutton_color_style_option = {
+
+                        // fillColor: new Microsoft.Maps.Color(0.6, 255, 255, 255),
+                        // can not do opacity 
+                        fillColor: _feature_fill_color,
+                        strokeColor: _feature_fill_color,
+                        strokeThickness: 3
+                    };
 
 
+
+                    set_feature_style_option(_code_column_name, _current_code_click, radiobutton_color_style_option);
+
+                   
 
 
                 }// else end do it
 
 
             });// end click
-
-
-
-
-
-
-
-
 
 
 
@@ -307,14 +337,20 @@ function init_classification_buttons_radio(_area, _subject) {
 
     // high light off button  
     $('#label_high_light_off').click(function () {
-        map.data.forEach(function (_feature) {
-            map.data.revertStyle(_feature);
-        });// map.data.foreach         
+
+
+        set_feature_style_option_for_all(default_geojson_style_option);
+
+       
+
     });
 
 
 
 }  //function init_classification_buttons
+
+
+
 
 
 function apply_checkbox() {
@@ -342,22 +378,17 @@ function apply_checkbox() {
 
 
             // loop through all current featurs on map 
-            map.data.forEach(function (_feature) {
+            var checkboxbutton_color_style_option = {
 
-                if (_feature.getProperty(_code_column_name) == pArray[i]['code']) {
-
-                    //map.data.revertStyle();
-                    map.data.overrideStyle(_feature, {
-
-                        strokeWeight: 1,
-                        strokeColor: _feature_fill_color,
-                        fillColor: _feature_fill_color,
-                        fillOpacity: 0.7
-                    });// overrideStyle
+                // fillColor: new Microsoft.Maps.Color(0.6, 255, 255, 255),
+                // can not do opacity 
+                fillColor: _feature_fill_color,
+                strokeColor: _feature_fill_color,
+                strokeThickness: 3
+            };
 
 
-                }//if
-            });// map.data.foreach
+            set_feature_style_option(_code_column_name, pArray[i]['code'], checkboxbutton_color_style_option)
 
 
 
@@ -395,7 +426,255 @@ function uncheck_all_checkbox_button() {
 }
 
 
+
+
 function add_mapdata_listener_classification_radio() {
+
+    _geojson_layer = new Microsoft.Maps.Layer();
+    map.layers.insert(_geojson_layer);
+
+
+
+
+    //================== mouse over listener =============================
+    Microsoft.Maps.Events.addHandler(_geojson_layer, 'mouseover', function (event) {
+
+
+        _last_mousover_highlighted_feature = event.primitive;
+
+        event.primitive.setOptions(highlight_geojson_style);
+
+        var object = event.primitive.metadata;
+
+
+
+        var instant_info = "<ul>";
+
+        for (var property in object) {
+            if (object.hasOwnProperty(property)) {
+
+                var _value = object[property];
+
+
+                instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + object[property] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+                // alert(property);
+
+
+
+                //------------------------------mouse over event for classify check box --------classification [2]-----------    
+
+                if (property == _code_column_name) {
+
+
+                    // ********** special char '&' is not allowed, must replace with '-'  ****************
+                    if (typeof _value === 'string' || _value instanceof String) {
+                        if (_value.indexOf('&') >= 0) {
+
+                            _value = _value.replace("&", "-");
+
+                        }
+                    }
+                    // **********  end special char '&' is not allowed, must replace with '-'  **************** 
+
+
+
+
+
+                    var _highlight_button = '#label_' + _value;
+
+
+                    // **** if that element exist length >0  *******
+                    if ($(_highlight_button).length) {
+
+                        _current_classifycheckbox_class = $(_highlight_button).attr('class');
+                        $(_highlight_button).removeClass(_current_classifycheckbox_class).addClass("btn btn-black");
+
+
+                        $("#label_highlight").text($(_highlight_button).text());
+
+
+                    }
+
+                }
+
+                //------------------------------End of mouse over event for classify check box ------------------- 
+
+
+
+
+
+
+
+
+            } // if 
+        } // for
+
+
+        //alert(instant_info);
+        instant_info = instant_info + "</ul>";
+
+        // update bottom <div>
+        document.getElementById("info-table").innerHTML = instant_info;
+
+
+
+
+
+
+
+    });
+
+    //==================End of mouse over listener =============================
+
+
+
+
+
+
+    // =============== mouse out listener ===================================   
+
+    Microsoft.Maps.Events.addHandler(_geojson_layer, 'mouseout', function (event) {
+
+        event.primitive.setOptions(default_geojson_style_option);
+
+
+        // reserve last time click feature 'click_highlight_style'
+        if (_last_click_highlighted_feature) {
+            _last_click_highlighted_feature.setOptions(click_highlight_geojson_style);
+        }
+
+
+        // empty bottom <div>
+        document.getElementById("info-table").innerHTML = "";
+
+
+
+
+        //------------------------------mouse out event for classify check box --------classification [3]-----------    
+
+        var object = event.primitive.metadata;
+
+        for (var property in object) {
+            if (object.hasOwnProperty(property)) {
+
+                var _value = object[property];
+
+                if (property == _code_column_name) {
+
+                    // ********** special char '&' is not allowed, must replace with '-'  ****************                                                 
+                    if (typeof _value === 'string' || _value instanceof String) {
+                        if (_value.indexOf('&') >= 0) {
+
+                            _value = _value.replace("&", "-");
+
+                        }
+                    }
+                    // **********  end special char '&' is not allowed, must replace with '-'  ****************                     
+
+
+                    var _highlight_button = '#label_' + _value;
+
+
+                    if ($(_highlight_button).length) {
+
+                        //_current_classifycheckbox_class = $(_highlight_button).attr('class');
+                        $(_highlight_button).removeClass("btn btn-black").addClass(_current_classifycheckbox_class);
+
+
+                        $("#label_highlight").text("");
+
+                    }
+
+                }
+            }// if
+        }//for
+
+        //------------------------------End of mouse out event for classify check box -------------------    
+
+
+
+
+    });
+
+    // ===============End of  mouse out listener ===================================  
+
+
+
+
+
+
+    // ================= click listener ================
+    Microsoft.Maps.Events.addHandler(_geojson_layer, 'click', function (event) {
+
+
+        // instead reset all feature style, only reset last highlighted feature.
+
+        if (_last_click_highlighted_feature) {
+            _last_click_highlighted_feature.setOptions(default_geojson_style_option);
+        }
+
+
+
+        // highlight only this one
+        event.primitive.setOptions(click_highlight_geojson_style);
+
+
+        _last_click_highlighted_feature = event.primitive;
+
+
+
+
+        //============ bing map infobox  ==============
+
+        infobox.setLocation(event.location);
+
+
+
+        // info window table style
+        var popup = "<table>";
+
+        var object = event.primitive.metadata;
+
+        for (var property in object) {
+            if (object.hasOwnProperty(property)) {
+
+                popup = popup + "<tr><td width='50%'><p style='color:white;'> " + property + "</p></td><td><p style='color:white;'>" + object[property] + "</p></td></tr>";
+            }
+        }
+
+        popup = popup + "</table>";
+
+        popup = "<div style='width:200px; height:200px; overflow:auto; text-align: center;border-style:solid; border-width:medium; border-color:white;'>" + popup + "</div>";
+
+
+        infobox.setHtmlContent(popup);
+
+
+        infobox.setOptions({
+            visible: true,
+            showCloseButton: true
+        });
+
+        //============   End  bing map infobox  ==============
+
+
+
+
+
+    });
+
+    // =================End of  click listener ================
+
+
+
+}
+
+
+
+
+
+
+function add_mapdata_listener_classification_radio__________() {
 
 
     // ================= click listener ================
@@ -567,19 +846,9 @@ function add_mapdata_listener_classification_radio() {
 
 
 
-
 function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
     // Load a GeoJSON from the server 
-
-
-    ////------tile[3] ---------
-    //if ($('input[name="color_tiles_switch"]').bootstrapSwitch('state')) {
-    //    add_tiles();
-
-    //}
-
-
 
 
     // test url if return a number means too many polygon to show.otherwise add polygon to map.
@@ -589,51 +858,60 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
+            // ---------   processing data(geoJson) to fill datatables -----------------
 
 
-            var _geojson_object = JSON.parse(data);
+            // ************ bing map geojson loader pushpin(point) bug fix************
+
+            // raw geojson string has "_id":  as point(works fine with polygon/line), bing map will fail display pushpin( marker/icon ), only display first one, hidden the rest.
+            // Fix by replace all "_id" to "id", you must have "id" field, if no 'id' field, failed show pushpin. 
 
 
-
-
-            //----------------  add new geojson, then remove last geojson --------------------
-
-            map.data.setStyle({
-                fillOpacity: _classfiy_fillOpacity,
-                strokeColor: _classfiy_strokeColor,
-                strokeWeight: _classfiy_strokeWeight
-
-            });
-
-            _last_geojson_layer = _current_geojson_layer;
-
-            _current_geojson_layer = map.data.addGeoJson(_geojson_object);
+            var data_fix_id = data.replace(/_id/g, 'id');
 
 
 
-            // ---- after add new geojson, now remove last time old geojson -------------
-            // don't use Array.ForEach is about 95% slower than for() in JavaScript.
-
-            if (_last_geojson_layer) {
-
-                for (var l = 0, len = _last_geojson_layer.length; l < len; l++) {
-
-                    gmap.data.remove(_last_geojson_layer[l]);
-
-                }// for
-            }// if
+            // ************  End bing map geojson loader point bug fix ************
 
 
-            //------------------------end add new geojson, then remove last geojson------------------------- ---------------
+            // 'data' is string of geojson,  _geojson_object is javascript object, bing map accept both format  
+            var _geojson_object = JSON.parse(data_fix_id);
 
 
 
 
+            //----------------Bing map  add new geojson, then remove last geojson --------------------
+
+
+            _geojson_layer.clear();
+
+
+
+
+
+            Microsoft.Maps.loadModule('Microsoft.Maps.GeoJson', function () {
+
+
+                // 'data' is string of geojson,  _geojson_object is javascript object, bing map accept both format, google only accept javascript object format, no string.
+                // featureCollection is array of shapes(Pushpin, Polyline, Polygon)
+                //featureCollection = Microsoft.Maps.GeoJson.read(_geojson_object, default_geojson_style);
+                featureCollection = Microsoft.Maps.GeoJson.read(data_fix_id, default_geojson_style);
+                //featureCollection = Microsoft.Maps.GeoJson.read(data_fix_id);
+
+                _geojson_layer.add(featureCollection);
+
+
+
+
+
+            }); // loadmodule
+
+            //------------------------Bing map  end add new geojson, then remove last geojson------------------------- ---------------
 
             // hidden the title_info
             document.getElementById("ajaxload").style.display = "none";
             document.getElementById("title_info").style.display = "none";
-            document.getElementById("legend").style.display = "none";
+            // document.getElementById("legend").style.display = "none";
 
 
             // do not use this, because it have place holder for blank
@@ -641,8 +919,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
             document.getElementById("title_info").innerHTML = "";
-            document.getElementById("legend").innerHTML = "";
-
+            // document.getElementById("legend").innerHTML = "";
 
             // ------------- map click event [3] -------------------
             if (_map_click_event) {
@@ -664,36 +941,33 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
             // ---------- if return number, should remove last time geojson -----------
-            _last_geojson_layer = _current_geojson_layer;
-            if (_last_geojson_layer) {
 
-                for (var l = 0, len = _last_geojson_layer.length; l < len; l++) {
 
-                    gmap.data.remove(_last_geojson_layer[l]);
 
-                }// for
-            }// if
+            _geojson_layer.clear();
+
+
             //-------------------- end remove last geojson ------------------------------
-
 
 
 
 
             document.getElementById("ajaxload").style.display = "none";
             document.getElementById("title_info").style.display = "inline";
-            document.getElementById("legend").style.display = "inline";
+            //  document.getElementById("legend").style.display = "inline";
 
             if (data > 0) {
 
                 document.getElementById("title_info").innerHTML = "Found [ " + data + " ] records ZOOM IN for Details  ";
 
-                document.getElementById('legend').innerHTML = "Found [ " + data + " ] records ZOOM IN for Details ";
+                // document.getElementById('legend').innerHTML = "Found [ " + data + " ] records ZOOM IN for Details ";
 
             } else {
 
                 document.getElementById("title_info").innerHTML = "Nothing found";
-                document.getElementById("legend").innerHTML = "Nothing found";
+                //   document.getElementById("legend").innerHTML = "Nothing found";
             }
+
 
 
             // ------------- map click event [4] -------------------
@@ -702,10 +976,12 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
             //-------------------------------------------------------------
 
+
             // -------------- classification [5] --------------------
             uncheck_all_checkbox_button();
 
-        }
+
+        }// else return number only
 
     });// get
 
@@ -714,63 +990,34 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
+
+
 function initialize() {
-
-    infowindow = new google.maps.InfoWindow();
-
-
-
-    initial_location = set_initial_location($("#areaID").val());
-
 
     // load classification button [1]
     init_classification_buttons_radio($("#areaID").val(), $("#subjectID").val());
 
 
-    //tile_slider();
-    //tile_switch_button();
+    initial_location = set_initial_location($("#areaID").val());
 
 
-
-    var mapOptions = {
-
-        //center: new google.maps.LatLng(33.65992448007282, -117.91505813598633),
-        center: new google.maps.LatLng(initial_location[1], initial_location[2]),
-        //mapTypeId: google.maps.MapTypeId.ROADMAP
-        mapTypeId: google.maps.MapTypeId.HYBRID
-    };
-    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    map.setZoom(initial_location[3]);
+    init_base_map();
 
     add_area_boundary($("#areaID").val());
 
 
-
-    //------tile[1] ---------
-    init_tiling();
-
-
-
-
-
-
-
-
     geocoding();
 
-
-
-
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('legend'));
-
-
-
-
+    init_tiling();
 
     add_mapdata_listener_classification_radio();
 
-    add_map_listener_idle();
 
+    add_map_listener();
+
+
+    // first time load geojson
+    get_map_bound();
 
 
 
@@ -782,22 +1029,3 @@ function initialize() {
 
 
 
-
-
-
-$(document).ready(function () {
-
-    // base_url = document.getElementById('base_url').value;
-
-
-
-
-
-    //  load data for google map and lower datatable 
-    google.maps.event.addDomListener(window, 'load', initialize);
-
-
-
-
-
-}); // document ready function

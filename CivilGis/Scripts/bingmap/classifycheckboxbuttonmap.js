@@ -18,9 +18,6 @@ function set_feature_style_option(_this_column_name, _this_code, _this_feature_s
         element = array_shapes[x];
 
 
-        var _meta = element.metadata;
-
-       
 
         if (element.metadata[_this_column_name] === _this_code) {
 
@@ -364,22 +361,20 @@ function apply_checkbox() {
 
 
             // loop through all current featurs on map 
-            map.data.forEach(function (_feature) {
 
-                if (_feature.getProperty(_code_column_name) == pArray[i]['code']) {
+            var checkboxbutton_color_style_option = {
 
-                    //map.data.revertStyle();
-                    map.data.overrideStyle(_feature, {
-
-                        strokeWeight: 1,
-                        strokeColor: _feature_fill_color,
-                        fillColor: _feature_fill_color,
-                        fillOpacity: 0.7
-                    });// overrideStyle
+                // fillColor: new Microsoft.Maps.Color(0.6, 255, 255, 255),
+                // can not do opacity 
+                fillColor: _feature_fill_color,
+                strokeColor: _feature_fill_color,
+                strokeThickness: 3
+            };
 
 
-                }//if
-            });// map.data.foreach
+            set_feature_style_option(_code_column_name, pArray[i]['code'], checkboxbutton_color_style_option)
+
+            
 
 
 
@@ -757,7 +752,8 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
             //-------------------------------------------------------------
 
-
+            // everytime load new geojson, need to apply color on those checkbox which is checked------------------------ classification [4] --------------------
+            apply_checkbox();
 
 
 
@@ -776,10 +772,6 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             //-------------------- end remove last geojson ------------------------------
 
 
-
-            //---------------marker cluster  [2.3]-------------------
-            //  need to clear old last time marker clusters.
-            // markerClusterer.clearMarkers();
 
 
             document.getElementById("ajaxload").style.display = "none";
@@ -805,6 +797,10 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             _mapclick_in_use = true;
 
             //-------------------------------------------------------------
+
+
+            // -------------- classification [5] --------------------
+            uncheck_all_checkbox_button();
 
 
         }// else return number only
@@ -843,7 +839,7 @@ function initialize() {
 
              //bing map layer data event
              // add_mapdata_listener();
-                add_mapdata_listener_classification_checkbox()
+              add_mapdata_listener_classification_checkbox();
 
 
               add_map_listener();
