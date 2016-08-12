@@ -178,6 +178,9 @@ var default_geojson_style_option = {
 };
 
 
+
+
+
 var highlight_pushpin_option = {
    
         //icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
