@@ -16,7 +16,7 @@ function just_add_tiles() {
 
     document.getElementById("ajaxload").style.display = "none";
     document.getElementById("title_info").style.display = "none";
-    document.getElementById("legend").style.display = "none";
+   
    
 }
 
