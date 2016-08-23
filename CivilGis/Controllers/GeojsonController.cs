@@ -734,7 +734,80 @@ namespace CivilGis.Controllers
         }
 
 
+        [AcceptVerbs("GET", "POST")]
+        public async Task<HttpResponseMessage> maparealimit(string area, string subject)
+        {
+            // subject is always = limit 
+            var table_name = area + "_Limit";
 
+
+            // set connection string in web.config 
+            _mongoClient = new MongoClient(ConfigurationManager.ConnectionStrings["MongoDBContext"].ConnectionString);
+            _mongoDatabase = _mongoClient.GetDatabase(ConfigurationManager.AppSettings["civilgisDBname"]);
+            var _max_row_count = Convert.ToInt16(ConfigurationManager.AppSettings["max_row_count"]);
+            
+            var _mongoCollection = _mongoDatabase.GetCollection<FeatureDoc>(table_name);
+
+
+            // empty filter match everything, select all record from table
+            BsonDocument filter = new BsonDocument();
+
+            string result = "";
+
+            
+                result = @"{ ""type"": ""FeatureCollection"",""features"": ";
+
+
+
+                // ------------------- use Find ----------------------------------------
+                var _listBsonDoc = await _mongoCollection.Find(filter).ToListAsync();
+
+
+                //--------------------- 1 ---------------------------------------------------
+                var batch_json = _listBsonDoc.ToJson();
+
+                //ObjectId("55c532cf21167708171b02a2") must change to  "55c532cf21167708171b02a2"
+                // below use 1.1    1.2 is alternative
+
+
+                //----------------- 1.1 ok ---------------------------
+                batch_json = batch_json.Replace("ObjectId(\"", "\"");
+                batch_json = batch_json.Replace("\")", "\"");
+                //----------------------------------------------------
+
+                /*
+                        //--------------------1.2 ---------------------------------
+                         batch_json = Regex.Replace(batch_json, "ObjectId", "");
+                         batch_json = Regex.Replace(batch_json, @"(", "");
+                         batch_json = Regex.Replace(batch_json, @")", "");
+                        //----------------------------------------------------------
+                 */
+
+                result = result + batch_json;
+
+                //----------------------------------- end 1 --------------------------------------
+
+            
+
+
+                // batch.toString() has bug, 
+                // -------- temp fix the bug, there are one ][ occur between {1}][{2}, it should be {1},{2}, so ][ need to replace with , -------------
+                result = result.Replace("][", ",");
+                //================================================== bug fix {}][{} ====================================================================
+
+
+                result = result + "}";
+
+
+
+
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result, "text/plain");
+
+
+
+            return response;
+
+        }
 
 
 
