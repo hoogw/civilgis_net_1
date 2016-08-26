@@ -949,7 +949,137 @@ namespace CivilGis.Controllers
 
 
 
-        
+        // this is in use, for mobile, return small amount max 300
+        [AcceptVerbs("GET", "POST")]
+        public async Task<HttpResponseMessage> feature_mobile(string area, string subj, double SWlong, double SWlat, double NElong, double NElat)
+        {
+
+
+
+            // set connection string in web.config 
+            _mongoClient = new MongoClient(ConfigurationManager.ConnectionStrings["MongoDBContext"].ConnectionString);
+            _mongoDatabase = _mongoClient.GetDatabase(ConfigurationManager.AppSettings["civilgisDBname"]);
+            var _max_row_count = Convert.ToInt16(ConfigurationManager.AppSettings["max_row_count_mobile"]);
+
+            var table_name = area + "_" + subj;
+
+
+
+            var _mongoCollection = _mongoDatabase.GetCollection<FeatureDoc>(table_name);
+
+
+            if ((SWlong == 0) || (SWlat == 0) || (NElong == 0) || (NElat == 0))
+            {
+                SWlong = -117.963690;
+                SWlat = 33.634180;
+                NElong = -117.854780;
+                NElat = 33.702970;
+            }
+
+
+
+            GeoJson2DGeographicCoordinates bottomleft = new GeoJson2DGeographicCoordinates(SWlong, SWlat);
+            GeoJson2DGeographicCoordinates topleft = new GeoJson2DGeographicCoordinates(SWlong, NElat);
+            GeoJson2DGeographicCoordinates topright = new GeoJson2DGeographicCoordinates(NElong, NElat);
+            GeoJson2DGeographicCoordinates bottomright = new GeoJson2DGeographicCoordinates(NElong, SWlat);
+            GeoJson2DGeographicCoordinates[] coord_array = new GeoJson2DGeographicCoordinates[] { bottomleft, topleft, topright, bottomright, bottomleft };
+            GeoJsonLinearRingCoordinates<GeoJson2DGeographicCoordinates> ringcoord = new GeoJsonLinearRingCoordinates<GeoJson2DGeographicCoordinates>(coord_array);
+            GeoJsonPolygonCoordinates<GeoJson2DGeographicCoordinates> boxcoord = new GeoJsonPolygonCoordinates<GeoJson2DGeographicCoordinates>(ringcoord);
+            GeoJsonPolygon<GeoJson2DGeographicCoordinates> box = new GeoJsonPolygon<GeoJson2DGeographicCoordinates>(boxcoord);
+
+
+            var filter = Builders<FeatureDoc>.Filter.GeoIntersects(x => x.geometry, box);
+
+
+
+            long count = 0;
+            string result = "";
+
+
+
+
+            // count only, not select
+            var temp = _mongoCollection.CountAsync(filter);
+            temp.Wait();
+            count = temp.Result;
+
+
+
+            if ((count > 0) && (count < _max_row_count))
+            {
+
+                //var result = "{ \"type\": \"FeatureCollection\",\"features\": [";
+                // result = @"{ ""type"": ""FeatureCollection"",""features"": [";
+                result = @"{ ""type"": ""FeatureCollection"",""features"": ";
+
+
+
+                // ------------------- use Find ----------------------------------------
+                var _listBsonDoc = await _mongoCollection.Find(filter).ToListAsync();
+
+
+                //--------------------- 1 ---------------------------------------------------
+                var batch_json = _listBsonDoc.ToJson();
+
+                //ObjectId("55c532cf21167708171b02a2") must change to  "55c532cf21167708171b02a2"
+                // below use 1.1    1.2 is alternative
+
+
+                //----------------- 1.1 ok ---------------------------
+                batch_json = batch_json.Replace("ObjectId(\"", "\"");
+                batch_json = batch_json.Replace("\")", "\"");
+                //----------------------------------------------------
+
+                /*
+                        //--------------------1.2 ---------------------------------
+                         batch_json = Regex.Replace(batch_json, "ObjectId", "");
+                         batch_json = Regex.Replace(batch_json, @"(", "");
+                         batch_json = Regex.Replace(batch_json, @")", "");
+                        //----------------------------------------------------------
+                 */
+
+                result = result + batch_json;
+
+                //----------------------------------- end 1 --------------------------------------
+
+
+
+
+
+
+
+                // batch.toString() has bug, 
+                // -------- temp fix the bug, there are one ][ occur between {1}][{2}, it should be {1},{2}, so ][ need to replace with , -------------
+                result = result.Replace("][", ",");
+                //================================================== bug fix {}][{} ====================================================================
+
+
+                result = result + "}";
+
+            }
+
+            else if (count == 0)
+            {
+                // no record
+                result = count.ToString();
+
+            }
+            else
+            {
+                // more than limit
+                result = count.ToString();
+            }
+
+
+
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result, "text/plain");
+
+
+
+            return response;
+
+        }
+
 
         // Not in use, FindAsync is old api, should use new api Find
         [AcceptVerbs("GET", "POST")]
