@@ -1,9 +1,13 @@
-//var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
-var _tile_baseURL = 'http://tile.transparentgov.net/v2/';
+var google_map_api_key = 'AIzaSyCeIFVL6oxxXNT7NToJjfU4J9TV2J8m4vE';
 
+
+var _tile_baseURL = 'http://166.62.80.50:8887/v2/';
+//var _tile_baseURL = 'http://tile.transparentgov.net/v2/';
 
 var _tile_exist = false;
 var _tile_list;
+
+var _tile_slider;
 
 var _addr_info;
 var search_address_marker;
@@ -75,7 +79,7 @@ var _cluster_in_use = false;
 
 
 var _multi_polyline;
-
+var _tile_baseURL;
 var _areaID;
 var _subjectID;
 var tile_MapType;
@@ -122,9 +126,18 @@ _highlight_strokeWeight = 8;
 _classfiy_fillOpacity = 0;
 _classfiy_strokeColor = 'yellow';
 _classfiy_strokeWeight = 0.2;
-
-
 //---------------------------------
+
+
+
+
+//   *******   google opacity slider control ***************
+var opacityDiv;
+var opacityKnobDiv;
+var opacityCtrlKnob;
+var initialOpacity = 100;
+var OPACITY_MAX_PIXELS = 57; // Width of opacity control image
+//****************************************************
 
 
 
@@ -168,10 +181,10 @@ function set_initial_location(_area) {
     _area_db["Arura"] = ["Arura", 39.723296392333026, -104.84081268310547, 13, "/-104.97127532958984/39.61573894281141/-104.501953125/39.818557296839344/"];
     _area_db["Bakersfield"] = ["Bakersfield", 39.818557296839344, -104.501953125, 13, "/-119.19822692871094/35.266365060848436/-118.78177642822266/35.44808511462123/"];
     _area_db["Baltimore"] = ["Baltimore", 35.44808511462123, -118.78177642822266, 13, "/-76.74568176269531/39.24714385893248/-76.42021179199219/39.44520783247914/"];
-    
+
     _area_db["Orlando"] = ["Orlando", 39.90657598772841, -104.59259033203125, 13, "/-81.47872924804688/28.4463551910418/-81.265869140625/28.6080342113753/"];
     _area_db["Palo_Alto"] = ["Palo_Alto", 37.4426999532675, -122.15492248535156, 13, "/-122.22702026367188/37.339045928741186/-122.10411071777344/37.49529038649112/"];
-    _area_db["Philadelphia"] = ["Philadelphia", 37.49529038649112, -122.10411071777344, 13, "/-75.24845123291016/39.87048617098581/-74.95491027832031/40.13794057716276/"];
+    _area_db["Philadelphia"] = ["Philadelphia", 39.87048617098581, -75.24845123291016, 13, "/-75.24845123291016/39.87048617098581/-74.95491027832031/40.13794057716276/"];
     _area_db["Portland"] = ["Portland", 40.13794057716276, -74.95491027832031, 13, "/-122.75264739990234/45.433153642271414/-122.46803283691406/45.58473142874248/"];
     _area_db["San_Jose"] = ["San_Jose", 45.58473142874248, -122.46803283691406, 13, "/-122.06428527832031/37.22076028799717/-121.82052612304688/37.45469273789926/"];
     _area_db["Seattle"] = ["Seattle", 37.45469273789926, -121.82052612304688, 13, "/-122.43644714355469/47.514186307885765/-122.20745086669922/47.741863047356425/"];
@@ -330,7 +343,7 @@ function add_area_boundary(_area) {
 }// function add_area_boundary
 
 
-
+// ----------- tiling ----------------------
 function init_tiling() {
 
     // --------------------- dynamic load javascript file  ---------------------------
@@ -341,11 +354,7 @@ function init_tiling() {
 
     $.when(
              $.getScript(_tile_list_js)
-     /*
-    $.getScript( "/mypath/myscript1.js" ),
-    $.getScript( "/mypath/myscript2.js" ),
-    $.getScript( "/mypath/myscript3.js" ),
-    */
+
 
     ).done(function () {
 
@@ -356,7 +365,7 @@ function init_tiling() {
 
 
             //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
-            //_tile_baseURL = 'http://tile.transparentgov.net/v2/';
+            // _tile_baseURL = 'http://tile.transparentgov.net/v2/';
             // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
 
 
@@ -376,10 +385,28 @@ function init_tiling() {
 
             }); // tile_maptype
 
+            map.overlayMapTypes.insertAt(0, tile_MapType);
+
+
 
             _tile_exist = true;
 
-        }// if
+
+            // Add opacity control and set initial value , this must be here after tile_MapType initialized and finished loading tiles, otherwise, tile_MapType will show un-defined.
+            createOpacityControl(map, initialOpacity);
+
+
+        }// if tile exist
+
+        else {
+            // tile does not exist, should hide the opacity slider control div.
+
+
+            $("#opacityDiv").hide();
+            $("#opacityKnobDiv").hide();
+
+
+        }
 
 
     }); // when done
@@ -391,6 +418,7 @@ function init_tiling() {
 
 function add_tiles() {
 
+    // alert(_tile_exist);
     if (_tile_exist) {
         // ---- if returning total number, not geoJOSN feature, then add tiling layer on top ---------------------------
 
@@ -413,6 +441,90 @@ function remove_tiles() {
         //map.overlayMapTypes.removeAt(0);
     }
 }
+
+//--------------------End of tiling --------------------------------------
+
+
+
+//   ******  google map tile opacity slider control ****************
+
+
+function createOpacityControl(map, opacity) {
+
+
+    //  main div to hold the control.
+    opacityDiv = document.getElementById('opacityDiv');
+
+    //  knob
+    opacityKnobDiv = document.getElementById('opacityKnobDiv');
+
+
+    opacityCtrlKnob = new ExtDraggableObject(opacityKnobDiv, {
+        restrictY: true,
+        container: opacityDiv
+    });
+
+    google.maps.event.addListener(opacityCtrlKnob, "dragend", function () {
+        setOpacity(opacityCtrlKnob.valueX());
+    });
+
+    google.maps.event.addDomListener(opacityDiv, "click", function (e) {
+        var left = findPosLeft(this);
+        var x = e.pageX - left - 5; // - 5 as we're using a margin of 5px on the div
+        opacityCtrlKnob.setValueX(x);
+        setOpacity(x);
+    });
+
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(opacityDiv);
+
+    // Set initial value
+    var initialValue = OPACITY_MAX_PIXELS / (100 / opacity);
+    opacityCtrlKnob.setValueX(initialValue);
+    setOpacity(initialValue);
+}
+
+function setOpacity(pixelX) {
+    // Range = 0 to OPACITY_MAX_PIXELS
+    var value = (100 / OPACITY_MAX_PIXELS) * pixelX;
+    if (value < 0) value = 0;
+    if (value == 0) {
+
+
+
+        tile_MapType.setOpacity(Math.round(value) / 100);
+
+
+
+    }
+    else {
+
+
+
+        tile_MapType.setOpacity(Math.round(value) / 100);
+
+
+
+    }
+}
+
+function findPosLeft(obj) {
+    var curleft = 0;
+    if (obj.offsetParent) {
+        do {
+            curleft += obj.offsetLeft;
+        } while (obj = obj.offsetParent);
+        return curleft;
+    }
+    return undefined;
+}
+
+
+
+
+// ************** End of google map tile opacity slider control **************************
+
+
+
 
 
 
@@ -512,6 +624,243 @@ function geocodeAddress(geocoder, resultsMap) {
 
 
 
+
+//------------- Googlemap  basic simple map function -----------------------------
+
+function get_map_bound() {
+
+    //document.getElementById("title_info").innerHTML = "MAP BOUNDS [SouthWest, NorthEast] "+ map.getBounds();
+    // get current map bounds as URL parameters. 
+
+
+
+
+
+    bounds = map.getBounds();
+    southWest = bounds.getSouthWest();
+    northEast = bounds.getNorthEast();
+    SWlong = southWest.lng();
+    SWlat = southWest.lat();
+    NElong = northEast.lng();
+    NElat = northEast.lat();
+
+    // http://localhost:10/civilgis/api/load/general_landuse/SWlong/SWlat/NElong/NElat/   This is sample URI
+    //var _url = base_url + 'api/loadall/' + $("#areaID").val() + '/' + $("#subjectID").val() + '/' + SWlong + '/' + SWlat + '/' + NElong + '/' + NElat + '/';
+    var _url = "/api/geojson/feature/" + initial_location[0] + '/' + $("#subjectID").val() + "/" + SWlong + "/" + SWlat + "/" + NElong + "/" + NElat + "/";
+
+    document.getElementById("ajaxload").style.display = "block";
+    ajax_GeoJSON(map, _url, false);
+
+
+
+}
+
+
+function remove_map_listener() {
+
+    google.maps.event.removeListener(listener_dragend);
+    google.maps.event.removeListener(listener_zoom_changed);
+
+}
+
+// ---------  map click event [2] -------------------------------
+
+function get_click_latlng(_click_event_lat, _click_event_lng) {
+
+
+    if (_mapclick_in_use) {
+
+
+        // --- current use 2X2 grid boundary (as click event latlong is on center point), you can use 3x3 grid or adjust house length to make larger/smaller select area. 
+        var _square_house_length = 0.0004; // average is 0.0003-0.0004
+
+
+        SWlong = _click_event_lng - _square_house_length;
+        SWlat = _click_event_lat - _square_house_length;
+        NElong = _click_event_lng + _square_house_length;
+        NElat = _click_event_lat + _square_house_length;
+
+
+
+
+        var _url_click_event = "/api/geojson/feature/" + $("#areaID").val() + '/' + $("#subjectID").val() + "/" + SWlong + "/" + SWlat + "/" + NElong + "/" + NElat + "/";
+
+        document.getElementById("ajaxload").style.display = "block";
+        ajax_GeoJSON(map, _url_click_event, true);
+
+
+
+    }
+
+
+
+
+}
+
+
+
+function back_full_extend() {
+
+    map.setZoom(initial_location[3]);
+    map.setCenter(new google.maps.LatLng(initial_location[1], initial_location[2]));
+}
+
+
+function add_map_listener_idle() {
+
+    listener_idle = map.addListener('idle', function () {
+
+        get_map_bound();
+
+
+    });
+
+
+
+    // ---------  map click event [1] ------ search for a single feature where clicked ------------
+    listener_click = map.addListener('click', function (click_event_location) {
+
+        // the current popup infowindow should be close if click anywhere on map.
+        if (infowindow) {
+            infowindow.close();
+        }
+
+
+
+
+        get_click_latlng(click_event_location.latLng.lat(), click_event_location.latLng.lng());
+    });
+
+
+    listener_rightclick = map.addListener('rightclick', function () {
+
+        back_full_extend();
+    });
+
+    //--------------------------End  map right click event ---------- back to full extend ----------------------
+
+
+
+}
+//------------------ End map click event [2] -------------------------------
+
+
+
+function add_map_listener() {
+
+    //map.addListener('bounds_changed', function() {  // does not work well
+    listener_dragend = map.addListener('dragend', function () {
+
+        get_map_bound();
+
+
+    });
+
+
+
+
+
+
+    listener_zoom_changed = map.addListener('zoom_changed', function () {
+
+        get_map_bound();
+    });
+
+
+
+}
+
+
+function add_mapdata_listener() {
+
+    // click listener
+    map.data.addListener('click', function (event) {
+        //var myHTML = event.feature.getProperty("NAME_ABV_A");
+
+        // map.data.overrideStyle(event.feature, {fillColor: 'yellow'});
+
+        // info window table style
+        var popup = "<table>";
+        event.feature.forEachProperty(function (_value, _property) {
+            popup = popup + "<tr><td width='50%'>" + _property + "</td><td>" + _value + "</td></tr>";
+        });
+        popup = popup + "</table>";
+
+        infowindow.setContent("<div style='width:200px; height:150px;text-align: center;'>" + popup + "</div>");
+        infowindow.setPosition(event.latLng);
+        infowindow.open(map);
+
+    });    // click listener
+
+
+
+
+
+    // mouse over listener
+    map.data.addListener('mouseover', function (event) {
+        //map.data.revertStyle();                 
+        map.data.overrideStyle(event.feature, {
+            strokeWeight: _highlight_strokeWeight,
+            strokeColor: _highlight_strokeColor,
+            fillOpacity: _highlight_fillOpacity
+            //fillColor:''
+        });
+
+        var instant_info = "<ul>";
+        event.feature.forEachProperty(function (_value, _property) {
+            instant_info = instant_info + "<li style=\"float:left; list-style: none;\"><span style=\"background-color: #454545;\"><font color=\"white\">&nbsp;" + _property + "&nbsp;</font></span>" + "&nbsp;&nbsp;" + _value + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "</li>";
+        });
+        instant_info = instant_info + "</ul>";
+
+
+        // update bottom <div>
+        document.getElementById("info-table").innerHTML = instant_info;
+
+    });
+
+
+    // mouse out listener
+    map.data.addListener('mouseout', function (event) {
+        map.data.revertStyle(event.feature);
+
+        // empty bottom <div>
+        document.getElementById("info-table").innerHTML = "";
+        //infowindow.close();
+
+    });
+
+}
+
+
+
+function geocoding() {
+    // --------  search address
+    geocoder = new google.maps.Geocoder();
+
+    document.getElementById('search_addr').addEventListener('click', function () {
+        geocodeAddress(geocoder, map);
+    });
+
+    // ---------- 
+
+}
+
+
+function zoomToObject(obj) {
+    var bounds = new google.maps.LatLngBounds();
+    var points = obj.getPath().getArray();
+    for (var n = 0; n < points.length ; n++) {
+        bounds.extend(points[n]);
+    }
+    map.fitBounds(bounds);
+}
+
+//----------------End of Googlemap basic simple map function  ------------------------
+
+
+
+// ############### retired function ############################
+
 function tile_switch_button() {
 
 
@@ -542,3 +891,107 @@ function tile_switch_button() {
 
 
 }
+
+
+
+function tile_slider() {
+
+
+    _tile_slider = document.getElementById('tile_slider');
+
+    noUiSlider.create(_tile_slider, {
+        start: [100],
+        connect: 'lower',
+        //  tooltips: true,
+        range: {
+            'min': 0,
+            'max': 100
+        }
+    });
+
+
+
+}
+
+
+function init_tiling_old_slider_switch() {
+
+    // --------------------- dynamic load javascript file  ---------------------------
+
+
+
+    var _tile_list_js = "/Scripts/map_init/tile_list/googlemap_tile_list.js";
+
+    $.when(
+             $.getScript(_tile_list_js)
+     /*
+    $.getScript( "/mypath/myscript1.js" ),
+    $.getScript( "/mypath/myscript2.js" ),
+    $.getScript( "/mypath/myscript3.js" ),
+    */
+
+    ).done(function () {
+
+        var _tile_name = _areaID + "_" + _subjectID;
+        var _i = _tile_list.indexOf(_tile_name);
+        //alert(_tile_name);
+        if (_i >= 0) {
+
+
+            //http://tile.transparentgov.net/v2/cityadr/{z}/{x}/{y}.png
+            // _tile_baseURL = 'http://tile.transparentgov.net/v2/';
+            // _tile_baseURL = 'http://localhost:8888/v2/cityadr/{z}/{x}/{y}.png';
+
+
+
+            tile_MapType = new google.maps.ImageMapType({
+                getTileUrl: function (coord, zoom) {
+
+
+
+                    return _tile_baseURL + _areaID + '_' + _subjectID + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
+
+
+                },
+                tileSize: new google.maps.Size(256, 256),
+                maxZoom: 22,
+                minZoom: 0
+
+            }); // tile_maptype
+
+            map.overlayMapTypes.insertAt(0, tile_MapType);
+
+
+
+
+            //............................ bind opacity to slider ........................
+
+            _tile_slider.noUiSlider.on('set', function (values, handle, unencoded, tap, positions) {
+
+
+                var _slider_handle_value = values[handle];
+                _slider_handle_value = Math.round(_slider_handle_value) / 100;
+
+                tile_MapType.setOpacity(_slider_handle_value);
+
+            });
+            //................End ....... bind opacity to slider ........................
+
+
+
+
+
+            _tile_exist = true;
+
+
+
+
+        }// if tile exist
+
+
+    }); // when done
+
+
+}// init tile
+
+// ############### retired function ############################

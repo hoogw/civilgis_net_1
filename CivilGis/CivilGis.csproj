@@ -810,6 +810,24 @@
     <Content Include="Views\BingMap\scrollerservertablemap.cshtml" />
     <Content Include="Views\BingMap\simpleclustermap.cshtml" />
     <Content Include="Views\BingMap\simplemap.cshtml" />
+    <Content Include="Views\HereMap\_ViewStart.cshtml" />
+    <Content Include="Views\HereMap\classifycheckboxbuttonmap.cshtml" />
+    <Content Include="Views\HereMap\classifyradiobuttonmap.cshtml" />
+    <Content Include="Views\HereMap\clusterpagedclienttablemap.cshtml" />
+    <Content Include="Views\HereMap\clusterscrollerclienttablemap.cshtml" />
+    <Content Include="Views\HereMap\colormap.cshtml" />
+    <Content Include="Views\HereMap\justtiles.cshtml" />
+    <Content Include="Views\HereMap\justtiles_old_slider_switch.cshtml" />
+    <Content Include="Views\HereMap\maplistpaged.cshtml" />
+    <Content Include="Views\HereMap\maplistscroller.cshtml" />
+    <Content Include="Views\HereMap\pagedclienttablemap.cshtml" />
+    <Content Include="Views\HereMap\pagedfulltablemap.cshtml" />
+    <Content Include="Views\HereMap\pagedservertablemap.cshtml" />
+    <Content Include="Views\HereMap\scrollerclienttablemap.cshtml" />
+    <Content Include="Views\HereMap\scrollerfulltablemap.cshtml" />
+    <Content Include="Views\HereMap\scrollerservertablemap.cshtml" />
+    <Content Include="Views\HereMap\simpleclustermap.cshtml" />
+    <Content Include="Views\HereMap\simplemap.cshtml" />
     <None Include="Views\Home\corporate\blue.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
