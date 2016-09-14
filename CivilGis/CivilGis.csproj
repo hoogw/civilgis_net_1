@@ -264,6 +264,7 @@
     <Content Include="images\logo\seattle_logo.png" />
     <Content Include="images\logo\shoreline_logo.jpg" />
     <Content Include="images\logo\stockton.png" />
+    <Content Include="images\logo\trgv_apple.svg" />
     <Content Include="images\logo\washington_dc_logo.png" />
     <Content Include="images\logo\zoning.png" />
     <Content Include="images\sort_asc.png" />
