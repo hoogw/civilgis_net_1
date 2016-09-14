@@ -497,22 +497,6 @@
     <Content Include="Scripts\googlemap\scrollerservertablemap.js" />
     <Content Include="Scripts\googlemap\simpleclustermap.js" />
     <Content Include="Scripts\googlemap\simplemap.js" />
-    <Content Include="Scripts\heremap\classifycheckboxbuttonmap.js" />
-    <Content Include="Scripts\heremap\classifyradiobuttonmap.js" />
-    <Content Include="Scripts\heremap\clusterpagedclienttablemap.js" />
-    <Content Include="Scripts\heremap\clusterscrollerclienttablemap.js" />
-    <Content Include="Scripts\heremap\colormap.js" />
-    <Content Include="Scripts\heremap\justtiles.js" />
-    <Content Include="Scripts\heremap\maplist_paged.js" />
-    <Content Include="Scripts\heremap\maplist_scroller.js" />
-    <Content Include="Scripts\heremap\pagedclienttablemap.js" />
-    <Content Include="Scripts\heremap\pagedfulltablemap.js" />
-    <Content Include="Scripts\heremap\pagedservertablemap.js" />
-    <Content Include="Scripts\heremap\scrollerclienttablemap.js" />
-    <Content Include="Scripts\heremap\scrollerfulltablemap.js" />
-    <Content Include="Scripts\heremap\scrollerservertablemap.js" />
-    <Content Include="Scripts\heremap\simpleclustermap.js" />
-    <Content Include="Scripts\heremap\simplemap.js" />
     <Content Include="Scripts\leafletmvt\classifycheckboxbuttonmap.js" />
     <Content Include="Scripts\leafletmvt\classifyradiobuttonmap.js" />
     <Content Include="Scripts\leafletmvt\clusterpagedclienttablemap.js" />
@@ -1276,6 +1260,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\heremap\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
