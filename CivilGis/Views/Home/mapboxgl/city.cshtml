@@ -7,7 +7,7 @@
 
 
 @{
-    string _side_panel_path = "~/Views/Shared/mapbox/_" + ViewBag.Area + "_side_panel.cshtml";
+    string _side_panel_path = "~/Views/Shared/mapboxgl/_" + ViewBag.Area + "_side_panel.cshtml";
 
     Html.RenderPartial(_side_panel_path);
 
@@ -29,12 +29,17 @@
                         </div>
                         <div class="panel-body">
                            
+
+                            <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/mapboxgl/multilayerrenderedfeaturescrollertablemap/city/overview'">Address Parcels Streets multi-layer with attribute table</button>
+                            &nbsp;&nbsp;
+
+
                                 
-                                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/mapbox/scrollerfulltablemap/city/address'">Address</button>
+                                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/mapboxgl/singlelayerrenderedfeaturescrollertablehighlightgeojsonmap/city/address'">Address</button>
                             &nbsp;&nbsp;    
-                            <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/mapbox/scrollerfulltablemap/city/parcels'">Parcels</button>
+                            <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/mapboxgl/singlelayerrenderedfeaturescrollertablehighlightgeojsonmap/city/parcels'">Parcels</button>
                             &nbsp;&nbsp;    
-                            <button type="button" class="btn btn-outline btn-success"    onclick="location.href = '/mapbox/scrollerfulltablemap/city/streets'">Streets</button>
+                            <button type="button" class="btn btn-outline btn-success"    onclick="location.href = '/mapboxgl/singlelayerrenderedfeaturepagedtablehighlightgeojsonmap/city/streets'">Streets</button>
 
 
                               
@@ -60,18 +65,27 @@
                             
 
                                
-
-                                <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/mapbox/classifycheckboxbuttonmap/city/zoning'"> Zoning [check box button]</button>
-                            &nbsp;&nbsp;    
-                            <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/mapbox/classifyradiobuttonmap/city/zoning'">Zoning [radio button]</button>
-                                
+                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/mapboxgl/classifypolygon2overlay/city/zoning/address/parcels'">Zoning & 2 overlay(parcels, address)</button>
                             &nbsp;&nbsp;
-                            <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/mapbox/classifycheckboxbuttonmap/city/general_landuse'">General Land Use</button>
 
+
+                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/mapboxgl/classifypolygon1overlay/city/zoning/parcels'">Zoning & 1 overlay(parcels)</button>
+                            &nbsp;&nbsp;
+
+
+                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/mapboxgl/classifypolygon1overlay/city/zoning/address'">Zoning & 1 overlay(address)</button>
+                            &nbsp;&nbsp;
+
+                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/mapboxgl/classifypolygonswitch/city/zoning'">Simple Zoning with switch</button>
+                            &nbsp;&nbsp;
+
+
+                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/mapboxgl/classifypolygonsimple/city/zoning'">Simple Zoning</button>
+                            &nbsp;&nbsp;
 
                             &nbsp;&nbsp;
                                 
-                                <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/mapbox/simplemap/city/neighbor'">Neighbor</button>
+                                <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/mapboxgl/singlelayersimplehighlightgeojsonmap/city/neighbor'">Neighbor</button>
 
                          
 
@@ -95,7 +109,7 @@
                         </div>
                         <div class="panel-body">
                             
-                                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/mapbox/scrollerclienttablemap/city/parks'">Parks</button>
+                                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/mapboxgl/singlelayerrenderedfeaturescrollertablehighlightgeojsonmap/city/parks'">Parks</button>
 
                            
                         </div>
@@ -120,7 +134,7 @@
                         </div>
                         <div class="panel-body">
                             
-                                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/mapbox/scrollerclienttablemap/city/schools'">Schools</button>
+                                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/mapboxgl/singlelayerrenderedfeaturescrollertablehighlightgeojsonmap/city/schools'">Schools</button>
 
                             
                         </div>
@@ -146,11 +160,11 @@
                            
                                 
 
-                                <button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/mapbox/simplemap/city/law_agency'">Law agency</button>
-                            &nbsp;&nbsp;<button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/mapbox/simplemap/city/law_reportarea'">Law report area</button>
-                            &nbsp;&nbsp;<button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/mapbox/simplemap/city/law_geoproximity'">Law geoproximity</button>
-                            &nbsp;&nbsp; <button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/mapbox/simplemap/city/law_district'">Law district</button>
-                            &nbsp;&nbsp; <button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/mapbox/simplemap/city/law_beat'">Law beat</button>
+                                <button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/mapboxgl/singlelayersimplehighlightgeojsonmap/city/law_agency'">Law agency</button>
+                            &nbsp;&nbsp;<button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/mapboxgl/singlelayersimplehighlightgeojsonmap/city/law_reportarea'">Law report area</button>
+                            &nbsp;&nbsp;<button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/mapboxgl/singlelayersimplehighlightgeojsonmap/city/law_geoproximity'">Law geoproximity</button>
+                            &nbsp;&nbsp; <button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/mapboxgl/singlelayersimplehighlightgeojsonmap/city/law_district'">Law district</button>
+                            &nbsp;&nbsp; <button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/mapboxgl/singlelayersimplehighlightgeojsonmap/city/law_beat'">Law beat</button>
                                
 
                           
@@ -179,10 +193,10 @@
                           
 
 
-                                <button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/mapbox/simplemap/city/fire_station_boundary'">Fire station boundary</button>
-                            &nbsp;&nbsp;<button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/mapbox/simplemap/city/fire_geoproximity'">Fire geoproximity</button>
-                            &nbsp;&nbsp;<button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/mapbox/simplemap/city/fire_district'">Fire district</button>
-                            &nbsp;&nbsp;<button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/mapbox/simplemap/city/fire_agency'">Fire agency</button>
+                                <button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/mapboxgl/singlelayersimplehighlightgeojsonmap/city/fire_station_boundary'">Fire station boundary</button>
+                            &nbsp;&nbsp;<button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/mapboxgl/singlelayersimplehighlightgeojsonmap/city/fire_geoproximity'">Fire geoproximity</button>
+                            &nbsp;&nbsp;<button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/mapboxgl/singlelayersimplehighlightgeojsonmap/city/fire_district'">Fire district</button>
+                            &nbsp;&nbsp;<button type="button" class="btn btn-outline btn-danger" onclick="location.href = '/mapboxgl/singlelayersimplehighlightgeojsonmap/city/fire_agency'">Fire agency</button>
 
                             
                         </div>
