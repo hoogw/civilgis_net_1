@@ -667,6 +667,8 @@
     <Content Include="Scripts\map_init\leaflet.js" />
     <Content Include="Scripts\map_init\googlemap.js" />
     <Content Include="Scripts\map_init\source_layer\city.js" />
+    <Content Include="Scripts\map_init\source_layer\Newport_Beach.js" />
+    <Content Include="Scripts\map_init\source_layer\Santa_Monica.js" />
     <Content Include="Scripts\map_init\tile_list\googlemap_tile_list.js" />
     <Content Include="Scripts\openlayers\classifycheckboxbuttonmap.js" />
     <Content Include="Scripts\openlayers\classifyradiobuttonmap.js" />
