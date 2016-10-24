@@ -568,7 +568,7 @@ function add_mapdata_listener_classification_radio() {
 
 
 
-function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
+function ajax_GeoJSON(gmap, _apiURI_returncountonly, _apiURI, _map_click_event) {
 
     // Load a GeoJSON from the server 
 

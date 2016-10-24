@@ -21,6 +21,18 @@ namespace CivilGis.Controllers
         }
 
 
+        public ActionResult tabular_data_home()
+        {
+
+
+
+
+            return View();
+
+        }
+
+
+
 
         public ActionResult tablelistpaged(string area)
         {

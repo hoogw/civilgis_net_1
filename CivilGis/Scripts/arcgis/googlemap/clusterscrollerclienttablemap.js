@@ -231,7 +231,7 @@ function feed_datatables(_geojson_obj) {
 
 
 
-function ajax_GeoJSON(gmap,_apiURI) {
+function ajax_GeoJSON(gmap, _apiURI_returncountonly, _apiURI) {
     
     // Load a GeoJSON from the server 
    

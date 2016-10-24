@@ -100,6 +100,8 @@ namespace CivilGis.Controllers
 
 
 
+
+
         public ActionResult Leafletmvt()
         {
 
@@ -110,6 +112,32 @@ namespace CivilGis.Controllers
 
 
         public ActionResult Openlayers()
+        {
+
+            return View();
+
+        }
+
+
+
+
+        public ActionResult Arcgis()
+        {
+
+            return View();
+
+        }
+
+
+        public ActionResult Arcgisleaflet()
+        {
+
+            return View();
+
+        }
+
+
+        public ActionResult Arcgisjavascriptapi()
         {
 
             return View();

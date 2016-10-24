@@ -11,7 +11,7 @@
 
 // ---------- map click event [3]--------add _map_click --------
 
-function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
+function ajax_GeoJSON(gmap, _apiURI_returncountonly, _apiURI, _map_click_event) {
     
     // Load a GeoJSON from the server 
    
@@ -42,7 +42,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-                            var _geojson_object = JSON.parse(data);
+                             _geojson_object = JSON.parse(data);
 
                            //----- marker cluster  [2.1] ------each time before you add new point geojson, need to clear old last time marker clusters.
                            //   markerClusterer.clearMarkers();
