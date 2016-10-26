@@ -1,0 +1,111 @@
+﻿<script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?branch=release&callback=initialize' async defer></script>
+
+
+
+
+<script src="~/Scripts/infobox.js"></script>
+<script src="~/Scripts/markerclusterer.js"></script>
+    
+
+
+
+<script src="~/Scripts/arcgis/map_init/bingmap.js"></script>
+<script src="~/Scripts/arcgis/bingmap/colormap.js"></script>
+
+
+<!--          bootstrap_slider                                  -->
+<link href="~/Scripts/map_api/bootstrap_slider/bootstrap-slider.css" rel="stylesheet" />
+<script src="~/Scripts/map_api/bootstrap_slider/bootstrap-slider.js"></script>
+
+
+
+
+  <!-- this hidden value carry the map subject from controller use it in javascript api call-->
+
+<input type="hidden" id="areaID" value=@ViewBag.Area />
+<input type="hidden" id="subjectID" value=@ViewBag.Subject />
+<input type="hidden" id="sidebarID" value=@ViewBag.Side_Bar />
+
+
+
+
+@{
+    string _side_panel_path = "~/Views/Shared/bingmap/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
+
+    Html.RenderPartial(_side_panel_path); 
+    
+    }
+
+
+
+
+
+
+
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <div id="title_info"> </div>
+                    <img id="ajaxload" src="~/Content/img/devoops_getdata.GIF" alt="Loading ... " style="top: 25px;left: 15px;color:#ebebeb;" />
+
+                </div>
+                <!-- /.panel-heading -->
+
+                <div class="panel-body">
+
+
+
+                    <div id="map-canvas" style="position: relative;-webkit-border-radius: 0 0 3px 3px;-moz-border-radius: 0 0 3px 3px;border-radius: 0 0 3px 3px;padding: 15px;background: #FCFCFC;height: 800px;"></div>
+
+                    <div id='searchBoxContainer'>
+                        Search:<input type='text' id='searchBox' /> &nbsp; &nbsp; &nbsp;
+                        Opacity:<input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="10" data-slider-value="100" style="float:right;" />
+                    </div>
+
+
+
+                    <div id="info-table">
+
+                    </div>
+
+
+                </div>
+                <!-- /.panel-body -->
+                <!-- hr / -->
+
+
+
+                <div class="panel-footer">
+
+
+                    <p>
+
+
+
+                    </p>
+
+
+
+
+
+
+                </div>
+
+
+
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.row -->
+    </div>
+
+
+
+
+    <!-- /#page-wrapper -->
+</div>
+

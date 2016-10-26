@@ -1,0 +1,141 @@
+﻿
+<link rel="stylesheet" href="http://openlayers.org/en/v3.15.1/css/ol.css" type="text/css">
+<script src="http://openlayers.org/en/v3.15.1/build/ol.js"></script>
+
+
+
+
+<!--           ol3-layerswitcher                             -->
+<link href="~/Scripts/map_api/openlayers/ol3_layerswitcher/ol3-layerswitcher.css" rel="stylesheet" />
+<script src="~/Scripts/map_api/openlayers/ol3_layerswitcher/ol3-layerswitcher.js"></script>
+<link href="~/Scripts/map_api/openlayers/ol3_layerswitcher/scroll.css" rel="stylesheet" />
+
+<!--           ol3-geocoder                             -->
+<link href="~/Scripts/map_api/openlayers/ol3_geocoder/ol3-geocoder.min.css" rel="stylesheet" />
+<script src="~/Scripts/map_api/openlayers/ol3_geocoder/ol3-geocoder.js"></script>
+
+
+<!--           ol3-popup                             -->
+<link href="~/Scripts/map_api/openlayers/ol3_popup/ol3-popup.css" rel="stylesheet" />
+<script src="~/Scripts/map_api/openlayers/ol3_popup/ol3-popup.js"></script>
+<link href="~/Scripts/map_api/openlayers/ol3_popup/scroll.css" rel="stylesheet" />
+
+
+
+<!--          bootstrap_slider                                  -->
+<link href="~/Scripts/map_api/bootstrap_slider/bootstrap-slider.css" rel="stylesheet" />
+<script src="~/Scripts/map_api/bootstrap_slider/bootstrap-slider.js"></script>
+
+
+
+
+
+
+<script src="~/Scripts/jquery.dataTables.js"></script>
+<link href="~/Content/jquery.dataTables.css" rel="stylesheet">
+
+
+
+
+<script src="~/Scripts/arcgis/map_init/openlayers.js"></script>
+
+<script src="~/Scripts/arcgis/openlayers/clusterpagedclienttablemap.js"></script>
+
+
+
+
+
+  <!-- this hidden value carry the map subject from controller use it in javascript api call-->
+
+<input type="hidden" id="areaID" value=@ViewBag.Area />
+<input type="hidden" id="subjectID" value=@ViewBag.Subject />
+<input type="hidden" id="sidebarID" value=@ViewBag.Side_Bar />
+
+
+
+
+@{
+    string _side_panel_path = "~/Views/Shared/openlayers/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
+
+    Html.RenderPartial(_side_panel_path); 
+    
+    }
+
+
+
+
+
+
+
+
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <div id="title_info"> </div>
+                    <img id="ajaxload" src="~/Content/img/devoops_getdata.GIF" alt="Loading ... " style="top: 25px;left: 15px;color:#ebebeb;" />
+
+                </div>
+                <!-- /.panel-heading -->
+
+                <div class="panel-body">
+
+
+
+                    <div id="map-canvas" style="position: relative;-webkit-border-radius: 0 0 3px 3px;-moz-border-radius: 0 0 3px 3px;border-radius: 0 0 3px 3px;padding: 15px;background: #FCFCFC;height: 800px;"></div>
+                    <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="10" data-slider-value="100" />
+
+
+
+                    <div id="legend" class="alert alert-warning"></div>
+
+
+                    <div id="tableDiv"></div>
+
+
+                    <div id="info-table"> </div>
+
+
+
+                    <div id="utfgrid_info">  </div>
+
+
+                </div>
+                <!-- /.panel-body -->
+                <!-- hr / -->
+
+
+
+                <div class="panel-footer">
+
+
+                    <p>
+
+
+
+                    </p>
+
+
+
+
+
+
+                </div>
+
+
+
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.row -->
+    </div>
+
+
+
+
+    <!-- /#page-wrapper -->
+</div>
+

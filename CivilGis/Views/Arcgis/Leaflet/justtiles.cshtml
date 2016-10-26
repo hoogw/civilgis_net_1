@@ -1,0 +1,153 @@
+﻿
+
+<script src="~/Scripts/map_api/leaflet/leaflet.js"></script>
+<link href="~/Scripts/map_api/leaflet/leaflet.css" rel="stylesheet" />
+
+
+
+<!--
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+-->
+
+
+<script src="~/Scripts/map_api/leaflet_providers/leaflet-providers.js"></script>
+
+<script src="~/Scripts/map_api/leaflet_GeoSearch/js/l.control.geosearch.js"></script>
+<script src="~/Scripts/map_api/leaflet_GeoSearch/js/l.geosearch.provider.openstreetmap.js"></script>
+<script src="~/Scripts/map_api/leaflet_GeoSearch/js/l.geosearch.provider.google.js"></script>
+<script src="~/Scripts/map_api/leaflet_GeoSearch/js/l.geosearch.provider.esri.js"></script>
+<script src="~/Scripts/map_api/leaflet_GeoSearch/js/l.geosearch.provider.bing.js"></script>
+<script src="~/Scripts/map_api/leaflet_GeoSearch/js/l.geosearch.provider.nokia.js"></script>
+<link href="~/Scripts/map_api/leaflet_GeoSearch/css/l.geosearch.css" rel="stylesheet" />
+
+
+<script src="~/Scripts/arcgis/map_init/leaflet.js"></script>
+
+<script src="~/Scripts/arcgis/leaflet/justtiles.js"></script>
+
+
+<!--
+<link href="~/Scripts/ui/bootstrap-switch/bootstrap-switch.css" rel="stylesheet" />
+<script src="~/Scripts/ui/bootstrap-switch/bootstrap-switch.js"></script>
+<script src="~/Scripts/ui/noUiSlider.8.5.1/nouislider.min.js"></script>
+<link href="~/Scripts/ui/noUiSlider.8.5.1/nouislider.min.css" rel="stylesheet" />
+    -->
+
+
+<link href="~/Scripts/map_api/leaflet_slider/leaflet-slider.css" rel="stylesheet" />
+<script src="~/Scripts/map_api/leaflet_slider/leaflet-slider.js"></script>
+
+
+
+<script src="~/Scripts/map_api/Leaflet_utfgrid/leaflet.utfgrid-src.js"></script>
+
+
+  <!-- this hidden value carry the map subject from controller use it in javascript api call-->
+
+<input type="hidden" id="areaID" value=@ViewBag.Area />
+<input type="hidden" id="subjectID" value=@ViewBag.Subject />
+<input type="hidden" id="sidebarID" value=@ViewBag.Side_Bar />
+
+
+
+
+@{
+    string _side_panel_path = "~/Views/Shared/leaflet/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
+
+    Html.RenderPartial(_side_panel_path); 
+    
+    }
+
+
+
+
+
+
+
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <div id="title_info"> </div>
+                    <img id="ajaxload" src="~/Content/img/devoops_getdata.GIF" alt="Loading ... " style="top: 25px;left: 15px;color:#ebebeb;" />
+
+                </div>
+                <!-- /.panel-heading -->
+
+                <div class="panel-body">
+
+
+
+                    <div id="map-canvas" style="position: relative;-webkit-border-radius: 0 0 3px 3px;-moz-border-radius: 0 0 3px 3px;border-radius: 0 0 3px 3px;padding: 15px;background: #FCFCFC;height: 800px;"></div>
+
+                    <div id="legend" class="alert alert-warning"></div>
+
+
+                    <!--
+
+                    <div class="well">
+                        <div class="row">
+
+                            <div class="col-lg-1">
+                                <input type="checkbox" name="color_tiles_switch" checked>
+                            </div>
+
+                            <div class="col-lg-2" name="tile_slider" id="tile_slider">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                     -->
+
+
+                    <div id="info-table"> </div>
+
+                    
+
+                    <div id="utfgrid_info">  </div>
+
+                   
+
+
+                </div>
+                <!-- /.panel-body -->
+                <!-- hr / -->
+
+
+
+                <div class="panel-footer">
+
+
+                    <p>
+
+
+
+                    </p>
+
+
+
+
+
+
+                </div>
+
+
+
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.row -->
+    </div>
+
+
+
+
+    <!-- /#page-wrapper -->
+</div>
+

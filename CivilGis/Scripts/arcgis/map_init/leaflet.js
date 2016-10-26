@@ -1,9 +1,9 @@
 var heremap_app_id = "J5aP2hv9dOa9Us8e6OPn";
 var heremap_app_code = "oXTkvCJfsVdMTkD56CBy0g";
 
-//var _tile_baseURL = 'http://166.62.80.50:8888/v2/';
-var _tile_baseURL = 'http://tile.transparentgov.net/v2/';
-var _tile_baseURL_localhost = 'http://localhost:8888/v2/';
+var _tile_baseURL = 'http://166.62.80.50:8887/v2/';
+//var _tile_baseURL = 'http://tile.transparentgov.net/v2/';
+var _tile_baseURL_localhost = 'http://localhost:8887/v2/';
 
 
 
