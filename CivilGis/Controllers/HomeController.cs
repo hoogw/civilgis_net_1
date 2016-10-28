@@ -182,6 +182,57 @@ namespace CivilGis.Controllers
 
 
 
+        //---------- arcgis hybrid-------------
+
+        public ActionResult arcgis(string frontmap, string area)
+        {
+
+
+
+            ViewBag.Area = area;
+            ViewBag.Frontmap = frontmap;
+
+            _view_path = "~/Views/Home/arcgis/"+ frontmap+ "/" + area + ".cshtml";
+
+
+            return View(_view_path);
+        }
+
+
+
+
+        //--------- end arcgis hybrid-----
+
+
+
+        public ActionResult arcgisleaflet(string area)
+        {
+
+
+
+            ViewBag.Area = area;
+
+            _view_path = "~/Views/Home/arcgisleaflet/" + area + ".cshtml";
+
+
+            return View(_view_path);
+        }
+
+
+
+        public ActionResult arcgisjavascriptapi(string area)
+        {
+
+
+
+            ViewBag.Area = area;
+
+            _view_path = "~/Views/Home/arcgisjavascriptapi/" + area + ".cshtml";
+
+
+            return View(_view_path);
+        }
+
 
 
 

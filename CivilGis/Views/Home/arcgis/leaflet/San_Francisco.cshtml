@@ -1,0 +1,258 @@
+﻿<!-- this hidden value carry the map subject from controller use it in javascript api call-->
+
+<input type="hidden" id="areaID" value=@ViewBag.Area />
+
+
+
+
+
+@{
+    string _side_panel_path = "~/Views/Shared/arcgis/leaflet/_" + ViewBag.Area + "_side_panel.cshtml";
+
+    Html.RenderPartial(_side_panel_path);
+
+}
+
+
+
+
+        
+
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                           Downtown
+                        </div>
+                        <div class="panel-body">
+                          
+                                
+                               
+
+                                
+
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/leaflet/classifycheckboxbuttonmap/San_Francisco/Downtown_Zoning'">Downtown Zoning [check box button]</button>
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/leaflet/classifyradiobuttonmap/San_Francisco/Downtown_Zoning'">Downtown Zoning [radio button]</button>
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/leaflet/classifycheckboxbuttonmap/San_Francisco/Downtown_Land_Use'">Downtown Land Use [check box button]</button>
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/leaflet/classifyradiobuttonmap/San_Francisco/Downtown_Land_Use'">Downtown Land Use [radio button]</button>
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/leaflet/scrollerfulltablemap/San_Francisco/Downtown_Address'">Downtown Address</button>
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/leaflet/scrollerfulltablemap/San_Francisco/Downtown_Zoning'">Downtown Parcels</button>
+
+                            
+
+                            
+
+
+                            
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+
+
+
+
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                Planning
+            </div>
+            <div class="panel-body">
+
+
+
+
+                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/leaflet/classifycheckboxbuttonmap/San_Francisco/Zoning_Districts'">Zoning Districts [check box button]</button>
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/leaflet/classifyradiobuttonmap/San_Francisco/Zoning_Districts'">Zoning Districts [radio button]</button>
+                &nbsp;&nbsp;
+
+
+                <br />
+                <br />
+              
+                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/leaflet/simplemap/San_Francisco/Height_And_Bulk_Districts'">Height And Bulk Districts</button>
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/leaflet/simplemap/San_Francisco/Blocks'">Blocks</button>
+
+                &nbsp;&nbsp;
+
+                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/leaflet/simplemap/San_Francisco/Special_Sign_Districts'">Special Sign Districts</button>
+
+                &nbsp;&nbsp;
+
+                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/leaflet/simplemap/San_Francisco/Special_Sign_Districts_Scenic_Streets'">Special Sign Districts Scenic Streets</button>
+
+                &nbsp;&nbsp;
+
+                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/leaflet/simplemap/San_Francisco/Special_Use_Districts'">Special Use Districts</button>
+
+                &nbsp;&nbsp;
+
+
+
+
+
+
+            </div>
+            <div class="panel-footer">
+
+            </div>
+        </div>
+    </div>
+    <!-- /.col-lg-4 -->
+</div>
+
+
+
+
+            <!-- /.row -->
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Civil 
+                        </div>
+                        <div class="panel-body">
+                           
+
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/leaflet/scrollerfulltablemap/San_Francisco/Major_Streets'">Major Streets</button>
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/leaflet/scrollerfulltablemap/San_Francisco/Streets'">Streets</button>
+                            &nbsp;&nbsp;
+
+                            <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/leaflet/simplemap/San_Francisco/Street_Structures'">Street Structures</button>
+                            &nbsp;&nbsp;
+
+
+                            <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/leaflet/justtiles/San_Francisco/Curb_Island'">Curb and Island</button>
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/leaflet/justtiles/San_Francisco/Building'">Building Footprint</button>
+                            &nbsp;&nbsp;
+
+                            
+
+                           
+
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            Public
+                        </div>
+                        <div class="panel-body">
+                            
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/leaflet/simplemap/San_Francisco/Zipcode'">Zipcode</button>
+                            &nbsp;&nbsp;
+                                
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/leaflet/simplemap/San_Francisco/Realtor_Neighborhoods'">Realtor Neighborhoods</button>
+
+                            &nbsp;&nbsp;
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/leaflet/scrollerclienttablemap/San_Francisco/Schools_Public'">Schools Public</button>
+                            &nbsp;&nbsp;
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/leaflet/simpleclustermap/San_Francisco/Schools_Public_Address'">Schools Public Address</button>
+                            &nbsp;&nbsp;
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/leaflet/simplemap/San_Francisco/City_Land'">City Land</button>
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/leaflet/simpleclustermap/San_Francisco/City_Facility'">City Facility</button>
+                            &nbsp;&nbsp;
+
+                           
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            Permission for use of these proprietary data is granted by the City of San Francisco. &nbsp; &nbsp; Copyright &copy; @DateTime.Now.Year City of San Francisco. All Rights Reserved
+                        </div>
+
+                        <!--
+                <div class="panel-body">
+                    <p>
+
+
+
+                    </p>
+                </div>
+                <div class="panel-footer">
+
+                </div>
+
+                    -->
+                    </div>
+                </div>
+
+
+
+            </div>
+
+          
+
+
+          
+                </div>
+                <!-- /#page-wrapper -->
+                <!-- /#page-wrapper -->
+          
+
+
+
+
+
+
+
+
+            <!-- /#wrapper -->
+        </div>
+
+
+</body>
+</html>

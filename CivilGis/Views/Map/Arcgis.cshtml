@@ -5,7 +5,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header"><img style="height:20px;" src="~/images/logo/Esri_logo.png" alt="" /> </h3>
+                    <h3 class="page-header"><img style="height:20px;" src="~/images/logo/Esri_logo.png" alt="" />  ArcGIS Server Rest API Backend Hybrid with Web Map Frontend</h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -25,13 +25,668 @@
                         </div>
                         <div class="panel-body">
 
+                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/home/arcgis/googlemap/city'">Sample city</button>
+                            &nbsp;&nbsp;
 
 
 
-                            <button type="button" class="btn btn-success" onclick="location.href = '/arcgis/simplemap/googlemap/city/parcels'">city_parcels</button>
-                            <button type="button" class="btn btn-success" onclick="location.href = '/arcgis/simplemap/googlemap/city/address'">test_address</button>
 
-                            <hr>
+                            <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/googlemap/Newport_Beach'">
+                                <img src="~/images/logo/newport_beach.png" alt="" />
+                            </button>
+
+
+
+
+                            &nbsp;&nbsp;
+
+
+                            <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/googlemap/Santa_Monica'">
+                                <img src="~/images/logo/santa_monica.png" alt="" />
+                            </button>
+
+
+
+                            &nbsp;&nbsp;
+
+                            <!--
+
+                                <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/home/arcgis/googlemap/Palo_Alto/'">
+                                    <img src="~/images/logo/Palo_Alto_logo.png" alt="" />
+                                </button>
+
+
+
+                                &nbsp;&nbsp;
+
+
+
+
+
+                                   <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/googlemap/Shoreline/'">
+                                    <img src="~/images/logo/shoreline_logo.jpg" />
+                                </button>
+
+
+
+                                &nbsp;&nbsp;
+
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/home/arcgis/googlemap/New_York'">
+                                    <img src="~/images/logo/nyc.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/googlemap/San_Francisco'">
+                                    <img src="~/images/logo/san_francisco.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+                                <button type="button" class="btn btn-xs btn-outline btn-warning" onclick="location.href = '/home/arcgis/googlemap/Chicago'">
+                                    <img src="~/images/logo/city-of-chicago-logo.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-danger" onclick="location.href = '/home/arcgis/googlemap/Los_Angeles'">
+                                    <img src="~/images/logo/city_of_los_angeles.png" alt="" />
+                                </button>
+
+
+      -->
+                            
+
+
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+
+
+
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            Bing Maps frontend + ArcGIS server rest API backend
+                        </div>
+                        <div class="panel-body">
+
+
+                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/home/arcgis/bingmap/city'">Sample city</button>
+                            &nbsp;&nbsp;
+
+
+
+
+                            <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/bingmap/Newport_Beach'">
+                                <img src="~/images/logo/newport_beach.png" alt="" />
+                            </button>
+
+
+
+
+                            &nbsp;&nbsp;
+
+
+                            <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/bingmap/Santa_Monica'">
+                                <img src="~/images/logo/santa_monica.png" alt="" />
+                            </button>
+
+
+
+                            &nbsp;&nbsp;
+
+                            <!--
+
+                                <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/home/arcgis/bingmap/Palo_Alto/'">
+                                    <img src="~/images/logo/Palo_Alto_logo.png" alt="" />
+                                </button>
+
+
+
+                                &nbsp;&nbsp;
+
+
+
+
+
+                                   <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/bingmap/Shoreline/'">
+                                    <img src="~/images/logo/shoreline_logo.jpg" />
+                                </button>
+
+
+
+                                &nbsp;&nbsp;
+
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/home/arcgis/bingmap/New_York'">
+                                    <img src="~/images/logo/nyc.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/bingmap/San_Francisco'">
+                                    <img src="~/images/logo/san_francisco.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+                                <button type="button" class="btn btn-xs btn-outline btn-warning" onclick="location.href = '/home/arcgis/bingmap/Chicago'">
+                                    <img src="~/images/logo/city-of-chicago-logo.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-danger" onclick="location.href = '/home/arcgis/bingmap/Los_Angeles'">
+                                    <img src="~/images/logo/city_of_los_angeles.png" alt="" />
+                                </button>
+
+
+      -->
+                            
+
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+
+
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Here Maps frontend + ArcGIS server rest API backend
+                        </div>
+                        <div class="panel-body">
+
+                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/home/arcgis/heremap/city'">Sample city</button>
+                            &nbsp;&nbsp;
+
+
+
+
+                            <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/heremap/Newport_Beach'">
+                                <img src="~/images/logo/newport_beach.png" alt="" />
+                            </button>
+
+
+
+
+                            &nbsp;&nbsp;
+
+
+                            <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/heremap/Santa_Monica'">
+                                <img src="~/images/logo/santa_monica.png" alt="" />
+                            </button>
+
+
+
+                            &nbsp;&nbsp;
+
+                            <!--
+
+                                <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/home/arcgis/heremap/Palo_Alto/'">
+                                    <img src="~/images/logo/Palo_Alto_logo.png" alt="" />
+                                </button>
+
+
+
+                                &nbsp;&nbsp;
+
+
+
+
+
+                                   <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/heremap/Shoreline/'">
+                                    <img src="~/images/logo/shoreline_logo.jpg" />
+                                </button>
+
+
+
+                                &nbsp;&nbsp;
+
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/home/arcgis/heremap/New_York'">
+                                    <img src="~/images/logo/nyc.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/heremap/San_Francisco'">
+                                    <img src="~/images/logo/san_francisco.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+                                <button type="button" class="btn btn-xs btn-outline btn-warning" onclick="location.href = '/home/arcgis/heremap/Chicago'">
+                                    <img src="~/images/logo/city-of-chicago-logo.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-danger" onclick="location.href = '/home/arcgis/heremap/Los_Angeles'">
+                                    <img src="~/images/logo/city_of_los_angeles.png" alt="" />
+                                </button>
+
+
+      -->
+                            
+
+
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+
+
+
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Leaflet frontend + ArcGIS server rest API backend
+                        </div>
+                        <div class="panel-body">
+
+                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/home/arcgis/leaflet/city'">Sample city</button>
+                            &nbsp;&nbsp;
+
+
+
+
+                            <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/leaflet/Newport_Beach'">
+                                <img src="~/images/logo/newport_beach.png" alt="" />
+                            </button>
+
+
+
+
+                            &nbsp;&nbsp;
+
+
+                            <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/leaflet/Santa_Monica'">
+                                <img src="~/images/logo/santa_monica.png" alt="" />
+                            </button>
+
+
+
+                            &nbsp;&nbsp;
+
+                            <!--
+
+                                <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/home/arcgis/leaflet/Palo_Alto/'">
+                                    <img src="~/images/logo/Palo_Alto_logo.png" alt="" />
+                                </button>
+
+
+
+                                &nbsp;&nbsp;
+
+
+
+
+
+                                   <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/leaflet/Shoreline/'">
+                                    <img src="~/images/logo/shoreline_logo.jpg" />
+                                </button>
+
+
+
+                                &nbsp;&nbsp;
+
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/home/arcgis/leaflet/New_York'">
+                                    <img src="~/images/logo/nyc.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/leaflet/San_Francisco'">
+                                    <img src="~/images/logo/san_francisco.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+                                <button type="button" class="btn btn-xs btn-outline btn-warning" onclick="location.href = '/home/arcgis/leaflet/Chicago'">
+                                    <img src="~/images/logo/city-of-chicago-logo.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-danger" onclick="location.href = '/home/arcgis/leaflet/Los_Angeles'">
+                                    <img src="~/images/logo/city_of_los_angeles.png" alt="" />
+                                </button>
+
+
+      -->
+                            
+
+
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+
+
+
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Mapbox frontend + ArcGIS server rest API backend
+                        </div>
+                        <div class="panel-body">
+
+                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/home/arcgis/mapbox/city'">Sample city</button>
+                            &nbsp;&nbsp;
+
+
+
+
+                            <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/mapbox/Newport_Beach'">
+                                <img src="~/images/logo/newport_beach.png" alt="" />
+                            </button>
+
+
+
+
+                            &nbsp;&nbsp;
+
+
+                            <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/mapbox/Santa_Monica'">
+                                <img src="~/images/logo/santa_monica.png" alt="" />
+                            </button>
+
+
+
+                            &nbsp;&nbsp;
+
+                            <!--
+
+                                <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/home/arcgis/mapbox/Palo_Alto/'">
+                                    <img src="~/images/logo/Palo_Alto_logo.png" alt="" />
+                                </button>
+
+
+
+                                &nbsp;&nbsp;
+
+
+
+
+
+                                   <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/mapbox/Shoreline/'">
+                                    <img src="~/images/logo/shoreline_logo.jpg" />
+                                </button>
+
+
+
+                                &nbsp;&nbsp;
+
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/home/arcgis/mapbox/New_York'">
+                                    <img src="~/images/logo/nyc.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/mapbox/San_Francisco'">
+                                    <img src="~/images/logo/san_francisco.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+                                <button type="button" class="btn btn-xs btn-outline btn-warning" onclick="location.href = '/home/arcgis/mapbox/Chicago'">
+                                    <img src="~/images/logo/city-of-chicago-logo.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-danger" onclick="location.href = '/home/arcgis/mapbox/Los_Angeles'">
+                                    <img src="~/images/logo/city_of_los_angeles.png" alt="" />
+                                </button>
+
+
+      -->
+                            
+
+
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+
+
+
+
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            MapQuest frontend + ArcGIS server rest API backend
+                        </div>
+                        <div class="panel-body">
+
+                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/home/arcgis/mapquest/city'">Sample city</button>
+                            &nbsp;&nbsp;
+
+
+
+
+                            <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/mapquest/Newport_Beach'">
+                                <img src="~/images/logo/newport_beach.png" alt="" />
+                            </button>
+
+
+
+
+                            &nbsp;&nbsp;
+
+
+                            <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/mapquest/Santa_Monica'">
+                                <img src="~/images/logo/santa_monica.png" alt="" />
+                            </button>
+
+
+
+                            &nbsp;&nbsp;
+
+                            <!--
+
+                                <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/home/arcgis/mapquest/Palo_Alto/'">
+                                    <img src="~/images/logo/Palo_Alto_logo.png" alt="" />
+                                </button>
+
+
+
+                                &nbsp;&nbsp;
+
+
+
+
+
+                                   <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/mapquest/Shoreline/'">
+                                    <img src="~/images/logo/shoreline_logo.jpg" />
+                                </button>
+
+
+
+                                &nbsp;&nbsp;
+
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/home/arcgis/mapquest/New_York'">
+                                    <img src="~/images/logo/nyc.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/mapquest/San_Francisco'">
+                                    <img src="~/images/logo/san_francisco.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+                                <button type="button" class="btn btn-xs btn-outline btn-warning" onclick="location.href = '/home/arcgis/mapquest/Chicago'">
+                                    <img src="~/images/logo/city-of-chicago-logo.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-danger" onclick="location.href = '/home/arcgis/mapquest/Los_Angeles'">
+                                    <img src="~/images/logo/city_of_los_angeles.png" alt="" />
+                                </button>
+
+
+      -->
+                            
+
+
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+
+
+
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Openlayers frontend + ArcGIS server rest API backend
+                        </div>
+                        <div class="panel-body">
+
+                            <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/home/arcgis/openlayers/city'">Sample city</button>
+                            &nbsp;&nbsp;
+
+
+
+
+                            <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/openlayers/Newport_Beach'">
+                                <img src="~/images/logo/newport_beach.png" alt="" />
+                            </button>
+
+
+
+
+                            &nbsp;&nbsp;
+
+
+                            <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/openlayers/Santa_Monica'">
+                                <img src="~/images/logo/santa_monica.png" alt="" />
+                            </button>
+
+
+
+                            &nbsp;&nbsp;
+
+                            <!--
+
+                                <button type="button" class="btn btn-xs btn-outline btn-success" onclick="location.href = '/home/arcgis/openlayers/Palo_Alto/'">
+                                    <img src="~/images/logo/Palo_Alto_logo.png" alt="" />
+                                </button>
+
+
+
+                                &nbsp;&nbsp;
+
+
+
+
+
+                                   <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/openlayers/Shoreline/'">
+                                    <img src="~/images/logo/shoreline_logo.jpg" />
+                                </button>
+
+
+
+                                &nbsp;&nbsp;
+
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-info" onclick="location.href = '/home/arcgis/openlayers/New_York'">
+                                    <img src="~/images/logo/nyc.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-default" onclick="location.href = '/home/arcgis/openlayers/San_Francisco'">
+                                    <img src="~/images/logo/san_francisco.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+                                <button type="button" class="btn btn-xs btn-outline btn-warning" onclick="location.href = '/home/arcgis/openlayers/Chicago'">
+                                    <img src="~/images/logo/city-of-chicago-logo.png" alt="" />
+                                </button>
+
+                                &nbsp;&nbsp;
+
+
+                                <button type="button" class="btn btn-xs btn-outline btn-danger" onclick="location.href = '/home/arcgis/openlayers/Los_Angeles'">
+                                    <img src="~/images/logo/city_of_los_angeles.png" alt="" />
+                                </button>
+
+
+      -->
+                            
 
 
                         </div>

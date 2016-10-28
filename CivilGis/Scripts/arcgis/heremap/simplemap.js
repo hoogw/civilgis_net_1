@@ -11,20 +11,27 @@
 
 // ---------- map click event [3]--------add _map_click --------
 
-function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
+function ajax_GeoJSON(gmap, _apiURI_returncountonly, _apiURI, _map_click_event) {
     
     // Load a GeoJSON from the server 
    
 
-          
+    $.get(_apiURI_returncountonly, function(data_count_only){
+                
+                
+        //{"type":"FeatureCollection","properties":{"count":24362},"features":[]}  
+        var data = JSON.parse(data_count_only).properties.count;
+                
+        if (parseInt(data) < max_return_feature_limit)
+                
+        {
         
             
             
             // test url if return a number means too many polygon to show.otherwise add polygon to map.
             $.get(_apiURI, function(data){
            
-                        if(isNaN(data)){
-                           
+                       
                             
                           
                           // ---------   processing data(geoJson) to fill datatables -----------------
@@ -42,7 +49,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-                            var _geojson_object = JSON.parse(data);
+                             _geojson_object = JSON.parse(data);
 
                            //----- marker cluster  [2.1] ------each time before you add new point geojson, need to clear old last time marker clusters.
                            //   markerClusterer.clearMarkers();
@@ -132,8 +139,10 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
                           
-                           
-                        }
+            });// get// end get process geojson
+
+
+        } // if < limit
                              // returning number of count
                         else{ 
                             

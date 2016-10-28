@@ -16,29 +16,22 @@ function ajax_GeoJSON(gmap, _apiURI_returncountonly, _apiURI, _map_click_event) 
     // Load a GeoJSON from the server 
 
 
-   
+    $.get(_apiURI_returncountonly, function(data_count_only){
+                
+                
+        //{"type":"FeatureCollection","properties":{"count":24362},"features":[]}  
+        var data = JSON.parse(data_count_only).properties.count;
+                
+        if (parseInt(data) < max_return_feature_limit)
+                
+        {
 
 
 
     // test url if return a number means too many polygon to show.otherwise add polygon to map.
     $.get(_apiURI, function (data) {
 
-        if (isNaN(data)) {
-
-
-
-            // ---------   processing data(geoJson) to fill datatables -----------------
-
-
-
-            //--------------------------------------------
-
-
-            //gmap.data.loadGeoJson(_apiURI);
-
-            // Note: data is a string, not a javascript object.
-            //the function addGeoJson needs a javascript object and not a string. so you must convert string to javascript object before feed into addGeoJson
-            // if you use loadGeoJson(url), do not need any formate change, feed URL return string, the loadGeoJson will do with returning string.
+       
 
 
 
@@ -132,7 +125,10 @@ function ajax_GeoJSON(gmap, _apiURI_returncountonly, _apiURI, _map_click_event) 
 
 
 
-        }
+    });// get// end get process geojson
+
+
+        } // if < limit
             // returning number of count
         else {
 

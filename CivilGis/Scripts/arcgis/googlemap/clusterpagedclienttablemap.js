@@ -229,33 +229,22 @@ function ajax_GeoJSON(gmap, _apiURI_returncountonly, _apiURI) {
     // Load a GeoJSON from the server 
    
 
-   
+    $.get(_apiURI_returncountonly, function(data_count_only){
+                
+                
+        //{"type":"FeatureCollection","properties":{"count":24362},"features":[]}  
+        var data = JSON.parse(data_count_only).properties.count;
+                
+        if (parseInt(data) < max_return_feature_limit)
+                
+        {
         
             
             
             // test url if return a number means too many polygon to show.otherwise add polygon to map.
             $.get(_apiURI, function(data){
            
-                        if(isNaN(data)){
-                            //------tile[2] ---------- returning geoJSON, need to remove previously tiling layers.  
-                            
-                           // map.overlayMapTypes.removeAt(0); // if no tile layer before, this will error, use clear() instead. solve the error
-                          //  map.overlayMapTypes.clear();
-                            
-                            
-                          
-                          // ---------   processing data(geoJson) to fill datatables -----------------
-                          
-                          
-                          
-                          //--------------------------------------------
-                          
-                          
-                          //gmap.data.loadGeoJson(_apiURI);
-
-                            // Note: data is a string, not a javascript object.
-                            //the function addGeoJson needs a javascript object and not a string. so you must convert string to javascript object before feed into addGeoJson
-                            // if you use loadGeoJson(url), do not need any formate change, feed URL return string, the loadGeoJson will do with returning string.
+                       
 
 
 
@@ -267,41 +256,25 @@ function ajax_GeoJSON(gmap, _apiURI_returncountonly, _apiURI) {
 
                             var _features_array = _geojson_object['features'];
 
-                            var _id_obj;
-                            var _id_obj_id;
+                // var _id_obj;
+                            var _id_obj_id =0;
                             var _propty_obj;
 
-                            _features_array.forEach(function (eachFeatueItem) {
 
+                                         
 
-                                /*
-                                  // --- php format ------
-                                  
-                                     _id_obj = eachFeatueItem['_id'];
-                                     _id_obj_id = _id_obj['$id'];
-                                    _propty_obj = eachFeatueItem['properties'];
-                                    
-                                    
-                                    _propty_obj['GeoFeatureType']=_geo_type['type'];
-                                    _propty_obj['GeoFeatureID'] = _id_obj_id;
-                
-                
-                
-                              
-                                    // ---end  php format ------
-                                 */
-
-
-                                // ------ asp.net format -----------
-                                var _geo_type = eachFeatueItem['geometry'];
-
-
-
+                            _features_array.forEach( function (eachFeatueItem)
+                            {
+                                // _id_obj = eachFeatueItem['_id'];
+                                // _id_obj_id = _id_obj['$id'];
+                                                  
+                                _id_obj_id = _id_obj_id + 1;
+                                                  
                                 _propty_obj = eachFeatueItem['properties'];
-
-                                _propty_obj['GeoFeatureType'] = _geo_type['type'];
-                                _propty_obj['GeoFeatureID'] = eachFeatueItem['_id'];
-
+                                var _geo_type = eachFeatueItem['geometry'];
+                                                 
+                                _propty_obj['GeoFeatureType']=_geo_type['type'];
+                                _propty_obj['GeoFeatureID']=_id_obj_id;
 
                             });// features_array_foreach
 
@@ -389,7 +362,10 @@ function ajax_GeoJSON(gmap, _apiURI_returncountonly, _apiURI) {
                             
                           
                            
-                        }
+            });// get// end get process geojson
+
+
+        } // if < limit
                              // returning number of count
                         else{ 
                             

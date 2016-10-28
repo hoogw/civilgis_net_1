@@ -29,7 +29,7 @@
 <input type="hidden" id="sidebarID" value=@ViewBag.Side_Bar />
 
 @{
-    string _side_panel_path = "~/Views/Shared/heremap/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
+    string _side_panel_path = "~/Views/Shared/arcgis/heremap/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
 
     Html.RenderPartial(_side_panel_path);
 

@@ -240,7 +240,7 @@ function feed_datatables(_geojson_obj){
 
 
 
-function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
+function ajax_GeoJSON(gmap, _apiURI_returncountonly, _apiURI, _map_click_event) {
     
     // Load a GeoJSON from the server 
    
@@ -248,7 +248,15 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
             
             
                             
-                            
+    $.get(_apiURI_returncountonly, function(data_count_only){
+                
+                
+        //{"type":"FeatureCollection","properties":{"count":24362},"features":[]}  
+        var data = JSON.parse(data_count_only).properties.count;
+                
+        if (parseInt(data) < max_return_feature_limit)
+                
+        {                
             
             
             
@@ -258,8 +266,7 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
            
             $.get(_apiURI, function(data){
            
-                        if(isNaN(data)){
-                             
+                      
                         
                           
                            
@@ -272,44 +279,27 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
                                          var _features_array = _geojson_object['features'];
 
-                                         var _id_obj;
-                                         var _id_obj_id;
+                // var _id_obj;
+                                         var _id_obj_id =0;
                                          var _propty_obj;
 
+
+                                         
+
                                          _features_array.forEach( function (eachFeatueItem)
-                                             {
+                                         {
+                                             // _id_obj = eachFeatueItem['_id'];
+                                             // _id_obj_id = _id_obj['$id'];
                                                   
-                                             
-                                             /*
-                                               // --- php format ------
-                                               
-                                                  _id_obj = eachFeatueItem['_id'];
-                                                  _id_obj_id = _id_obj['$id'];
-                                                 _propty_obj = eachFeatueItem['properties'];
-                                                 var _geo_type = eachFeatueItem['geometry'];
-                                                 
-                                                 _propty_obj['GeoFeatureType']=_geo_type['type'];
-                                                 _propty_obj['GeoFeatureID'] = _id_obj_id;
-
-
-
-                                           
-                                                 // ---end  php format ------
-                                              */
-
-
-                                             // ------ asp.net format -----------
-                                             var _geo_type = eachFeatueItem['geometry'];
-
-
-
+                                             _id_obj_id = _id_obj_id + 1;
+                                                  
                                              _propty_obj = eachFeatueItem['properties'];
+                                             var _geo_type = eachFeatueItem['geometry'];
+                                                 
+                                             _propty_obj['GeoFeatureType']=_geo_type['type'];
+                                             _propty_obj['GeoFeatureID']=_id_obj_id;
 
-                                             _propty_obj['GeoFeatureType'] = _geo_type['type'];
-                                             _propty_obj['GeoFeatureID'] = eachFeatueItem['_id'];
-
-
-                                             });// features_array_foreach
+                                         });// features_array_foreach
 
                                          _geojson_object['features'] = {};
                                          _geojson_object['features'] = _features_array;
@@ -378,7 +368,10 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
                             
                           
                            
-                        }
+            });// get// end get process geojson
+
+
+        } // if < limit
                              // returning number of count, no geojson, clean the datatables
                         else{ 
                             

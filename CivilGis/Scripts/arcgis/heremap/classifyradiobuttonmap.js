@@ -568,25 +568,24 @@ function add_mapdata_listener_classification_radio() {
 
 
 
-function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
+function ajax_GeoJSON(gmap, _apiURI_returncountonly, _apiURI, _map_click_event) {
 
     // Load a GeoJSON from the server 
 
 
-    ////------tile[3] ---------
-    //if ($('input[name="color_tiles_switch"]').bootstrapSwitch('state')) {
-    //    add_tiles();
-
-    //}
-
-
+    $.get(_apiURI_returncountonly, function(data_count_only){
+                
+                
+        //{"type":"FeatureCollection","properties":{"count":24362},"features":[]}  
+        var data = JSON.parse(data_count_only).properties.count;
+                
+        if (parseInt(data) < max_return_feature_limit)
+                
+        {
 
 
     // test url if return a number means too many polygon to show.otherwise add polygon to map.
     $.get(_apiURI, function (data) {
-
-        if (isNaN(data)) {
-
 
 
 
@@ -658,7 +657,10 @@ function ajax_GeoJSON(gmap, _apiURI, _map_click_event) {
 
 
 
-        }
+    });// get// end get process geojson
+
+
+        } // if < limit
             // returning number of count
         else {
 

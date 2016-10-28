@@ -40,15 +40,38 @@ namespace CivilGis
 
 
 
+            // arcgis -----------
+           
+
+            routes.MapRoute(
+              name: "arcgis",
+              url: "arcgis/{action}/{frontmap}/{area}/{subject}/",
+              defaults: new { controller = "Arcgis", action = "simplemap", area = "city", subject = "zoning"}
+          );
+
+
+           
+
+
+
+
+            routes.MapRoute(
+              name: "arcgisleaflet",
+              url: "arcgisleaflet/{action}/{area}/{subject}/",
+              defaults: new { controller = "arcgisleaflet", action = "index" }
+          );
+
+
+
+            routes.MapRoute(
+             name: "arcgisjavascriptapi",
+             url: "arcgisjavascriptapi/{action}/{area}/{subject}/",
+             defaults: new { controller = "arcgisjavascriptapi", action = "index" }
+         );
+
+
 
             // mapping -----------------
-
-         
-
-
-
-        
-
 
             routes.MapRoute(
             name: "home",
@@ -58,26 +81,11 @@ namespace CivilGis
 
 
             routes.MapRoute(
-               name: "thememap",
-               url: "thememap/{action}/{area}/{subject}/",
-               defaults: new { controller = "ThemeMap", action = "index" }
-           );
+            name: "home_arcgis",
+            url: "home/{action}/{frontmap}/{area}/",
+            defaults: new { controller = "Home", action = "arcgis", frontmap = "googlemap", area = "city" }
+        );
 
-
-
-            routes.MapRoute(
-                name: "localmap",
-                url: "localmap/{action}/{area}/{subject}/",
-                defaults: new { controller = "LocalMap", action = "index" }
-            );
-
-
-
-            routes.MapRoute(
-                name: "localmap2",
-                url: "localmap/{action}/{area}/",
-                defaults: new { controller = "LocalMap", action = "localmaplistpaged", area = "city" }
-            );
 
 
 

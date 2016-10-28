@@ -51,7 +51,7 @@
 <input type="hidden" id="sidebarID" value=@ViewBag.Side_Bar />
 
 @{
-    string _side_panel_path = "~/Views/Shared/openlayers/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
+    string _side_panel_path = "~/Views/Shared/arcgis/openlayers/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
 
     Html.RenderPartial(_side_panel_path);
 

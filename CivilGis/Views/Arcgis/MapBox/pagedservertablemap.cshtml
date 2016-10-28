@@ -38,7 +38,7 @@
 <input type="hidden" id="sidebarID" value=@ViewBag.Side_Bar />
 
 @{
-    string _side_panel_path = "~/Views/Shared/mapbox/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
+    string _side_panel_path = "~/Views/Shared/arcgis/mapbox/_" + ViewBag.Side_Bar + "_side_panel.cshtml";
 
     Html.RenderPartial(_side_panel_path);
 
