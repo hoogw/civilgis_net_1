@@ -145,109 +145,54 @@ namespace CivilGis.Controllers
         }
 
 
-
-        // -------------   below are old, testing only, not in use --------------------------        
-
-        public ActionResult mapsmpp(string area, string subject)
+        public ActionResult carto()
         {
 
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Subject_uppercase = subject.ToUpper(); // for display title in view
-
-            ViewBag.Area = area;
-
-
             return View();
+
         }
 
-        public ActionResult mapsmps(string area, string subject)
+
+        public ActionResult vg()
         {
 
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Subject_uppercase = subject.ToUpper(); // for display title in view
-
-            ViewBag.Area = area;
-
-
             return View();
-        }
 
-        public ActionResult mappaged(string area, string subject)
-        {
-
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Subject_uppercase = subject.ToUpper(); // for display title in view
-
-            ViewBag.Area = area;
-
-
-            return View();
-        }
-
-        public ActionResult mapscroller(string area, string subject)
-        {
-
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Subject_uppercase = subject.ToUpper(); // for display title in view
-
-            ViewBag.Area = area;
-
-
-            return View();
         }
 
 
 
-
-        public ActionResult City(string subject)
+        public ActionResult iot()
         {
 
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Subject_uppercase = subject.ToUpper(); // for display title in view
-
-            ViewBag.Area = "city";
-
-
             return View();
-        }
 
-        public ActionResult County(string subject)
-        {
-
-            ViewBag.Subject = subject; // for api call 
-            ViewBag.Subject_uppercase = subject.ToUpper(); // for display title in view
-
-            ViewBag.Area = "county";
-
-
-            return View();
         }
 
 
-        public ActionResult Maplistpaged(string area)
+        public ActionResult mongodb()
         {
 
-            ViewBag.Area = area; // for api call 
-           // ViewBag.Subject_uppercase = subject.ToUpper(); // for display title in view
-
             return View();
+
         }
 
 
-        public ActionResult Maplistscroller(string area)
+        public ActionResult postgis()
         {
 
-            ViewBag.Area = area; // for api call 
-            //ViewBag.Subject_uppercase = subject.ToUpper(); // for display title in view
-
             return View();
+
         }
 
 
 
+        public ActionResult material_design()
+        {
 
+            return View();
 
-        //--------------------above testing only, not in use --------------------------------------
+        }
 
 
     }

@@ -219,6 +219,7 @@
     <Content Include="Content\jquery.dataTables.css" />
     <Content Include="Content\scroller.dataTables.min.css" />
     <Content Include="images\favicon.ico" />
+    <Content Include="images\logo\5g.jpg" />
     <Content Include="images\logo\address.png" />
     <Content Include="images\logo\Aurora_logo.png" />
     <Content Include="images\logo\Bakersfield_logo.png" />
@@ -237,18 +238,22 @@
     <Content Include="images\logo\education.png" />
     <Content Include="images\logo\email.png" />
     <Content Include="images\logo\Esri_logo.png" />
+    <Content Include="images\logo\esri_logo.svg.png" />
     <Content Include="images\logo\globe-blue.png" />
     <Content Include="images\logo\google-maps-icon.png" />
     <Content Include="images\logo\here-logo.png" />
     <Content Include="images\logo\hospital-icon.png" />
     <Content Include="images\logo\icon-build.png" />
     <Content Include="images\logo\icon-street.png" />
+    <Content Include="images\logo\iot.jpg" />
     <Content Include="images\logo\land.png" />
     <Content Include="images\logo\landarea.png" />
     <Content Include="images\logo\leaflet-logo.png" />
     <Content Include="images\logo\mapbox-logo.png" />
     <Content Include="images\logo\mapbox_2.png" />
     <Content Include="images\logo\mapquest.png" />
+    <Content Include="images\logo\material_design_logo.png" />
+    <Content Include="images\logo\mongodb.png" />
     <Content Include="images\logo\mongodb.svg" />
     <Content Include="images\logo\new-york.png" />
     <Content Include="images\logo\newport_beach.png" />
@@ -1295,8 +1300,6 @@
     <Content Include="Views\Map\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_MapLayout.cshtml" />
     <Content Include="Views\Map\Index.cshtml" />
-    <Content Include="Views\Map\City.cshtml" />
-    <Content Include="Views\Map\County.cshtml" />
     <Content Include="Views\Data\_ViewStart.cshtml" />
     <Content Include="Views\Data\tablepaged.cshtml" />
     <Content Include="Views\Data\Index.cshtml" />
@@ -1304,11 +1307,6 @@
     <Content Include="Views\Data\tablescroller.cshtml" />
     <Content Include="Views\Data\tablelistpaged.cshtml" />
     <Content Include="Views\Data\tablelistscroller.cshtml" />
-    <Content Include="Views\Map\Maplistpaged.cshtml" />
-    <Content Include="Views\Map\Maplistscroller.cshtml" />
-    <Content Include="Views\Map\mapsmpp.cshtml" />
-    <Content Include="Views\Map\mapsmps.cshtml" />
-    <Content Include="Views\Map\mappaged.cshtml" />
     <Content Include="Views\LocalMap\localsimplemap.cshtml" />
     <Content Include="Views\LocalMap\_ViewStart.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -1317,7 +1315,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\LocalMap\localmaplistpaged.cshtml" />
     <Content Include="Views\LocalMap\localmaplistscroller.cshtml" />
-    <Content Include="Views\Map\mapscroller.cshtml" />
     <Content Include="Views\LocalMap\localcolormap.cshtml" />
     <Content Include="Views\LocalMap\localsimpleclustermap.cshtml" />
     <Content Include="Views\Home\corporate\_ViewStart.cshtml" />
@@ -1783,6 +1780,12 @@
     <Content Include="Views\Home\arcgisleaflet\San_Francisco.cshtml" />
     <Content Include="Views\Home\arcgisleaflet\Santa_Monica.cshtml" />
     <Content Include="Views\Home\arcgisleaflet\Shoreline.cshtml" />
+    <Content Include="Views\Map\Carto.cshtml" />
+    <Content Include="Views\Map\vg.cshtml" />
+    <Content Include="Views\Map\iot.cshtml" />
+    <Content Include="Views\Map\postgis.cshtml" />
+    <Content Include="Views\Map\Material_Design.cshtml" />
+    <Content Include="Views\Map\mongodb.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
