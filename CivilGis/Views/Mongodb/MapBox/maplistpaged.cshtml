@@ -1,0 +1,119 @@
+﻿<!---- local DataTables JS must load after Jquery js. Otherwise error   -->
+
+<script src="~/Scripts/jquery.dataTables.js"></script>
+<link href="~/Content/jquery.dataTables.css" rel="stylesheet">
+
+<!-- our js -->
+
+
+<script src="~/Scripts/mapbox/maplist_paged.js"></script>
+
+
+<input type="hidden" id="areaID" value=@ViewBag.Area />
+
+
+
+
+
+
+@{
+    string _side_panel_path = "~/Views/Shared/mapbox/_" + ViewBag.Area + "_side_panel.cshtml";
+
+    Html.RenderPartial(_side_panel_path);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <div id="title_info"> </div>
+
+                </div>
+                <!-- /.panel-heading -->
+
+                <div class="panel-body">
+
+
+
+
+                    <table id="tabledata" class="display" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th> Index</th>
+
+                                <th> Table of Content</th>
+                            </tr>
+                        </thead>
+
+                        <tfoot>
+                            <tr>
+
+                                <th> Index </th>
+                                <th>Table of Content</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+
+                </div>
+                <!-- /.panel-body -->
+                <!-- hr / -->
+
+
+
+
+
+
+                                
+
+
+
+                            <div class="panel-footer">
+
+
+                                <p>
+
+
+
+                                </p>
+
+
+
+
+
+
+                            </div>
+
+
+
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+
+
+
+
+                <!-- /#page-wrapper -->
+            </div>

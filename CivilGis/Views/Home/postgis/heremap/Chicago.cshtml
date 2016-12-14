@@ -1,0 +1,282 @@
+﻿<!-- this hidden value carry the map subject from controller use it in javascript api call-->
+
+<input type="hidden" id="areaID" value=@ViewBag.Area />
+
+
+
+
+
+@{
+    string _side_panel_path = "~/Views/Shared/postgis/heremap/_" + ViewBag.Area + "_side_panel.cshtml";
+
+    Html.RenderPartial(_side_panel_path);
+
+}
+
+
+
+
+        
+
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            Planning
+                        </div>
+                        <div class="panel-body">
+                          
+                                
+                               
+
+                                
+
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/postgis/classifycheckboxbuttonmap/heremap/Chicago/Zoning'"> Zoning [check box button]</button>
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/postgis/classifyradiobuttonmap/heremap/Chicago/Zoning'"> Zoning [radio button]</button>
+                            &nbsp;&nbsp;
+                            
+                            
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/postgis/simplemap/heremap/Chicago/Planning_Districts'">Planning Districts</button>
+
+                            &nbsp;&nbsp;
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/postgis/simplemap/heremap/Chicago/Planning_Regions'">Planning Regions</button>
+
+                            &nbsp;&nbsp;
+
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/postgis/scrollerclienttablemap/heremap/Chicago/Community'">Community</button>
+
+                            &nbsp;&nbsp;
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/postgis/scrollerclienttablemap/heremap/Chicago/Neighborhoods'">Neighborhoods</button>
+
+                            &nbsp;&nbsp;
+                            <br/>
+                            <br />
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/postgis/simplemap/heremap/Chicago/Industrial_Corridors'">Industrial Corridors</button>
+
+                            &nbsp;&nbsp;
+
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/postgis/simplemap/heremap/Chicago/Enterprises_Communities'">Enterprises Communities</button>
+
+                            &nbsp;&nbsp;
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/postgis/scrollerclienttablemap/heremap/Chicago/Landmark_Districts'">Landmark Districts</button>
+
+                            &nbsp;&nbsp;
+
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/postgis/scrollerclienttablemap/heremap/Chicago/Conservation_Areas'">Conservation Areas</button>
+
+                            &nbsp;&nbsp;
+
+
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/postgis/simplemap/heremap/Chicago/Empowerment_Zones'">Empowerment Zones</button>
+
+                            &nbsp;&nbsp;
+
+
+
+
+                            
+
+
+                            
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+
+
+
+
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                Police
+            </div>
+            <div class="panel-body">
+
+
+
+
+
+                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/postgis/simplemap/heremap/Chicago/Police_Beat'">Police Beat</button>
+                &nbsp;&nbsp;
+
+                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/postgis/simplemap/heremap/Chicago/Police_District'">Police District</button>
+                &nbsp;&nbsp;
+
+
+
+
+
+
+            </div>
+            <div class="panel-footer">
+
+            </div>
+        </div>
+    </div>
+    <!-- /.col-lg-4 -->
+</div>
+
+
+
+
+            <!-- /.row -->
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Transportation
+                        </div>
+                        <div class="panel-body">
+                           
+
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/postgis/scrollerfulltablemap/heremap/Chicago/Major_Streets'">Major Streets</button>
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/postgis/simplemap/heremap/Chicago/Railroads'">Railroads</button>
+                            &nbsp;&nbsp;
+
+                            <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/postgis/simplemap/heremap/Chicago/Streets_Sweeping'">Streets Sweeping</button>
+                            &nbsp;&nbsp;
+
+                            <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/postgis/scrollerfulltablemap/heremap/Chicago/Bike_Routes'">Bike Routes</button>
+                            &nbsp;&nbsp;
+                           
+
+                            
+
+                           
+
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            Public
+                        </div>
+                        <div class="panel-body">
+                            
+                            <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/postgis/simplemap/heremap/Chicago/Census_Tracts'">Census Tracts</button>
+                            &nbsp;&nbsp;
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/postgis/scrollerclienttablemap/heremap/Chicago/Hospitals'">Hospitals</button>
+                            &nbsp;&nbsp;
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/postgis/scrollerclienttablemap/heremap/Chicago/Schools'">Schools</button>
+                            &nbsp;&nbsp;
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/postgis/scrollerclienttablemap/heremap/Chicago/High_School_Attendance_Boundaries'">High School Attendance Boundaries</button>
+                            &nbsp;&nbsp;
+
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/postgis/scrollerclienttablemap/heremap/Chicago/Parks'">Parks</button>
+                            &nbsp;&nbsp;
+
+
+                            <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/postgis/simplemap/heremap/Chicago/Hydro'">Hydro</button>
+                            &nbsp;&nbsp;
+
+                            <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/postgis/simplemap/heremap/Chicago/Forestry'">Forestry</button>
+                            &nbsp;&nbsp;
+
+
+
+                           
+                           
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            Permission for use of these proprietary data is granted by the City of Chicago. &nbsp; &nbsp; Copyright &copy; @DateTime.Now.Year City of Chicago. All Rights Reserved
+                        </div>
+
+                        <!--
+                <div class="panel-body">
+                    <p>
+
+
+
+                    </p>
+                </div>
+                <div class="panel-footer">
+
+                </div>
+
+                    -->
+                    </div>
+                </div>
+
+
+
+            </div>
+
+          
+
+
+          
+
+                </div>
+                <!-- /#page-wrapper -->
+                <!-- /#page-wrapper -->
+          
+
+
+
+
+
+
+
+
+            <!-- /#wrapper -->
+        </div>
+
+
+</body>
+</html>

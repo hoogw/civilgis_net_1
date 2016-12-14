@@ -1,0 +1,175 @@
+﻿<!-- this hidden value carry the map subject from controller use it in javascript api call-->
+
+<input type="hidden" id="areaID" value=@ViewBag.Area />
+
+
+
+
+
+@{
+    string _side_panel_path = "~/Views/Shared/postgis/openlayers/_" + ViewBag.Area + "_side_panel.cshtml";
+
+    Html.RenderPartial(_side_panel_path);
+
+}
+
+
+
+
+        
+
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                           Base Map
+                        </div>
+                        <div class="panel-body">
+                          
+                                
+                               
+
+                                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/postgis/scrollerfulltablemap/openlayers/Newport_Beach/Address'">Address</button>
+                            &nbsp;&nbsp;
+                                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/postgis/scrollerfulltablemap/openlayers/Newport_Beach/Parcels'">Parcels</button>
+                            &nbsp;&nbsp;
+                                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/postgis/scrollerfulltablemap/openlayers/Newport_Beach/Streets'">Streets</button>
+                            &nbsp;&nbsp;
+                                <button type="button" class="btn btn-outline btn-success" onclick="location.href = '/postgis/justtiles/openlayers/Newport_Beach/Right_Of_Way'">Right of Way</button>
+
+
+                            
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+
+
+            <!-- /.row -->
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Parks & Recreation Map
+                        </div>
+                        <div class="panel-body">
+                           
+
+                               
+
+                               
+
+                                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/postgis/scrollerclienttablemap/openlayers/Newport_Beach/Parks'">Parks</button>
+
+
+                            
+
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            Planning
+                        </div>
+                        <div class="panel-body">
+                            
+                                
+
+
+
+
+                                <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/postgis/classifycheckboxbuttonmap/openlayers/Newport_Beach/Zoning'">Zoning [check box button]</button>
+                            &nbsp;&nbsp;    
+                            <button type="button" class="btn btn-outline btn-info" onclick="location.href = '/postgis/classifyradiobuttonmap/openlayers/Newport_Beach/Zoning'">Zoning [radio button]</button>
+                            &nbsp;&nbsp;
+                                <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/postgis/classifycheckboxbuttonmap/openlayers/Newport_Beach/General_Land_Use'">General Land Use [check box button]</button>
+                            &nbsp;&nbsp;    
+                            <button type="button" class="btn btn-outline btn-primary" onclick="location.href = '/postgis/classifyradiobuttonmap/openlayers/Newport_Beach/General_Land_Use'">General Land Use [radio button]</button>
+
+
+
+                           
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            Permission for use of these proprietary data is granted by the City of Newport Beach. &nbsp; &nbsp; Copyright &copy; @DateTime.Now.Year City of Newport Beach. All Rights Reserved
+                        </div>
+
+                        <!--
+                <div class="panel-body">
+                    <p>
+
+
+
+                    </p>
+                </div>
+                <div class="panel-footer">
+
+                </div>
+
+                    -->
+                    </div>
+                </div>
+
+
+
+            </div>
+
+          
+
+
+     
+
+                </div>
+                <!-- /#page-wrapper -->
+                <!-- /#page-wrapper -->
+          
+
+
+
+
+
+
+
+
+            <!-- /#wrapper -->
+        </div>
+
+
+</body>
+</html>
