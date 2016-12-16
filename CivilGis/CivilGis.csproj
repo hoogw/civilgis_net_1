@@ -1475,6 +1475,9 @@
     <Compile Include="Controllers\ArcgisleafletController.cs" />
     <Compile Include="Controllers\BingMapController.cs" />
     <Compile Include="Controllers\DataController.cs" />
+    <Compile Include="Controllers\DB_MongodbController.cs" />
+    <Compile Include="Controllers\DB_MysqlController.cs" />
+    <Compile Include="Controllers\DB_PostgisController.cs" />
     <Compile Include="Controllers\GeojsonController.cs" />
     <Compile Include="Controllers\GoogleMapController.cs" />
     <Compile Include="Controllers\HereMapController.cs" />
@@ -2573,6 +2576,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\DB_Mongodb\" />
+    <Folder Include="Views\DB_Mysql\" />
+    <Folder Include="Views\DB_Postgis\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

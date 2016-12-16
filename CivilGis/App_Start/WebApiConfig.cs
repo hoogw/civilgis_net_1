@@ -35,6 +35,34 @@ namespace CivilGis
 
 
 
+            // *****************  database api *******************
+
+            //  example:  http://locahost:100/api/DB_Postgis/sql/geojson/civilgis/select%20.../
+
+            config.Routes.MapHttpRoute(
+                name: "Api_sql",
+                routeTemplate: "api/{controller}/{action}/{format}/{db}/{sql}/",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
+
+            //  example:  http://locahost:100/api/DB_Postgis/intersect/geojson/civilgis/city_parks/117.98/32.98/127.90/49.78/
+            config.Routes.MapHttpRoute(
+                name: "Api_intersect",
+                routeTemplate: "api/{controller}/{action}/{format}/{db}/{table}/{SWlong}/{SWlat}/{NElong}/{NElat}/",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
+
+
+
+            // *****************  End   database api *******************
+
+
+
+
+
+
 
 
             //    -------------    mapping    --------------------------------
