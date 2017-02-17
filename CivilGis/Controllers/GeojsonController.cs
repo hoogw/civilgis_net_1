@@ -823,8 +823,10 @@ namespace CivilGis.Controllers
 
 
 
-                    // set connection string in web.config 
-                    _mongoClient = new MongoClient(ConfigurationManager.ConnectionStrings["MongoDBContext"].ConnectionString);         
+
+
+            // set connection string in web.config 
+            _mongoClient = new MongoClient(ConfigurationManager.ConnectionStrings["MongoDBContext"].ConnectionString);         
                     _mongoDatabase = _mongoClient.GetDatabase(ConfigurationManager.AppSettings["civilgisDBname"]);
                     var _max_row_count = Convert.ToInt16(ConfigurationManager.AppSettings["max_row_count"]);
 
